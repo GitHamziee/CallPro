@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import TawkChat from "@/components/shared/TawkChat";
 import PageLoader from "@/components/shared/PageLoader";
+import { Providers } from "./providers";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,9 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
-        <PageLoader />
-        {children}
-        <TawkChat />
+        <Providers>
+          <PageLoader />
+          {children}
+          <TawkChat />
+        </Providers>
       </body>
     </html>
   );

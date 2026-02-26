@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { PhoneCall, Eye, EyeOff, ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -11,10 +13,30 @@ export default function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [error, setError] = useState("");
+  const registered = searchParams.get("registered");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => setLoading(false), 1500);
+    setError("");
+
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: formData.email,
+      password: formData.password,
+    });
+
+    setLoading(false);
+
+    if (res?.error) {
+      setError(res.error);
+    } else {
+      // success: redirect to dashboard or homepage
+      router.push("/");
+    }
   };
 
   return (
@@ -51,6 +73,10 @@ export default function LoginPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          {registered === "1" && (
+            <p className="text-sm text-green-600">Account created, please sign in.</p>
+          )}
+          {error && <p className="text-sm text-red-500">{error}</p>}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1.5">
               Email address
