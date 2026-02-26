@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand col */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
+            <Link href="/" className="flex items-center gap-2 mb-4 justify-center md:justify-start">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600">
                 <PhoneCall className="h-4 w-4 text-white" />
               </div>
@@ -17,11 +17,11 @@ export default function Footer() {
                 Call<span className="text-brand-400">Pro</span>
               </span>
             </Link>
-            <p className="max-w-xs text-sm text-white/60 leading-relaxed">
+            <p className="max-w-xs text-sm text-white/60 leading-relaxed text-center md:text-left mx-auto md:mx-0">
               We turn cold lists into warm pipelines. Outbound sales solutions
               built for B2B teams who demand results.
             </p>
-            <div className="mt-6 flex gap-3">
+            <div className="mt-6 flex gap-3 justify-center md:justify-start">
               {[
                 { icon: Linkedin, label: "LinkedIn", href: "#" },
                 { icon: Twitter, label: "Twitter", href: "#" },
@@ -37,7 +37,7 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-            <div className="mt-6 flex flex-col gap-2 text-sm text-white/60">
+            <div className="mt-6 flex flex-col gap-2 text-sm text-white/60 items-center md:items-start">
               <a
                 href="tel:+18005551234"
                 className="flex items-center gap-2 hover:text-white transition-colors"
@@ -56,7 +56,7 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
               Services
             </h3>
@@ -75,7 +75,7 @@ export default function Footer() {
           </div>
 
           {/* Company */}
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
               Company
             </h3>
@@ -94,7 +94,7 @@ export default function Footer() {
           </div>
 
           {/* Legal */}
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
               Legal
             </h3>
