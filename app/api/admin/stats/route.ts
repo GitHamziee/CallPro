@@ -58,7 +58,7 @@ export async function GET() {
 
     // Calculate revenue this month (sum of package prices for new subscriptions)
     const revenueThisMonth = subscriptionsThisMonth.reduce(
-      (sum, p) => sum + p.package.price,
+      (sum: number, p: { package: { price: number } }) => sum + p.package.price,
       0
     );
 
