@@ -1,6 +1,5 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import { SidebarProvider } from "@/components/portal/SidebarContext";
 import Sidebar from "@/components/portal/Sidebar";
 import TopBar from "@/components/portal/TopBar";
@@ -10,21 +9,8 @@ export default function PortalLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { status } = useSession();
-
-  // Show loading spinner while auth is being checked
-  // (Middleware handles the actual redirect — this is a UX fallback)
-  if (status === "loading") {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-2 border-slate-200 border-t-brand-600 mx-auto mb-3" />
-          <p className="text-sm text-slate-500">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
+  // Middleware already protects these routes — no need to block rendering
+  // while useSession() resolves. This prevents loading flashes on tab navigation.
   return (
     <SidebarProvider>
       <div className="min-h-screen bg-slate-50">
