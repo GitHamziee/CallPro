@@ -112,7 +112,8 @@ export default function SettingsPage() {
 
   const isAdmin = session?.user?.role === "ADMIN";
 
-  const allTabs: { id: string; label: string; icon: typeof User; userOnly?: boolean }[] = [
+  type TabId = "account" | "security" | "billing";
+  const allTabs: { id: TabId; label: string; icon: typeof User; userOnly?: boolean }[] = [
     { id: "account", label: "Account", icon: User },
     { id: "security", label: "Security", icon: Lock },
     { id: "billing", label: "Billing & Plans", icon: CreditCard, userOnly: true },
