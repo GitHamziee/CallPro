@@ -1,7 +1,5 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { useSession } from "next-auth/react";
 import {
   Search,
   ShieldCheck,
@@ -11,117 +9,31 @@ import {
   UserCog,
   Headset,
 } from "lucide-react";
-
-interface UserRow {
-  id: string;
-  name: string | null;
-  email: string;
-  role: string;
-  createdAt: string;
-}
+import { useAdminRoles } from "@/hooks/useAdminRoles";
 
 export default function AdminRolesPage() {
-  const { data: session } = useSession();
-  const [users, setUsers] = useState<UserRow[]>([]);
-  const [total, setTotal] = useState(0);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [updating, setUpdating] = useState<string | null>(null);
-  const [message, setMessage] = useState<{
-    text: string;
-    type: "success" | "error";
-  } | null>(null);
-
-  const fetchUsers = useCallback(async () => {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams({
-        page: page.toString(),
-        limit: "10",
-        ...(search && { search }),
-        sortBy: "createdAt",
-        sortOrder: "desc",
-      });
-
-      const res = await fetch(`/api/admin/users?${params}`);
-      const data = await res.json();
-
-      if (res.ok) {
-        setUsers(data.users);
-        setTotal(data.total);
-        setTotalPages(data.totalPages);
-      }
-    } catch {
-      // silently fail
-    } finally {
-      setLoading(false);
-    }
-  }, [page, search]);
-
-  useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [search]);
-
-  // Auto-dismiss message
-  useEffect(() => {
-    if (message) {
-      const timer = setTimeout(() => setMessage(null), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [message]);
-
-  async function handleRoleChange(userId: string, newRole: string) {
-    // Prevent self-demotion
-    if (userId === session?.user?.id && newRole !== "ADMIN") {
-      setMessage({
-        text: "You cannot remove your own admin role.",
-        type: "error",
-      });
-      return;
-    }
-
-    setUpdating(userId);
-    try {
-      const res = await fetch(`/api/admin/users/${userId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ role: newRole }),
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        // Update local state
-        setUsers((prev) =>
-          prev.map((u) => (u.id === userId ? { ...u, role: data.user.role } : u))
-        );
-        setMessage({
-          text: `${data.user.name || data.user.email} is now ${data.user.role}.`,
-          type: "success",
-        });
-      } else {
-        const err = await res.json();
-        setMessage({ text: err.error || "Failed to update role.", type: "error" });
-      }
-    } catch {
-      setMessage({ text: "Network error. Try again.", type: "error" });
-    } finally {
-      setUpdating(null);
-    }
-  }
+  const {
+    session,
+    users,
+    total,
+    page,
+    totalPages,
+    search,
+    loading,
+    updating,
+    message,
+    setPage,
+    setSearch,
+    setMessage,
+    handleRoleChange,
+  } = useAdminRoles();
 
   return (
     <div className="mx-auto max-w-5xl">
       {/* Header */}
       <div className="mb-6">
         <p className="text-sm text-slate-500">
-          Assign roles to users. {total} user{total !== 1 ? "s" : ""}{" "}
-          total.
+          Assign roles to users. {total} user{total !== 1 ? "s" : ""} total.
         </p>
       </div>
 
@@ -198,16 +110,38 @@ export default function AdminRolesPage() {
                   const isSelf = user.id === session?.user?.id;
                   const isUpdating = updating === user.id;
 
-                  const roleBadge = user.role === "ADMIN"
-                    ? { bg: "bg-amber-100 text-amber-700", icon: <ShieldCheck className="h-3 w-3" /> }
-                    : user.role === "AGENT"
-                    ? { bg: "bg-blue-100 text-blue-700", icon: <Headset className="h-3 w-3" /> }
-                    : { bg: "bg-slate-100 text-slate-600", icon: <UserCog className="h-3 w-3" /> };
+                  const roleBadge =
+                    user.role === "ADMIN"
+                      ? {
+                          bg: "bg-amber-100 text-amber-700",
+                          icon: <ShieldCheck className="h-3 w-3" />,
+                        }
+                      : user.role === "AGENT"
+                        ? {
+                            bg: "bg-blue-100 text-blue-700",
+                            icon: <Headset className="h-3 w-3" />,
+                          }
+                        : {
+                            bg: "bg-slate-100 text-slate-600",
+                            icon: <UserCog className="h-3 w-3" />,
+                          };
 
                   const availableRoles = [
-                    { value: "USER", label: "User", bg: "bg-slate-100 text-slate-700 hover:bg-slate-200" },
-                    { value: "AGENT", label: "Agent", bg: "bg-blue-100 text-blue-700 hover:bg-blue-200" },
-                    { value: "ADMIN", label: "Admin", bg: "bg-amber-100 text-amber-700 hover:bg-amber-200" },
+                    {
+                      value: "USER",
+                      label: "User",
+                      bg: "bg-slate-100 text-slate-700 hover:bg-slate-200",
+                    },
+                    {
+                      value: "AGENT",
+                      label: "Agent",
+                      bg: "bg-blue-100 text-blue-700 hover:bg-blue-200",
+                    },
+                    {
+                      value: "ADMIN",
+                      label: "Admin",
+                      bg: "bg-amber-100 text-amber-700 hover:bg-amber-200",
+                    },
                   ].filter((r) => r.value !== user.role);
 
                   return (
@@ -219,7 +153,7 @@ export default function AdminRolesPage() {
                       <td className="px-6 py-4">
                         <div>
                           <p className="text-sm font-medium text-slate-900">
-                            {user.name || "—"}
+                            {user.name || "\u2014"}
                             {isSelf && (
                               <span className="ml-2 text-xs text-slate-400">
                                 (you)
@@ -260,7 +194,9 @@ export default function AdminRolesPage() {
                             {availableRoles.map((r) => (
                               <button
                                 key={r.value}
-                                onClick={() => handleRoleChange(user.id, r.value)}
+                                onClick={() =>
+                                  handleRoleChange(user.id, r.value)
+                                }
                                 className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors ${r.bg}`}
                               >
                                 {r.label}

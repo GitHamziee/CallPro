@@ -1,147 +1,43 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
 import { User, Lock, CreditCard } from "lucide-react";
+import { useSettings } from "@/hooks/useSettings";
 
 export default function SettingsPage() {
-  const { data: session } = useSession();
-  const [loading, setLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [activeTab, setActiveTab] = useState<"account" | "security" | "billing">("account");
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-  });
-
-  const [passwordData, setPasswordData] = useState({
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
-  });
-
-  // Sync form data when session loads
-  useEffect(() => {
-    if (session?.user) {
-      setFormData({
-        name: session.user.name || "",
-        email: session.user.email || "",
-      });
-    }
-  }, [session]);
-
-  const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setPasswordData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleProfileSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setErrorMessage("");
-    setSuccessMessage("");
-
-    try {
-      const response = await fetch("/api/auth/update-profile", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setErrorMessage(data.error || "Failed to update profile");
-        return;
-      }
-
-      setSuccessMessage("Profile updated successfully!");
-      setTimeout(() => setSuccessMessage(""), 3000);
-    } catch {
-      setErrorMessage("An error occurred. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handlePasswordSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setErrorMessage("");
-    setSuccessMessage("");
-
-    if (passwordData.newPassword !== passwordData.confirmPassword) {
-      setErrorMessage("Passwords do not match");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const response = await fetch("/api/auth/change-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          currentPassword: passwordData.currentPassword,
-          newPassword: passwordData.newPassword,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setErrorMessage(data.error || "Failed to change password");
-        return;
-      }
-
-      setSuccessMessage("Password changed successfully!");
-      setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
-      setTimeout(() => setSuccessMessage(""), 3000);
-    } catch {
-      setErrorMessage("An error occurred. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const [purchase, setPurchase] = useState<{
-    id: string;
-    status: string;
-    expiresAt: string | null;
-    createdAt: string;
-    package: { name: string; price: number };
-  } | null>(null);
-
-  const hideBilling = session?.user?.role === "ADMIN" || session?.user?.role === "AGENT";
-
-  // Fetch active subscription for billing tab
-  useEffect(() => {
-    if (hideBilling) return;
-    async function fetchPurchase() {
-      try {
-        const res = await fetch("/api/auth/purchases");
-        if (res.ok) {
-          const data = await res.json();
-          setPurchase(data.purchase);
-        }
-      } catch {
-        // silently fail
-      }
-    }
-    fetchPurchase();
-  }, [hideBilling]);
+  const {
+    session,
+    loading,
+    successMessage,
+    errorMessage,
+    activeTab,
+    formData,
+    passwordData,
+    purchase,
+    hideBilling,
+    setSuccessMessage,
+    setErrorMessage,
+    setActiveTab,
+    handleProfileChange,
+    handlePasswordChange,
+    handleProfileSubmit,
+    handlePasswordSubmit,
+  } = useSettings();
 
   type TabId = "account" | "security" | "billing";
-  const allTabs: { id: TabId; label: string; icon: typeof User; userOnly?: boolean }[] = [
+  const allTabs: {
+    id: TabId;
+    label: string;
+    icon: typeof User;
+    userOnly?: boolean;
+  }[] = [
     { id: "account", label: "Account", icon: User },
     { id: "security", label: "Security", icon: Lock },
-    { id: "billing", label: "Billing & Plans", icon: CreditCard, userOnly: true },
+    {
+      id: "billing",
+      label: "Billing & Plans",
+      icon: CreditCard,
+      userOnly: true,
+    },
   ];
 
   const tabs = allTabs.filter((tab) => !tab.userOnly || !hideBilling);
@@ -155,11 +51,22 @@ export default function SettingsPage() {
       {/* Notifications */}
       {successMessage && (
         <div className="mb-4 md:mb-6 p-3 md:p-4 pl-4 md:pl-5 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-lg text-emerald-800 text-sm flex items-start gap-2 md:gap-3">
-          <svg className="w-4 h-4 md:w-5 md:h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+          <svg
+            className="w-4 h-4 md:w-5 md:h-5 mt-0.5 flex-shrink-0"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clipRule="evenodd"
+            />
           </svg>
           <span className="flex-1">{successMessage}</span>
-          <button onClick={() => setSuccessMessage("")} className="text-emerald-600 hover:text-emerald-700">
+          <button
+            onClick={() => setSuccessMessage("")}
+            className="text-emerald-600 hover:text-emerald-700"
+          >
             ✕
           </button>
         </div>
@@ -167,11 +74,22 @@ export default function SettingsPage() {
 
       {errorMessage && (
         <div className="mb-4 md:mb-6 p-3 md:p-4 pl-4 md:pl-5 bg-red-50 border-l-4 border-red-500 rounded-r-lg text-red-800 text-sm flex items-start gap-2 md:gap-3">
-          <svg className="w-4 h-4 md:w-5 md:h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+          <svg
+            className="w-4 h-4 md:w-5 md:h-5 mt-0.5 flex-shrink-0"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+              clipRule="evenodd"
+            />
           </svg>
           <span className="flex-1">{errorMessage}</span>
-          <button onClick={() => setErrorMessage("")} className="text-red-600 hover:text-red-700">
+          <button
+            onClick={() => setErrorMessage("")}
+            className="text-red-600 hover:text-red-700"
+          >
             ✕
           </button>
         </div>
@@ -210,14 +128,24 @@ export default function SettingsPage() {
               <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 md:p-6">
                 <div className="flex items-start justify-between mb-4 md:mb-6">
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-slate-900">Account</h2>
-                    <p className="text-slate-600 text-xs md:text-sm mt-1">Update your profile information</p>
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+                      Account
+                    </h2>
+                    <p className="text-slate-600 text-xs md:text-sm mt-1">
+                      Update your profile information
+                    </p>
                   </div>
                 </div>
 
-                <form onSubmit={handleProfileSubmit} className="space-y-4 md:space-y-6">
+                <form
+                  onSubmit={handleProfileSubmit}
+                  className="space-y-4 md:space-y-6"
+                >
                   <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2"
+                    >
                       Full Name
                     </label>
                     <input
@@ -229,11 +157,16 @@ export default function SettingsPage() {
                       className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
                       placeholder="John Doe"
                     />
-                    <p className="text-xs text-slate-500 mt-1">This is the name displayed on your profile</p>
+                    <p className="text-xs text-slate-500 mt-1">
+                      This is the name displayed on your profile
+                    </p>
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2"
+                    >
                       Email Address
                     </label>
                     <input
@@ -245,7 +178,9 @@ export default function SettingsPage() {
                       className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
                       placeholder="john@example.com"
                     />
-                    <p className="text-xs text-slate-500 mt-1">Used for login and account notifications</p>
+                    <p className="text-xs text-slate-500 mt-1">
+                      Used for login and account notifications
+                    </p>
                   </div>
 
                   <button
@@ -266,14 +201,24 @@ export default function SettingsPage() {
               <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 md:p-6">
                 <div className="flex items-start justify-between mb-4 md:mb-6">
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-slate-900">Security</h2>
-                    <p className="text-slate-600 text-xs md:text-sm mt-1">Manage your password and security settings</p>
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+                      Security
+                    </h2>
+                    <p className="text-slate-600 text-xs md:text-sm mt-1">
+                      Manage your password and security settings
+                    </p>
                   </div>
                 </div>
 
-                <form onSubmit={handlePasswordSubmit} className="space-y-4 md:space-y-6">
+                <form
+                  onSubmit={handlePasswordSubmit}
+                  className="space-y-4 md:space-y-6"
+                >
                   <div>
-                    <label htmlFor="currentPassword" className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2">
+                    <label
+                      htmlFor="currentPassword"
+                      className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2"
+                    >
                       Current Password
                     </label>
                     <input
@@ -289,12 +234,17 @@ export default function SettingsPage() {
 
                   <div className="border-t border-slate-200 pt-4 md:pt-6">
                     <div className="mb-3 md:mb-4">
-                      <h3 className="text-sm font-semibold text-slate-900 mb-3 md:mb-4">New Password</h3>
+                      <h3 className="text-sm font-semibold text-slate-900 mb-3 md:mb-4">
+                        New Password
+                      </h3>
                     </div>
 
                     <div className="space-y-3 md:space-y-4">
                       <div>
-                        <label htmlFor="newPassword" className="block text-sm font-medium text-slate-700 mb-1.5 md:mb-2">
+                        <label
+                          htmlFor="newPassword"
+                          className="block text-sm font-medium text-slate-700 mb-1.5 md:mb-2"
+                        >
                           New Password
                         </label>
                         <input
@@ -306,11 +256,17 @@ export default function SettingsPage() {
                           className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
                           placeholder="••••••••"
                         />
-                        <p className="text-xs text-slate-500 mt-1">Min 8 characters with uppercase, lowercase, and a number</p>
+                        <p className="text-xs text-slate-500 mt-1">
+                          Min 8 characters with uppercase, lowercase, and a
+                          number
+                        </p>
                       </div>
 
                       <div>
-                        <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-700 mb-1.5 md:mb-2">
+                        <label
+                          htmlFor="confirmPassword"
+                          className="block text-sm font-medium text-slate-700 mb-1.5 md:mb-2"
+                        >
                           Confirm Password
                         </label>
                         <input
@@ -344,8 +300,12 @@ export default function SettingsPage() {
               <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 md:p-6">
                 <div className="flex items-start justify-between mb-4 md:mb-6">
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-slate-900">Billing & Plans</h2>
-                    <p className="text-slate-600 text-xs md:text-sm mt-1">Manage your subscription and billing</p>
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+                      Billing & Plans
+                    </h2>
+                    <p className="text-slate-600 text-xs md:text-sm mt-1">
+                      Manage your subscription and billing
+                    </p>
                   </div>
                 </div>
 
@@ -353,7 +313,9 @@ export default function SettingsPage() {
                   <div className="space-y-4">
                     <div className="p-4 rounded-lg border border-brand-200 bg-brand-50/30">
                       <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-base font-semibold text-slate-900">{purchase.package.name} Plan</h3>
+                        <h3 className="text-base font-semibold text-slate-900">
+                          {purchase.package.name} Plan
+                        </h3>
                         <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">
                           Active
                         </span>
@@ -361,16 +323,27 @@ export default function SettingsPage() {
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
                           <p className="text-slate-500">Monthly Cost</p>
-                          <p className="font-semibold text-slate-900">${(purchase.package.price / 100).toLocaleString()}</p>
+                          <p className="font-semibold text-slate-900">
+                            $
+                            {(purchase.package.price / 100).toLocaleString()}
+                          </p>
                         </div>
                         <div>
                           <p className="text-slate-500">Started</p>
-                          <p className="font-semibold text-slate-900">{new Date(purchase.createdAt).toLocaleDateString()}</p>
+                          <p className="font-semibold text-slate-900">
+                            {new Date(
+                              purchase.createdAt
+                            ).toLocaleDateString()}
+                          </p>
                         </div>
                         {purchase.expiresAt && (
                           <div>
                             <p className="text-slate-500">Expires</p>
-                            <p className="font-semibold text-slate-900">{new Date(purchase.expiresAt).toLocaleDateString()}</p>
+                            <p className="font-semibold text-slate-900">
+                              {new Date(
+                                purchase.expiresAt
+                              ).toLocaleDateString()}
+                            </p>
                           </div>
                         )}
                       </div>
@@ -385,9 +358,12 @@ export default function SettingsPage() {
                 ) : (
                   <div className="text-center py-8 md:py-12">
                     <CreditCard className="w-10 h-10 md:w-12 md:h-12 text-slate-300 mx-auto mb-3 md:mb-4" />
-                    <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-2">No Active Subscription</h3>
+                    <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-2">
+                      No Active Subscription
+                    </h3>
                     <p className="text-xs md:text-sm text-slate-500 mb-4 md:mb-6 max-w-sm mx-auto">
-                      Browse our available packages to find the right plan for your business.
+                      Browse our available packages to find the right plan for
+                      your business.
                     </p>
                     <a
                       href="/packages"

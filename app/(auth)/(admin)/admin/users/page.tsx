@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -12,100 +11,25 @@ import {
   CreditCard,
   ArrowUpRight,
 } from "lucide-react";
-
-interface UserRow {
-  id: string;
-  name: string | null;
-  email: string;
-  role: string;
-  createdAt: string;
-  _count: { purchases: number };
-}
-
-function getInitials(name: string | null, email: string) {
-  if (name) {
-    return name
-      .split(" ")
-      .map((w) => w[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
-  }
-  return email[0].toUpperCase();
-}
-
-function getAvatarColor(id: string) {
-  const colors = [
-    "bg-brand-100 text-brand-700",
-    "bg-violet-100 text-violet-700",
-    "bg-sky-100 text-sky-700",
-    "bg-amber-100 text-amber-700",
-    "bg-rose-100 text-rose-700",
-    "bg-teal-100 text-teal-700",
-  ];
-  let hash = 0;
-  for (let i = 0; i < id.length; i++) hash = id.charCodeAt(i) + ((hash << 5) - hash);
-  return colors[Math.abs(hash) % colors.length];
-}
-
-function timeAgo(dateStr: string) {
-  const diff = Date.now() - new Date(dateStr).getTime();
-  const days = Math.floor(diff / 86400000);
-  if (days === 0) return "Today";
-  if (days === 1) return "Yesterday";
-  if (days < 30) return `${days}d ago`;
-  const months = Math.floor(days / 30);
-  if (months < 12) return `${months}mo ago`;
-  return `${Math.floor(months / 12)}y ago`;
-}
+import { useAdminUsers } from "@/hooks/useAdminUsers";
+import { timeAgo, getInitials, getAvatarColor } from "@/lib/format-utils";
 
 export default function AdminUsersPage() {
-  const [users, setUsers] = useState<UserRow[]>([]);
-  const [total, setTotal] = useState(0);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [search, setSearch] = useState("");
-  const [roleFilter, setRoleFilter] = useState("");
-  const [loading, setLoading] = useState(true);
-
-  const fetchUsers = useCallback(async () => {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams({
-        page: page.toString(),
-        limit: "10",
-        ...(search && { search }),
-        ...(roleFilter && { role: roleFilter }),
-        sortBy: "createdAt",
-        sortOrder: "desc",
-      });
-
-      const res = await fetch(`/api/admin/users?${params}`);
-      const data = await res.json();
-
-      if (res.ok) {
-        setUsers(data.users);
-        setTotal(data.total);
-        setTotalPages(data.totalPages);
-      }
-    } catch {
-      // silently fail
-    } finally {
-      setLoading(false);
-    }
-  }, [page, search, roleFilter]);
-
-  useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [search, roleFilter]);
-
-  const admins = users.filter((u) => u.role === "ADMIN").length;
-  const agents = users.filter((u) => u.role === "AGENT").length;
-  const withSubs = users.filter((u) => u._count.purchases > 0).length;
+  const {
+    users,
+    total,
+    page,
+    totalPages,
+    search,
+    roleFilter,
+    loading,
+    admins,
+    agents,
+    withSubs,
+    setPage,
+    setSearch,
+    setRoleFilter,
+  } = useAdminUsers();
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -188,7 +112,10 @@ export default function AdminUsersPage() {
         {loading ? (
           <div className="divide-y divide-slate-100">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="flex items-center gap-4 px-5 py-4 animate-pulse">
+              <div
+                key={i}
+                className="flex items-center gap-4 px-5 py-4 animate-pulse"
+              >
                 <div className="h-10 w-10 rounded-full bg-slate-100" />
                 <div className="flex-1 space-y-2">
                   <div className="h-4 w-32 rounded bg-slate-100" />
@@ -202,7 +129,9 @@ export default function AdminUsersPage() {
           <div className="flex flex-col items-center justify-center py-20 text-slate-400">
             <Users className="h-10 w-10 mb-3" />
             <p className="text-sm font-medium">No users found</p>
-            <p className="text-xs mt-1">Try adjusting your search or filters</p>
+            <p className="text-xs mt-1">
+              Try adjusting your search or filters
+            </p>
           </div>
         ) : (
           <div className="divide-y divide-slate-100">
@@ -240,7 +169,9 @@ export default function AdminUsersPage() {
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-slate-500 truncate">{user.email}</p>
+                  <p className="text-xs text-slate-500 truncate">
+                    {user.email}
+                  </p>
                 </div>
 
                 {/* Meta */}
@@ -248,7 +179,8 @@ export default function AdminUsersPage() {
                   {user._count.purchases > 0 && (
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 text-xs font-medium">
                       <CreditCard className="h-3 w-3" />
-                      {user._count.purchases} sub{user._count.purchases !== 1 ? "s" : ""}
+                      {user._count.purchases} sub
+                      {user._count.purchases !== 1 ? "s" : ""}
                     </span>
                   )}
                   <span className="text-xs text-slate-400 w-16 text-right">

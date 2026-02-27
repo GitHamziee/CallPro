@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
 import {
   Search,
   ChevronLeft,
@@ -13,134 +12,33 @@ import {
   DollarSign,
   CreditCard,
 } from "lucide-react";
+import { useAdminLeads } from "@/hooks/useAdminLeads";
+import { timeAgo, LEAD_STATUS_BADGES } from "@/lib/format-utils";
 import AssignLeadModal from "@/components/admin/AssignLeadModal";
 import SendInvoiceModal from "@/components/admin/SendInvoiceModal";
 
-interface LeadInvoice {
-  id: string;
-  amount: number;
-  status: string;
-  paidAt: string | null;
-}
-
-interface LeadRow {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  zipCode: string;
-  status: "NEW" | "PENDING" | "ACCEPTED" | "INVOICED" | "PAID";
-  createdAt: string;
-  agent: { id: string; name: string | null; email: string };
-  assignedTo: { id: string; name: string | null; email: string } | null;
-  invoice: LeadInvoice | null;
-}
-
-interface AgentOption {
-  id: string;
-  name: string | null;
-  email: string;
-}
-
-interface LeadStats {
-  totalLeads: number;
-  leadsThisMonth: number;
-  newCount: number;
-  pendingCount: number;
-  acceptedCount: number;
-  invoicedCount: number;
-  paidCount: number;
-}
-
-const STATUS_BADGES: Record<string, string> = {
-  NEW: "bg-slate-100 text-slate-600",
-  PENDING: "bg-amber-50 text-amber-700",
-  ACCEPTED: "bg-emerald-50 text-emerald-700",
-  INVOICED: "bg-blue-50 text-blue-700",
-  PAID: "bg-green-50 text-green-700",
-};
-
-function timeAgo(dateStr: string) {
-  const diff = Date.now() - new Date(dateStr).getTime();
-  const days = Math.floor(diff / 86400000);
-  if (days === 0) return "Today";
-  if (days === 1) return "Yesterday";
-  if (days < 30) return `${days}d ago`;
-  const months = Math.floor(days / 30);
-  if (months < 12) return `${months}mo ago`;
-  return `${Math.floor(months / 12)}y ago`;
-}
-
 export default function AdminLeadsPage() {
-  const [leads, setLeads] = useState<LeadRow[]>([]);
-  const [total, setTotal] = useState(0);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [search, setSearch] = useState("");
-  const [agentFilter, setAgentFilter] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [agents, setAgents] = useState<AgentOption[]>([]);
-  const [stats, setStats] = useState<LeadStats | null>(null);
-  const [assignLeadId, setAssignLeadId] = useState<string | null>(null);
-  const [invoiceLeadId, setInvoiceLeadId] = useState<string | null>(null);
-
-  // Fetch agents for filter dropdown
-  useEffect(() => {
-    async function fetchAgents() {
-      try {
-        const res = await fetch("/api/admin/users?role=AGENT&limit=50");
-        const data = await res.json();
-        if (res.ok) {
-          setAgents(
-            data.users.map((u: AgentOption) => ({
-              id: u.id,
-              name: u.name,
-              email: u.email,
-            }))
-          );
-        }
-      } catch {
-        // silently fail
-      }
-    }
-    fetchAgents();
-  }, []);
-
-  const fetchLeads = useCallback(async () => {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams({
-        page: page.toString(),
-        limit: "10",
-        ...(search && { search }),
-        ...(agentFilter && { agentId: agentFilter }),
-        ...(statusFilter && { status: statusFilter }),
-      });
-
-      const res = await fetch(`/api/admin/leads?${params}`);
-      const data = await res.json();
-
-      if (res.ok) {
-        setLeads(data.leads);
-        setTotal(data.total);
-        setTotalPages(data.totalPages);
-        setStats(data.stats);
-      }
-    } catch {
-      // silently fail
-    } finally {
-      setLoading(false);
-    }
-  }, [page, search, agentFilter, statusFilter]);
-
-  useEffect(() => {
-    fetchLeads();
-  }, [fetchLeads]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [search, agentFilter, statusFilter]);
+  const {
+    leads,
+    total,
+    page,
+    totalPages,
+    search,
+    agentFilter,
+    statusFilter,
+    loading,
+    agents,
+    stats,
+    assignLeadId,
+    invoiceLeadId,
+    setPage,
+    setSearch,
+    setAgentFilter,
+    setStatusFilter,
+    setAssignLeadId,
+    setInvoiceLeadId,
+    fetchLeads,
+  } = useAdminLeads();
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -339,7 +237,8 @@ export default function AdminLeadsPage() {
                     <td className="px-5 py-4">
                       <span
                         className={`inline-flex px-2.5 py-1 rounded-full text-xs font-semibold ${
-                          STATUS_BADGES[lead.status] || STATUS_BADGES.NEW
+                          LEAD_STATUS_BADGES[lead.status] ||
+                          LEAD_STATUS_BADGES.NEW
                         }`}
                       >
                         {lead.status}
@@ -362,7 +261,9 @@ export default function AdminLeadsPage() {
                           <DollarSign className="h-3 w-3" />
                           Send Invoice
                         </button>
-                      ) : (lead.status === "INVOICED" || lead.status === "PAID") && lead.invoice ? (
+                      ) : (lead.status === "INVOICED" ||
+                          lead.status === "PAID") &&
+                        lead.invoice ? (
                         <span className="text-sm font-medium text-slate-700">
                           ${(lead.invoice.amount / 100).toFixed(2)}
                         </span>

@@ -13,24 +13,7 @@ import {
   DollarSign,
 } from "lucide-react";
 import { useMyLeads } from "@/hooks/useMyLeads";
-
-const STATUS_BADGES: Record<string, string> = {
-  PENDING: "bg-amber-50 text-amber-700",
-  ACCEPTED: "bg-emerald-50 text-emerald-700",
-  INVOICED: "bg-blue-50 text-blue-700",
-  PAID: "bg-green-50 text-green-700",
-};
-
-function timeAgo(dateStr: string) {
-  const diff = Date.now() - new Date(dateStr).getTime();
-  const days = Math.floor(diff / 86400000);
-  if (days === 0) return "Today";
-  if (days === 1) return "Yesterday";
-  if (days < 30) return `${days}d ago`;
-  const months = Math.floor(days / 30);
-  if (months < 12) return `${months}mo ago`;
-  return `${Math.floor(months / 12)}y ago`;
-}
+import { timeAgo, LEAD_STATUS_BADGES } from "@/lib/format-utils";
 
 export default function MyLeadsPage() {
   const {
@@ -201,7 +184,8 @@ export default function MyLeadsPage() {
                     <td className="px-5 py-4">
                       <span
                         className={`inline-flex px-2.5 py-1 rounded-full text-xs font-semibold ${
-                          STATUS_BADGES[lead.status] || STATUS_BADGES.PENDING
+                          LEAD_STATUS_BADGES[lead.status] ||
+                          LEAD_STATUS_BADGES.PENDING
                         }`}
                       >
                         {lead.status}

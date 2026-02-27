@@ -1,63 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
-import {
-  Send,
-  CheckCircle,
-  XCircle,
-} from "lucide-react";
+import { Send, CheckCircle, XCircle } from "lucide-react";
+import { useSubmitLead } from "@/hooks/useSubmitLead";
 
 export default function SubmitLeadPage() {
-  const { data: session } = useSession();
-  const [submitting, setSubmitting] = useState(false);
-  const [message, setMessage] = useState<{
-    text: string;
-    type: "success" | "error";
-  } | null>(null);
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    zipCode: "",
-  });
-
-  useEffect(() => {
-    if (message) {
-      const timer = setTimeout(() => setMessage(null), 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [message]);
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setSubmitting(true);
-    setMessage(null);
-
-    try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        setMessage({ text: "Lead submitted successfully!", type: "success" });
-        setForm({ name: "", email: "", phone: "", zipCode: "" });
-      } else {
-        setMessage({
-          text: data.error || "Failed to submit lead",
-          type: "error",
-        });
-      }
-    } catch {
-      setMessage({ text: "Network error. Try again.", type: "error" });
-    } finally {
-      setSubmitting(false);
-    }
-  }
+  const { form, submitting, message, handleSubmit, updateField } =
+    useSubmitLead();
 
   return (
     <div className="mx-auto max-w-2xl">
@@ -108,9 +56,7 @@ export default function SubmitLeadPage() {
               <input
                 type="text"
                 value={form.name}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, name: e.target.value }))
-                }
+                onChange={(e) => updateField("name", e.target.value)}
                 placeholder="John Doe"
                 required
                 className="w-full px-3 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 transition-all"
@@ -123,9 +69,7 @@ export default function SubmitLeadPage() {
               <input
                 type="email"
                 value={form.email}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, email: e.target.value }))
-                }
+                onChange={(e) => updateField("email", e.target.value)}
                 placeholder="john@example.com"
                 required
                 className="w-full px-3 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 transition-all"
@@ -138,9 +82,7 @@ export default function SubmitLeadPage() {
               <input
                 type="tel"
                 value={form.phone}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, phone: e.target.value }))
-                }
+                onChange={(e) => updateField("phone", e.target.value)}
                 placeholder="+1 (555) 000-0000"
                 required
                 className="w-full px-3 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 transition-all"
@@ -153,9 +95,7 @@ export default function SubmitLeadPage() {
               <input
                 type="text"
                 value={form.zipCode}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, zipCode: e.target.value }))
-                }
+                onChange={(e) => updateField("zipCode", e.target.value)}
                 placeholder="10001"
                 required
                 className="w-full px-3 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 transition-all"

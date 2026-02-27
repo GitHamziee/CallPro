@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
 import {
   Search,
   ChevronLeft,
@@ -9,74 +8,21 @@ import {
   CalendarDays,
   Clock,
 } from "lucide-react";
-
-interface LeadRow {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  zipCode: string;
-  createdAt: string;
-}
-
-interface LeadStats {
-  totalLeads: number;
-  leadsThisMonth: number;
-  leadsToday: number;
-}
-
-function timeAgo(dateStr: string) {
-  const diff = Date.now() - new Date(dateStr).getTime();
-  const days = Math.floor(diff / 86400000);
-  if (days === 0) return "Today";
-  if (days === 1) return "Yesterday";
-  if (days < 30) return `${days}d ago`;
-  const months = Math.floor(days / 30);
-  if (months < 12) return `${months}mo ago`;
-  return `${Math.floor(months / 12)}y ago`;
-}
+import { useLeadHistory } from "@/hooks/useLeadHistory";
+import { timeAgo } from "@/lib/format-utils";
 
 export default function LeadHistoryPage() {
-  const [leads, setLeads] = useState<LeadRow[]>([]);
-  const [total, setTotal] = useState(0);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState<LeadStats | null>(null);
-
-  const fetchLeads = useCallback(async () => {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams({
-        page: page.toString(),
-        limit: "10",
-        ...(search && { search }),
-      });
-
-      const res = await fetch(`/api/leads?${params}`);
-      const data = await res.json();
-
-      if (res.ok) {
-        setLeads(data.leads);
-        setTotal(data.total);
-        setTotalPages(data.totalPages);
-        setStats(data.stats);
-      }
-    } catch {
-      // silently fail
-    } finally {
-      setLoading(false);
-    }
-  }, [page, search]);
-
-  useEffect(() => {
-    fetchLeads();
-  }, [fetchLeads]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [search]);
+  const {
+    leads,
+    total,
+    page,
+    totalPages,
+    search,
+    loading,
+    stats,
+    setPage,
+    setSearch,
+  } = useLeadHistory();
 
   return (
     <div className="mx-auto max-w-5xl">
@@ -97,7 +43,9 @@ export default function LeadHistoryPage() {
             <div className="p-1.5 md:p-2 rounded-lg bg-blue-50">
               <FileText className="h-4 w-4 md:h-5 md:w-5 text-blue-600" />
             </div>
-            <p className="text-[10px] md:text-sm font-medium text-slate-500">Total Leads</p>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">
+              Total Leads
+            </p>
           </div>
           <p className="text-lg md:text-2xl font-bold text-slate-900">
             {stats?.totalLeads ?? 0}
@@ -108,7 +56,9 @@ export default function LeadHistoryPage() {
             <div className="p-1.5 md:p-2 rounded-lg bg-brand-50">
               <CalendarDays className="h-4 w-4 md:h-5 md:w-5 text-brand-600" />
             </div>
-            <p className="text-[10px] md:text-sm font-medium text-slate-500">This Month</p>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">
+              This Month
+            </p>
           </div>
           <p className="text-lg md:text-2xl font-bold text-slate-900">
             {stats?.leadsThisMonth ?? 0}
@@ -119,7 +69,9 @@ export default function LeadHistoryPage() {
             <div className="p-1.5 md:p-2 rounded-lg bg-emerald-50">
               <Clock className="h-4 w-4 md:h-5 md:w-5 text-emerald-600" />
             </div>
-            <p className="text-[10px] md:text-sm font-medium text-slate-500">Today</p>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">
+              Today
+            </p>
           </div>
           <p className="text-lg md:text-2xl font-bold text-slate-900">
             {stats?.leadsToday ?? 0}

@@ -53,7 +53,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
       // Initial login — embed all fields including tokenVersion
       if (user) {
         token.id = user.id;
@@ -64,13 +64,31 @@ export const authOptions: NextAuthOptions = {
         return token;
       }
 
+      // Client called useSession().update() — refresh from DB immediately
+      if (trigger === "update") {
+        try {
+          const dbUser = await prisma.user.findUnique({
+            where: { id: token.id },
+            select: { name: true, email: true, role: true },
+          });
+          if (dbUser) {
+            token.name = dbUser.name;
+            token.email = dbUser.email;
+            token.role = dbUser.role;
+          }
+        } catch (error) {
+          console.error("Session update DB error:", error);
+        }
+        return token;
+      }
+
       // Subsequent requests — periodically re-validate against DB
       const now = Date.now();
       if (now - token.lastChecked > TOKEN_REVALIDATION_INTERVAL) {
         try {
           const dbUser = await prisma.user.findUnique({
             where: { id: token.id },
-            select: { tokenVersion: true, role: true },
+            select: { tokenVersion: true, role: true, name: true },
           });
 
           // User deleted — invalidate token
@@ -83,8 +101,9 @@ export const authOptions: NextAuthOptions = {
             return {} as typeof token;
           }
 
-          // Refresh role in case it changed
+          // Refresh role and name in case they changed
           token.role = dbUser.role;
+          token.name = dbUser.name;
           token.lastChecked = now;
         } catch (error) {
           // On DB error, skip check — prevents mass sign-outs on transient Neon outage

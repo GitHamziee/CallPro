@@ -1,8 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
-import { useSession } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import Link from "next/link";
 import {
   Package,
@@ -18,32 +16,15 @@ import {
   FileText,
   CalendarDays,
   Clock,
-  Send,
 } from "lucide-react";
-
-interface PurchaseInfo {
-  id: string;
-  status: string;
-  expiresAt: string | null;
-  createdAt: string;
-  package: { name: string; price: number };
-}
-
-interface AdminStats {
-  totalUsers: number;
-  newUsersThisMonth: number;
-  totalAdmins: number;
-  activeSubscriptions: number;
-  newSubscriptionsThisMonth: number;
-  revenueThisMonth: number;
-  recentUsers: {
-    id: string;
-    name: string | null;
-    email: string;
-    role: string;
-    createdAt: string;
-  }[];
-}
+import {
+  useDashboard,
+  useAdminDashboard,
+  useAgentDashboard,
+  type PurchaseInfo,
+  type AdminStats,
+} from "@/hooks/useDashboard";
+import type { Session } from "next-auth";
 
 // ─── User Dashboard ────────────────────────────────────────────────
 function UserDashboard({
@@ -52,14 +33,13 @@ function UserDashboard({
   showPaymentSuccess,
   setShowPaymentSuccess,
 }: {
-  session: ReturnType<typeof useSession>["data"];
+  session: Session | null;
   purchase: PurchaseInfo | null;
   showPaymentSuccess: boolean;
   setShowPaymentSuccess: (v: boolean) => void;
 }) {
   return (
     <div className="mx-auto max-w-5xl space-y-4 md:space-y-6">
-      {/* Payment success banner */}
       {showPaymentSuccess && (
         <div className="flex items-center gap-2 p-3 md:p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-800">
           <CheckCircle className="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
@@ -75,7 +55,6 @@ function UserDashboard({
         </div>
       )}
 
-      {/* Welcome Card */}
       <div className="rounded-lg bg-white p-4 md:p-6 shadow-sm border border-slate-200">
         <h2 className="text-lg md:text-xl font-bold text-slate-900 mb-1">
           Welcome back,{" "}
@@ -86,14 +65,15 @@ function UserDashboard({
         </p>
       </div>
 
-      {/* Stats Cards */}
       <div className="grid grid-cols-3 gap-2 md:gap-4">
         <div className="rounded-lg bg-white p-3 md:p-5 shadow-sm border border-slate-200">
           <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
             <div className="p-1.5 md:p-2 rounded-lg bg-brand-50">
               <Package className="h-4 w-4 md:h-5 md:w-5 text-brand-600" />
             </div>
-            <p className="text-[10px] md:text-sm font-medium text-slate-500">Current Plan</p>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">
+              Current Plan
+            </p>
           </div>
           <p className="text-base md:text-2xl font-bold text-slate-900">
             {purchase ? purchase.package.name : "None"}
@@ -110,7 +90,9 @@ function UserDashboard({
             <div className="p-1.5 md:p-2 rounded-lg bg-brand-50">
               <CreditCard className="h-4 w-4 md:h-5 md:w-5 text-brand-600" />
             </div>
-            <p className="text-[10px] md:text-sm font-medium text-slate-500">Monthly Cost</p>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">
+              Monthly Cost
+            </p>
           </div>
           <p className="text-base md:text-2xl font-bold text-slate-900">
             {purchase
@@ -124,16 +106,22 @@ function UserDashboard({
 
         <div className="rounded-lg bg-white p-3 md:p-5 shadow-sm border border-slate-200">
           <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
-            <div className={`p-1.5 md:p-2 rounded-lg ${purchase ? "bg-emerald-50" : "bg-slate-100"}`}>
+            <div
+              className={`p-1.5 md:p-2 rounded-lg ${purchase ? "bg-emerald-50" : "bg-slate-100"}`}
+            >
               {purchase ? (
                 <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-emerald-600" />
               ) : (
                 <XCircle className="h-4 w-4 md:h-5 md:w-5 text-slate-400" />
               )}
             </div>
-            <p className="text-[10px] md:text-sm font-medium text-slate-500">Status</p>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">
+              Status
+            </p>
           </div>
-          <p className={`text-base md:text-2xl font-bold ${purchase ? "text-slate-900" : "text-slate-400"}`}>
+          <p
+            className={`text-base md:text-2xl font-bold ${purchase ? "text-slate-900" : "text-slate-400"}`}
+          >
             {purchase ? "Active" : "Inactive"}
           </p>
           <p className="text-[10px] md:text-xs text-slate-400 mt-1 hidden sm:block">
@@ -141,29 +129,6 @@ function UserDashboard({
           </p>
         </div>
       </div>
-
-      {/* Quick Actions — commented out for now
-      <div className="rounded-lg bg-white p-6 shadow-sm border border-slate-200">
-        <h3 className="text-base font-semibold text-slate-900 mb-4">
-          Quick Actions
-        </h3>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <Link
-            href="/settings"
-            className="px-4 py-2.5 border border-slate-200 text-slate-700 hover:bg-slate-50 text-sm font-medium rounded-lg transition-colors text-center flex items-center justify-center gap-2"
-          >
-            <Settings className="h-4 w-4" />
-            Settings
-          </Link>
-          <Link
-            href="/contact"
-            className="px-4 py-2.5 border border-slate-200 text-slate-700 hover:bg-slate-50 text-sm font-medium rounded-lg transition-colors text-center"
-          >
-            Contact Support
-          </Link>
-        </div>
-      </div>
-      */}
     </div>
   );
 }
@@ -171,32 +136,15 @@ function UserDashboard({
 // ─── Admin Dashboard ───────────────────────────────────────────────
 function AdminDashboard({
   session,
+  stats,
+  loading,
 }: {
-  session: ReturnType<typeof useSession>["data"];
+  session: Session | null;
+  stats: AdminStats | null;
+  loading: boolean;
 }) {
-  const [stats, setStats] = useState<AdminStats | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchStats() {
-      try {
-        const res = await fetch("/api/admin/stats");
-        if (res.ok) {
-          const data = await res.json();
-          setStats(data);
-        }
-      } catch {
-        // silently fail
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchStats();
-  }, []);
-
   return (
     <div className="mx-auto max-w-5xl space-y-4 md:space-y-6">
-      {/* Welcome Card */}
       <div className="rounded-lg bg-white p-4 md:p-6 shadow-sm border border-slate-200">
         <h2 className="text-lg md:text-xl font-bold text-slate-900 mb-1">
           Welcome back, {session?.user?.name || "Admin"}
@@ -211,21 +159,32 @@ function AdminDashboard({
         </p>
       </div>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-2 gap-2 md:gap-4 lg:grid-cols-4">
         <div className="rounded-lg bg-white p-3 md:p-5 shadow-sm border border-slate-200">
           <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
             <div className="p-1.5 md:p-2 rounded-lg bg-brand-50">
               <Users className="h-4 w-4 md:h-5 md:w-5 text-brand-600" />
             </div>
-            <p className="text-[10px] md:text-sm font-medium text-slate-500">Total Users</p>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">
+              Total Users
+            </p>
           </div>
           {loading ? (
-            <div className="animate-pulse"><div className="h-7 w-12 bg-slate-200 rounded mt-1" /><div className="h-3 w-20 bg-slate-100 rounded mt-2" /></div>
-          ) : (<>
-            <p className="text-lg md:text-2xl font-bold text-slate-900">{stats?.totalUsers ?? 0}</p>
-            <p className="text-[10px] md:text-xs text-slate-400 mt-1 hidden sm:block">{stats?.totalAdmins ?? 0} admin{(stats?.totalAdmins ?? 0) !== 1 ? "s" : ""}</p>
-          </>)}
+            <div className="animate-pulse">
+              <div className="h-7 w-12 bg-slate-200 rounded mt-1" />
+              <div className="h-3 w-20 bg-slate-100 rounded mt-2" />
+            </div>
+          ) : (
+            <>
+              <p className="text-lg md:text-2xl font-bold text-slate-900">
+                {stats?.totalUsers ?? 0}
+              </p>
+              <p className="text-[10px] md:text-xs text-slate-400 mt-1 hidden sm:block">
+                {stats?.totalAdmins ?? 0} admin
+                {(stats?.totalAdmins ?? 0) !== 1 ? "s" : ""}
+              </p>
+            </>
+          )}
         </div>
 
         <div className="rounded-lg bg-white p-3 md:p-5 shadow-sm border border-slate-200">
@@ -238,11 +197,20 @@ function AdminDashboard({
             </p>
           </div>
           {loading ? (
-            <div className="animate-pulse"><div className="h-7 w-10 bg-slate-200 rounded mt-1" /><div className="h-3 w-16 bg-slate-100 rounded mt-2" /></div>
-          ) : (<>
-            <p className="text-lg md:text-2xl font-bold text-slate-900">{stats?.newUsersThisMonth ?? 0}</p>
-            <p className="text-[10px] md:text-xs text-slate-400 mt-1 hidden sm:block">This month</p>
-          </>)}
+            <div className="animate-pulse">
+              <div className="h-7 w-10 bg-slate-200 rounded mt-1" />
+              <div className="h-3 w-16 bg-slate-100 rounded mt-2" />
+            </div>
+          ) : (
+            <>
+              <p className="text-lg md:text-2xl font-bold text-slate-900">
+                {stats?.newUsersThisMonth ?? 0}
+              </p>
+              <p className="text-[10px] md:text-xs text-slate-400 mt-1 hidden sm:block">
+                This month
+              </p>
+            </>
+          )}
         </div>
 
         <div className="rounded-lg bg-white p-3 md:p-5 shadow-sm border border-slate-200">
@@ -255,11 +223,20 @@ function AdminDashboard({
             </p>
           </div>
           {loading ? (
-            <div className="animate-pulse"><div className="h-7 w-10 bg-slate-200 rounded mt-1" /><div className="h-3 w-24 bg-slate-100 rounded mt-2" /></div>
-          ) : (<>
-            <p className="text-lg md:text-2xl font-bold text-slate-900">{stats?.activeSubscriptions ?? 0}</p>
-            <p className="text-[10px] md:text-xs text-slate-400 mt-1 hidden sm:block">{stats?.newSubscriptionsThisMonth ?? 0} new this month</p>
-          </>)}
+            <div className="animate-pulse">
+              <div className="h-7 w-10 bg-slate-200 rounded mt-1" />
+              <div className="h-3 w-24 bg-slate-100 rounded mt-2" />
+            </div>
+          ) : (
+            <>
+              <p className="text-lg md:text-2xl font-bold text-slate-900">
+                {stats?.activeSubscriptions ?? 0}
+              </p>
+              <p className="text-[10px] md:text-xs text-slate-400 mt-1 hidden sm:block">
+                {stats?.newSubscriptionsThisMonth ?? 0} new this month
+              </p>
+            </>
+          )}
         </div>
 
         <div className="rounded-lg bg-white p-3 md:p-5 shadow-sm border border-slate-200">
@@ -272,15 +249,23 @@ function AdminDashboard({
             </p>
           </div>
           {loading ? (
-            <div className="animate-pulse"><div className="h-7 w-16 bg-slate-200 rounded mt-1" /><div className="h-3 w-28 bg-slate-100 rounded mt-2" /></div>
-          ) : (<>
-            <p className="text-lg md:text-2xl font-bold text-slate-900">${((stats?.revenueThisMonth ?? 0) / 100).toLocaleString()}</p>
-            <p className="text-[10px] md:text-xs text-slate-400 mt-1 hidden sm:block">From new subscriptions</p>
-          </>)}
+            <div className="animate-pulse">
+              <div className="h-7 w-16 bg-slate-200 rounded mt-1" />
+              <div className="h-3 w-28 bg-slate-100 rounded mt-2" />
+            </div>
+          ) : (
+            <>
+              <p className="text-lg md:text-2xl font-bold text-slate-900">
+                ${((stats?.revenueThisMonth ?? 0) / 100).toLocaleString()}
+              </p>
+              <p className="text-[10px] md:text-xs text-slate-400 mt-1 hidden sm:block">
+                From new subscriptions
+              </p>
+            </>
+          )}
         </div>
       </div>
 
-      {/* Recent Registrations */}
       <div className="rounded-lg bg-white shadow-sm border border-slate-200 overflow-hidden">
         <div className="flex items-center justify-between px-4 py-3 md:px-6 md:py-4 border-b border-slate-200">
           <div className="flex items-center gap-2">
@@ -301,10 +286,16 @@ function AdminDashboard({
         {loading ? (
           <div className="divide-y divide-slate-100 animate-pulse">
             {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="flex items-center justify-between px-6 py-3">
+              <div
+                key={i}
+                className="flex items-center justify-between px-6 py-3"
+              >
                 <div className="flex items-center gap-3">
                   <div className="h-8 w-8 rounded-full bg-slate-200" />
-                  <div><div className="h-4 w-24 bg-slate-200 rounded" /><div className="h-3 w-32 bg-slate-100 rounded mt-1" /></div>
+                  <div>
+                    <div className="h-4 w-24 bg-slate-200 rounded" />
+                    <div className="h-3 w-32 bg-slate-100 rounded mt-1" />
+                  </div>
                 </div>
                 <div className="h-4 w-16 bg-slate-100 rounded" />
               </div>
@@ -319,15 +310,15 @@ function AdminDashboard({
               >
                 <div className="flex items-center gap-2 md:gap-3 min-w-0">
                   <div className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-slate-100 text-slate-600 text-[10px] md:text-xs font-semibold flex-shrink-0">
-                    {(user.name || user.email)
-                      .charAt(0)
-                      .toUpperCase()}
+                    {(user.name || user.email).charAt(0).toUpperCase()}
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs md:text-sm font-medium text-slate-900 truncate">
-                      {user.name || "—"}
+                      {user.name || "\u2014"}
                     </p>
-                    <p className="text-[10px] md:text-xs text-slate-500 truncate">{user.email}</p>
+                    <p className="text-[10px] md:text-xs text-slate-500 truncate">
+                      {user.email}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 md:gap-3 flex-shrink-0 ml-2">
@@ -336,8 +327,8 @@ function AdminDashboard({
                       user.role === "ADMIN"
                         ? "bg-amber-100 text-amber-700"
                         : user.role === "AGENT"
-                        ? "bg-blue-100 text-blue-700"
-                        : "bg-slate-100 text-slate-600"
+                          ? "bg-blue-100 text-blue-700"
+                          : "bg-slate-100 text-slate-600"
                     }`}
                   >
                     {user.role}
@@ -356,7 +347,6 @@ function AdminDashboard({
         )}
       </div>
 
-      {/* Admin quick link */}
       <div className="rounded-lg bg-slate-900 p-4 md:p-6 shadow-sm">
         <div className="flex items-center justify-between gap-3">
           <div>
@@ -380,40 +370,11 @@ function AdminDashboard({
 }
 
 // ─── Agent Dashboard ──────────────────────────────────────────────
-interface AgentStats {
-  totalLeads: number;
-  leadsThisMonth: number;
-  leadsToday: number;
-}
-
-function AgentDashboard({
-  session,
-}: {
-  session: ReturnType<typeof useSession>["data"];
-}) {
-  const [stats, setStats] = useState<AgentStats | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch("/api/leads?limit=1");
-        if (res.ok) {
-          const data = await res.json();
-          setStats(data.stats);
-        }
-      } catch {
-        // silently fail
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
+function AgentDashboard({ session }: { session: Session | null }) {
+  const { stats, loading } = useAgentDashboard();
 
   return (
     <div className="mx-auto max-w-5xl space-y-4 md:space-y-6">
-      {/* Welcome Card */}
       <div className="rounded-lg bg-white p-4 md:p-6 shadow-sm border border-slate-200">
         <h2 className="text-lg md:text-xl font-bold text-slate-900 mb-1">
           Welcome back, {session?.user?.name || "Agent"}
@@ -423,19 +384,24 @@ function AgentDashboard({
         </p>
       </div>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-3 gap-2 md:gap-4">
         <div className="rounded-lg bg-white p-3 md:p-5 shadow-sm border border-slate-200">
           <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
             <div className="p-1.5 md:p-2 rounded-lg bg-blue-50">
               <FileText className="h-4 w-4 md:h-5 md:w-5 text-blue-600" />
             </div>
-            <p className="text-[10px] md:text-sm font-medium text-slate-500">Total Leads</p>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">
+              Total Leads
+            </p>
           </div>
           {loading ? (
-            <div className="animate-pulse"><div className="h-7 w-12 bg-slate-200 rounded mt-1" /></div>
+            <div className="animate-pulse">
+              <div className="h-7 w-12 bg-slate-200 rounded mt-1" />
+            </div>
           ) : (
-            <p className="text-lg md:text-2xl font-bold text-slate-900">{stats?.totalLeads ?? 0}</p>
+            <p className="text-lg md:text-2xl font-bold text-slate-900">
+              {stats?.totalLeads ?? 0}
+            </p>
           )}
         </div>
 
@@ -444,12 +410,18 @@ function AgentDashboard({
             <div className="p-1.5 md:p-2 rounded-lg bg-brand-50">
               <CalendarDays className="h-4 w-4 md:h-5 md:w-5 text-brand-600" />
             </div>
-            <p className="text-[10px] md:text-sm font-medium text-slate-500">This Month</p>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">
+              This Month
+            </p>
           </div>
           {loading ? (
-            <div className="animate-pulse"><div className="h-7 w-10 bg-slate-200 rounded mt-1" /></div>
+            <div className="animate-pulse">
+              <div className="h-7 w-10 bg-slate-200 rounded mt-1" />
+            </div>
           ) : (
-            <p className="text-lg md:text-2xl font-bold text-slate-900">{stats?.leadsThisMonth ?? 0}</p>
+            <p className="text-lg md:text-2xl font-bold text-slate-900">
+              {stats?.leadsThisMonth ?? 0}
+            </p>
           )}
         </div>
 
@@ -458,56 +430,39 @@ function AgentDashboard({
             <div className="p-1.5 md:p-2 rounded-lg bg-emerald-50">
               <Clock className="h-4 w-4 md:h-5 md:w-5 text-emerald-600" />
             </div>
-            <p className="text-[10px] md:text-sm font-medium text-slate-500">Today</p>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">
+              Today
+            </p>
           </div>
           {loading ? (
-            <div className="animate-pulse"><div className="h-7 w-10 bg-slate-200 rounded mt-1" /></div>
+            <div className="animate-pulse">
+              <div className="h-7 w-10 bg-slate-200 rounded mt-1" />
+            </div>
           ) : (
-            <p className="text-lg md:text-2xl font-bold text-slate-900">{stats?.leadsToday ?? 0}</p>
+            <p className="text-lg md:text-2xl font-bold text-slate-900">
+              {stats?.leadsToday ?? 0}
+            </p>
           )}
         </div>
       </div>
-
     </div>
   );
 }
 
 // ─── Inner component (uses useSearchParams — must be inside Suspense) ─────
 function DashboardContent() {
-  const { data: session } = useSession();
-  const searchParams = useSearchParams();
-  const [purchase, setPurchase] = useState<PurchaseInfo | null>(null);
-  const [showPaymentSuccess, setShowPaymentSuccess] = useState(false);
-
-  const role = session?.user?.role;
-
-  useEffect(() => {
-    if (searchParams.get("payment") === "success") {
-      setShowPaymentSuccess(true);
-      setTimeout(() => setShowPaymentSuccess(false), 5000);
-    }
-  }, [searchParams]);
-
-  useEffect(() => {
-    // Only fetch purchase for regular users
-    if (role !== "USER") return;
-
-    async function fetchPurchase() {
-      try {
-        const res = await fetch("/api/auth/purchases");
-        if (res.ok) {
-          const data = await res.json();
-          setPurchase(data.purchase);
-        }
-      } catch {
-        // silently fail
-      }
-    }
-    fetchPurchase();
-  }, [role]);
+  const { session, role, purchase, showPaymentSuccess, setShowPaymentSuccess } =
+    useDashboard();
+  const adminDashboard = useAdminDashboard();
 
   if (role === "ADMIN") {
-    return <AdminDashboard session={session} />;
+    return (
+      <AdminDashboard
+        session={session}
+        stats={adminDashboard.stats}
+        loading={adminDashboard.loading}
+      />
+    );
   }
 
   if (role === "AGENT") {
