@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -367,8 +367,8 @@ function AdminDashboard({
   );
 }
 
-// ─── Main Dashboard Page ───────────────────────────────────────────
-export default function DashboardPage() {
+// ─── Inner component (uses useSearchParams — must be inside Suspense) ─────
+function DashboardContent() {
   const { data: session } = useSession();
   const searchParams = useSearchParams();
   const [purchase, setPurchase] = useState<PurchaseInfo | null>(null);
@@ -412,5 +412,14 @@ export default function DashboardPage() {
       showPaymentSuccess={showPaymentSuccess}
       setShowPaymentSuccess={setShowPaymentSuccess}
     />
+  );
+}
+
+// ─── Main Dashboard Page ───────────────────────────────────────────
+export default function DashboardPage() {
+  return (
+    <Suspense>
+      <DashboardContent />
+    </Suspense>
   );
 }
