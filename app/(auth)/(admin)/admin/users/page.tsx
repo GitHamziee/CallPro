@@ -10,7 +10,6 @@ import {
   Shield,
   CreditCard,
   ArrowUpRight,
-  Filter,
 } from "lucide-react";
 
 interface UserRow {
@@ -151,17 +150,24 @@ export default function AdminUsersPage() {
             className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
           />
         </div>
-        <div className="relative">
-          <Filter className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-          <select
-            value={roleFilter}
-            onChange={(e) => setRoleFilter(e.target.value)}
-            className="pl-10 pr-8 py-2.5 border border-slate-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 appearance-none cursor-pointer"
-          >
-            <option value="">All Roles</option>
-            <option value="USER">Users</option>
-            <option value="ADMIN">Admins</option>
-          </select>
+        <div className="flex items-center gap-1 rounded-xl border border-slate-200 bg-white p-1">
+          {[
+            { label: "All", value: "" },
+            { label: "Users", value: "USER" },
+            { label: "Admins", value: "ADMIN" },
+          ].map((opt) => (
+            <button
+              key={opt.value}
+              onClick={() => setRoleFilter(opt.value)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                roleFilter === opt.value
+                  ? "bg-slate-900 text-white shadow-sm"
+                  : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
         </div>
       </div>
 

@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Menu, Shield } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useSidebar } from "@/components/portal/SidebarContext";
 
 const PAGE_TITLES: Record<string, string> = {
@@ -47,15 +47,9 @@ export default function AdminTopBar() {
       {/* Spacer */}
       <div className="flex-1" />
 
-      {/* Admin badge + user info */}
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 text-amber-700">
-          <Shield className="h-3.5 w-3.5" />
-          <span className="text-xs font-semibold">Admin</span>
-        </div>
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-white text-sm font-semibold">
-          {initials}
-        </div>
+      {/* User avatar */}
+      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-white text-sm font-semibold">
+        {initials}
       </div>
     </header>
   );
