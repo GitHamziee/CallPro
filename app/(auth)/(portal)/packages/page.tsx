@@ -120,7 +120,7 @@ export default function PackagesPage() {
           return (
             <div
               key={pkg.id}
-              className={`relative rounded-xl border-2 p-6 transition-all ${
+              className={`relative rounded-xl border-2 p-4 md:p-6 transition-all flex flex-col ${
                 isCurrentPlan
                   ? "border-brand-600 bg-brand-50/30 shadow-md shadow-brand-600/10"
                   : "border-slate-200 bg-white hover:border-slate-300 hover:shadow-sm"
@@ -132,20 +132,20 @@ export default function PackagesPage() {
                 </div>
               )}
 
-              <div className="mb-6">
-                <h3 className="text-xl font-bold text-slate-900">{pkg.name}</h3>
-                <p className="text-sm text-slate-500 mt-1">{pkg.description}</p>
+              <div className="mb-3 md:mb-6">
+                <h3 className="text-lg md:text-xl font-bold text-slate-900">{pkg.name}</h3>
+                <p className="text-xs md:text-sm text-slate-500 mt-1">{pkg.description}</p>
               </div>
 
-              <div className="mb-6">
+              <div className="mb-3 md:mb-6">
                 {isEnterprise ? (
                   <div>
-                    <span className="text-3xl font-bold text-slate-900">Custom</span>
+                    <span className="text-2xl md:text-3xl font-bold text-slate-900">Custom</span>
                     <p className="text-sm text-slate-500 mt-1">Contact us for pricing</p>
                   </div>
                 ) : (
                   <div>
-                    <span className="text-3xl font-bold text-slate-900">
+                    <span className="text-2xl md:text-3xl font-bold text-slate-900">
                       ${(pkg.price / 100).toLocaleString()}
                     </span>
                     <span className="text-slate-500 text-sm">/month</span>
@@ -153,10 +153,10 @@ export default function PackagesPage() {
                 )}
               </div>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-2 md:space-y-3 mb-4 md:mb-8 flex-1">
                 {pkg.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-600">
-                    <Check className="h-4 w-4 text-brand-600 mt-0.5 flex-shrink-0" />
+                  <li key={idx} className="flex items-start gap-2 text-xs md:text-sm text-slate-600">
+                    <Check className="h-3.5 w-3.5 md:h-4 md:w-4 text-brand-600 mt-0.5 flex-shrink-0" />
                     {feature}
                   </li>
                 ))}
@@ -165,14 +165,14 @@ export default function PackagesPage() {
               {isCurrentPlan ? (
                 <button
                   disabled
-                  className="w-full px-4 py-2.5 border-2 border-brand-600 text-brand-600 font-semibold rounded-lg cursor-default text-sm"
+                  className="mt-auto w-full px-3 py-2 md:px-4 md:py-2.5 border-2 border-brand-600 text-brand-600 font-semibold rounded-lg cursor-default text-xs md:text-sm"
                 >
                   Current Plan
                 </button>
               ) : isEnterprise ? (
                 <a
                   href="/contact"
-                  className="block w-full px-4 py-2.5 border-2 border-slate-200 text-slate-700 font-semibold rounded-lg text-center hover:bg-slate-50 transition-colors text-sm"
+                  className="mt-auto block w-full px-3 py-2 md:px-4 md:py-2.5 border-2 border-slate-200 text-slate-700 font-semibold rounded-lg text-center hover:bg-slate-50 transition-colors text-xs md:text-sm"
                 >
                   Contact Sales
                 </a>
@@ -180,7 +180,7 @@ export default function PackagesPage() {
                 <button
                   onClick={() => handleSubscribe(pkg.id)}
                   disabled={subscribing === pkg.id}
-                  className="w-full px-4 py-2.5 bg-brand-600 hover:bg-brand-700 disabled:bg-brand-400 text-white font-semibold rounded-lg transition-colors text-sm flex items-center justify-center gap-2"
+                  className="mt-auto w-full px-3 py-2 md:px-4 md:py-2.5 bg-brand-600 hover:bg-brand-700 disabled:bg-brand-400 text-white font-semibold rounded-lg transition-colors text-xs md:text-sm flex items-center justify-center gap-2"
                 >
                   {subscribing === pkg.id ? (
                     <>

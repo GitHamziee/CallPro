@@ -3,13 +3,12 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { PhoneCall, LayoutDashboard, Package, Settings, LogOut, X, MessageCircle } from "lucide-react";
+import { PhoneCall, LayoutDashboard, Package, Settings, LogOut, X } from "lucide-react";
 import { useSidebar } from "./SidebarContext";
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "Packages", href: "/packages", icon: Package, userOnly: true },
-  { label: "Live Chat", href: "/chat", icon: MessageCircle },
   { label: "Settings", href: "/settings", icon: Settings },
 ];
 

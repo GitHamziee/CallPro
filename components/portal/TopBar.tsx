@@ -10,7 +10,6 @@ const PAGE_TITLES: Record<string, string> = {
   "/dashboard": "Dashboard",
   "/packages": "Packages",
   "/settings": "Settings",
-  "/chat": "Live Chat",
 };
 
 export default function TopBar() {

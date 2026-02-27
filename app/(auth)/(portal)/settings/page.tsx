@@ -123,14 +123,14 @@ export default function SettingsPage() {
 
   return (
     <div className="mx-auto max-w-5xl">
-      <p className="text-sm text-slate-500 mb-6">
+      <p className="text-xs md:text-sm text-slate-500 mb-4 md:mb-6">
         Manage your account, security, and billing preferences.
       </p>
 
       {/* Notifications */}
       {successMessage && (
-        <div className="mb-6 p-4 pl-5 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-lg text-emerald-800 flex items-start gap-3">
-          <svg className="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+        <div className="mb-4 md:mb-6 p-3 md:p-4 pl-4 md:pl-5 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-lg text-emerald-800 text-sm flex items-start gap-2 md:gap-3">
+          <svg className="w-4 h-4 md:w-5 md:h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
           </svg>
           <span className="flex-1">{successMessage}</span>
@@ -141,8 +141,8 @@ export default function SettingsPage() {
       )}
 
       {errorMessage && (
-        <div className="mb-6 p-4 pl-5 bg-red-50 border-l-4 border-red-500 rounded-r-lg text-red-800 flex items-start gap-3">
-          <svg className="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+        <div className="mb-4 md:mb-6 p-3 md:p-4 pl-4 md:pl-5 bg-red-50 border-l-4 border-red-500 rounded-r-lg text-red-800 text-sm flex items-start gap-2 md:gap-3">
+          <svg className="w-4 h-4 md:w-5 md:h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
           </svg>
           <span className="flex-1">{errorMessage}</span>
@@ -153,23 +153,23 @@ export default function SettingsPage() {
       )}
 
       {/* Settings Container */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-6">
         {/* Tab Navigation */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-1">
+          <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-1 flex lg:block overflow-x-auto">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-colors text-left ${
+                  className={`flex-1 lg:flex-none w-auto lg:w-full flex items-center justify-center lg:justify-start gap-2 lg:gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-md transition-colors text-center lg:text-left whitespace-nowrap text-sm ${
                     activeTab === tab.id
                       ? "bg-brand-50 text-brand-600 font-medium"
                       : "text-slate-600 hover:bg-slate-50"
                   }`}
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-4 h-4 lg:w-5 lg:h-5" />
                   <span>{tab.label}</span>
                 </button>
               );
@@ -181,18 +181,18 @@ export default function SettingsPage() {
         <div className="lg:col-span-3">
           {/* Account Settings */}
           {activeTab === "account" && (
-            <div className="space-y-6">
-              <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-                <div className="flex items-start justify-between mb-6">
+            <div className="space-y-4 md:space-y-6">
+              <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 md:p-6">
+                <div className="flex items-start justify-between mb-4 md:mb-6">
                   <div>
-                    <h2 className="text-2xl font-bold text-slate-900">Account</h2>
-                    <p className="text-slate-600 text-sm mt-1">Update your profile information</p>
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-900">Account</h2>
+                    <p className="text-slate-600 text-xs md:text-sm mt-1">Update your profile information</p>
                   </div>
                 </div>
 
-                <form onSubmit={handleProfileSubmit} className="space-y-6">
+                <form onSubmit={handleProfileSubmit} className="space-y-4 md:space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-slate-900 mb-2">
+                    <label htmlFor="name" className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2">
                       Full Name
                     </label>
                     <input
@@ -201,14 +201,14 @@ export default function SettingsPage() {
                       name="name"
                       value={formData.name}
                       onChange={handleProfileChange}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                      className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
                       placeholder="John Doe"
                     />
                     <p className="text-xs text-slate-500 mt-1">This is the name displayed on your profile</p>
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-slate-900 mb-2">
+                    <label htmlFor="email" className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2">
                       Email Address
                     </label>
                     <input
@@ -217,7 +217,7 @@ export default function SettingsPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleProfileChange}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                      className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
                       placeholder="john@example.com"
                     />
                     <p className="text-xs text-slate-500 mt-1">Used for login and account notifications</p>
@@ -226,7 +226,7 @@ export default function SettingsPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full px-6 py-3 bg-brand-600 hover:bg-brand-700 disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+                    className="w-full px-4 py-2.5 md:px-6 md:py-3 bg-brand-600 hover:bg-brand-700 disabled:bg-slate-400 disabled:cursor-not-allowed text-white text-sm md:text-base font-semibold rounded-lg transition-colors"
                   >
                     {loading ? "Saving..." : "Save Changes"}
                   </button>
@@ -237,18 +237,18 @@ export default function SettingsPage() {
 
           {/* Security Settings */}
           {activeTab === "security" && (
-            <div className="space-y-6">
-              <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-                <div className="flex items-start justify-between mb-6">
+            <div className="space-y-4 md:space-y-6">
+              <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 md:p-6">
+                <div className="flex items-start justify-between mb-4 md:mb-6">
                   <div>
-                    <h2 className="text-2xl font-bold text-slate-900">Security</h2>
-                    <p className="text-slate-600 text-sm mt-1">Manage your password and security settings</p>
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-900">Security</h2>
+                    <p className="text-slate-600 text-xs md:text-sm mt-1">Manage your password and security settings</p>
                   </div>
                 </div>
 
-                <form onSubmit={handlePasswordSubmit} className="space-y-6">
+                <form onSubmit={handlePasswordSubmit} className="space-y-4 md:space-y-6">
                   <div>
-                    <label htmlFor="currentPassword" className="block text-sm font-semibold text-slate-900 mb-2">
+                    <label htmlFor="currentPassword" className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2">
                       Current Password
                     </label>
                     <input
@@ -257,19 +257,19 @@ export default function SettingsPage() {
                       name="currentPassword"
                       value={passwordData.currentPassword}
                       onChange={handlePasswordChange}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                      className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
                       placeholder="••••••••"
                     />
                   </div>
 
-                  <div className="border-t border-slate-200 pt-6">
-                    <div className="mb-4">
-                      <h3 className="text-sm font-semibold text-slate-900 mb-4">New Password</h3>
+                  <div className="border-t border-slate-200 pt-4 md:pt-6">
+                    <div className="mb-3 md:mb-4">
+                      <h3 className="text-sm font-semibold text-slate-900 mb-3 md:mb-4">New Password</h3>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-3 md:space-y-4">
                       <div>
-                        <label htmlFor="newPassword" className="block text-sm font-medium text-slate-700 mb-2">
+                        <label htmlFor="newPassword" className="block text-sm font-medium text-slate-700 mb-1.5 md:mb-2">
                           New Password
                         </label>
                         <input
@@ -278,14 +278,14 @@ export default function SettingsPage() {
                           name="newPassword"
                           value={passwordData.newPassword}
                           onChange={handlePasswordChange}
-                          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                          className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
                           placeholder="••••••••"
                         />
                         <p className="text-xs text-slate-500 mt-1">Min 8 characters with uppercase, lowercase, and a number</p>
                       </div>
 
                       <div>
-                        <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-700 mb-2">
+                        <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-700 mb-1.5 md:mb-2">
                           Confirm Password
                         </label>
                         <input
@@ -294,7 +294,7 @@ export default function SettingsPage() {
                           name="confirmPassword"
                           value={passwordData.confirmPassword}
                           onChange={handlePasswordChange}
-                          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                          className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
                           placeholder="••••••••"
                         />
                       </div>
@@ -304,7 +304,7 @@ export default function SettingsPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full px-6 py-3 bg-brand-600 hover:bg-brand-700 disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+                    className="w-full px-4 py-2.5 md:px-6 md:py-3 bg-brand-600 hover:bg-brand-700 disabled:bg-slate-400 disabled:cursor-not-allowed text-white text-sm md:text-base font-semibold rounded-lg transition-colors"
                   >
                     {loading ? "Updating..." : "Update Password"}
                   </button>
@@ -315,24 +315,24 @@ export default function SettingsPage() {
 
           {/* Billing & Plans — users only */}
           {activeTab === "billing" && !isAdmin && (
-            <div className="space-y-6">
-              <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-                <div className="flex items-start justify-between mb-6">
+            <div className="space-y-4 md:space-y-6">
+              <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 md:p-6">
+                <div className="flex items-start justify-between mb-4 md:mb-6">
                   <div>
-                    <h2 className="text-2xl font-bold text-slate-900">Billing & Plans</h2>
-                    <p className="text-slate-600 text-sm mt-1">Manage your subscription and billing</p>
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-900">Billing & Plans</h2>
+                    <p className="text-slate-600 text-xs md:text-sm mt-1">Manage your subscription and billing</p>
                   </div>
                 </div>
 
-                <div className="text-center py-12">
-                  <CreditCard className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">No Active Subscription</h3>
-                  <p className="text-sm text-slate-500 mb-6 max-w-sm mx-auto">
+                <div className="text-center py-8 md:py-12">
+                  <CreditCard className="w-10 h-10 md:w-12 md:h-12 text-slate-300 mx-auto mb-3 md:mb-4" />
+                  <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-2">No Active Subscription</h3>
+                  <p className="text-xs md:text-sm text-slate-500 mb-4 md:mb-6 max-w-sm mx-auto">
                     Browse our available packages to find the right plan for your business.
                   </p>
                   <a
                     href="/packages"
-                    className="inline-flex items-center px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-lg transition-colors"
+                    className="inline-flex items-center px-4 py-2.5 md:px-6 md:py-3 bg-brand-600 hover:bg-brand-700 text-white text-sm md:text-base font-semibold rounded-lg transition-colors"
                   >
                     View Packages
                   </a>
