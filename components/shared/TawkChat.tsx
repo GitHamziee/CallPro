@@ -7,14 +7,14 @@ import Script from "next/script";
 // Find them in: Tawk.to Dashboard → Administration → Chat Widget
 // The embed URL looks like: https://embed.tawk.to/{PROPERTY_ID}/{WIDGET_ID}
 // ─────────────────────────────────────────────────────────────
-const TAWK_PROPERTY_ID = "YOUR_PROPERTY_ID";
-const TAWK_WIDGET_ID = "YOUR_WIDGET_ID";
+const TAWK_PROPERTY_ID = "69a13c924afa321c34c793e9";
+const TAWK_WIDGET_ID = "1jiet97hl";
 
 export default function TawkChat() {
   return (
     <Script
       id="tawk-to"
-      strategy="lazyOnload"
+      strategy="afterInteractive"
       dangerouslySetInnerHTML={{
         __html: `
           var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();

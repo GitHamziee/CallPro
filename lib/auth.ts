@@ -1,17 +1,17 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import bcrypt from "bcrypt";
 import prisma from "./prisma";
 
+if (!process.env.NEXTAUTH_SECRET) {
+  throw new Error("NEXTAUTH_SECRET is not set. Add it to .env.local.");
+}
+
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
-  },
-  jwt: {
-    secret: process.env.NEXTAUTH_SECRET,
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   providers: [
     CredentialsProvider({
@@ -25,50 +25,51 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials.password) {
           return null;
         }
+
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+          where: { email: credentials.email.toLowerCase().trim() },
         });
+
         if (!user || !user.password) return null;
-        const isValid = await bcrypt.compare(credentials.password, user.password);
+
+        const isValid = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
         if (!isValid) return null;
-        return user;
+
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        };
       },
     }),
-    // add other providers (Google, GitHub, etc.) here
   ],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.role = user.role;
+        token.name = user.name;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
+        session.user.role = token.role as string;
+        session.user.name = token.name as string;
       }
       return session;
     },
   },
   pages: {
     signIn: "/login",
-    newUser: "/register",
-  },
-  events: {
-    async signIn({ user, account, profile, isNewUser }) {
-      // This is called on successful signin
-    },
   },
 };
 
-/**
- * Helper to wrap `getServerSession` with the auth options.
- */
-import { getServerSession } from "next-auth";
-
-export const getServerAuthSession = (ctx: {
-  req: import("next").NextApiRequest | Request;
-  res: import("next").NextApiResponse | Response;
-}) => {
-  return getServerSession(ctx.req, ctx.res, authOptions);
+export const getServerAuthSession = () => {
+  return getServerSession(authOptions);
 };

@@ -159,7 +159,7 @@ export default function PricingCards() {
                         : "bg-brand-600 hover:bg-brand-700 text-white btn-glow"
                     }
                   >
-                    <Link href="/contact">
+                    <Link href={plan.name === "Enterprise" ? "/contact" : "/register"}>
                       {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
                     </Link>
                   </Button>

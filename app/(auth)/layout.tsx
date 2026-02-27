@@ -3,8 +3,6 @@
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 export default function AuthLayout({
   children,
@@ -24,11 +22,5 @@ export default function AuthLayout({
     }
   }, [session, status, router, pathname]);
 
-  return (
-    <>
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
-    </>
-  );
+  return <>{children}</>;
 }

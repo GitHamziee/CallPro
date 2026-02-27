@@ -1,13 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import { PhoneCall, Eye, EyeOff, ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginContent />
+    </Suspense>
+  );
+}
+
+function LoginContent() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -32,10 +40,11 @@ export default function LoginPage() {
     setLoading(false);
 
     if (res?.error) {
-      setError(res.error);
+      setError("Invalid email or password");
     } else {
-      // success: redirect to dashboard or homepage
-      router.push("/");
+      // Fetch session to check role, redirect admins to admin portal
+      const session = await getSession();
+      router.push(session?.user?.role === "ADMIN" ? "/admin" : "/dashboard");
     }
   };
 
@@ -98,7 +107,7 @@ export default function LoginPage() {
                 Password
               </label>
               <Link
-                href="#"
+                href="/forgot-password"
                 className="text-xs text-slate-500 hover:text-brand-600 transition-colors"
               >
                 Forgot password?

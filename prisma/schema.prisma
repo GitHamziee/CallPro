@@ -1,4 +1,4 @@
-// Prisma schema for CallPro authentication
+// Prisma schema for CallPro
 
 datasource db {
   provider = "postgresql"
@@ -8,23 +8,33 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// TODO: for Prisma 7+ you may move connection details to prisma.config.js, but
-// an inline datasource is still tolerated by the CLI for now.
+enum Role {
+  USER
+  ADMIN
+}
 
-// user model with credentials support
+enum PurchaseStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
   email         String    @unique
   emailVerified DateTime?
   image         String?
-  // password field over which we have control (required for credentials provider)
-  password      String?   // stored as bcrypt hash
-  // current plan
-  plan          String    @default("Starter")   // Starter, Growth, or Enterprise
+  password      String?
+  phone         String?
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
-  accounts      Account[]
-  sessions      Session[]
+  accounts           Account[]
+  sessions           Session[]
+  purchases          Purchase[]
+  passwordResetTokens PasswordResetToken[]
 }
 
 model Account {
@@ -41,7 +51,7 @@ model Account {
   id_token          String?
   session_state     String?
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -52,7 +62,7 @@ model Session {
   userId       String
   expires      DateTime
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
@@ -61,4 +71,43 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Package {
+  id            String   @id @default(cuid())
+  name          String   @unique
+  description   String?
+  price         Int      // cents (e.g., 149900 = $1,499.00)
+  features      String[]
+  isActive      Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  stripePriceId String?  @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  purchases Purchase[]
+}
+
+model Purchase {
+  id              String   @id @default(cuid())
+  userId          String
+  packageId       String
+  status          PurchaseStatus @default(ACTIVE)
+  stripeSessionId String?  @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  package Package @relation(fields: [packageId], references: [id])
 }

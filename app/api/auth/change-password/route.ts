@@ -3,52 +3,62 @@ import bcrypt from "bcrypt";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { validatePassword } from "@/lib/validation";
 
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
 
-    if (!session?.user?.email) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const { currentPassword, newPassword } = await req.json();
 
     if (!currentPassword || !newPassword) {
       return NextResponse.json(
-        { message: "Current and new passwords are required" },
+        { error: "Current and new passwords are required" },
         { status: 400 }
       );
     }
 
-    // Get user with password
-    const user = await prisma.user.findUnique({
-      where: { email: session.user.email },
-    });
-
-    if (!user || !user.password) {
+    const passwordResult = validatePassword(newPassword);
+    if (!passwordResult.valid) {
       return NextResponse.json(
-        { message: "User not found" },
-        { status: 404 }
+        { error: passwordResult.error },
+        { status: 400 }
       );
     }
 
-    // Verify current password
-    const isValid = await bcrypt.compare(currentPassword, user.password);
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+    });
 
+    if (!user || !user.password) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    const isValid = await bcrypt.compare(currentPassword, user.password);
     if (!isValid) {
       return NextResponse.json(
-        { message: "Current password is incorrect" },
+        { error: "Current password is incorrect" },
         { status: 401 }
       );
     }
 
-    // Hash new password
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    // Ensure new password is different
+    const isSame = await bcrypt.compare(newPassword, user.password);
+    if (isSame) {
+      return NextResponse.json(
+        { error: "New password must be different from current password" },
+        { status: 400 }
+      );
+    }
 
-    // Update password
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
+
     await prisma.user.update({
-      where: { email: session.user.email },
+      where: { id: session.user.id },
       data: { password: hashedPassword },
     });
 
@@ -56,7 +66,7 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("Password change error:", error);
     return NextResponse.json(
-      { message: "Internal server error" },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }
