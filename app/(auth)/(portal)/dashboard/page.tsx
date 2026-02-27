@@ -192,14 +192,6 @@ function AdminDashboard({
     fetchStats();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="mx-auto max-w-5xl flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-2 border-slate-200 border-t-slate-800" />
-      </div>
-    );
-  }
-
   return (
     <div className="mx-auto max-w-5xl space-y-6">
       {/* Welcome Card */}
@@ -226,12 +218,12 @@ function AdminDashboard({
             </div>
             <p className="text-sm font-medium text-slate-500">Total Users</p>
           </div>
-          <p className="text-2xl font-bold text-slate-900">
-            {stats?.totalUsers ?? 0}
-          </p>
-          <p className="text-xs text-slate-400 mt-1">
-            {stats?.totalAdmins ?? 0} admin{(stats?.totalAdmins ?? 0) !== 1 ? "s" : ""}
-          </p>
+          {loading ? (
+            <div className="animate-pulse"><div className="h-7 w-12 bg-slate-200 rounded mt-1" /><div className="h-3 w-20 bg-slate-100 rounded mt-2" /></div>
+          ) : (<>
+            <p className="text-2xl font-bold text-slate-900">{stats?.totalUsers ?? 0}</p>
+            <p className="text-xs text-slate-400 mt-1">{stats?.totalAdmins ?? 0} admin{(stats?.totalAdmins ?? 0) !== 1 ? "s" : ""}</p>
+          </>)}
         </div>
 
         <div className="rounded-lg bg-white p-5 shadow-sm border border-slate-200">
@@ -243,10 +235,12 @@ function AdminDashboard({
               New Registrations
             </p>
           </div>
-          <p className="text-2xl font-bold text-slate-900">
-            {stats?.newUsersThisMonth ?? 0}
-          </p>
-          <p className="text-xs text-slate-400 mt-1">This month</p>
+          {loading ? (
+            <div className="animate-pulse"><div className="h-7 w-10 bg-slate-200 rounded mt-1" /><div className="h-3 w-16 bg-slate-100 rounded mt-2" /></div>
+          ) : (<>
+            <p className="text-2xl font-bold text-slate-900">{stats?.newUsersThisMonth ?? 0}</p>
+            <p className="text-xs text-slate-400 mt-1">This month</p>
+          </>)}
         </div>
 
         <div className="rounded-lg bg-white p-5 shadow-sm border border-slate-200">
@@ -258,12 +252,12 @@ function AdminDashboard({
               Active Subscriptions
             </p>
           </div>
-          <p className="text-2xl font-bold text-slate-900">
-            {stats?.activeSubscriptions ?? 0}
-          </p>
-          <p className="text-xs text-slate-400 mt-1">
-            {stats?.newSubscriptionsThisMonth ?? 0} new this month
-          </p>
+          {loading ? (
+            <div className="animate-pulse"><div className="h-7 w-10 bg-slate-200 rounded mt-1" /><div className="h-3 w-24 bg-slate-100 rounded mt-2" /></div>
+          ) : (<>
+            <p className="text-2xl font-bold text-slate-900">{stats?.activeSubscriptions ?? 0}</p>
+            <p className="text-xs text-slate-400 mt-1">{stats?.newSubscriptionsThisMonth ?? 0} new this month</p>
+          </>)}
         </div>
 
         <div className="rounded-lg bg-white p-5 shadow-sm border border-slate-200">
@@ -275,10 +269,12 @@ function AdminDashboard({
               Revenue This Month
             </p>
           </div>
-          <p className="text-2xl font-bold text-slate-900">
-            ${((stats?.revenueThisMonth ?? 0) / 100).toLocaleString()}
-          </p>
-          <p className="text-xs text-slate-400 mt-1">From new subscriptions</p>
+          {loading ? (
+            <div className="animate-pulse"><div className="h-7 w-16 bg-slate-200 rounded mt-1" /><div className="h-3 w-28 bg-slate-100 rounded mt-2" /></div>
+          ) : (<>
+            <p className="text-2xl font-bold text-slate-900">${((stats?.revenueThisMonth ?? 0) / 100).toLocaleString()}</p>
+            <p className="text-xs text-slate-400 mt-1">From new subscriptions</p>
+          </>)}
         </div>
       </div>
 
@@ -300,7 +296,19 @@ function AdminDashboard({
           </Link>
         </div>
 
-        {stats?.recentUsers && stats.recentUsers.length > 0 ? (
+        {loading ? (
+          <div className="divide-y divide-slate-100 animate-pulse">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="flex items-center justify-between px-6 py-3">
+                <div className="flex items-center gap-3">
+                  <div className="h-8 w-8 rounded-full bg-slate-200" />
+                  <div><div className="h-4 w-24 bg-slate-200 rounded" /><div className="h-3 w-32 bg-slate-100 rounded mt-1" /></div>
+                </div>
+                <div className="h-4 w-16 bg-slate-100 rounded" />
+              </div>
+            ))}
+          </div>
+        ) : stats?.recentUsers && stats.recentUsers.length > 0 ? (
           <div className="divide-y divide-slate-100">
             {stats.recentUsers.map((user) => (
               <div

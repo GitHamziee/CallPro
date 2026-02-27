@@ -73,14 +73,6 @@ export default function PackagesPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-2 border-slate-200 border-t-brand-600" />
-      </div>
-    );
-  }
-
   return (
     <div className="mx-auto max-w-5xl">
       <div className="mb-8">
@@ -103,7 +95,25 @@ export default function PackagesPage() {
 
       {/* Package cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {packages.map((pkg) => {
+        {loading
+          ? Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="rounded-xl border-2 border-slate-200 bg-white p-6 animate-pulse">
+                <div className="mb-6">
+                  <div className="h-6 w-24 bg-slate-200 rounded" />
+                  <div className="h-4 w-40 bg-slate-100 rounded mt-2" />
+                </div>
+                <div className="mb-6">
+                  <div className="h-8 w-28 bg-slate-200 rounded" />
+                </div>
+                <div className="space-y-3 mb-8">
+                  {Array.from({ length: 4 }).map((_, j) => (
+                    <div key={j} className="h-4 bg-slate-100 rounded w-full" />
+                  ))}
+                </div>
+                <div className="h-10 bg-slate-200 rounded-lg" />
+              </div>
+            ))
+          : packages.map((pkg) => {
           const isCurrentPlan = activePurchase?.packageId === pkg.id;
           const isEnterprise = pkg.price === 0;
 
