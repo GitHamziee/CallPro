@@ -20,8 +20,8 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  // Admin users hitting /dashboard → send to /admin
-  if (pathname === "/dashboard" && token?.role === "ADMIN") {
+  // Admin users hitting /dashboard → send to /admin (unless explicitly navigating to portal)
+  if (pathname === "/dashboard" && token?.role === "ADMIN" && !req.nextUrl.searchParams.has("portal")) {
     return NextResponse.redirect(new URL("/admin", req.url));
   }
 

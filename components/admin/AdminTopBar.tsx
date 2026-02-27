@@ -47,9 +47,12 @@ export default function AdminTopBar() {
       {/* Spacer */}
       <div className="flex-1" />
 
-      {/* User avatar */}
-      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-white text-sm font-semibold">
-        {initials}
+      {/* User info */}
+      <div className="flex items-center gap-3">
+        <span className="text-sm font-medium text-slate-700 hidden sm:block">{userName}</span>
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-white text-sm font-semibold">
+          {initials}
+        </div>
       </div>
     </header>
   );

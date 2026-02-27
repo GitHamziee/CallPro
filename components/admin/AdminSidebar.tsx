@@ -66,7 +66,7 @@ export default function AdminSidebar() {
       {/* Bottom actions */}
       <div className="px-3 py-4 border-t border-slate-700/50 space-y-1">
         <Link
-          href="/dashboard"
+          href="/dashboard?portal"
           className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors"
         >
           <ArrowLeft className="h-5 w-5" />
