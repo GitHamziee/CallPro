@@ -4,10 +4,20 @@ import { useState, useEffect } from "react";
 import { PhoneCall } from "lucide-react";
 
 export default function PageLoader() {
+  const [show, setShow] = useState(false);
   const [fading, setFading] = useState(false);
   const [gone, setGone] = useState(false);
 
   useEffect(() => {
+    // Only show on first visit in this browser session
+    if (sessionStorage.getItem("callpro_loaded")) {
+      setGone(true);
+      return;
+    }
+
+    setShow(true);
+    sessionStorage.setItem("callpro_loaded", "1");
+
     const fadeTimer = setTimeout(() => setFading(true), 1600);
     const removeTimer = setTimeout(() => setGone(true), 2000);
     return () => {
@@ -16,7 +26,7 @@ export default function PageLoader() {
     };
   }, []);
 
-  if (gone) return null;
+  if (gone || !show) return null;
 
   return (
     <div
