@@ -86,7 +86,7 @@ export default function AdminSidebar() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:fixed md:inset-y-0 md:left-0 md:z-30 md:flex md:w-60">
+      <aside className="hidden md:fixed md:inset-y-0 md:left-0 md:z-30 md:flex md:w-38">
         {sidebarContent}
       </aside>
 
@@ -97,7 +97,7 @@ export default function AdminSidebar() {
             className="fixed inset-0 z-40 bg-black/30 md:hidden"
             onClick={close}
           />
-          <aside className="fixed inset-y-0 left-0 z-50 w-60 md:hidden">
+          <aside className="fixed inset-y-0 left-0 z-50 w-38 md:hidden">
             {sidebarContent}
           </aside>
         </>

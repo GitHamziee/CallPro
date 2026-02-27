@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import prisma from "@/lib/prisma";
+import { getActivePurchase } from "@/lib/purchase-utils";
 
 export async function GET() {
   try {
@@ -11,23 +11,7 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Get the user's most recent active purchase
-    const purchase = await prisma.purchase.findFirst({
-      where: {
-        userId: session.user.id,
-        status: "ACTIVE",
-      },
-      select: {
-        id: true,
-        status: true,
-        packageId: true,
-        createdAt: true,
-        package: {
-          select: { name: true, price: true },
-        },
-      },
-      orderBy: { createdAt: "desc" },
-    });
+    const purchase = await getActivePurchase(session.user.id);
 
     return NextResponse.json({ purchase });
   } catch (error) {

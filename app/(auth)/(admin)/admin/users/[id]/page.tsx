@@ -2,7 +2,19 @@
 
 import { useState, useEffect, use } from "react";
 import Link from "next/link";
-import { ArrowLeft, Shield, User as UserIcon, Mail, Phone, Calendar, Package } from "lucide-react";
+import {
+  ArrowLeft,
+  Shield,
+  Mail,
+  Phone,
+  Calendar,
+  Package,
+  CreditCard,
+  Clock,
+  ShieldCheck,
+  ShieldOff,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface UserDetail {
   id: string;
@@ -15,9 +27,22 @@ interface UserDetail {
   purchases: {
     id: string;
     status: string;
+    expiresAt: string | null;
     createdAt: string;
     package: { name: string; price: number };
   }[];
+}
+
+function getInitials(name: string | null) {
+  if (name) {
+    return name
+      .split(" ")
+      .map((w) => w[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  }
+  return "?";
 }
 
 export default function AdminUserDetailPage({
@@ -46,8 +71,9 @@ export default function AdminUserDetailPage({
     fetchUser();
   }, [id]);
 
-  const handleRoleChange = async (newRole: string) => {
-    if (!user || user.role === newRole) return;
+  const handleRoleChange = async () => {
+    if (!user) return;
+    const newRole = user.role === "ADMIN" ? "USER" : "ADMIN";
 
     const confirmed = window.confirm(
       `Change ${user.name || user.email}'s role to ${newRole}?`
@@ -82,8 +108,17 @@ export default function AdminUserDetailPage({
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-2 border-slate-200 border-t-slate-800" />
+      <div className="mx-auto max-w-4xl">
+        <div className="h-5 w-28 bg-slate-100 rounded mb-6 animate-pulse" />
+        <div className="bg-white rounded-xl border border-slate-200 p-6 animate-pulse">
+          <div className="flex items-center gap-4">
+            <div className="h-14 w-14 rounded-full bg-slate-100" />
+            <div className="space-y-2">
+              <div className="h-5 w-40 bg-slate-100 rounded" />
+              <div className="h-4 w-56 bg-slate-50 rounded" />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -92,12 +127,21 @@ export default function AdminUserDetailPage({
     return (
       <div className="text-center py-20">
         <p className="text-slate-500">User not found</p>
-        <Link href="/admin/users" className="text-sm text-brand-600 hover:text-brand-700 mt-2 inline-block">
+        <Link
+          href="/admin/users"
+          className="text-sm text-brand-600 hover:text-brand-700 mt-2 inline-block"
+        >
           Back to users
         </Link>
       </div>
     );
   }
+
+  const activePurchase = user.purchases.find((p) => {
+    if (p.status !== "ACTIVE") return false;
+    if (p.expiresAt && new Date(p.expiresAt) < new Date()) return false;
+    return true;
+  });
 
   return (
     <div className="mx-auto max-w-4xl">
@@ -112,7 +156,7 @@ export default function AdminUserDetailPage({
 
       {message && (
         <div
-          className={`mb-6 p-4 rounded-lg text-sm ${
+          className={`mb-4 px-4 py-3 rounded-xl text-sm font-medium ${
             message.includes("success")
               ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
               : "bg-red-50 text-red-700 border border-red-200"
@@ -122,130 +166,182 @@ export default function AdminUserDetailPage({
         </div>
       )}
 
-      {/* User info card */}
-      <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 mb-6">
-        <div className="flex items-start justify-between">
+      {/* Profile header */}
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden mb-5">
+        <div className="bg-gradient-to-r from-slate-800 to-slate-900 px-6 py-8">
           <div className="flex items-center gap-4">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-slate-600 text-lg font-semibold">
-              {user.name
-                ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)
-                : "?"}
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 backdrop-blur text-white text-xl font-bold ring-2 ring-white/20">
+              {getInitials(user.name)}
             </div>
             <div>
-              <h2 className="text-xl font-bold text-slate-900">
-                {user.name || "No name"}
+              <h2 className="text-xl font-bold text-white">
+                {user.name || "Unnamed User"}
               </h2>
-              <div className="flex items-center gap-2 mt-1">
-                <span
-                  className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold ${
-                    user.role === "ADMIN"
-                      ? "bg-amber-100 text-amber-700"
-                      : "bg-slate-100 text-slate-600"
-                  }`}
-                >
-                  {user.role === "ADMIN" && <Shield className="h-3 w-3" />}
-                  {user.role}
-                </span>
-              </div>
+              <p className="text-sm text-slate-300">{user.email}</p>
             </div>
-          </div>
-
-          {/* Role change */}
-          <div className="flex items-center gap-2">
-            <label className="text-sm text-slate-500">Role:</label>
-            <select
-              value={user.role}
-              onChange={(e) => handleRoleChange(e.target.value)}
-              disabled={updating}
-              className="px-3 py-1.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 bg-white disabled:opacity-50"
-            >
-              <option value="USER">User</option>
-              <option value="ADMIN">Admin</option>
-            </select>
           </div>
         </div>
 
-        {/* Details grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 pt-6 border-t border-slate-100">
-          <div className="flex items-center gap-3">
-            <Mail className="h-4 w-4 text-slate-400" />
-            <div>
-              <p className="text-xs text-slate-500">Email</p>
-              <p className="text-sm text-slate-900">{user.email}</p>
+        {/* Quick info row */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-slate-100 border-b border-slate-100">
+          <div className="px-5 py-4">
+            <p className="text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1">
+              Role
+            </p>
+            <div className="flex items-center gap-1.5">
+              {user.role === "ADMIN" ? (
+                <Shield className="h-3.5 w-3.5 text-amber-500" />
+              ) : null}
+              <span className="text-sm font-semibold text-slate-900">
+                {user.role === "ADMIN" ? "Admin" : "User"}
+              </span>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Phone className="h-4 w-4 text-slate-400" />
-            <div>
-              <p className="text-xs text-slate-500">Phone</p>
-              <p className="text-sm text-slate-900">{user.phone || "—"}</p>
-            </div>
+          <div className="px-5 py-4">
+            <p className="text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1">
+              Phone
+            </p>
+            <p className="text-sm font-semibold text-slate-900">
+              {user.phone || "—"}
+            </p>
           </div>
-          <div className="flex items-center gap-3">
-            <Calendar className="h-4 w-4 text-slate-400" />
-            <div>
-              <p className="text-xs text-slate-500">Joined</p>
-              <p className="text-sm text-slate-900">
-                {new Date(user.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </p>
-            </div>
+          <div className="px-5 py-4">
+            <p className="text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1">
+              Joined
+            </p>
+            <p className="text-sm font-semibold text-slate-900">
+              {new Date(user.createdAt).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
           </div>
-          <div className="flex items-center gap-3">
-            <UserIcon className="h-4 w-4 text-slate-400" />
-            <div>
-              <p className="text-xs text-slate-500">User ID</p>
-              <p className="text-sm text-slate-900 font-mono">{user.id}</p>
-            </div>
+          <div className="px-5 py-4">
+            <p className="text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1">
+              Status
+            </p>
+            <span
+              className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold ${
+                activePurchase
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "bg-slate-100 text-slate-500"
+              }`}
+            >
+              {activePurchase ? "Subscribed" : "No Plan"}
+            </span>
           </div>
+        </div>
+
+        {/* Actions */}
+        <div className="px-6 py-4 flex items-center justify-between">
+          <p className="text-xs text-slate-400 font-mono">ID: {user.id}</p>
+          <Button
+            onClick={handleRoleChange}
+            disabled={updating}
+            variant="outline"
+            className="text-xs h-8 gap-1.5"
+          >
+            {user.role === "ADMIN" ? (
+              <>
+                <ShieldOff className="h-3.5 w-3.5" />
+                Remove Admin
+              </>
+            ) : (
+              <>
+                <ShieldCheck className="h-3.5 w-3.5" />
+                Make Admin
+              </>
+            )}
+          </Button>
         </div>
       </div>
 
       {/* Purchase history */}
-      <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">
-          Purchase History
-        </h3>
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-100">
+          <h3 className="text-sm font-semibold text-slate-900">
+            Purchase History
+          </h3>
+        </div>
 
         {user.purchases.length === 0 ? (
-          <div className="text-center py-10 text-slate-400">
-            <Package className="h-8 w-8 mx-auto mb-2" />
+          <div className="text-center py-14 text-slate-400">
+            <Package className="h-8 w-8 mx-auto mb-2 opacity-50" />
             <p className="text-sm">No purchases yet</p>
           </div>
         ) : (
-          <div className="space-y-3">
-            {user.purchases.map((purchase) => (
-              <div
-                key={purchase.id}
-                className="flex items-center justify-between p-4 rounded-lg border border-slate-100 hover:bg-slate-50/50"
-              >
-                <div>
-                  <p className="text-sm font-medium text-slate-900">
-                    {purchase.package.name}
-                  </p>
-                  <p className="text-xs text-slate-500">
-                    {new Date(purchase.createdAt).toLocaleDateString()}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm font-semibold text-slate-900">
-                    ${(purchase.package.price / 100).toLocaleString()}
-                  </p>
-                  <span
-                    className={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${
-                      purchase.status === "ACTIVE"
-                        ? "bg-emerald-100 text-emerald-700"
-                        : "bg-slate-100 text-slate-500"
+          <div className="divide-y divide-slate-50">
+            {user.purchases.map((purchase) => {
+              const isExpired =
+                purchase.status === "EXPIRED" ||
+                (purchase.expiresAt &&
+                  new Date(purchase.expiresAt) < new Date());
+              const displayStatus = isExpired ? "EXPIRED" : purchase.status;
+
+              return (
+                <div
+                  key={purchase.id}
+                  className="flex items-center gap-4 px-6 py-4"
+                >
+                  <div
+                    className={`flex h-10 w-10 items-center justify-center rounded-lg shrink-0 ${
+                      displayStatus === "ACTIVE"
+                        ? "bg-emerald-50"
+                        : "bg-slate-50"
                     }`}
                   >
-                    {purchase.status}
-                  </span>
+                    <CreditCard
+                      className={`h-5 w-5 ${
+                        displayStatus === "ACTIVE"
+                          ? "text-emerald-600"
+                          : "text-slate-400"
+                      }`}
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-slate-900">
+                      {purchase.package.name}
+                    </p>
+                    <div className="flex items-center gap-3 mt-0.5">
+                      <span className="flex items-center gap-1 text-xs text-slate-400">
+                        <Calendar className="h-3 w-3" />
+                        {new Date(purchase.createdAt).toLocaleDateString(
+                          "en-US",
+                          { month: "short", day: "numeric", year: "numeric" }
+                        )}
+                      </span>
+                      {purchase.expiresAt && (
+                        <span className="flex items-center gap-1 text-xs text-slate-400">
+                          <Clock className="h-3 w-3" />
+                          Expires{" "}
+                          {new Date(purchase.expiresAt).toLocaleDateString(
+                            "en-US",
+                            { month: "short", day: "numeric" }
+                          )}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-sm font-semibold text-slate-900">
+                      ${(purchase.package.price / 100).toLocaleString()}
+                    </p>
+                    <span
+                      className={`inline-flex px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider ${
+                        displayStatus === "ACTIVE"
+                          ? "bg-emerald-50 text-emerald-700"
+                          : displayStatus === "EXPIRED"
+                          ? "bg-amber-50 text-amber-600"
+                          : "bg-slate-100 text-slate-500"
+                      }`}
+                    >
+                      {displayStatus}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

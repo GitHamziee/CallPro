@@ -3,7 +3,7 @@
 import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { signIn, getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { PhoneCall, Eye, EyeOff, ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -42,9 +42,8 @@ function LoginContent() {
     if (res?.error) {
       setError("Invalid email or password");
     } else {
-      // Fetch session to check role, redirect admins to admin portal
-      const session = await getSession();
-      router.push(session?.user?.role === "ADMIN" ? "/admin" : "/dashboard");
+      // Redirect to dashboard — middleware will reroute admins to /admin
+      window.location.href = "/dashboard";
     }
   };
 

@@ -32,7 +32,13 @@ export async function GET() {
         where: { role: "ADMIN" },
       }),
       prisma.purchase.count({
-        where: { status: "ACTIVE" },
+        where: {
+          status: "ACTIVE",
+          OR: [
+            { expiresAt: { gt: new Date() } },
+            { expiresAt: null },
+          ],
+        },
       }),
       prisma.purchase.findMany({
         where: {

@@ -8,6 +8,7 @@ import {
   Package,
   CreditCard,
   CheckCircle,
+  XCircle,
   Users,
   UserPlus,
   DollarSign,
@@ -19,6 +20,7 @@ import {
 interface PurchaseInfo {
   id: string;
   status: string;
+  expiresAt: string | null;
   createdAt: string;
   package: { name: string; price: number };
 }
@@ -94,7 +96,7 @@ function UserDashboard({
           </p>
           <p className="text-[10px] md:text-xs text-slate-400 mt-1 hidden sm:block">
             {purchase
-              ? `Since ${new Date(purchase.createdAt).toLocaleDateString()}`
+              ? `Since ${new Date(purchase.createdAt).toLocaleDateString()}${purchase.expiresAt ? ` · Expires ${new Date(purchase.expiresAt).toLocaleDateString()}` : ""}`
               : "No active subscription"}
           </p>
         </div>
@@ -118,12 +120,16 @@ function UserDashboard({
 
         <div className="rounded-lg bg-white p-3 md:p-5 shadow-sm border border-slate-200">
           <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
-            <div className="p-1.5 md:p-2 rounded-lg bg-emerald-50">
-              <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-emerald-600" />
+            <div className={`p-1.5 md:p-2 rounded-lg ${purchase ? "bg-emerald-50" : "bg-slate-100"}`}>
+              {purchase ? (
+                <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-emerald-600" />
+              ) : (
+                <XCircle className="h-4 w-4 md:h-5 md:w-5 text-slate-400" />
+              )}
             </div>
             <p className="text-[10px] md:text-sm font-medium text-slate-500">Status</p>
           </div>
-          <p className="text-base md:text-2xl font-bold text-slate-900">
+          <p className={`text-base md:text-2xl font-bold ${purchase ? "text-slate-900" : "text-slate-400"}`}>
             {purchase ? "Active" : "Inactive"}
           </p>
           <p className="text-[10px] md:text-xs text-slate-400 mt-1 hidden sm:block">

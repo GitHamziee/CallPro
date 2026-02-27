@@ -46,7 +46,19 @@ export async function GET(req: NextRequest) {
           email: true,
           role: true,
           createdAt: true,
-          _count: { select: { purchases: true } },
+          _count: {
+            select: {
+              purchases: {
+                where: {
+                  status: "ACTIVE",
+                  OR: [
+                    { expiresAt: { gt: new Date() } },
+                    { expiresAt: null },
+                  ],
+                },
+              },
+            },
+          },
         },
         orderBy: { [safeSortBy]: sortOrder },
         skip: (page - 1) * limit,

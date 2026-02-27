@@ -110,7 +110,32 @@ export default function SettingsPage() {
     }
   };
 
+  const [purchase, setPurchase] = useState<{
+    id: string;
+    status: string;
+    expiresAt: string | null;
+    createdAt: string;
+    package: { name: string; price: number };
+  } | null>(null);
+
   const isAdmin = session?.user?.role === "ADMIN";
+
+  // Fetch active subscription for billing tab
+  useEffect(() => {
+    if (isAdmin) return;
+    async function fetchPurchase() {
+      try {
+        const res = await fetch("/api/auth/purchases");
+        if (res.ok) {
+          const data = await res.json();
+          setPurchase(data.purchase);
+        }
+      } catch {
+        // silently fail
+      }
+    }
+    fetchPurchase();
+  }, [isAdmin]);
 
   type TabId = "account" | "security" | "billing";
   const allTabs: { id: TabId; label: string; icon: typeof User; userOnly?: boolean }[] = [
@@ -324,19 +349,54 @@ export default function SettingsPage() {
                   </div>
                 </div>
 
-                <div className="text-center py-8 md:py-12">
-                  <CreditCard className="w-10 h-10 md:w-12 md:h-12 text-slate-300 mx-auto mb-3 md:mb-4" />
-                  <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-2">No Active Subscription</h3>
-                  <p className="text-xs md:text-sm text-slate-500 mb-4 md:mb-6 max-w-sm mx-auto">
-                    Browse our available packages to find the right plan for your business.
-                  </p>
-                  <a
-                    href="/packages"
-                    className="inline-flex items-center px-4 py-2.5 md:px-6 md:py-3 bg-brand-600 hover:bg-brand-700 text-white text-sm md:text-base font-semibold rounded-lg transition-colors"
-                  >
-                    View Packages
-                  </a>
-                </div>
+                {purchase ? (
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-lg border border-brand-200 bg-brand-50/30">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="text-base font-semibold text-slate-900">{purchase.package.name} Plan</h3>
+                        <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">
+                          Active
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <p className="text-slate-500">Monthly Cost</p>
+                          <p className="font-semibold text-slate-900">${(purchase.package.price / 100).toLocaleString()}</p>
+                        </div>
+                        <div>
+                          <p className="text-slate-500">Started</p>
+                          <p className="font-semibold text-slate-900">{new Date(purchase.createdAt).toLocaleDateString()}</p>
+                        </div>
+                        {purchase.expiresAt && (
+                          <div>
+                            <p className="text-slate-500">Expires</p>
+                            <p className="font-semibold text-slate-900">{new Date(purchase.expiresAt).toLocaleDateString()}</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <a
+                      href="/packages"
+                      className="inline-flex items-center px-4 py-2.5 md:px-6 md:py-3 border border-slate-200 text-slate-700 hover:bg-slate-50 text-sm md:text-base font-semibold rounded-lg transition-colors"
+                    >
+                      View All Packages
+                    </a>
+                  </div>
+                ) : (
+                  <div className="text-center py-8 md:py-12">
+                    <CreditCard className="w-10 h-10 md:w-12 md:h-12 text-slate-300 mx-auto mb-3 md:mb-4" />
+                    <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-2">No Active Subscription</h3>
+                    <p className="text-xs md:text-sm text-slate-500 mb-4 md:mb-6 max-w-sm mx-auto">
+                      Browse our available packages to find the right plan for your business.
+                    </p>
+                    <a
+                      href="/packages"
+                      className="inline-flex items-center px-4 py-2.5 md:px-6 md:py-3 bg-brand-600 hover:bg-brand-700 text-white text-sm md:text-base font-semibold rounded-lg transition-colors"
+                    >
+                      View Packages
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           )}

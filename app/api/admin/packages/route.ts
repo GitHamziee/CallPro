@@ -18,7 +18,19 @@ export async function GET() {
         price: true,
         isActive: true,
         sortOrder: true,
-        _count: { select: { purchases: true } },
+        _count: {
+          select: {
+            purchases: {
+              where: {
+                status: "ACTIVE",
+                OR: [
+                  { expiresAt: { gt: new Date() } },
+                  { expiresAt: null },
+                ],
+              },
+            },
+          },
+        },
       },
       orderBy: { sortOrder: "asc" },
     });

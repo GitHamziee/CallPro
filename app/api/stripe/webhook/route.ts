@@ -70,12 +70,17 @@ export async function POST(req: Request) {
           break;
         }
 
+        // Set expiration to 30 days from now
+        const expiresAt = new Date();
+        expiresAt.setDate(expiresAt.getDate() + 30);
+
         await prisma.purchase.create({
           data: {
             userId,
             packageId,
             status: "ACTIVE",
             stripeSessionId: session.id,
+            expiresAt,
           },
         });
 

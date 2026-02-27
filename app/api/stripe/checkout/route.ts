@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getStripe } from "@/lib/stripe";
 import prisma from "@/lib/prisma";
+import { getActivePurchase } from "@/lib/purchase-utils";
 
 export async function POST(req: Request) {
   try {
@@ -40,18 +41,12 @@ export async function POST(req: Request) {
       );
     }
 
-    // Check if user already has an active purchase for this package
-    const existingPurchase = await prisma.purchase.findFirst({
-      where: {
-        userId: session.user.id,
-        packageId: pkg.id,
-        status: "ACTIVE",
-      },
-    });
+    // Block checkout if user already has any active (non-expired) subscription
+    const activePurchase = await getActivePurchase(session.user.id);
 
-    if (existingPurchase) {
+    if (activePurchase) {
       return NextResponse.json(
-        { error: "You already have an active subscription for this package" },
+        { error: "You already have an active subscription. Wait for it to expire or contact support to switch plans." },
         { status: 400 }
       );
     }

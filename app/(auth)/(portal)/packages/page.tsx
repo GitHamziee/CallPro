@@ -16,6 +16,7 @@ interface PurchaseData {
   id: string;
   status: string;
   packageId: string;
+  expiresAt: string | null;
   package: { name: string };
 }
 
@@ -89,6 +90,11 @@ export default function PackagesPage() {
             <span className="font-semibold text-brand-700">
               {activePurchase.package.name}
             </span>
+            {activePurchase.expiresAt && (
+              <span className="ml-2 text-slate-400">
+                · Expires {new Date(activePurchase.expiresAt).toLocaleDateString()}
+              </span>
+            )}
           </p>
         </div>
       )}
