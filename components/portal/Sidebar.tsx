@@ -3,11 +3,14 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { PhoneCall, LayoutDashboard, Package, Settings, LogOut, X } from "lucide-react";
+import { PhoneCall, LayoutDashboard, Package, Settings, LogOut, X, Send, FileText, Inbox } from "lucide-react";
 import { useSidebar } from "./SidebarContext";
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Submit Lead", href: "/leads/submit", icon: Send, agentOnly: true },
+  { label: "Lead History", href: "/leads/history", icon: FileText, agentOnly: true },
+  { label: "My Leads", href: "/my-leads", icon: Inbox, userOnly: true },
   { label: "Packages", href: "/packages", icon: Package, userOnly: true },
   { label: "Settings", href: "/settings", icon: Settings },
 ];
@@ -16,11 +19,13 @@ export default function Sidebar() {
   const pathname = usePathname();
   const { isOpen, close } = useSidebar();
   const { data: session } = useSession();
-  const isAdmin = session?.user?.role === "ADMIN";
+  const role = session?.user?.role;
 
-  const filteredNav = NAV_ITEMS.filter(
-    (item) => !item.userOnly || !isAdmin
-  );
+  const filteredNav = NAV_ITEMS.filter((item) => {
+    if (item.userOnly && role !== "USER") return false;
+    if (item.agentOnly && role !== "AGENT") return false;
+    return true;
+  });
 
   const sidebarContent = (
     <div className="flex h-full flex-col bg-white border-r border-slate-200">

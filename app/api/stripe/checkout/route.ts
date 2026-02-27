@@ -1,17 +1,16 @@
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 import { getStripe } from "@/lib/stripe";
 import prisma from "@/lib/prisma";
 import { getActivePurchase } from "@/lib/purchase-utils";
+import { requireAuth, applyRateLimit } from "@/lib/api-utils";
 
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession(authOptions);
+    const [session, authError] = await requireAuth();
+    if (authError) return authError;
 
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const rateLimited = applyRateLimit(`checkout:${session.user.id}`, 10, 60 * 1000);
+    if (rateLimited) return rateLimited;
 
     const { packageId } = await req.json();
 

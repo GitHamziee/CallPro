@@ -118,11 +118,11 @@ export default function SettingsPage() {
     package: { name: string; price: number };
   } | null>(null);
 
-  const isAdmin = session?.user?.role === "ADMIN";
+  const hideBilling = session?.user?.role === "ADMIN" || session?.user?.role === "AGENT";
 
   // Fetch active subscription for billing tab
   useEffect(() => {
-    if (isAdmin) return;
+    if (hideBilling) return;
     async function fetchPurchase() {
       try {
         const res = await fetch("/api/auth/purchases");
@@ -135,7 +135,7 @@ export default function SettingsPage() {
       }
     }
     fetchPurchase();
-  }, [isAdmin]);
+  }, [hideBilling]);
 
   type TabId = "account" | "security" | "billing";
   const allTabs: { id: TabId; label: string; icon: typeof User; userOnly?: boolean }[] = [
@@ -144,7 +144,7 @@ export default function SettingsPage() {
     { id: "billing", label: "Billing & Plans", icon: CreditCard, userOnly: true },
   ];
 
-  const tabs = allTabs.filter((tab) => !tab.userOnly || !isAdmin);
+  const tabs = allTabs.filter((tab) => !tab.userOnly || !hideBilling);
 
   return (
     <div className="mx-auto max-w-5xl">
@@ -339,7 +339,7 @@ export default function SettingsPage() {
           )}
 
           {/* Billing & Plans — users only */}
-          {activeTab === "billing" && !isAdmin && (
+          {activeTab === "billing" && !hideBilling && (
             <div className="space-y-4 md:space-y-6">
               <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 md:p-6">
                 <div className="flex items-start justify-between mb-4 md:mb-6">

@@ -1,18 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { requireAdmin, applyRateLimit } from "@/lib/api-utils";
 
 export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await getServerSession(authOptions);
-
-    if (!session?.user?.id || session.user.role !== "ADMIN") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-    }
+    const [, authError] = await requireAdmin();
+    if (authError) return authError;
 
     const { id } = await params;
 
@@ -60,23 +56,24 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await getServerSession(authOptions);
+    const [session, authError] = await requireAdmin();
+    if (authError) return authError;
 
-    if (!session?.user?.id || session.user.role !== "ADMIN") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-    }
+    const rateLimited = applyRateLimit(`admin:${session.user.id}`, 60, 60 * 1000);
+    if (rateLimited) return rateLimited;
 
     const { id } = await params;
     const body = await req.json();
     const { role } = body;
 
     // Validate role
-    if (role && role !== "USER" && role !== "ADMIN") {
+    const validRoles = ["USER", "AGENT", "ADMIN"];
+    if (role && !validRoles.includes(role)) {
       return NextResponse.json({ error: "Invalid role" }, { status: 400 });
     }
 
     // Prevent admin from removing their own admin role
-    if (id === session.user.id && role === "USER") {
+    if (id === session.user.id && role !== "ADMIN") {
       return NextResponse.json(
         { error: "Cannot remove your own admin role" },
         { status: 400 }
@@ -85,7 +82,10 @@ export async function PATCH(
 
     const user = await prisma.user.update({
       where: { id },
-      data: { ...(role && { role }) },
+      data: {
+        ...(role && { role }),
+        tokenVersion: { increment: 1 },
+      },
       select: { id: true, name: true, email: true, role: true },
     });
 

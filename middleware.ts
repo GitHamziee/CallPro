@@ -13,7 +13,7 @@ export async function middleware(req: NextRequest) {
   }
 
   // Protected routes: require auth
-  const protectedPaths = ["/dashboard", "/settings", "/packages", "/admin"];
+  const protectedPaths = ["/dashboard", "/settings", "/packages", "/admin", "/leads", "/my-leads"];
   const isProtected = protectedPaths.some((p) => pathname.startsWith(p));
 
   if (isProtected && !token) {
@@ -25,6 +25,21 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/admin", req.url));
   }
 
+  // Block AGENT from /packages (they don't have subscriptions)
+  if (pathname.startsWith("/packages") && token?.role === "AGENT") {
+    return NextResponse.redirect(new URL("/dashboard", req.url));
+  }
+
+  // /leads routes: only AGENT can access
+  if (pathname.startsWith("/leads") && token?.role !== "AGENT") {
+    return NextResponse.redirect(new URL("/dashboard", req.url));
+  }
+
+  // /my-leads routes: only USER can access
+  if (pathname.startsWith("/my-leads") && token?.role !== "USER") {
+    return NextResponse.redirect(new URL("/dashboard", req.url));
+  }
+
   // Admin routes: require ADMIN role
   if (pathname.startsWith("/admin") && token?.role !== "ADMIN") {
     return NextResponse.redirect(new URL("/dashboard", req.url));
@@ -34,5 +49,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/login", "/register", "/dashboard/:path*", "/settings/:path*", "/packages/:path*", "/admin/:path*"],
+  matcher: ["/", "/login", "/register", "/dashboard/:path*", "/settings/:path*", "/packages/:path*", "/admin/:path*", "/leads/:path*", "/my-leads/:path*"],
 };

@@ -15,6 +15,10 @@ import {
   ShieldCheck,
   TrendingUp,
   ArrowRight,
+  FileText,
+  CalendarDays,
+  Clock,
+  Send,
 } from "lucide-react";
 
 interface PurchaseInfo {
@@ -331,6 +335,8 @@ function AdminDashboard({
                     className={`hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold ${
                       user.role === "ADMIN"
                         ? "bg-amber-100 text-amber-700"
+                        : user.role === "AGENT"
+                        ? "bg-blue-100 text-blue-700"
                         : "bg-slate-100 text-slate-600"
                     }`}
                   >
@@ -373,6 +379,99 @@ function AdminDashboard({
   );
 }
 
+// ─── Agent Dashboard ──────────────────────────────────────────────
+interface AgentStats {
+  totalLeads: number;
+  leadsThisMonth: number;
+  leadsToday: number;
+}
+
+function AgentDashboard({
+  session,
+}: {
+  session: ReturnType<typeof useSession>["data"];
+}) {
+  const [stats, setStats] = useState<AgentStats | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("/api/leads?limit=1");
+        if (res.ok) {
+          const data = await res.json();
+          setStats(data.stats);
+        }
+      } catch {
+        // silently fail
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+  return (
+    <div className="mx-auto max-w-5xl space-y-4 md:space-y-6">
+      {/* Welcome Card */}
+      <div className="rounded-lg bg-white p-4 md:p-6 shadow-sm border border-slate-200">
+        <h2 className="text-lg md:text-xl font-bold text-slate-900 mb-1">
+          Welcome back, {session?.user?.name || "Agent"}
+        </h2>
+        <p className="text-xs md:text-sm text-slate-500">
+          Submit and track your call center leads.
+        </p>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-3 gap-2 md:gap-4">
+        <div className="rounded-lg bg-white p-3 md:p-5 shadow-sm border border-slate-200">
+          <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+            <div className="p-1.5 md:p-2 rounded-lg bg-blue-50">
+              <FileText className="h-4 w-4 md:h-5 md:w-5 text-blue-600" />
+            </div>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">Total Leads</p>
+          </div>
+          {loading ? (
+            <div className="animate-pulse"><div className="h-7 w-12 bg-slate-200 rounded mt-1" /></div>
+          ) : (
+            <p className="text-lg md:text-2xl font-bold text-slate-900">{stats?.totalLeads ?? 0}</p>
+          )}
+        </div>
+
+        <div className="rounded-lg bg-white p-3 md:p-5 shadow-sm border border-slate-200">
+          <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+            <div className="p-1.5 md:p-2 rounded-lg bg-brand-50">
+              <CalendarDays className="h-4 w-4 md:h-5 md:w-5 text-brand-600" />
+            </div>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">This Month</p>
+          </div>
+          {loading ? (
+            <div className="animate-pulse"><div className="h-7 w-10 bg-slate-200 rounded mt-1" /></div>
+          ) : (
+            <p className="text-lg md:text-2xl font-bold text-slate-900">{stats?.leadsThisMonth ?? 0}</p>
+          )}
+        </div>
+
+        <div className="rounded-lg bg-white p-3 md:p-5 shadow-sm border border-slate-200">
+          <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+            <div className="p-1.5 md:p-2 rounded-lg bg-emerald-50">
+              <Clock className="h-4 w-4 md:h-5 md:w-5 text-emerald-600" />
+            </div>
+            <p className="text-[10px] md:text-sm font-medium text-slate-500">Today</p>
+          </div>
+          {loading ? (
+            <div className="animate-pulse"><div className="h-7 w-10 bg-slate-200 rounded mt-1" /></div>
+          ) : (
+            <p className="text-lg md:text-2xl font-bold text-slate-900">{stats?.leadsToday ?? 0}</p>
+          )}
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
 // ─── Inner component (uses useSearchParams — must be inside Suspense) ─────
 function DashboardContent() {
   const { data: session } = useSession();
@@ -380,7 +479,7 @@ function DashboardContent() {
   const [purchase, setPurchase] = useState<PurchaseInfo | null>(null);
   const [showPaymentSuccess, setShowPaymentSuccess] = useState(false);
 
-  const isAdmin = session?.user?.role === "ADMIN";
+  const role = session?.user?.role;
 
   useEffect(() => {
     if (searchParams.get("payment") === "success") {
@@ -391,7 +490,7 @@ function DashboardContent() {
 
   useEffect(() => {
     // Only fetch purchase for regular users
-    if (isAdmin) return;
+    if (role !== "USER") return;
 
     async function fetchPurchase() {
       try {
@@ -405,10 +504,14 @@ function DashboardContent() {
       }
     }
     fetchPurchase();
-  }, [isAdmin]);
+  }, [role]);
 
-  if (isAdmin) {
+  if (role === "ADMIN") {
     return <AdminDashboard session={session} />;
+  }
+
+  if (role === "AGENT") {
+    return <AgentDashboard session={session} />;
   }
 
   return (

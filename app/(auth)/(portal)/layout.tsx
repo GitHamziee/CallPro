@@ -19,7 +19,7 @@ export default function PortalLayout({
         {/* Main content area -- offset by sidebar width on desktop */}
         <div className="md:ml-38 flex flex-col min-h-screen">
           <TopBar />
-          <main className="flex-1 px-3 py-2 sm:px-4 sm:py-3">{children}</main>
+          <main className="flex-1 px-4 py-4 sm:px-6 sm:py-5">{children}</main>
         </div>
       </div>
     </SidebarProvider>

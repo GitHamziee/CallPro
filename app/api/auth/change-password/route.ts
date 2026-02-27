@@ -1,17 +1,16 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { validatePassword } from "@/lib/validation";
+import { requireAuth, applyRateLimit } from "@/lib/api-utils";
 
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession(authOptions);
+    const [session, authError] = await requireAuth();
+    if (authError) return authError;
 
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const rateLimited = applyRateLimit(`change-password:${session.user.id}`, 5, 5 * 60 * 1000);
+    if (rateLimited) return rateLimited;
 
     const { currentPassword, newPassword } = await req.json();
 
@@ -59,7 +58,10 @@ export async function POST(req: Request) {
 
     await prisma.user.update({
       where: { id: session.user.id },
-      data: { password: hashedPassword },
+      data: {
+        password: hashedPassword,
+        tokenVersion: { increment: 1 },
+      },
     });
 
     return NextResponse.json({ message: "Password changed successfully" });

@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   ChevronRight,
   UserCog,
+  Headset,
 } from "lucide-react";
 
 interface UserRow {
@@ -77,7 +78,7 @@ export default function AdminRolesPage() {
 
   async function handleRoleChange(userId: string, newRole: string) {
     // Prevent self-demotion
-    if (userId === session?.user?.id && newRole === "USER") {
+    if (userId === session?.user?.id && newRole !== "ADMIN") {
       setMessage({
         text: "You cannot remove your own admin role.",
         type: "error",
@@ -119,7 +120,7 @@ export default function AdminRolesPage() {
       {/* Header */}
       <div className="mb-6">
         <p className="text-sm text-slate-500">
-          Assign admin or user roles. {total} user{total !== 1 ? "s" : ""}{" "}
+          Assign roles to users. {total} user{total !== 1 ? "s" : ""}{" "}
           total.
         </p>
       </div>
@@ -195,8 +196,19 @@ export default function AdminRolesPage() {
               <tbody className="divide-y divide-slate-100">
                 {users.map((user) => {
                   const isSelf = user.id === session?.user?.id;
-                  const isAdmin = user.role === "ADMIN";
                   const isUpdating = updating === user.id;
+
+                  const roleBadge = user.role === "ADMIN"
+                    ? { bg: "bg-amber-100 text-amber-700", icon: <ShieldCheck className="h-3 w-3" /> }
+                    : user.role === "AGENT"
+                    ? { bg: "bg-blue-100 text-blue-700", icon: <Headset className="h-3 w-3" /> }
+                    : { bg: "bg-slate-100 text-slate-600", icon: <UserCog className="h-3 w-3" /> };
+
+                  const availableRoles = [
+                    { value: "USER", label: "User", bg: "bg-slate-100 text-slate-700 hover:bg-slate-200" },
+                    { value: "AGENT", label: "Agent", bg: "bg-blue-100 text-blue-700 hover:bg-blue-200" },
+                    { value: "ADMIN", label: "Admin", bg: "bg-amber-100 text-amber-700 hover:bg-amber-200" },
+                  ].filter((r) => r.value !== user.role);
 
                   return (
                     <tr
@@ -221,17 +233,9 @@ export default function AdminRolesPage() {
                       {/* Current role badge */}
                       <td className="px-6 py-4">
                         <span
-                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold ${
-                            isAdmin
-                              ? "bg-amber-100 text-amber-700"
-                              : "bg-slate-100 text-slate-600"
-                          }`}
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold ${roleBadge.bg}`}
                         >
-                          {isAdmin ? (
-                            <ShieldCheck className="h-3 w-3" />
-                          ) : (
-                            <UserCog className="h-3 w-3" />
-                          )}
+                          {roleBadge.icon}
                           {user.role}
                         </span>
                       </td>
@@ -247,35 +251,22 @@ export default function AdminRolesPage() {
                           <span className="text-xs text-slate-400 italic">
                             Cannot change own role
                           </span>
+                        ) : isUpdating ? (
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1.5">
+                            <div className="animate-spin rounded-full h-3 w-3 border border-slate-400 border-t-transparent" />
+                          </div>
                         ) : (
-                          <button
-                            onClick={() =>
-                              handleRoleChange(
-                                user.id,
-                                isAdmin ? "USER" : "ADMIN"
-                              )
-                            }
-                            disabled={isUpdating}
-                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
-                              isAdmin
-                                ? "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                                : "bg-amber-100 text-amber-700 hover:bg-amber-200"
-                            }`}
-                          >
-                            {isUpdating ? (
-                              <div className="animate-spin rounded-full h-3 w-3 border border-current border-t-transparent" />
-                            ) : isAdmin ? (
-                              <>
-                                <UserCog className="h-3 w-3" />
-                                Demote to User
-                              </>
-                            ) : (
-                              <>
-                                <ShieldCheck className="h-3 w-3" />
-                                Promote to Admin
-                              </>
-                            )}
-                          </button>
+                          <div className="inline-flex items-center gap-1.5">
+                            {availableRoles.map((r) => (
+                              <button
+                                key={r.value}
+                                onClick={() => handleRoleChange(user.id, r.value)}
+                                className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors ${r.bg}`}
+                              >
+                                {r.label}
+                              </button>
+                            ))}
+                          </div>
                         )}
                       </td>
                     </tr>

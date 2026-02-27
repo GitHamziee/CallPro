@@ -5,14 +5,11 @@ import Link from "next/link";
 import {
   ArrowLeft,
   Shield,
-  Mail,
-  Phone,
+  Headset,
   Calendar,
   Package,
   CreditCard,
   Clock,
-  ShieldCheck,
-  ShieldOff,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -71,9 +68,8 @@ export default function AdminUserDetailPage({
     fetchUser();
   }, [id]);
 
-  const handleRoleChange = async () => {
+  const handleRoleChange = async (newRole: string) => {
     if (!user) return;
-    const newRole = user.role === "ADMIN" ? "USER" : "ADMIN";
 
     const confirmed = window.confirm(
       `Change ${user.name || user.email}'s role to ${newRole}?`
@@ -191,9 +187,11 @@ export default function AdminUserDetailPage({
             <div className="flex items-center gap-1.5">
               {user.role === "ADMIN" ? (
                 <Shield className="h-3.5 w-3.5 text-amber-500" />
+              ) : user.role === "AGENT" ? (
+                <Headset className="h-3.5 w-3.5 text-blue-500" />
               ) : null}
               <span className="text-sm font-semibold text-slate-900">
-                {user.role === "ADMIN" ? "Admin" : "User"}
+                {user.role === "ADMIN" ? "Admin" : user.role === "AGENT" ? "Agent" : "User"}
               </span>
             </div>
           </div>
@@ -236,24 +234,26 @@ export default function AdminUserDetailPage({
         {/* Actions */}
         <div className="px-6 py-4 flex items-center justify-between">
           <p className="text-xs text-slate-400 font-mono">ID: {user.id}</p>
-          <Button
-            onClick={handleRoleChange}
-            disabled={updating}
-            variant="outline"
-            className="text-xs h-8 gap-1.5"
-          >
-            {user.role === "ADMIN" ? (
-              <>
-                <ShieldOff className="h-3.5 w-3.5" />
-                Remove Admin
-              </>
-            ) : (
-              <>
-                <ShieldCheck className="h-3.5 w-3.5" />
-                Make Admin
-              </>
-            )}
-          </Button>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-slate-400 mr-1">Set role:</span>
+            {(["USER", "AGENT", "ADMIN"] as const).filter((r) => r !== user.role).map((r) => (
+              <Button
+                key={r}
+                onClick={() => handleRoleChange(r)}
+                disabled={updating}
+                variant="outline"
+                className={`text-xs h-8 gap-1.5 ${
+                  r === "ADMIN"
+                    ? "border-amber-200 text-amber-700 hover:bg-amber-50"
+                    : r === "AGENT"
+                    ? "border-blue-200 text-blue-700 hover:bg-blue-50"
+                    : "border-slate-200 text-slate-700 hover:bg-slate-50"
+                }`}
+              >
+                {r === "ADMIN" ? "Admin" : r === "AGENT" ? "Agent" : "User"}
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
 

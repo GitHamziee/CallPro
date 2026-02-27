@@ -8,6 +8,7 @@ import {
   ChevronRight,
   Users,
   Shield,
+  Headset,
   CreditCard,
   ArrowUpRight,
 } from "lucide-react";
@@ -103,12 +104,13 @@ export default function AdminUsersPage() {
   }, [search, roleFilter]);
 
   const admins = users.filter((u) => u.role === "ADMIN").length;
+  const agents = users.filter((u) => u.role === "AGENT").length;
   const withSubs = users.filter((u) => u._count.purchases > 0).length;
 
   return (
     <div className="mx-auto max-w-6xl">
       {/* Stats row */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100">
             <Users className="h-5 w-5 text-slate-600" />
@@ -125,6 +127,15 @@ export default function AdminUsersPage() {
           <div>
             <p className="text-2xl font-semibold text-slate-900">{admins}</p>
             <p className="text-xs text-slate-500">Admins</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50">
+            <Headset className="h-5 w-5 text-blue-600" />
+          </div>
+          <div>
+            <p className="text-2xl font-semibold text-slate-900">{agents}</p>
+            <p className="text-xs text-slate-500">Agents</p>
           </div>
         </div>
         <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
@@ -154,6 +165,7 @@ export default function AdminUsersPage() {
           {[
             { label: "All", value: "" },
             { label: "Users", value: "USER" },
+            { label: "Agents", value: "AGENT" },
             { label: "Admins", value: "ADMIN" },
           ].map((opt) => (
             <button
@@ -219,6 +231,12 @@ export default function AdminUsersPage() {
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-700">
                         <Shield className="h-2.5 w-2.5" />
                         Admin
+                      </span>
+                    )}
+                    {user.role === "AGENT" && (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-700">
+                        <Headset className="h-2.5 w-2.5" />
+                        Agent
                       </span>
                     )}
                   </div>
