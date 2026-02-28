@@ -74,8 +74,8 @@ export function useAdminLeads() {
     fetchAgents();
   }, []);
 
-  const fetchLeads = useCallback(async () => {
-    setLoading(true);
+  const fetchLeads = useCallback(async (silent = false) => {
+    if (!silent) setLoading(true);
     try {
       const params = new URLSearchParams({
         page: page.toString(),
@@ -97,12 +97,31 @@ export function useAdminLeads() {
     } catch {
       // silently fail
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
   }, [page, search, agentFilter, statusFilter]);
 
   useEffect(() => {
     fetchLeads();
+  }, [fetchLeads]);
+
+  // Poll every 30s while tab is visible
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+
+    const start = () => {
+      interval = setInterval(() => fetchLeads(true), 30_000);
+    };
+    const stop = () => clearInterval(interval);
+
+    const onVisibility = () => {
+      if (document.hidden) { stop(); }
+      else { fetchLeads(true); start(); }
+    };
+
+    start();
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => { stop(); document.removeEventListener("visibilitychange", onVisibility); };
   }, [fetchLeads]);
 
   useEffect(() => {

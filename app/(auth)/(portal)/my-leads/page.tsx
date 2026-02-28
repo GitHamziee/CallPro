@@ -218,7 +218,7 @@ export default function MyLeadsPage() {
                       {lead.status === "PENDING" ? (
                         <div className="flex items-center justify-end gap-2">
                           <button
-                            onClick={() => handleAction(lead.id, "accept")}
+                            onClick={(e) => { e.stopPropagation(); handleAction(lead.id, "accept"); }}
                             disabled={acting !== null}
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors disabled:opacity-50"
                           >
@@ -230,7 +230,7 @@ export default function MyLeadsPage() {
                             Accept
                           </button>
                           <button
-                            onClick={() => handleAction(lead.id, "decline")}
+                            onClick={(e) => { e.stopPropagation(); handleAction(lead.id, "decline"); }}
                             disabled={acting !== null}
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-50 text-red-600 hover:bg-red-100 transition-colors disabled:opacity-50"
                           >
@@ -244,7 +244,7 @@ export default function MyLeadsPage() {
                             ${(lead.invoice.amount / 100).toFixed(2)}
                           </span>
                           <button
-                            onClick={() => handlePayInvoice(lead.invoice!.id)}
+                            onClick={(e) => { e.stopPropagation(); handlePayInvoice(lead.invoice!.id); }}
                             disabled={acting !== null}
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors disabled:opacity-50"
                           >

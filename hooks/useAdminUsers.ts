@@ -8,7 +8,7 @@ export interface UserRow {
   email: string;
   role: string;
   createdAt: string;
-  _count: { purchases: number };
+  _count: { purchases: number; assignedLeads: number };
 }
 
 export function useAdminUsers() {

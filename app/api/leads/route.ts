@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { requireAgent, applyRateLimit } from "@/lib/api-utils";
+import {
+  validateEmail,
+  validatePhone,
+  validateZipCode,
+  sanitizeInput,
+} from "@/lib/validation";
 
 export async function GET(req: NextRequest) {
   try {
@@ -75,24 +81,33 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { name, email, phone, zipCode } = body;
 
+    // Sanitize text input
+    const cleanName = sanitizeInput(name || "");
+
     // Validate required fields
-    if (!name || typeof name !== "string" || name.trim().length < 1) {
-      return NextResponse.json({ error: "Name is required" }, { status: 400 });
+    if (cleanName.length < 2) {
+      return NextResponse.json({ error: "Name must be at least 2 characters" }, { status: 400 });
     }
-    if (!email || typeof email !== "string" || !email.includes("@")) {
-      return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
+
+    const emailResult = validateEmail(email);
+    if (!emailResult.valid) {
+      return NextResponse.json({ error: emailResult.error }, { status: 400 });
     }
-    if (!phone || typeof phone !== "string" || phone.trim().length < 5) {
-      return NextResponse.json({ error: "Valid phone number is required" }, { status: 400 });
+
+    const phoneResult = validatePhone(phone);
+    if (!phoneResult.valid) {
+      return NextResponse.json({ error: phoneResult.error }, { status: 400 });
     }
-    if (!zipCode || typeof zipCode !== "string" || zipCode.trim().length < 3) {
-      return NextResponse.json({ error: "Valid zip code is required" }, { status: 400 });
+
+    const zipResult = validateZipCode(zipCode);
+    if (!zipResult.valid) {
+      return NextResponse.json({ error: zipResult.error }, { status: 400 });
     }
 
     const lead = await prisma.lead.create({
       data: {
         agentId: session.user.id,
-        name: name.trim(),
+        name: cleanName,
         email: email.trim().toLowerCase(),
         phone: phone.trim(),
         zipCode: zipCode.trim(),

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { requireAdmin, applyRateLimit } from "@/lib/api-utils";
+import { expireStaleSubscriptions } from "@/lib/purchase-utils";
 
 export async function GET() {
   try {
@@ -9,6 +10,9 @@ export async function GET() {
 
     const rateLimited = applyRateLimit(`admin:${session.user.id}`, 60, 60 * 1000);
     if (rateLimited) return rateLimited;
+
+    // Opportunistic cleanup: expire stale subscriptions on admin load
+    await expireStaleSubscriptions();
 
     // Current month boundaries
     const now = new Date();
@@ -47,6 +51,7 @@ export async function GET() {
         where: {
           status: "ACTIVE",
           createdAt: { gte: monthStart },
+          OR: [{ expiresAt: { gt: new Date() } }, { expiresAt: null }],
         },
         select: {
           package: { select: { price: true } },

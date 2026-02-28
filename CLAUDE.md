@@ -32,22 +32,30 @@ app/
 │   ├── pricing/         # /pricing
 │   ├── about/           # /about
 │   ├── contact/         # /contact
-│   └── *-policy/        # Legal pages
+│   └── *-policy/        # Legal pages (privacy, terms, refund)
 ├── (auth)/              # Auth-related pages
 │   ├── login/           # Standalone login page
 │   ├── register/        # Standalone register page
+│   ├── forgot-password/ # Password reset request
+│   ├── reset-password/  # Password reset with token
 │   ├── (portal)/        # User portal (sidebar + topbar layout)
-│   │   ├── dashboard/
-│   │   ├── settings/
-│   │   └── packages/
+│   │   ├── dashboard/   # Role-conditional dashboard
+│   │   ├── settings/    # Account, Security, Billing tabs
+│   │   ├── packages/    # Package subscription (USER only)
+│   │   ├── my-leads/    # Assigned leads (USER only)
+│   │   └── leads/       # Submit + History (AGENT only)
 │   └── (admin)/         # Admin portal (dark sidebar layout)
 │       └── admin/
-│           ├── users/
+│           ├── users/   # User management + [id] detail
+│           ├── leads/   # Lead management + assign/invoice
 │           └── packages/
 ├── api/
-│   ├── auth/            # NextAuth + register/profile/password
-│   ├── admin/           # Admin-only endpoints
+│   ├── auth/            # NextAuth + register/profile/password/reset
+│   ├── admin/           # Admin-only endpoints (users, leads, stats, invoices)
 │   ├── packages/        # Public package listing
+│   ├── leads/           # Agent lead CRUD
+│   ├── my-leads/        # User lead actions
+│   ├── invoices/        # Invoice Stripe checkout
 │   └── stripe/          # Checkout + webhooks
 └── globals.css          # Tailwind theme + custom utilities
 ```
@@ -65,17 +73,21 @@ app/
 - `components/admin/` — Admin portal UI (AdminSidebar, AdminTopBar)
 
 ## Design Tokens
-- Brand: emerald (`brand-600: #059669`)
-- Accent: teal
-- Section dark: `#3f3f46`
+- Brand: blue (`brand-600: #2563eb`)
+- Accent: purple (`accent-600: #9333ea`)
+- Section dark: `#172554` (deep blue)
+- Gradient: blue→purple (buttons, text accents)
 - Portal bg: `slate-50`
 - Admin sidebar: `slate-900`
 
 ## Auth & Roles
-- Two roles: `USER` (default), `ADMIN`
-- JWT strategy — role, name, id embedded in token
-- Middleware protects `/dashboard`, `/settings`, `/admin` routes
+- Three roles: `USER` (default), `AGENT`, `ADMIN`
+- JWT strategy — role, name, id, tokenVersion embedded in token
+- Token revalidation every 5 minutes (checks DB for role/version changes)
+- Middleware protects `/dashboard`, `/settings`, `/packages`, `/admin`, `/leads`, `/my-leads`
 - Admin routes require `role === "ADMIN"`
+- Agent routes (`/leads`) require `role === "AGENT"`
+- User routes (`/my-leads`, `/packages`) require `role === "USER"`
 
 ## Environment Variables
 ```
@@ -85,6 +97,7 @@ NEXTAUTH_URL=           # http://localhost:3000 (dev)
 STRIPE_SECRET_KEY=      # Stripe secret key
 STRIPE_WEBHOOK_SECRET=  # Stripe webhook signing secret
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=  # Stripe publishable key
+RESEND_API_KEY=         # Resend email service API key
 ```
 
 ## Conventions

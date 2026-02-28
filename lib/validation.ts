@@ -71,6 +71,42 @@ export function validateName(name: string): ValidationResult {
   return { valid: true };
 }
 
+export function validatePhone(phone: string): ValidationResult {
+  if (!phone || typeof phone !== "string") {
+    return { valid: false, error: "Phone number is required" };
+  }
+
+  const trimmed = phone.trim();
+
+  if (!/^[0-9()\-+\s.]+$/.test(trimmed)) {
+    return { valid: false, error: "Phone number contains invalid characters" };
+  }
+
+  const digits = trimmed.replace(/\D/g, "");
+  if (digits.length < 7 || digits.length > 15) {
+    return { valid: false, error: "Phone number must be 7-15 digits" };
+  }
+
+  return { valid: true };
+}
+
+export function validateZipCode(zipCode: string): ValidationResult {
+  if (!zipCode || typeof zipCode !== "string") {
+    return { valid: false, error: "Zip code is required" };
+  }
+
+  const trimmed = zipCode.trim();
+
+  if (!/^\d{5}(-\d{4})?$/.test(trimmed)) {
+    return {
+      valid: false,
+      error: "Invalid zip code format (e.g. 12345 or 12345-6789)",
+    };
+  }
+
+  return { valid: true };
+}
+
 export function sanitizeInput(input: string): string {
   if (typeof input !== "string") return "";
   return input.trim().replace(/<[^>]*>/g, "");

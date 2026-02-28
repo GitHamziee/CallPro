@@ -46,6 +46,7 @@ async function main() {
       description:
         "Only pay for the leads you receive. $375 one-time setup, then $100 per lead. Lifetime access.",
       price: 37500, // $375.00 setup fee
+      durationDays: null, // lifetime — no expiry
       features: [
         "$375 one-time setup fee",
         "$100 per qualified lead",
@@ -61,6 +62,7 @@ async function main() {
       description:
         "High volume leads with performance-based pricing. 12–15 leads over 6 months.",
       price: 69900, // $699.00
+      durationDays: 180, // 6 months
       features: [
         "$699 for 6-month term",
         "12–15 qualified leads included",
@@ -76,6 +78,7 @@ async function main() {
       description:
         "Maximum value with 10 guaranteed leads at 40% off. Best price per lead.",
       price: 82500, // $825.00
+      durationDays: null, // no time expiry — expires after 10 leads
       features: [
         "$825 one-time payment",
         "10 guaranteed leads",

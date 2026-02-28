@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { Suspense } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { signIn } from "next-auth/react";
 import { PhoneCall, Eye, EyeOff, ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLogin } from "@/hooks/useLogin";
 
 export default function LoginPage() {
   return (
@@ -16,36 +15,19 @@ export default function LoginPage() {
 }
 
 function LoginContent() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [error, setError] = useState("");
-  const registered = searchParams.get("registered");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-
-    const res = await signIn("credentials", {
-      redirect: false,
-      email: formData.email,
-      password: formData.password,
-    });
-
-    setLoading(false);
-
-    if (res?.error) {
-      setError("Invalid email or password");
-    } else {
-      // Redirect to dashboard — middleware will reroute admins to /admin
-      window.location.href = "/dashboard";
-    }
-  };
+  const {
+    formData,
+    setFormData,
+    showPassword,
+    setShowPassword,
+    rememberMe,
+    setRememberMe,
+    loading,
+    error,
+    registered,
+    registerHref,
+    handleSubmit,
+  } = useLogin();
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center px-4 py-12">
@@ -163,7 +145,7 @@ function LoginContent() {
         <div className="mt-6 pt-6 border-t border-slate-100 text-center">
           <p className="text-sm text-slate-500">
             Don&apos;t have an account?{" "}
-            <Link href="/register" className="font-medium text-brand-600 hover:text-brand-700 transition-colors">
+            <Link href={registerHref} className="font-medium text-brand-600 hover:text-brand-700 transition-colors">
               Create one
             </Link>
           </p>

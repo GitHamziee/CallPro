@@ -39,35 +39,35 @@
 
   /* ─── Brand color palette ───────────────────────────────────────────────
      To change the site's primary color, update ONLY these values.
-     Current palette: Blue (Indigo)
+     Current palette: Blue
      ──────────────────────────────────────────────────────────────────── */
-  --color-brand-50:  #eef2ff;
-  --color-brand-100: #e0e7ff;
-  --color-brand-200: #c7d2fe;
-  --color-brand-300: #a5b4fc;
-  --color-brand-400: #818cf8;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
-  --color-brand-700: #4338ca;
-  --color-brand-800: #3730a3;
-  --color-brand-900: #312e81;
-  --color-brand-950: #1e1b4b;
+  --color-brand-50:  #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #1e3a8a;
+  --color-brand-950: #172554;
 
   /* ─── Accent color palette ───────────────────────────────────────────────
      Used for highlights, gradient endpoints, and glow accents.
-     Current palette: Violet / Purple
+     Current palette: Purple
      ──────────────────────────────────────────────────────────────────── */
-  --color-accent-200: #ddd6fe;
-  --color-accent-300: #c4b5fd;
-  --color-accent-400: #a78bfa;
-  --color-accent-500: #8b5cf6;
-  --color-accent-600: #7c3aed;
+  --color-accent-200: #e9d5ff;
+  --color-accent-300: #d8b4fe;
+  --color-accent-400: #c084fc;
+  --color-accent-500: #a855f7;
+  --color-accent-600: #9333ea;
 
   /* ─── Section backgrounds ────────────────────────────────────────────────
      Dark section bg (CTABanner, ServiceProcess, etc.) — change here to retheme.
-     Current value: deep indigo-slate
+     Current value: deep blue
      ──────────────────────────────────────────────────────────────────── */
-  --color-section-dark: #1e1b4b;
+  --color-section-dark: #172554;
 }
 
 /* Light theme design system */
@@ -79,7 +79,7 @@
   --card-foreground: oklch(0.13 0.02 255);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.13 0.02 255);
-  --primary: oklch(0.55 0.22 264);
+  --primary: oklch(0.55 0.22 255);
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.97 0.01 240);
   --secondary-foreground: oklch(0.13 0.02 255);
@@ -90,15 +90,15 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.92 0.01 240);
   --input: oklch(0.92 0.01 240);
-  --ring: oklch(0.55 0.22 264);
+  --ring: oklch(0.55 0.22 255);
   --sidebar: oklch(0.97 0.01 240);
   --sidebar-foreground: oklch(0.13 0.02 255);
-  --sidebar-primary: oklch(0.55 0.22 264);
+  --sidebar-primary: oklch(0.55 0.22 255);
   --sidebar-primary-foreground: oklch(1 0 0);
   --sidebar-accent: oklch(0.97 0.01 240);
   --sidebar-accent-foreground: oklch(0.13 0.02 255);
   --sidebar-border: oklch(0.92 0.01 240);
-  --sidebar-ring: oklch(0.55 0.22 264);
+  --sidebar-ring: oklch(0.55 0.22 255);
 }
 
 @layer base {
@@ -113,14 +113,14 @@
 /* Subtle grid pattern */
 .grid-pattern {
   background-image:
-    linear-gradient(to right, rgba(79, 70, 229, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(79, 70, 229, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 
 /* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -128,10 +128,86 @@
 
 /* Glow button */
 .btn-glow {
-  box-shadow: 0 0 20px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.25);
 }
 .btn-glow:hover {
-  box-shadow: 0 0 30px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.4);
+}
+
+/* Gradient CTA button with moving shimmer + underglow */
+@keyframes btn-gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes btn-shine {
+  0%   { left: -100%; }
+  100% { left: 200%; }
+}
+.btn-gradient {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  background: linear-gradient(
+    90deg,
+    #2563eb 0%,
+    #7c3aed 33%,
+    #9333ea 50%,
+    #7c3aed 67%,
+    #2563eb 100%
+  ) !important;
+  background-size: 200% 100% !important;
+  animation: btn-gradient-shift 3s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+/* Underglow — blurred glow pool beneath the button */
+.btn-gradient-wrap {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+}
+.btn-gradient-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: linear-gradient(135deg, #2563eb, #9333ea);
+  border-radius: inherit;
+  filter: blur(18px);
+  opacity: 0.35;
+  z-index: -1;
+  transform: translateY(8px) scaleX(0.85);
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+.btn-gradient-wrap:hover::after {
+  opacity: 0.55;
+  filter: blur(24px);
+  transform: translateY(10px) scaleX(0.95);
+}
+/* Shine streak across the button */
+.btn-gradient::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  animation: btn-shine 3s ease-in-out infinite;
+  animation-delay: 1s;
+  pointer-events: none;
+}
+.btn-gradient:hover {
+  background-color: transparent !important;
+  transform: translateY(-1px);
+}
+.btn-gradient:active {
+  transform: translateY(0);
 }
 
 /* Light card */
@@ -141,9 +217,23 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
 }
 .glass-card:hover {
-  border-color: #c7d2fe;
-  box-shadow: 0 4px 16px 0 rgba(79, 70, 229, 0.08);
+  border-color: #bfdbfe;
+  box-shadow: 0 4px 16px 0 rgba(37, 99, 235, 0.08);
 }
+
+/* Floating blob drift — ambient background animation */
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0, 0); }
+  33%      { transform: translate(30px, -20px); }
+  66%      { transform: translate(-15px, 15px); }
+}
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0, 0); }
+  33%      { transform: translate(-25px, 20px); }
+  66%      { transform: translate(20px, -15px); }
+}
+.blob-drift-1 { animation: blob-drift-1 22s ease-in-out infinite; }
+.blob-drift-2 { animation: blob-drift-2 28s ease-in-out infinite; }
 
 /* Aurora animated gradient — used on hero campaign card */
 @keyframes aurora {
@@ -154,13 +244,13 @@
 .aurora-card {
   background: linear-gradient(
     -45deg,
-    #1e1b4b,
-    #312e81,
-    #3730a3,
-    #7c3aed,
-    #4f46e5,
-    #312e81,
-    #1e1b4b
+    #172554,
+    #1e3a8a,
+    #1e40af,
+    #9333ea,
+    #2563eb,
+    #1e3a8a,
+    #172554
   );
   background-size: 400% 400%;
   animation: aurora 8s ease infinite;

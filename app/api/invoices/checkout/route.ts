@@ -2,14 +2,20 @@ import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import prisma from "@/lib/prisma";
 import { requireUser, applyRateLimit } from "@/lib/api-utils";
+import { logStripeEvent } from "@/lib/stripe-logger";
+import Stripe from "stripe";
 
 export async function POST(req: NextRequest) {
+  let userId: string | undefined;
+
   try {
     const [session, authError] = await requireUser();
     if (authError) return authError;
 
+    userId = session.user.id;
+
     const rateLimited = applyRateLimit(
-      `invoice-checkout:${session.user.id}`,
+      `invoice-checkout:${userId}`,
       10,
       60 * 1000
     );
@@ -40,7 +46,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (invoice.lead.assignedToId !== session.user.id) {
+    if (invoice.lead.assignedToId !== userId) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
@@ -59,6 +65,11 @@ export async function POST(req: NextRequest) {
     }
 
     const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
+    const requestMetadata = {
+      type: "invoice" as const,
+      invoiceId: invoice.id,
+      userId,
+    };
 
     const checkoutSession = await getStripe().checkout.sessions.create({
       mode: "payment",
@@ -76,21 +87,59 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         },
       ],
-      metadata: {
-        type: "invoice",
-        invoiceId: invoice.id,
-        userId: session.user.id,
-      },
+      metadata: requestMetadata,
       customer_email: session.user.email || undefined,
       success_url: `${baseUrl}/my-leads?payment=success`,
       cancel_url: `${baseUrl}/my-leads?payment=cancelled`,
     });
 
+    await logStripeEvent({
+      event: "invoice-checkout.create",
+      sessionId: checkoutSession.id,
+      userId,
+      metadata: requestMetadata,
+      response: { url: checkoutSession.url, id: checkoutSession.id },
+      status: "success",
+    });
+
     return NextResponse.json({ url: checkoutSession.url });
   } catch (error) {
     console.error("Invoice checkout error:", error);
+
+    await logStripeEvent({
+      event: "invoice-checkout.create",
+      userId,
+      errorObj: error,
+      status: "error",
+    });
+
+    if (error instanceof Stripe.errors.StripeAuthenticationError) {
+      return NextResponse.json(
+        { error: "Payment service misconfigured" },
+        { status: 500 }
+      );
+    }
+    if (error instanceof Stripe.errors.StripeConnectionError) {
+      return NextResponse.json(
+        { error: "Payment service temporarily unavailable, please try again" },
+        { status: 503 }
+      );
+    }
+    if (error instanceof Stripe.errors.StripeRateLimitError) {
+      return NextResponse.json(
+        { error: "Too many requests, please try again shortly" },
+        { status: 429 }
+      );
+    }
+    if (error instanceof Stripe.errors.StripeError) {
+      return NextResponse.json(
+        { error: "Payment processing failed" },
+        { status: 502 }
+      );
+    }
+
     return NextResponse.json(
-      { error: "Failed to create checkout session" },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }

@@ -110,6 +110,7 @@ model Package {
   description   String?
   price         Int      // cents (e.g., 149900 = $1,499.00)
   features      String[]
+  durationDays  Int?     // null = no expiry (lifetime/lead-based)
   isActive      Boolean  @default(true)
   sortOrder     Int      @default(0)
   stripePriceId String?  @unique
@@ -170,5 +171,22 @@ model Invoice {
 
   lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
 
+  @@index([status])
+}
+
+model StripeLog {
+  id        String   @id @default(cuid())
+  event     String   // "checkout.create", "checkout.completed", "payment_failed", etc.
+  sessionId String?  // Stripe session or event ID
+  userId    String?  // Associated user if known
+  metadata  String?  // JSON string of request metadata
+  response  String?  // JSON string of Stripe response or event payload
+  error     String?  // Error message if failed
+  status    String   // "success" or "error"
+  createdAt DateTime @default(now())
+
+  @@index([event])
+  @@index([userId])
+  @@index([createdAt])
   @@index([status])
 }

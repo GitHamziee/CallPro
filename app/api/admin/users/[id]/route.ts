@@ -71,7 +71,12 @@ export async function PATCH(
     // --- Cancel subscription ---
     if (cancelPurchaseId) {
       const purchase = await prisma.purchase.findFirst({
-        where: { id: cancelPurchaseId, userId: id, status: "ACTIVE" },
+        where: {
+          id: cancelPurchaseId,
+          userId: id,
+          status: "ACTIVE",
+          OR: [{ expiresAt: { gt: new Date() } }, { expiresAt: null }],
+        },
       });
 
       if (!purchase) {

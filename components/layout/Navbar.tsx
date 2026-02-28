@@ -91,12 +91,14 @@ export default function Navbar() {
               >
                 Log In
               </Link>
-              <Button
-                asChild
-                className="bg-brand-600 hover:bg-brand-700 text-white btn-glow transition-all duration-200"
-              >
-                <Link href="/register">Register</Link>
-              </Button>
+              <div className="btn-gradient-wrap rounded-md">
+                <Button
+                  asChild
+                  className="btn-gradient text-white border-0 transition-all duration-200"
+                >
+                  <Link href="/register">Register</Link>
+                </Button>
+              </div>
             </>
           )}
         </div>
@@ -155,12 +157,14 @@ export default function Navbar() {
                   >
                     <Link href="/login">Log In</Link>
                   </Button>
-                  <Button
-                    asChild
-                    className="flex-1 bg-brand-600 hover:bg-brand-700 text-white"
-                  >
-                    <Link href="/register">Register</Link>
-                  </Button>
+                  <div className="flex-1 btn-gradient-wrap rounded-md">
+                    <Button
+                      asChild
+                      className="w-full btn-gradient text-white border-0"
+                    >
+                      <Link href="/register">Register</Link>
+                    </Button>
+                  </div>
                 </>
               )}
             </li>

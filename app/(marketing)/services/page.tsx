@@ -6,7 +6,7 @@ import ServiceProcess from "@/components/services/ServiceProcess";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Explore our full suite of outbound sales services: cold calling, appointment setting, lead qualification, CRM management, and more.",
+    "Explore our full suite of outbound sales services: outbound calling, appointment setting, lead qualification, CRM management, and more.",
 };
 
 export default function ServicesPage() {

@@ -56,6 +56,7 @@ export async function GET(req: NextRequest) {
                   ],
                 },
               },
+              assignedLeads: true,
             },
           },
         },

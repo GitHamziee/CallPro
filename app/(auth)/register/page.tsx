@@ -1,61 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { PhoneCall, Eye, EyeOff, ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRegister } from "@/hooks/useRegister";
 
 export default function RegisterPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
-  const [agreed, setAgreed] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [passwordError, setPasswordError] = useState("");
+  return (
+    <Suspense>
+      <RegisterContent />
+    </Suspense>
+  );
+}
 
-  const router = useRouter();
-  const [error, setError] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-
-    if (formData.password !== formData.confirmPassword) {
-      setPasswordError("Passwords do not match.");
-      return;
-    }
-    setPasswordError("");
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        setError(data.error || "Registration failed");
-      } else {
-        // redirect to login after success
-        router.push("/login?registered=1");
-      }
-    } catch (err) {
-      setError("Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
+function RegisterContent() {
+  const {
+    formData,
+    setFormData,
+    showPassword,
+    setShowPassword,
+    showConfirm,
+    setShowConfirm,
+    agreed,
+    setAgreed,
+    loading,
+    error,
+    passwordError,
+    setPasswordError,
+    loginHref,
+    handleSubmit,
+  } = useRegister();
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center px-4 py-12">
@@ -222,7 +197,7 @@ export default function RegisterPage() {
         <div className="mt-6 pt-6 border-t border-slate-100 text-center">
           <p className="text-sm text-slate-500">
             Already have an account?{" "}
-            <Link href="/login" className="font-medium text-brand-600 hover:text-brand-700 transition-colors">
+            <Link href={loginHref} className="font-medium text-brand-600 hover:text-brand-700 transition-colors">
               Sign in
             </Link>
           </p>

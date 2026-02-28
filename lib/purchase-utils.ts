@@ -36,3 +36,19 @@ export async function getActivePurchase(userId: string) {
 
   return purchase;
 }
+
+/**
+ * Opportunistic batch cleanup: marks all overdue ACTIVE purchases as EXPIRED.
+ * Call this from admin endpoints so stale records get cleaned up without cron jobs.
+ * Uses updateMany — single query, no N+1 overhead.
+ */
+export async function expireStaleSubscriptions() {
+  const result = await prisma.purchase.updateMany({
+    where: {
+      status: "ACTIVE",
+      expiresAt: { lt: new Date() },
+    },
+    data: { status: "EXPIRED" },
+  });
+  return result.count;
+}

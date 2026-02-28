@@ -42,7 +42,11 @@ export async function GET(req: NextRequest) {
 
     // Check if user is on "Pay Per Lead" plan
     const activePurchase = await prisma.purchase.findFirst({
-      where: { userId: session.user.id, status: "ACTIVE" },
+      where: {
+        userId: session.user.id,
+        status: "ACTIVE",
+        OR: [{ expiresAt: { gt: new Date() } }, { expiresAt: null }],
+      },
       include: { package: { select: { name: true } } },
     });
     const isPayPerLead = activePurchase?.package?.name === "Pay Per Lead";

@@ -92,21 +92,33 @@ export default function PricingCards() {
                   ))}
                 </ul>
 
-                <Button
-                  asChild
-                  size="lg"
-                  className={
-                    plan.highlighted
-                      ? "bg-white text-brand-700 hover:bg-brand-50 font-semibold"
-                      : "bg-brand-600 hover:bg-brand-700 text-white btn-glow"
-                  }
-                >
-                  <Link href="/register">
-                    {plan.cta === "Most Popular" || plan.cta === "Best Value"
-                      ? "Get Started"
-                      : plan.cta}
-                  </Link>
-                </Button>
+                {plan.highlighted ? (
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-white text-brand-700 hover:bg-brand-50 font-semibold"
+                  >
+                    <Link href="/register?callbackUrl=/packages">
+                      {plan.cta === "Most Popular" || plan.cta === "Best Value"
+                        ? "Get Started"
+                        : plan.cta}
+                    </Link>
+                  </Button>
+                ) : (
+                  <div className="btn-gradient-wrap rounded-md">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="btn-gradient text-white border-0 w-full"
+                    >
+                      <Link href="/register?callbackUrl=/packages">
+                        {plan.cta === "Most Popular" || plan.cta === "Best Value"
+                          ? "Get Started"
+                          : plan.cta}
+                      </Link>
+                    </Button>
+                  </div>
+                )}
               </div>
             </AnimatedSection>
           ))}

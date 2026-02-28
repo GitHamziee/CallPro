@@ -188,7 +188,13 @@ export default function AdminUsersPage() {
                 </div>
 
                 {/* Meta — desktop only */}
-                <div className="hidden sm:flex items-center gap-5 shrink-0">
+                <div className="hidden sm:flex items-center gap-3 shrink-0">
+                  {user._count.assignedLeads > 0 && (
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 text-xs font-medium">
+                      {user._count.assignedLeads} lead
+                      {user._count.assignedLeads !== 1 ? "s" : ""}
+                    </span>
+                  )}
                   {user._count.purchases > 0 && (
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 text-xs font-medium">
                       <CreditCard className="h-3 w-3" />

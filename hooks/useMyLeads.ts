@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 interface LeadAgent {
   id: string;
@@ -47,8 +47,10 @@ export function useMyLeads() {
   const [error, setError] = useState("");
   const [selectedLead, setSelectedLead] = useState<MyLead | null>(null);
 
-  const fetchLeads = useCallback(async () => {
-    setLoading(true);
+  const hasFetched = useRef(false);
+
+  const fetchLeads = useCallback(async (silent = false) => {
+    if (!silent) setLoading(true);
     setError("");
     try {
       const params = new URLSearchParams({
@@ -65,18 +67,38 @@ export function useMyLeads() {
         setTotal(data.total);
         setTotalPages(data.totalPages);
         setStats(data.stats);
-      } else {
+      } else if (!silent) {
         setError(data.error || "Failed to load leads");
       }
     } catch {
-      setError("Network error");
+      if (!silent) setError("Network error");
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
+      hasFetched.current = true;
     }
   }, [page, statusFilter]);
 
   useEffect(() => {
     fetchLeads();
+  }, [fetchLeads]);
+
+  // Poll every 30s while tab is visible
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+
+    const start = () => {
+      interval = setInterval(() => fetchLeads(true), 30_000);
+    };
+    const stop = () => clearInterval(interval);
+
+    const onVisibility = () => {
+      if (document.hidden) { stop(); }
+      else { fetchLeads(true); start(); }
+    };
+
+    start();
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => { stop(); document.removeEventListener("visibilitychange", onVisibility); };
   }, [fetchLeads]);
 
   useEffect(() => {

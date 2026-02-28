@@ -18,9 +18,9 @@ export const STATS = [
 export const SERVICES = [
   {
     icon: Phone,
-    title: "Cold Calling",
+    title: "Outbound Calling",
     description:
-      "Our trained agents deliver high-impact cold calling campaigns that open doors and generate qualified pipeline fast.",
+      "Our trained agents deliver high-impact outbound calling campaigns that open doors and generate qualified pipeline fast.",
     metric: "500+ calls/day per agent",
     bullets: [
       "Agents trained on your ICP, value prop & objections",
@@ -261,7 +261,7 @@ export const TEAM_MEMBERS = [
 
 export const FOOTER_LINKS = {
   services: [
-    { label: "Cold Calling", href: "/services" },
+    { label: "Outbound Calling", href: "/services" },
     { label: "Appointment Setting", href: "/services" },
     { label: "Lead Qualification", href: "/services" },
     { label: "CRM Management", href: "/services" },

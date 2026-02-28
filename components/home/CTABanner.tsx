@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/shared/AnimatedSection";
+import MagneticButton from "@/components/shared/MagneticButton";
 
 export default function CTABanner() {
   return (
@@ -20,24 +21,30 @@ export default function CTABanner() {
             pipeline.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-brand-600 hover:bg-brand-500 text-white btn-glow text-base px-8"
-            >
-              <Link href="/contact">
-                Book Free Consultation
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-white/30 bg-transparent text-white/80 hover:bg-white/10 hover:text-white text-base px-8"
-            >
-              <Link href="/pricing">View Pricing</Link>
-            </Button>
+            <MagneticButton>
+              <div className="btn-gradient-wrap rounded-md">
+                <Button
+                  asChild
+                  size="lg"
+                  className="btn-gradient text-white text-base px-8 border-0"
+                >
+                  <Link href="/contact">
+                    Book Free Consultation
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </MagneticButton>
+            <MagneticButton magneticStrength={6}>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-white/30 bg-transparent text-white/80 hover:bg-white/10 hover:text-white text-base px-8"
+              >
+                <Link href="/pricing">View Pricing</Link>
+              </Button>
+            </MagneticButton>
           </div>
         </AnimatedSection>
       </div>
