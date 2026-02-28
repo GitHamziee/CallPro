@@ -3,6 +3,23 @@ import prisma from "@/lib/prisma";
 import { requireUser, applyRateLimit } from "@/lib/api-utils";
 import { acceptLead, declineLead } from "@/lib/lead-utils";
 
+function maskString(str: string): string {
+  if (str.length <= 2) return "••••";
+  return str[0] + "•".repeat(Math.max(4, str.length - 2)) + str[str.length - 1];
+}
+
+function maskEmail(email: string): string {
+  const [local, domain] = email.split("@");
+  if (!domain) return "••••@••••";
+  return maskString(local) + "@" + domain;
+}
+
+function maskPhone(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  if (digits.length <= 4) return "••••••••";
+  return "•".repeat(digits.length - 4) + digits.slice(-4);
+}
+
 export async function GET(req: NextRequest) {
   try {
     const [session, authError] = await requireUser();
@@ -22,6 +39,13 @@ export async function GET(req: NextRequest) {
     } else {
       where.status = { in: ["PENDING", "ACCEPTED", "INVOICED", "PAID"] };
     }
+
+    // Check if user is on "Pay Per Lead" plan
+    const activePurchase = await prisma.purchase.findFirst({
+      where: { userId: session.user.id, status: "ACTIVE" },
+      include: { package: { select: { name: true } } },
+    });
+    const isPayPerLead = activePurchase?.package?.name === "Pay Per Lead";
 
     const [leads, total, pendingCount, acceptedCount, invoicedCount, paidCount] = await Promise.all([
       prisma.lead.findMany({
@@ -49,8 +73,22 @@ export async function GET(req: NextRequest) {
       }),
     ]);
 
+    // Redact contact details for PPL users on unpaid leads
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sanitizedLeads = leads.map((lead: any) => {
+      const shouldMask = isPayPerLead && lead.status !== "PAID";
+      return {
+        ...lead,
+        name: lead.name,
+        email: shouldMask ? maskEmail(lead.email) : lead.email,
+        phone: shouldMask ? maskPhone(lead.phone) : lead.phone,
+        zipCode: shouldMask ? "••••" : lead.zipCode,
+        contactHidden: shouldMask,
+      };
+    });
+
     return NextResponse.json({
-      leads,
+      leads: sanitizedLeads,
       total,
       page,
       totalPages: Math.ceil(total / limit),

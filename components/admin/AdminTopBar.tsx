@@ -8,7 +8,7 @@ import { useSidebar } from "@/components/portal/SidebarContext";
 const PAGE_TITLES: Record<string, string> = {
   "/admin": "Admin Dashboard",
   "/admin/users": "User Management",
-  "/admin/roles": "Assign Roles",
+  "/admin/leads": "Lead Management",
   "/admin/packages": "Package Management",
 };
 
@@ -42,7 +42,7 @@ export default function AdminTopBar() {
       </button>
 
       {/* Page title */}
-      <h1 className="text-lg font-semibold text-slate-900">{pageTitle}</h1>
+      <h1 className="text-sm sm:text-lg font-semibold text-slate-900">{pageTitle}</h1>
 
       {/* Spacer */}
       <div className="flex-1" />

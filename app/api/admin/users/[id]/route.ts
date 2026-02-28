@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcrypt";
 import prisma from "@/lib/prisma";
 import { requireAdmin, applyRateLimit } from "@/lib/api-utils";
+import { validatePassword } from "@/lib/validation";
 
 export async function GET(
   _req: NextRequest,
@@ -64,9 +66,52 @@ export async function PATCH(
 
     const { id } = await params;
     const body = await req.json();
-    const { role } = body;
+    const { role, newPassword, cancelPurchaseId } = body;
 
-    // Validate role
+    // --- Cancel subscription ---
+    if (cancelPurchaseId) {
+      const purchase = await prisma.purchase.findFirst({
+        where: { id: cancelPurchaseId, userId: id, status: "ACTIVE" },
+      });
+
+      if (!purchase) {
+        return NextResponse.json(
+          { error: "Active subscription not found" },
+          { status: 404 }
+        );
+      }
+
+      await prisma.purchase.update({
+        where: { id: cancelPurchaseId },
+        data: { status: "CANCELLED" },
+      });
+
+      return NextResponse.json({ message: "Subscription cancelled successfully" });
+    }
+
+    // --- Password change ---
+    if (newPassword) {
+      const passwordResult = validatePassword(newPassword);
+      if (!passwordResult.valid) {
+        return NextResponse.json(
+          { error: passwordResult.error },
+          { status: 400 }
+        );
+      }
+
+      const hashedPassword = await bcrypt.hash(newPassword, 12);
+      await prisma.user.update({
+        where: { id },
+        data: {
+          password: hashedPassword,
+          tokenVersion: { increment: 1 },
+        },
+      });
+
+      return NextResponse.json({ message: "Password updated successfully" });
+    }
+
+    // --- Role change ---
     const validRoles = ["USER", "AGENT", "ADMIN"];
     if (role && !validRoles.includes(role)) {
       return NextResponse.json({ error: "Invalid role" }, { status: 400 });

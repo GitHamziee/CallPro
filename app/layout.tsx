@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import PageLoader from "@/components/shared/PageLoader";
+import { Toaster } from "@/components/ui/sonner";
 import { Providers } from "./providers";
 
 const inter = Inter({
@@ -31,6 +32,7 @@ export default function RootLayout({
         <Providers>
           <PageLoader />
           {children}
+          <Toaster richColors position="top-right" />
         </Providers>
       </body>
     </html>

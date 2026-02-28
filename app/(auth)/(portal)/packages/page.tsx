@@ -64,7 +64,6 @@ export default function PackagesPage() {
             ))
           : packages.map((pkg) => {
               const isCurrentPlan = activePurchase?.packageId === pkg.id;
-              const isEnterprise = pkg.price === 0;
 
               return (
                 <div
@@ -91,23 +90,11 @@ export default function PackagesPage() {
                   </div>
 
                   <div className="mb-3 md:mb-6">
-                    {isEnterprise ? (
-                      <div>
-                        <span className="text-2xl md:text-3xl font-bold text-slate-900">
-                          Custom
-                        </span>
-                        <p className="text-sm text-slate-500 mt-1">
-                          Contact us for pricing
-                        </p>
-                      </div>
-                    ) : (
-                      <div>
-                        <span className="text-2xl md:text-3xl font-bold text-slate-900">
-                          ${(pkg.price / 100).toLocaleString()}
-                        </span>
-                        <span className="text-slate-500 text-sm">/month</span>
-                      </div>
-                    )}
+                    <div>
+                      <span className="text-2xl md:text-3xl font-bold text-slate-900">
+                        ${(pkg.price / 100).toLocaleString()}
+                      </span>
+                    </div>
                   </div>
 
                   <ul className="space-y-2 md:space-y-3 mb-4 md:mb-8 flex-1">
@@ -129,13 +116,6 @@ export default function PackagesPage() {
                     >
                       Current Plan
                     </button>
-                  ) : isEnterprise ? (
-                    <a
-                      href="/contact"
-                      className="mt-auto block w-full px-3 py-2 md:px-4 md:py-2.5 border-2 border-slate-200 text-slate-700 font-semibold rounded-lg text-center hover:bg-slate-50 transition-colors text-xs md:text-sm"
-                    >
-                      Contact Sales
-                    </a>
                   ) : (
                     <button
                       onClick={() => handleSubscribe(pkg.id)}
@@ -159,8 +139,8 @@ export default function PackagesPage() {
 
       {/* Info */}
       <p className="text-center text-xs text-slate-400 mt-8">
-        All plans are billed monthly. You can cancel or change your plan at any
-        time.
+        Choose the plan that fits your needs. Contact us if you have any
+        questions.
         {!session?.user && " Sign in to subscribe."}
       </p>
     </div>

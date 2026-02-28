@@ -3,12 +3,11 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-import { PhoneCall, Users, Package, LogOut, X, ArrowLeft, ShieldCheck, FileText } from "lucide-react";
+import { PhoneCall, Users, Package, LogOut, X, ArrowLeft, FileText } from "lucide-react";
 import { useSidebar } from "@/components/portal/SidebarContext";
 
 const NAV_ITEMS = [
   { label: "Users", href: "/admin/users", icon: Users },
-  { label: "Roles", href: "/admin/roles", icon: ShieldCheck },
   { label: "Leads", href: "/admin/leads", icon: FileText },
   { label: "Packages", href: "/admin/packages", icon: Package },
 ];

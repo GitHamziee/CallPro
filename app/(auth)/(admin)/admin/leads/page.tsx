@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import {
   Search,
   ChevronLeft,
@@ -11,11 +12,22 @@ import {
   UserPlus,
   DollarSign,
   CreditCard,
+  SlidersHorizontal,
+  ChevronDown,
 } from "lucide-react";
 import { useAdminLeads } from "@/hooks/useAdminLeads";
 import { timeAgo, LEAD_STATUS_BADGES } from "@/lib/format-utils";
 import AssignLeadModal from "@/components/admin/AssignLeadModal";
 import SendInvoiceModal from "@/components/admin/SendInvoiceModal";
+
+const STATUS_OPTIONS = [
+  { label: "All", value: "" },
+  { label: "New", value: "NEW" },
+  { label: "Pending", value: "PENDING" },
+  { label: "Accepted", value: "ACCEPTED" },
+  { label: "Invoiced", value: "INVOICED" },
+  { label: "Paid", value: "PAID" },
+];
 
 export default function AdminLeadsPage() {
   const {
@@ -39,6 +51,26 @@ export default function AdminLeadsPage() {
     setInvoiceLeadId,
     fetchLeads,
   } = useAdminLeads();
+
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [agentOpen, setAgentOpen] = useState(false);
+  const filterRef = useRef<HTMLDivElement>(null);
+  const agentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (filterRef.current && !filterRef.current.contains(e.target as Node)) {
+        setFilterOpen(false);
+      }
+      if (agentRef.current && !agentRef.current.contains(e.target as Node)) {
+        setAgentOpen(false);
+      }
+    }
+    if (filterOpen || agentOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [filterOpen, agentOpen]);
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -124,31 +156,58 @@ export default function AdminLeadsPage() {
             className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
           />
         </div>
+        {/* Agent dropdown */}
         {agents.length > 0 && (
-          <select
-            value={agentFilter}
-            onChange={(e) => setAgentFilter(e.target.value)}
-            className="px-3 py-2.5 border border-slate-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
-          >
-            <option value="">All Agents</option>
-            {agents.map((agent) => (
-              <option key={agent.id} value={agent.id}>
-                {agent.name || agent.email}
-              </option>
-            ))}
-          </select>
-        )}
-        <div className="flex items-center gap-1 rounded-xl border border-slate-200 bg-white p-1">
-          {[
-            { label: "All", value: "" },
-            { label: "New", value: "NEW" },
-            { label: "Pending", value: "PENDING" },
-            { label: "Accepted", value: "ACCEPTED" },
-            { label: "Invoiced", value: "INVOICED" },
-            { label: "Paid", value: "PAID" },
-          ].map((opt) => (
+          <div className="relative self-start" ref={agentRef}>
             <button
-              key={opt.value}
+              onClick={() => setAgentOpen((o) => !o)}
+              className={`flex items-center gap-1.5 px-3 py-2.5 rounded-xl border text-xs font-medium transition-all ${
+                agentFilter
+                  ? "border-slate-900 bg-slate-900 text-white"
+                  : "border-slate-200 bg-white text-slate-600"
+              }`}
+            >
+              <Headset className="h-3.5 w-3.5" />
+              {agentFilter
+                ? (agents.find((a) => a.id === agentFilter)?.name ||
+                   agents.find((a) => a.id === agentFilter)?.email ||
+                   "Agent")
+                : "All Agents"}
+              <ChevronDown className={`h-3 w-3 transition-transform ${agentOpen ? "rotate-180" : ""}`} />
+            </button>
+            {agentOpen && (
+              <div className="absolute top-full left-0 mt-1 w-48 rounded-xl border border-slate-200 bg-white shadow-lg py-1 z-30 max-h-60 overflow-y-auto">
+                <button
+                  onClick={() => { setAgentFilter(""); setAgentOpen(false); }}
+                  className={`w-full text-left px-3 py-2 text-xs font-medium transition-colors ${
+                    !agentFilter ? "bg-slate-50 text-slate-900" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                  }`}
+                >
+                  All Agents
+                  {!agentFilter && <span className="float-right text-brand-600">&#10003;</span>}
+                </button>
+                {agents.map((agent) => (
+                  <button
+                    key={agent.id}
+                    onClick={() => { setAgentFilter(agent.id); setAgentOpen(false); }}
+                    className={`w-full text-left px-3 py-2 text-xs font-medium transition-colors truncate ${
+                      agentFilter === agent.id ? "bg-slate-50 text-slate-900" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                    }`}
+                  >
+                    {agent.name || agent.email}
+                    {agentFilter === agent.id && <span className="float-right text-brand-600">&#10003;</span>}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Desktop: inline status pills */}
+        <div className="hidden sm:flex items-center gap-1 rounded-xl border border-slate-200 bg-white p-1 self-start">
+          {STATUS_OPTIONS.map((opt) => (
+            <button
+              key={opt.label}
               onClick={() => setStatusFilter(opt.value)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 statusFilter === opt.value
@@ -159,6 +218,39 @@ export default function AdminLeadsPage() {
               {opt.label}
             </button>
           ))}
+        </div>
+
+        {/* Mobile: status filter dropdown */}
+        <div className="relative sm:hidden self-start" ref={filterRef}>
+          <button
+            onClick={() => setFilterOpen((o) => !o)}
+            className={`flex items-center gap-1.5 px-3 py-2.5 rounded-xl border text-xs font-medium transition-all ${
+              statusFilter
+                ? "border-slate-900 bg-slate-900 text-white"
+                : "border-slate-200 bg-white text-slate-600"
+            }`}
+          >
+            <SlidersHorizontal className="h-3.5 w-3.5" />
+            {statusFilter
+              ? STATUS_OPTIONS.find((o) => o.value === statusFilter)?.label
+              : "Filter"}
+          </button>
+          {filterOpen && (
+            <div className="absolute top-full left-0 mt-1 w-40 rounded-xl border border-slate-200 bg-white shadow-lg py-1 z-30">
+              {STATUS_OPTIONS.map((opt) => (
+                <button
+                  key={opt.label}
+                  onClick={() => { setStatusFilter(opt.value); setFilterOpen(false); }}
+                  className={`w-full text-left px-3 py-2 text-xs font-medium transition-colors ${
+                    statusFilter === opt.value ? "bg-slate-50 text-slate-900" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                  }`}
+                >
+                  {opt.label}
+                  {statusFilter === opt.value && <span className="float-right text-brand-600">&#10003;</span>}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

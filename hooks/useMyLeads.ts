@@ -25,6 +25,7 @@ export interface MyLead {
   createdAt: string;
   agent: LeadAgent;
   invoice: LeadInvoice | null;
+  contactHidden?: boolean;
 }
 
 export interface MyLeadStats {
@@ -44,6 +45,7 @@ export function useMyLeads() {
   const [loading, setLoading] = useState(true);
   const [acting, setActing] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [selectedLead, setSelectedLead] = useState<MyLead | null>(null);
 
   const fetchLeads = useCallback(async () => {
     setLoading(true);
@@ -141,6 +143,8 @@ export function useMyLeads() {
     loading,
     acting,
     error,
+    selectedLead,
+    setSelectedLead,
     setPage,
     setStatusFilter,
     handleAction,

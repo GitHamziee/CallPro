@@ -152,82 +152,82 @@ export const TESTIMONIALS = [
 
 export const PRICING_PLANS = [
   {
-    name: "Starter",
-    price: "$1,499",
-    period: "/mo",
-    description: "Perfect for small teams ready to scale their outbound.",
+    name: "Pay Per Lead",
+    price: "$375",
+    period: "one-time setup",
+    description: "Only pay for the leads you receive. No commitment, no risk.",
     features: [
-      "Up to 500 calls/month",
-      "1 dedicated agent",
-      "Basic call scripts",
-      "Weekly email reports",
-      "CRM data entry",
-      "Email support",
+      "$375 one-time setup fee",
+      "$100 per qualified lead",
+      "Lifetime access — no expiry",
+      "Pay as you go",
+      "Lead details shown after payment",
+      "Cancel anytime",
     ],
     cta: "Get Started",
     highlighted: false,
   },
   {
-    name: "Growth",
-    price: "$3,499",
-    period: "/mo",
-    description: "Built for teams serious about consistent pipeline growth.",
+    name: "Bi-Annual",
+    price: "$699",
+    period: "/6 months",
+    description:
+      "Our most popular plan. High volume leads with performance-based pricing.",
     features: [
-      "Up to 2,000 calls/month",
-      "3 dedicated agents",
-      "Custom scripts + A/B testing",
-      "Live dashboard access",
-      "CRM integration",
+      "$699 for 6-month term",
+      "12–15 qualified leads included",
+      "15% commission per closing",
+      "Lead info available immediately",
+      "Re-activate after 6 months",
       "Priority support",
-      "Call recordings",
     ],
     cta: "Most Popular",
     highlighted: true,
   },
   {
-    name: "Enterprise",
-    price: "Custom",
-    period: "",
-    description: "Unlimited scale, dedicated team, and white-glove service.",
+    name: "Mega Bundle",
+    price: "$825",
+    period: "one-time",
+    description:
+      "Maximum value with guaranteed leads and the biggest savings.",
     features: [
-      "Unlimited calls",
-      "Dedicated agent team",
-      "Full campaign management",
-      "Real-time reporting",
-      "Custom CRM workflows",
-      "Dedicated account manager",
-      "Weekly strategy calls",
+      "$825 one-time payment",
+      "10 guaranteed leads",
+      "40% off standard pricing",
+      "Lead info available immediately",
+      "Plan expires after 10 leads",
+      "Best value per lead",
     ],
-    cta: "Contact Sales",
+    cta: "Best Value",
     highlighted: false,
   },
 ];
 
 export const PRICING_FAQ = [
   {
-    question: "Are there any long-term contracts?",
+    question: "How does Pay Per Lead work?",
     answer:
-      "No lock-in. We work on a month-to-month basis. We earn your business every single month through performance.",
+      "You pay a one-time $375 setup fee, then $100 for each qualified lead we deliver. There's no expiry — your account stays active for life. Lead details are shared after payment.",
   },
   {
-    question: "What happens if I want to cancel?",
+    question: "What's included in the Bi-Annual plan?",
     answer:
-      "You can cancel anytime with 30 days notice. There are no cancellation fees or penalties.",
+      "For $699 you get 12–15 qualified leads over a 6-month period, plus a 15% commission on each successful closing. Lead information is available immediately. You can re-activate after the term ends.",
+  },
+  {
+    question: "How does the Mega Bundle expire?",
+    answer:
+      "The Mega Bundle gives you 10 guaranteed leads at 40% off. Once all 10 leads have been delivered, the plan is complete. It's the best value per lead we offer.",
+  },
+  {
+    question: "Can I switch between plans?",
+    answer:
+      "Yes. You can upgrade or switch plans at any time. Contact our team and we'll help you transition to the plan that fits your needs.",
   },
   {
     question: "How quickly can you get started?",
     answer:
-      "Most campaigns launch within 5–7 business days of signing. Onboarding, scripting, and agent training are included.",
-  },
-  {
-    question: "Do you provide call recordings?",
-    answer:
-      "Yes. All calls are recorded and available in your dashboard for review and quality assurance.",
-  },
-  {
-    question: "Can I change plans mid-month?",
-    answer:
-      "Absolutely. You can upgrade or downgrade your plan at any time. Changes take effect at the start of the next billing cycle.",
+      "Most campaigns launch within 5–7 business days of signing. Onboarding and setup are included with every plan.",
   },
   {
     question: "What industries do you specialize in?",

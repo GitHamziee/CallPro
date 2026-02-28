@@ -42,62 +42,66 @@ async function main() {
   // Seed packages
   const packages = [
     {
-      name: "Starter",
-      description: "Perfect for small teams getting started with professional call center services.",
-      price: 149900, // $1,499.00
+      name: "Pay Per Lead",
+      description:
+        "Only pay for the leads you receive. $375 one-time setup, then $100 per lead. Lifetime access.",
+      price: 37500, // $375.00 setup fee
       features: [
-        "Up to 5 agents",
-        "Basic call routing",
-        "Email support",
-        "Standard analytics",
-        "Business hours coverage",
+        "$375 one-time setup fee",
+        "$100 per qualified lead",
+        "Lifetime access — no expiry",
+        "Pay as you go",
+        "Lead details shown after payment",
+        "Cancel anytime",
       ],
       sortOrder: 1,
     },
     {
-      name: "Growth",
-      description: "Ideal for growing businesses that need advanced features and scalability.",
-      price: 349900, // $3,499.00
+      name: "Bi-Annual",
+      description:
+        "High volume leads with performance-based pricing. 12–15 leads over 6 months.",
+      price: 69900, // $699.00
       features: [
-        "Up to 25 agents",
-        "Advanced call routing & IVR",
+        "$699 for 6-month term",
+        "12–15 qualified leads included",
+        "15% commission per closing",
+        "Lead info available immediately",
+        "Re-activate after 6 months",
         "Priority support",
-        "Real-time analytics",
-        "24/7 coverage",
-        "CRM integration",
-        "Call recording",
       ],
       sortOrder: 2,
     },
     {
-      name: "Enterprise",
-      description: "Custom solutions for large organizations with complex requirements.",
-      price: 0, // Contact for pricing
+      name: "Mega Bundle",
+      description:
+        "Maximum value with 10 guaranteed leads at 40% off. Best price per lead.",
+      price: 82500, // $825.00
       features: [
-        "Unlimited agents",
-        "Custom IVR flows",
-        "Dedicated account manager",
-        "Custom analytics & reporting",
-        "24/7 premium coverage",
-        "Full API access",
-        "SLA guarantee",
-        "White-label option",
+        "$825 one-time payment",
+        "10 guaranteed leads",
+        "40% off standard pricing",
+        "Lead info available immediately",
+        "Plan expires after 10 leads",
+        "Best value per lead",
       ],
       sortOrder: 3,
     },
   ];
 
-  for (const pkg of packages) {
-    const existing = await prisma.package.findUnique({
-      where: { name: pkg.name },
-    });
+  // Deactivate old packages that are no longer in the seed list
+  const packageNames = packages.map((p) => p.name);
+  await prisma.package.updateMany({
+    where: { name: { notIn: packageNames } },
+    data: { isActive: false },
+  });
 
-    if (!existing) {
-      await prisma.package.create({ data: pkg });
-      console.log(`Package created: ${pkg.name}`);
-    } else {
-      console.log(`Package already exists: ${pkg.name}`);
-    }
+  for (const pkg of packages) {
+    await prisma.package.upsert({
+      where: { name: pkg.name },
+      update: { ...pkg },
+      create: { ...pkg },
+    });
+    console.log(`Package upserted: ${pkg.name}`);
   }
 
   console.log("Seeding complete!");
