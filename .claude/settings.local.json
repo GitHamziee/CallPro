@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(netstat -ano)",
+      "Bash(taskkill //F //IM node.exe)",
+      "Bash(set -a)",
+      "Bash(source .env.local)",
+      "Bash(set +a)",
+      "Bash(npx prisma db push --url \"$DATABASE_URL\")",
+      "Bash(taskkill //f //im node.exe)",
+      "Bash(git status -u)",
+      "WebFetch(domain:realtoruplift.com)"
+    ]
+  }
+}

@@ -297,7 +297,7 @@ export default function AdminLeadsPage() {
                   <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3">
                     Status
                   </th>
-                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3 hidden md:table-cell">
+                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3">
                     Action
                   </th>
                   <th className="text-right text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3">
@@ -336,7 +336,7 @@ export default function AdminLeadsPage() {
                         {lead.status}
                       </span>
                     </td>
-                    <td className="px-3 py-3 sm:px-5 sm:py-4 hidden md:table-cell">
+                    <td className="px-3 py-3 sm:px-5 sm:py-4">
                       {lead.status === "NEW" && !lead.assignedTo ? (
                         <button
                           onClick={() => setAssignLeadId(lead.id)}

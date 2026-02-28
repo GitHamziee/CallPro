@@ -185,6 +185,21 @@ export default function AdminUsersPage() {
                       </span>
                     )}
                   </div>
+                  {/* Mobile lead/sub counts */}
+                  {(user._count.assignedLeads > 0 || user.purchases.length > 0) && (
+                    <div className="flex items-center gap-1.5 sm:hidden mt-1">
+                      {user._count.assignedLeads > 0 && (
+                        <span className="inline-flex px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 text-[9px] font-medium">
+                          {user._count.assignedLeads} lead{user._count.assignedLeads !== 1 ? "s" : ""}
+                        </span>
+                      )}
+                      {user.purchases.length > 0 && (
+                        <span className="inline-flex px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 text-[9px] font-medium">
+                          {user.purchases[0].package.name}
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Meta — desktop only */}
@@ -195,11 +210,10 @@ export default function AdminUsersPage() {
                       {user._count.assignedLeads !== 1 ? "s" : ""}
                     </span>
                   )}
-                  {user._count.purchases > 0 && (
+                  {user.purchases.length > 0 && (
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 text-xs font-medium">
                       <CreditCard className="h-3 w-3" />
-                      {user._count.purchases} sub
-                      {user._count.purchases !== 1 ? "s" : ""}
+                      {user.purchases[0].package.name}
                     </span>
                   )}
                   <span className="text-xs text-slate-400 w-16 text-right">

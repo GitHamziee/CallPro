@@ -8,7 +8,8 @@ export interface UserRow {
   email: string;
   role: string;
   createdAt: string;
-  _count: { purchases: number; assignedLeads: number };
+  purchases: { package: { name: string } }[];
+  _count: { assignedLeads: number };
 }
 
 export function useAdminUsers() {
@@ -57,7 +58,7 @@ export function useAdminUsers() {
 
   const admins = users.filter((u) => u.role === "ADMIN").length;
   const agents = users.filter((u) => u.role === "AGENT").length;
-  const withSubs = users.filter((u) => u._count.purchases > 0).length;
+  const withSubs = users.filter((u) => u.purchases.length > 0).length;
 
   return {
     users,

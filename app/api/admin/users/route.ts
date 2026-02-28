@@ -45,17 +45,20 @@ export async function GET(req: NextRequest) {
           email: true,
           role: true,
           createdAt: true,
+          purchases: {
+            where: {
+              status: "ACTIVE",
+              OR: [
+                { expiresAt: { gt: new Date() } },
+                { expiresAt: null },
+              ],
+            },
+            select: { package: { select: { name: true } } },
+            take: 1,
+            orderBy: { createdAt: "desc" },
+          },
           _count: {
             select: {
-              purchases: {
-                where: {
-                  status: "ACTIVE",
-                  OR: [
-                    { expiresAt: { gt: new Date() } },
-                    { expiresAt: null },
-                  ],
-                },
-              },
               assignedLeads: true,
             },
           },

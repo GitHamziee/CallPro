@@ -49,6 +49,7 @@ export async function GET(req: NextRequest) {
       },
       include: { package: { select: { name: true } } },
     });
+    const hasActiveSubscription = !!activePurchase;
     const isPayPerLead = activePurchase?.package?.name === "Pay Per Lead";
 
     const [leads, total, pendingCount, acceptedCount, invoicedCount, paidCount] = await Promise.all([
@@ -77,10 +78,10 @@ export async function GET(req: NextRequest) {
       }),
     ]);
 
-    // Redact contact details for PPL users on unpaid leads
+    // Redact contact details if no active subscription or PPL with unpaid leads
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const sanitizedLeads = leads.map((lead: any) => {
-      const shouldMask = isPayPerLead && lead.status !== "PAID";
+      const shouldMask = lead.status !== "PAID" && (!hasActiveSubscription || isPayPerLead);
       return {
         ...lead,
         name: lead.name,
