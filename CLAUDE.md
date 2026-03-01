@@ -1,8 +1,7 @@
-# CallPro — Call Center Website
+# R4Referral — Call Center Website
 
 ## Project Overview
 B2B call center services website with marketing pages and authenticated portal.
-Placeholder branding "CallPro" — client will replace.
 
 ## Tech Stack
 - **Framework**: Next.js 16 (App Router), TypeScript

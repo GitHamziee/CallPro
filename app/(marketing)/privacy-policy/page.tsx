@@ -3,7 +3,7 @@ import PageHeader from "@/components/shared/PageHeader";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "CallPro's Privacy Policy — how we collect, use, and protect your data.",
+  description: "R4Referral's Privacy Policy — how we collect, use, and protect your data.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -22,10 +22,10 @@ export default function PrivacyPolicyPage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Policy Overview</h2>
                 <p>
-                  This Policy governs the information practices of callpro.com and its affiliates
+                  This Policy governs the information practices of r4referral.com and its affiliates
                   or subsidiaries (&quot;we,&quot; &quot;us,&quot; and &quot;our&quot;) regarding your use of the
-                  Services offered on CallPro&apos;s websites, products, tools, promotions, and any other
-                  services that refer to this Policy. By using these Services, you authorize CallPro,
+                  Services offered on R4Referral&apos;s websites, products, tools, promotions, and any other
+                  services that refer to this Policy. By using these Services, you authorize R4Referral,
                   its corporate parents, affiliates, and partners to send you communications via automated
                   telephone dialing systems, artificial or prerecorded voices, and text messages for products
                   or services that may be of interest to you. However, your agreement to this policy is not
@@ -136,7 +136,7 @@ export default function PrivacyPolicyPage() {
                   <li><strong>Your consent:</strong> We may share your information with third parties if you have provided us with consent to do so.</li>
                   <li><strong>Service providers and subcontractors:</strong> We may grant select third parties access to your information if they carry out services on our behalf, such as marketing, customer support, or legal services.</li>
                   <li><strong>Business partners:</strong> In cases where we partner with other businesses to provide products and services, we may share your information with those partners.</li>
-                  <li><strong>Protection of CallPro and others:</strong> We may access, preserve, and disclose your information if required by law or in the good faith belief that it is necessary to protect our rights, property, or personal safety.</li>
+                  <li><strong>Protection of R4Referral and others:</strong> We may access, preserve, and disclose your information if required by law or in the good faith belief that it is necessary to protect our rights, property, or personal safety.</li>
                   <li><strong>Business transfers:</strong> In business transactions such as acquisitions or mergers, user information may be among the assets transferred.</li>
                 </ul>
               </div>
@@ -166,7 +166,7 @@ export default function PrivacyPolicyPage() {
                   To ensure the accuracy of your information, you have the ability to access and modify certain
                   data in accordance with applicable laws. Should your provided information change or become
                   inaccurate, it is imperative that you promptly update us. You can request deletion or
-                  modification through the Services or by emailing info@callpro.com. Upon your request, we will
+                  modification through the Services or by emailing info@r4referral.com. Upon your request, we will
                   close your account and remove your information as expeditiously as possible. Please be aware
                   that we may retain information from closed accounts for legal compliance, fee collection,
                   dispute resolution, and other purposes permitted by law.
@@ -176,7 +176,7 @@ export default function PrivacyPolicyPage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Children&apos;s Privacy</h2>
                 <p>
-                  CallPro&apos;s Services are not designed for children under the age of 13. In the event that
+                  R4Referral&apos;s Services are not designed for children under the age of 13. In the event that
                   we become aware of collecting personal information from children under 13, we will promptly
                   take reasonable steps to delete it, as mandated by the Children&apos;s Online Privacy
                   Protection Act (COPPA).
@@ -186,18 +186,18 @@ export default function PrivacyPolicyPage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Security</h2>
                 <p>
-                  CallPro has implemented administrative, technical, and physical measures to safeguard against
+                  R4Referral has implemented administrative, technical, and physical measures to safeguard against
                   unauthorized access, use, or alteration of your information. Nevertheless, we cannot guarantee
                   that these measures will prevent every unauthorized attempt to access, use, or disclose your
                   information, as no electronic transmissions can be entirely secure. If you suspect unauthorized
-                  access to your account, you must promptly contact us at info@callpro.com.
+                  access to your account, you must promptly contact us at info@r4referral.com.
                 </p>
               </div>
 
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Third-Party Links and Services</h2>
                 <p>
-                  CallPro&apos;s Services may include links to third-party websites, applications, and services.
+                  R4Referral&apos;s Services may include links to third-party websites, applications, and services.
                   However, we do not assume responsibility for the privacy practices of these external sites and
                   services. We strongly encourage you to review their privacy policies whenever you visit them.
                 </p>
@@ -211,7 +211,7 @@ export default function PrivacyPolicyPage() {
                   purposes under California law. Starting from January 1, 2020, the California Consumer Privacy
                   Act (CCPA) granted Californians data privacy rights, including the right to opt out of having
                   their personal information &quot;sold&quot; as defined by the CCPA. To initiate such a request,
-                  please send an email to info@callpro.com with &quot;Privacy Support&quot; in the subject line.
+                  please send an email to info@r4referral.com with &quot;Privacy Support&quot; in the subject line.
                 </p>
               </div>
 
@@ -228,7 +228,7 @@ export default function PrivacyPolicyPage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Contact Us</h2>
                 <p>
-                  If you have any questions about this Privacy Policy, please contact us at info@callpro.com.
+                  If you have any questions about this Privacy Policy, please contact us at info@r4referral.com.
                 </p>
               </div>
 

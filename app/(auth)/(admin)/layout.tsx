@@ -33,7 +33,7 @@ export default function AdminLayout({
     <SidebarProvider>
       <div className="min-h-screen bg-slate-50">
         <AdminSidebar />
-        <div className="md:ml-38 flex flex-col min-h-screen">
+        <div className="md:ml-46 flex flex-col min-h-screen">
           <AdminTopBar />
           <main className="flex-1 p-6">{children}</main>
         </div>

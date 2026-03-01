@@ -12,7 +12,7 @@ function getResend(): Resend {
   return _resend;
 }
 
-const FROM_EMAIL = "CallPro <onboarding@resend.dev>";
+const FROM_EMAIL = "R4Referral <onboarding@resend.dev>";
 
 export async function sendPasswordResetEmail(
   to: string,
@@ -26,12 +26,12 @@ export async function sendPasswordResetEmail(
   await resend.emails.send({
     from: FROM_EMAIL,
     to,
-    subject: "Reset your CallPro password",
+    subject: "Reset your R4Referral password",
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 40px 20px;">
         <div style="text-align: center; margin-bottom: 32px;">
           <h1 style="font-size: 20px; font-weight: 700; color: #0f172a; margin: 0;">
-            Call<span style="color: #2563eb;">Pro</span>
+            R4<span style="color: #2563eb;">Referral</span>
           </h1>
         </div>
 
@@ -60,7 +60,7 @@ export async function sendPasswordResetEmail(
         </div>
 
         <p style="font-size: 12px; color: #cbd5e1; text-align: center; margin-top: 32px;">
-          &copy; ${new Date().getFullYear()} CallPro. All rights reserved.
+          &copy; ${new Date().getFullYear()} R4Referral. All rights reserved.
         </p>
       </div>
     `,

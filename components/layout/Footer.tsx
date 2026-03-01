@@ -14,7 +14,7 @@ export default function Footer() {
                 <PhoneCall className="h-4 w-4 text-white" />
               </div>
               <span className="text-lg font-bold text-white">
-                Call<span className="text-brand-400">Pro</span>
+                R4<span className="text-brand-400">Referral</span>
               </span>
             </Link>
             <p className="max-w-xs text-sm text-white/60 leading-relaxed text-center md:text-left mx-auto md:mx-0">
@@ -46,11 +46,11 @@ export default function Footer() {
                 +1 (800) 555-1234
               </a>
               <a
-                href="mailto:hello@callpro.com"
+                href="mailto:hello@r4referral.com"
                 className="flex items-center gap-2 hover:text-white transition-colors"
               >
                 <Mail className="h-3.5 w-3.5" />
-                hello@callpro.com
+                hello@r4referral.com
               </a>
             </div>
           </div>
@@ -116,7 +116,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40">
-            © {new Date().getFullYear()} CallPro. All rights reserved.
+            © {new Date().getFullYear()} R4Referral. All rights reserved.
           </p>
           <p className="text-xs text-white/30">
             Built with precision for outbound excellence.

@@ -3,7 +3,7 @@ import PageHeader from "@/components/shared/PageHeader";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "CallPro's Terms of Service — the rules governing your use of our platform and services.",
+  description: "R4Referral's Terms of Service — the rules governing your use of our platform and services.",
 };
 
 export default function TermsOfServicePage() {
@@ -20,9 +20,9 @@ export default function TermsOfServicePage() {
             <div className="space-y-8 text-slate-600 leading-relaxed">
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">About CallPro</h2>
+                <h2 className="text-xl font-semibold text-slate-900 mb-3">About R4Referral</h2>
                 <p>
-                  CallPro provides outbound sales services designed to help B2B companies scale their
+                  R4Referral provides outbound sales services designed to help B2B companies scale their
                   pipeline. Through our trained agents, proven calling frameworks, and data-driven approach,
                   we deliver appointment setting, lead qualification, and outbound calling campaigns that
                   drive measurable results.
@@ -32,18 +32,18 @@ export default function TermsOfServicePage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Definitions</h2>
                 <p>
-                  The terms &quot;we,&quot; &quot;us,&quot; &quot;our,&quot; and &quot;CallPro&quot; refer to
-                  CallPro and its affiliates. &quot;You,&quot; &quot;your,&quot; and &quot;user&quot; refer to
-                  the user. The term &quot;CallPro services&quot; encompasses our phone-based and digital
+                  The terms &quot;we,&quot; &quot;us,&quot; &quot;our,&quot; and &quot;R4Referral&quot; refer to
+                  R4Referral and its affiliates. &quot;You,&quot; &quot;your,&quot; and &quot;user&quot; refer to
+                  the user. The term &quot;R4Referral services&quot; encompasses our phone-based and digital
                   services, our website and web application, along with various communications, email
-                  notifications, and other media offered by CallPro.
+                  notifications, and other media offered by R4Referral.
                 </p>
               </div>
 
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Changes to Terms</h2>
                 <p>
-                  We reserve the right to make changes to CallPro&apos;s Terms and Conditions at any time
+                  We reserve the right to make changes to R4Referral&apos;s Terms and Conditions at any time
                   and for any reason. We will alert you about any changes by updating the &quot;Last
                   Updated&quot; date. Any changes or modifications will be effective immediately upon posting
                   the updated Terms and Conditions on the Site, and you waive the right to receive specific
@@ -54,12 +54,12 @@ export default function TermsOfServicePage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Acceptance of Terms</h2>
                 <p>
-                  By utilizing CallPro services, you consent to our Terms. Your usage of CallPro services
+                  By utilizing R4Referral services, you consent to our Terms. Your usage of R4Referral services
                   implies that you have accepted and agreed to abide by these Terms. If you are accessing
-                  CallPro services on behalf of an entity, you agree to these Terms on behalf of that
-                  organization and assure CallPro that you possess the authority to bind that entity to
+                  R4Referral services on behalf of an entity, you agree to these Terms on behalf of that
+                  organization and assure R4Referral that you possess the authority to bind that entity to
                   these Terms. However, if that organization has an independent written agreement with
-                  CallPro, that agreement shall govern such usage if any provisions in these Terms conflict
+                  R4Referral, that agreement shall govern such usage if any provisions in these Terms conflict
                   with it.
                 </p>
               </div>
@@ -67,13 +67,13 @@ export default function TermsOfServicePage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Communications</h2>
                 <p>
-                  Using CallPro services indicates your acceptance of receiving phone calls and messages
-                  from us and our associates. By using CallPro services, you grant CallPro, its subsidiaries,
+                  Using R4Referral services indicates your acceptance of receiving phone calls and messages
+                  from us and our associates. By using R4Referral services, you grant R4Referral, its subsidiaries,
                   and its partners express permission to communicate with you via phone or text message at
                   the number provided. Please note that your wireless service provider contract may incur
                   message and data rates. Your consent to text messages and phone calls is not a prerequisite
                   to utilizing any of our services. If you do not wish to receive these communications,
-                  please refrain from using CallPro services or submitting your information to us.
+                  please refrain from using R4Referral services or submitting your information to us.
                 </p>
               </div>
 
@@ -83,7 +83,7 @@ export default function TermsOfServicePage() {
                 <ul className="mt-2 space-y-1 list-disc list-inside text-slate-600">
                   <li>Provide accurate and complete information for campaign setup</li>
                   <li>Ensure all contact lists comply with applicable laws (TCPA, CAN-SPAM, etc.)</li>
-                  <li>Promptly respond to CallPro communications</li>
+                  <li>Promptly respond to R4Referral communications</li>
                   <li>Pay all fees as specified in your service agreement</li>
                   <li>Not use our services for any unlawful purpose</li>
                   <li>Promptly notify us of any changes in your contact information</li>
@@ -104,8 +104,8 @@ export default function TermsOfServicePage() {
                 <p>
                   All payments made are final and non-disputable. The Client expressly waives any right to
                   initiate chargebacks or payment reversals through their bank or card provider. Any concerns
-                  or disputes must be addressed solely through CallPro&apos;s internal resolution process.
-                  Any chargeback attempt will be treated as a breach of contract, with CallPro reserving full
+                  or disputes must be addressed solely through R4Referral&apos;s internal resolution process.
+                  Any chargeback attempt will be treated as a breach of contract, with R4Referral reserving full
                   rights to dispute, recover losses, and pursue legal remedies.
                 </p>
               </div>
@@ -138,8 +138,8 @@ export default function TermsOfServicePage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Intellectual Property</h2>
                 <p>
-                  All scripts, templates, processes, and methodologies developed by CallPro remain the
-                  intellectual property of CallPro. Client-provided materials remain the property of the
+                  All scripts, templates, processes, and methodologies developed by R4Referral remain the
+                  intellectual property of R4Referral. Client-provided materials remain the property of the
                   client. Call recordings from campaigns are available to clients for review purposes.
                 </p>
               </div>
@@ -148,9 +148,9 @@ export default function TermsOfServicePage() {
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Data Disclosure</h2>
                 <p>We may need to access or reveal your data for the following reasons:</p>
                 <ul className="mt-2 space-y-1 list-disc list-inside text-slate-600">
-                  <li>Delivering CallPro services as required</li>
+                  <li>Delivering R4Referral services as required</li>
                   <li>Resolving technical concerns, extending assistance, or maintaining our services</li>
-                  <li>Safeguarding CallPro, our users, or the broader community</li>
+                  <li>Safeguarding R4Referral, our users, or the broader community</li>
                   <li>Responding to emergency situations</li>
                   <li>Adhering to legal obligations</li>
                 </ul>
@@ -175,7 +175,7 @@ export default function TermsOfServicePage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Warranty Disclaimer</h2>
                 <p>
-                  We offer CallPro services &quot;as is&quot; and provide no warranties or representations
+                  We offer R4Referral services &quot;as is&quot; and provide no warranties or representations
                   regarding these services. We explicitly deny any and all warranties, whether explicitly
                   stated or implied, including, but not limited to, warranties of merchantability,
                   non-infringement, and fitness for a particular purpose. We do not guarantee specific
@@ -186,12 +186,12 @@ export default function TermsOfServicePage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Indemnification</h2>
                 <p>
-                  CallPro will not be responsible for any bills, damages, or costs resulting from any claims
-                  arising from your use of our services. You agree to indemnify CallPro against all claims
-                  related to your use of our services. You will defend, indemnify, and hold harmless CallPro,
+                  R4Referral will not be responsible for any bills, damages, or costs resulting from any claims
+                  arising from your use of our services. You agree to indemnify R4Referral against all claims
+                  related to your use of our services. You will defend, indemnify, and hold harmless R4Referral,
                   its officers, directors, employees, members, stockholders, and affiliates against all claims
                   brought or threatened by a third party and any losses related thereto arising out of your
-                  breach of these Terms or your use of CallPro services.
+                  breach of these Terms or your use of R4Referral services.
                 </p>
               </div>
 
@@ -210,7 +210,7 @@ export default function TermsOfServicePage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Termination</h2>
                 <p>
-                  Either party may terminate services with 30 days written notice. CallPro may suspend
+                  Either party may terminate services with 30 days written notice. R4Referral may suspend
                   services immediately if we have reason to believe you have violated these Terms, if your
                   use of the services is fraudulent or negatively impacting the services, or if it has become
                   illegal or impractical to provide the services. Upon termination, all outstanding fees
@@ -221,9 +221,9 @@ export default function TermsOfServicePage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Eligibility</h2>
                 <p>
-                  CallPro services are intended for use by adults only and are not directed at minors. We do
+                  R4Referral services are intended for use by adults only and are not directed at minors. We do
                   not knowingly collect personally identifiable information from anyone under the age of 13.
-                  CallPro services are only intended for use by citizens and residents of the United States
+                  R4Referral services are only intended for use by citizens and residents of the United States
                   and Canada.
                 </p>
               </div>
@@ -256,7 +256,7 @@ export default function TermsOfServicePage() {
                   be interpreted according to the laws of the State of New York without regard to any
                   conflicts of laws. The United Nations Convention on Contracts for the International Sale
                   of Goods will not govern these terms. Any legal action arising out of or related to these
-                  terms or CallPro services will be brought in state or federal courts in New York, and both
+                  terms or R4Referral services will be brought in state or federal courts in New York, and both
                   parties agree to the personal jurisdiction of these courts.
                 </p>
               </div>
@@ -265,10 +265,10 @@ export default function TermsOfServicePage() {
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Agreement to Arbitrate</h2>
                 <p>
                   Before initiating any formal legal case, the parties should first attempt to resolve the
-                  dispute through CallPro&apos;s Customer Support. If the dispute remains unresolved, both
-                  parties agree to resolve any dispute relating to these terms or CallPro services through
+                  dispute through R4Referral&apos;s Customer Support. If the dispute remains unresolved, both
+                  parties agree to resolve any dispute relating to these terms or R4Referral services through
                   binding arbitration in New York, or any other location agreed upon by both parties. The
-                  agreement to arbitrate remains effective even after the parties stop using CallPro services.
+                  agreement to arbitrate remains effective even after the parties stop using R4Referral services.
                 </p>
                 <p className="mt-3">
                   The parties agree that disputes related to intellectual property will be resolved in court
@@ -284,7 +284,7 @@ export default function TermsOfServicePage() {
                 <p>
                   These terms and their attachments replace all previous and current proposals, statements,
                   marketing materials, presentations, and agreements, both oral and written. Any information
-                  or advice given by CallPro&apos;s employees or members, whether written or oral, does not
+                  or advice given by R4Referral&apos;s employees or members, whether written or oral, does not
                   create any additional warranty or expand the scope of the warranties mentioned in these terms.
                 </p>
               </div>
@@ -292,7 +292,7 @@ export default function TermsOfServicePage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">Contact Us</h2>
                 <p>
-                  If you have any questions about these Terms, please contact us at info@callpro.com.
+                  If you have any questions about these Terms, please contact us at info@r4referral.com.
                 </p>
               </div>
 

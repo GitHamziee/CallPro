@@ -61,7 +61,7 @@ function UserDashboard({
           {session?.user?.name || session?.user?.email || "User"}
         </h2>
         <p className="text-xs md:text-sm text-slate-500">
-          Here is an overview of your CallPro account.
+          Here is an overview of your R4Referral account.
         </p>
       </div>
 

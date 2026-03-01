@@ -3,7 +3,7 @@ import PageHeader from "@/components/shared/PageHeader";
 
 export const metadata: Metadata = {
   title: "Refund Policy",
-  description: "CallPro's Refund Policy — understand our billing and refund procedures.",
+  description: "R4Referral's Refund Policy — understand our billing and refund procedures.",
 };
 
 export default function RefundPolicyPage() {
@@ -21,7 +21,7 @@ export default function RefundPolicyPage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">1. Our Commitment</h2>
                 <p>
-                  At CallPro, we stand behind the quality of our work. We are committed to delivering
+                  At R4Referral, we stand behind the quality of our work. We are committed to delivering
                   the services outlined in your agreement. This refund policy explains the circumstances
                   under which refunds may be issued.
                 </p>
@@ -41,7 +41,7 @@ export default function RefundPolicyPage() {
                 <p>Refunds may be considered in the following circumstances:</p>
                 <ul className="mt-2 space-y-2 list-disc list-inside text-slate-600">
                   <li>
-                    <strong className="text-slate-800">Service not delivered:</strong> If CallPro fails to
+                    <strong className="text-slate-800">Service not delivered:</strong> If R4Referral fails to
                     initiate services within the agreed timeframe and you have not been contacted with a
                     revised timeline, you may request a full refund of fees paid for the undelivered period.
                   </li>
@@ -72,7 +72,7 @@ export default function RefundPolicyPage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">5. How to Request a Refund</h2>
                 <p>
-                  To request a refund, contact our billing team at billing@callpro.com within 30 days
+                  To request a refund, contact our billing team at billing@r4referral.com within 30 days
                   of the charge in question. Please include your account name, the charge date, amount,
                   and a brief explanation of your refund request. We will respond within 3 business days.
                 </p>
@@ -90,7 +90,7 @@ export default function RefundPolicyPage() {
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 mb-3">7. Contact</h2>
                 <p>
-                  Questions about billing or refunds? Reach us at billing@callpro.com or call
+                  Questions about billing or refunds? Reach us at billing@r4referral.com or call
                   +1 (800) 555-1234 Monday through Friday, 9am–6pm EST.
                 </p>
               </div>

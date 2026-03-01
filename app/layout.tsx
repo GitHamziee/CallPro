@@ -13,11 +13,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "CallPro — Outbound Sales & Lead Generation",
-    template: "%s | CallPro",
+    default: "R4Referral — Outbound Sales & Lead Generation",
+    template: "%s | R4Referral",
   },
   description:
-    "CallPro is a results-driven call center specializing in outbound sales, appointment setting, and lead generation for B2B businesses.",
+    "R4Referral is a results-driven call center specializing in outbound sales, appointment setting, and lead generation for B2B businesses.",
   keywords: ["call center", "outbound sales", "lead generation", "appointment setting", "B2B sales"],
 };
 

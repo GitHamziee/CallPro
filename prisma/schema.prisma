@@ -1,4 +1,4 @@
-// Prisma schema for CallPro
+// Prisma schema for R4Referral
 
 datasource db {
   provider = "postgresql"

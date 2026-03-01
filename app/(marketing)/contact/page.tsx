@@ -5,7 +5,7 @@ import ContactForm from "@/components/contact/ContactForm";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with CallPro. Book a free strategy call and find out how we can fill your pipeline.",
+    "Get in touch with R4Referral. Book a free strategy call and find out how we can fill your pipeline.",
 };
 
 export default function ContactPage() {

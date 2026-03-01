@@ -46,7 +46,7 @@ function LoginContent() {
           <PhoneCall className="h-4.5 w-4.5 text-white" />
         </div>
         <span className="text-xl font-bold text-slate-900">
-          Call<span className="text-brand-600">Pro</span>
+          R4<span className="text-brand-600">Referral</span>
         </span>
       </Link>
 
@@ -55,7 +55,7 @@ function LoginContent() {
 
         <div className="mb-7">
           <h1 className="text-xl font-semibold text-slate-900 tracking-tight">
-            Sign in to CallPro
+            Sign in to R4Referral
           </h1>
           <p className="mt-1 text-sm text-slate-500">
             Enter your credentials to access your portal.
@@ -154,7 +154,7 @@ function LoginContent() {
 
       {/* Footer */}
       <p className="mt-8 text-xs text-slate-400">
-        © {new Date().getFullYear()} CallPro ·{" "}
+        © {new Date().getFullYear()} R4Referral ·{" "}
         <Link href="/privacy-policy" className="hover:text-slate-600 transition-colors">Privacy</Link>
         {" "}·{" "}
         <Link href="/terms-of-service" className="hover:text-slate-600 transition-colors">Terms</Link>

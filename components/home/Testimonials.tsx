@@ -22,7 +22,7 @@ export default function Testimonials() {
           </h2>
           <p className="mt-4 text-brand-100 max-w-xl mx-auto">
             Don&apos;t take our word for it. Here&apos;s what our clients say
-            after 90 days of working with CallPro.
+            after 90 days of working with R4Referral.
           </p>
         </AnimatedSection>
 

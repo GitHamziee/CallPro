@@ -39,7 +39,7 @@ export default function Navbar() {
             <PhoneCall className="h-4 w-4 text-white" />
           </div>
           <span className="text-lg font-bold text-slate-900">
-            Call<span className="text-brand-600">Pro</span>
+            R4<span className="text-brand-600">Referral</span>
           </span>
         </Link>
 

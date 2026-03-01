@@ -15,8 +15,8 @@ const CONTACT_INFO = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@callpro.com",
-    href: "mailto:hello@callpro.com",
+    value: "hello@r4referral.com",
+    href: "mailto:hello@r4referral.com",
   },
   {
     icon: MapPin,

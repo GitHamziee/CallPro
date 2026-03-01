@@ -66,7 +66,7 @@ function ResetPasswordContent() {
             <PhoneCall className="h-4.5 w-4.5 text-white" />
           </div>
           <span className="text-xl font-bold text-slate-900">
-            Call<span className="text-brand-600">Pro</span>
+            R4<span className="text-brand-600">Referral</span>
           </span>
         </Link>
 
@@ -106,7 +106,7 @@ function ResetPasswordContent() {
           <PhoneCall className="h-4.5 w-4.5 text-white" />
         </div>
         <span className="text-xl font-bold text-slate-900">
-          Call<span className="text-brand-600">Pro</span>
+          R4<span className="text-brand-600">Referral</span>
         </span>
       </Link>
 
@@ -227,7 +227,7 @@ function ResetPasswordContent() {
 
       {/* Footer */}
       <p className="mt-8 text-xs text-slate-400">
-        © {new Date().getFullYear()} CallPro ·{" "}
+        © {new Date().getFullYear()} R4Referral ·{" "}
         <Link
           href="/privacy-policy"
           className="hover:text-slate-600 transition-colors"

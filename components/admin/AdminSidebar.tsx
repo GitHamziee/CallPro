@@ -27,7 +27,7 @@ export default function AdminSidebar() {
         </div>
         <div className="flex flex-col">
           <span className="text-lg font-bold text-white leading-tight">
-            Call<span className="text-brand-400">Pro</span>
+            R4<span className="text-brand-400">Referral</span>
           </span>
           <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
             Admin

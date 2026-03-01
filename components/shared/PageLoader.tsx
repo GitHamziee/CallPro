@@ -10,13 +10,13 @@ export default function PageLoader() {
 
   useEffect(() => {
     // Only show on first visit in this browser session
-    if (sessionStorage.getItem("callpro_loaded")) {
+    if (sessionStorage.getItem("r4referral_loaded")) {
       setGone(true);
       return;
     }
 
     setShow(true);
-    sessionStorage.setItem("callpro_loaded", "1");
+    sessionStorage.setItem("r4referral_loaded", "1");
 
     const fadeTimer = setTimeout(() => setFading(true), 1600);
     const removeTimer = setTimeout(() => setGone(true), 2000);
@@ -40,7 +40,7 @@ export default function PageLoader() {
           <PhoneCall className="h-6 w-6 text-white" />
         </div>
         <span className="text-2xl font-bold text-slate-900">
-          Call<span className="text-brand-600">Pro</span>
+          R4<span className="text-brand-600">Referral</span>
         </span>
       </div>
 

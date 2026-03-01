@@ -68,7 +68,7 @@ export async function POST(req: Request) {
           price_data: {
             currency: "usd",
             product_data: {
-              name: `CallPro ${pkg.name} Plan`,
+              name: `R4Referral ${pkg.name} Plan`,
               description: pkg.description || undefined,
             },
             unit_amount: pkg.price,

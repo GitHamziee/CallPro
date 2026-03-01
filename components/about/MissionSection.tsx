@@ -42,7 +42,7 @@ export default function MissionSection() {
             </h2>
             <p className="mt-5 text-slate-600 leading-relaxed">
               Too many B2B companies treat outbound as a gamble. They hire
-              reps, hand them a list, and hope for the best. We built CallPro
+              reps, hand them a list, and hope for the best. We built R4Referral
               to change that — a fully managed outbound engine with proven
               systems, trained agents, and complete accountability.
             </p>

@@ -9,7 +9,8 @@
       "Bash(npx prisma db push --url \"$DATABASE_URL\")",
       "Bash(taskkill //f //im node.exe)",
       "Bash(git status -u)",
-      "WebFetch(domain:realtoruplift.com)"
+      "WebFetch(domain:realtoruplift.com)",
+      "Bash(npm run dev)"
     ]
   }
 }
