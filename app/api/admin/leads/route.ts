@@ -11,8 +11,8 @@ export async function GET(req: NextRequest) {
     if (rateLimited) return rateLimited;
 
     const { searchParams } = new URL(req.url);
-    const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
-    const limit = Math.min(50, Math.max(1, parseInt(searchParams.get("limit") || "10")));
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1") || 1);
+    const limit = Math.min(50, Math.max(1, parseInt(searchParams.get("limit") || "10") || 10));
     const search = searchParams.get("search") || "";
     const agentId = searchParams.get("agentId") || "";
     const status = searchParams.get("status") || "";
@@ -36,9 +36,9 @@ export async function GET(req: NextRequest) {
     }
 
     const now = new Date();
-    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+    const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
 
-    const [leads, total, totalLeads, leadsThisMonth, newCount, pendingCount, acceptedCount, invoicedCount, paidCount] = await Promise.all([
+    const [leads, total, leadsThisMonth, statusCounts] = await Promise.all([
       prisma.lead.findMany({
         where,
         include: {
@@ -51,14 +51,20 @@ export async function GET(req: NextRequest) {
         take: limit,
       }),
       prisma.lead.count({ where }),
-      prisma.lead.count(),
       prisma.lead.count({ where: { createdAt: { gte: monthStart } } }),
-      prisma.lead.count({ where: { status: "NEW" } }),
-      prisma.lead.count({ where: { status: "PENDING" } }),
-      prisma.lead.count({ where: { status: "ACCEPTED" } }),
-      prisma.lead.count({ where: { status: "INVOICED" } }),
-      prisma.lead.count({ where: { status: "PAID" } }),
+      prisma.lead.groupBy({
+        by: ["status"],
+        _count: { _all: true },
+      }),
     ]);
+
+    // Build stats from groupBy result
+    const countByStatus: Record<string, number> = {};
+    let totalLeads = 0;
+    for (const row of statusCounts) {
+      countByStatus[row.status] = row._count._all;
+      totalLeads += row._count._all;
+    }
 
     return NextResponse.json({
       leads,
@@ -68,11 +74,11 @@ export async function GET(req: NextRequest) {
       stats: {
         totalLeads,
         leadsThisMonth,
-        newCount,
-        pendingCount,
-        acceptedCount,
-        invoicedCount,
-        paidCount,
+        newCount: countByStatus["NEW"] || 0,
+        pendingCount: countByStatus["PENDING"] || 0,
+        acceptedCount: countByStatus["ACCEPTED"] || 0,
+        invoicedCount: countByStatus["INVOICED"] || 0,
+        paidCount: countByStatus["PAID"] || 0,
       },
     });
   } catch (error) {

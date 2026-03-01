@@ -26,8 +26,8 @@ export async function GET(req: NextRequest) {
     if (authError) return authError;
 
     const { searchParams } = new URL(req.url);
-    const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
-    const limit = Math.min(50, Math.max(1, parseInt(searchParams.get("limit") || "10")));
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1") || 1);
+    const limit = Math.min(50, Math.max(1, parseInt(searchParams.get("limit") || "10") || 10));
     const status = searchParams.get("status") || "";
 
     const where: Record<string, unknown> = {
@@ -40,19 +40,7 @@ export async function GET(req: NextRequest) {
       where.status = { in: ["PENDING", "ACCEPTED", "INVOICED", "PAID"] };
     }
 
-    // Check if user is on "Pay Per Lead" plan
-    const activePurchase = await prisma.purchase.findFirst({
-      where: {
-        userId: session.user.id,
-        status: "ACTIVE",
-        OR: [{ expiresAt: { gt: new Date() } }, { expiresAt: null }],
-      },
-      include: { package: { select: { name: true } } },
-    });
-    const hasActiveSubscription = !!activePurchase;
-    const isPayPerLead = activePurchase?.package?.name === "Pay Per Lead";
-
-    const [leads, total, pendingCount, acceptedCount, invoicedCount, paidCount] = await Promise.all([
+    const [leads, total, statusCounts, activePurchase] = await Promise.all([
       prisma.lead.findMany({
         where,
         include: {
@@ -64,30 +52,39 @@ export async function GET(req: NextRequest) {
         take: limit,
       }),
       prisma.lead.count({ where }),
-      prisma.lead.count({
-        where: { assignedToId: session.user.id, status: "PENDING" },
+      prisma.lead.groupBy({
+        by: ["status"],
+        where: { assignedToId: session.user.id },
+        _count: { _all: true },
       }),
-      prisma.lead.count({
-        where: { assignedToId: session.user.id, status: "ACCEPTED" },
-      }),
-      prisma.lead.count({
-        where: { assignedToId: session.user.id, status: "INVOICED" },
-      }),
-      prisma.lead.count({
-        where: { assignedToId: session.user.id, status: "PAID" },
+      prisma.purchase.findFirst({
+        where: {
+          userId: session.user.id,
+          status: "ACTIVE",
+          OR: [{ expiresAt: { gt: new Date() } }, { expiresAt: null }],
+        },
+        select: { id: true },
       }),
     ]);
 
-    // Redact contact details if no active subscription or PPL with unpaid leads
+    const hasActiveSubscription = !!activePurchase;
+    const countByStatus: Record<string, number> = {};
+    for (const row of statusCounts) {
+      countByStatus[row.status] = row._count._all;
+    }
+    const pendingCount = countByStatus["PENDING"] || 0;
+    const acceptedCount = countByStatus["ACCEPTED"] || 0;
+    const invoicedCount = countByStatus["INVOICED"] || 0;
+    const paidCount = countByStatus["PAID"] || 0;
+
+    // Mask contact details if no active subscription
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const sanitizedLeads = leads.map((lead: any) => {
-      const shouldMask = lead.status !== "PAID" && (!hasActiveSubscription || isPayPerLead);
+      const shouldMask = lead.status !== "PAID" && !hasActiveSubscription;
       return {
         ...lead,
-        name: lead.name,
-        email: shouldMask ? maskEmail(lead.email) : lead.email,
+        email: shouldMask && lead.email ? maskEmail(lead.email) : lead.email,
         phone: shouldMask ? maskPhone(lead.phone) : lead.phone,
-        zipCode: shouldMask ? "••••" : lead.zipCode,
         contactHidden: shouldMask,
       };
     });

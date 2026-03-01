@@ -1,14 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export function useRegister() {
   const [formData, setFormData] = useState({
     name: "",
+    phone: "",
     email: "",
     password: "",
     confirmPassword: "",
+    licenseNo: "",
+    brokerage: "",
+    targetAreas: "",
+    state: "",
+    accountExecutive: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -16,6 +22,22 @@ export function useRegister() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  // State dropdown
+  const [stateOpen, setStateOpen] = useState(false);
+  const stateRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (stateRef.current && !stateRef.current.contains(e.target as Node)) {
+        setStateOpen(false);
+      }
+    }
+    if (stateOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [stateOpen]);
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -44,6 +66,12 @@ export function useRegister() {
           name: formData.name,
           email: formData.email,
           password: formData.password,
+          phone: formData.phone,
+          licenseNo: formData.licenseNo,
+          brokerage: formData.brokerage,
+          targetAreas: formData.targetAreas,
+          state: formData.state,
+          accountExecutive: formData.accountExecutive,
         }),
       });
       const data = await res.json();
@@ -77,5 +105,8 @@ export function useRegister() {
     setPasswordError,
     loginHref,
     handleSubmit,
+    stateOpen,
+    setStateOpen,
+    stateRef,
   };
 }

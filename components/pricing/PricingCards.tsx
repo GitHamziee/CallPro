@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Check, Shield, Zap, Headphones, BarChart3, DollarSign } from "lucide-react";
 import { PRICING_PLANS } from "@/lib/constants";
@@ -15,101 +16,116 @@ const TRUST_SIGNALS = [
 ];
 
 export default function PricingCards() {
+  const [priceMap, setPriceMap] = useState<Map<string, number>>(new Map());
+
+  useEffect(() => {
+    async function fetchPrices() {
+      try {
+        const res = await fetch("/api/packages");
+        const data = await res.json();
+        if (res.ok && data.packages) {
+          const map = new Map<string, number>();
+          for (const pkg of data.packages) {
+            map.set(pkg.name, pkg.price);
+          }
+          setPriceMap(map);
+        }
+      } catch {
+        // fall back to constants
+      }
+    }
+    fetchPrices();
+  }, []);
+
   return (
     <section className="py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Plan cards */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-start">
-          {PRICING_PLANS.map((plan, i) => (
-            <AnimatedSection key={plan.name} delay={i * 0.1}>
-              <div
-                className={`relative rounded-2xl p-8 flex flex-col h-full transition-all duration-300 hover:-translate-y-1 ${
-                  plan.highlighted
-                    ? "bg-brand-600 shadow-2xl shadow-brand-600/25 ring-1 ring-brand-500"
-                    : "glass-card"
-                }`}
-              >
-                {plan.highlighted && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <span className="rounded-full bg-accent-500 px-4 py-1 text-xs font-semibold text-white shadow-lg shadow-accent-500/30">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
+          {PRICING_PLANS.map((plan, i) => {
+            const dbPrice = priceMap.get(plan.name);
+            const displayPrice =
+              dbPrice !== undefined
+                ? `$${(dbPrice / 100).toLocaleString("en-US", { minimumFractionDigits: 0 })}`
+                : plan.price;
 
-                <div className="mb-6">
-                  <h3
-                    className={`text-lg font-semibold ${plan.highlighted ? "text-white" : "text-slate-900"}`}
-                  >
-                    {plan.name}
-                  </h3>
-                  <p
-                    className={`mt-1 text-sm ${plan.highlighted ? "text-brand-100" : "text-slate-500"}`}
-                  >
-                    {plan.description}
-                  </p>
-                </div>
+            return (
+              <AnimatedSection key={plan.name} delay={i * 0.1}>
+                <div
+                  className={`relative rounded-2xl p-8 flex flex-col h-full transition-all duration-300 hover:-translate-y-1 ${
+                    plan.highlighted
+                      ? "bg-brand-600 shadow-2xl shadow-brand-600/25 ring-1 ring-brand-500"
+                      : "glass-card"
+                  }`}
+                >
+                  {plan.highlighted && (
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                      <span className="rounded-full bg-accent-500 px-4 py-1 text-xs font-semibold text-white shadow-lg shadow-accent-500/30">
+                        Most Popular
+                      </span>
+                    </div>
+                  )}
 
-                {/* Price */}
-                <div className="mb-8">
-                  <div className="flex items-end gap-1">
-                    <span
-                      className={`text-5xl font-bold tabular-nums ${plan.highlighted ? "text-white" : "text-slate-900"}`}
+                  <div className="mb-6">
+                    <h3
+                      className={`text-lg font-semibold ${plan.highlighted ? "text-white" : "text-slate-900"}`}
                     >
-                      {plan.price}
-                    </span>
-                    {plan.period && (
-                      <span
-                        className={`mb-1.5 text-base ${plan.highlighted ? "text-brand-200" : "text-slate-500"}`}
-                      >
-                        {plan.period}
-                      </span>
-                    )}
+                      {plan.name}
+                    </h3>
+                    <p
+                      className={`mt-1 text-sm ${plan.highlighted ? "text-brand-100" : "text-slate-500"}`}
+                    >
+                      {plan.description}
+                    </p>
                   </div>
-                </div>
 
-                {/* Features */}
-                <ul className="space-y-3 flex-1 mb-8">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2.5">
-                      <div
-                        className={`mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full ${
-                          plan.highlighted
-                            ? "bg-white/20"
-                            : "bg-brand-50 border border-brand-200"
-                        }`}
-                      >
-                        <Check
-                          className={`h-3 w-3 ${plan.highlighted ? "text-white" : "text-brand-600"}`}
-                        />
-                      </div>
+                  {/* Price */}
+                  <div className="mb-8">
+                    <div className="flex items-end gap-1">
                       <span
-                        className={`text-sm ${plan.highlighted ? "text-brand-50" : "text-slate-700"}`}
+                        className={`text-5xl font-bold tabular-nums ${plan.highlighted ? "text-white" : "text-slate-900"}`}
                       >
-                        {feature}
+                        {displayPrice}
                       </span>
-                    </li>
-                  ))}
-                </ul>
+                      {plan.period && (
+                        <span
+                          className={`mb-1.5 text-base ${plan.highlighted ? "text-brand-200" : "text-slate-500"}`}
+                        >
+                          {plan.period}
+                        </span>
+                      )}
+                    </div>
+                  </div>
 
-                {plan.highlighted ? (
-                  <Button
-                    asChild
-                    size="lg"
-                    className="bg-white text-brand-700 hover:bg-brand-50 font-semibold"
-                  >
-                    <Link href="/register?callbackUrl=/packages">
-                      {plan.cta === "Most Popular" || plan.cta === "Best Value"
-                        ? "Get Started"
-                        : plan.cta}
-                    </Link>
-                  </Button>
-                ) : (
-                  <div className="btn-gradient-wrap rounded-md">
+                  {/* Features */}
+                  <ul className="space-y-3 flex-1 mb-8">
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2.5">
+                        <div
+                          className={`mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full ${
+                            plan.highlighted
+                              ? "bg-white/20"
+                              : "bg-brand-50 border border-brand-200"
+                          }`}
+                        >
+                          <Check
+                            className={`h-3 w-3 ${plan.highlighted ? "text-white" : "text-brand-600"}`}
+                          />
+                        </div>
+                        <span
+                          className={`text-sm ${plan.highlighted ? "text-brand-50" : "text-slate-700"}`}
+                        >
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {plan.highlighted ? (
                     <Button
                       asChild
                       size="lg"
-                      className="btn-gradient text-white border-0 w-full"
+                      className="bg-white text-brand-700 hover:bg-brand-50 font-semibold"
                     >
                       <Link href="/register?callbackUrl=/packages">
                         {plan.cta === "Most Popular" || plan.cta === "Best Value"
@@ -117,11 +133,25 @@ export default function PricingCards() {
                           : plan.cta}
                       </Link>
                     </Button>
-                  </div>
-                )}
-              </div>
-            </AnimatedSection>
-          ))}
+                  ) : (
+                    <div className="btn-gradient-wrap rounded-md">
+                      <Button
+                        asChild
+                        size="lg"
+                        className="btn-gradient text-white border-0 w-full"
+                      >
+                        <Link href="/register?callbackUrl=/packages">
+                          {plan.cta === "Most Popular" || plan.cta === "Best Value"
+                            ? "Get Started"
+                            : plan.cta}
+                        </Link>
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </AnimatedSection>
+            );
+          })}
         </div>
 
         {/* Trust signals */}

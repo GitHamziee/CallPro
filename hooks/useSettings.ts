@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 
 export interface SettingsPurchase {
@@ -23,6 +23,12 @@ export function useSettings() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
+    licenseNo: "",
+    brokerage: "",
+    targetAreas: "",
+    state: "",
+    accountExecutive: "",
   });
 
   const [passwordData, setPasswordData] = useState({
@@ -33,17 +39,62 @@ export function useSettings() {
 
   const [purchase, setPurchase] = useState<SettingsPurchase | null>(null);
 
+  // State dropdown
+  const [stateOpen, setStateOpen] = useState(false);
+  const stateRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (stateRef.current && !stateRef.current.contains(e.target as Node)) {
+        setStateOpen(false);
+      }
+    }
+    if (stateOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [stateOpen]);
+
   const hideBilling =
     session?.user?.role === "ADMIN" || session?.user?.role === "AGENT";
 
-  // Sync form data when session loads
+  // Fetch full profile from API (includes fields not in JWT)
   useEffect(() => {
-    if (session?.user) {
-      setFormData({
-        name: session.user.name || "",
-        email: session.user.email || "",
-      });
+    if (!session?.user) return;
+
+    async function fetchProfile() {
+      try {
+        const res = await fetch("/api/auth/profile");
+        if (res.ok) {
+          const data = await res.json();
+          setFormData({
+            name: data.profile.name || "",
+            email: data.profile.email || "",
+            phone: data.profile.phone || "",
+            licenseNo: data.profile.licenseNo || "",
+            brokerage: data.profile.brokerage || "",
+            targetAreas: data.profile.targetAreas || "",
+            state: data.profile.state || "",
+            accountExecutive: data.profile.accountExecutive || "",
+          });
+        } else {
+          // Fallback to session data
+          setFormData((prev) => ({
+            ...prev,
+            name: session?.user?.name || "",
+            email: session?.user?.email || "",
+          }));
+        }
+      } catch {
+        setFormData((prev) => ({
+          ...prev,
+          name: session?.user?.name || "",
+          email: session?.user?.email || "",
+        }));
+      }
     }
+
+    fetchProfile();
   }, [session]);
 
   // Fetch active subscription for billing tab
@@ -63,9 +114,15 @@ export function useSettings() {
     fetchPurchase();
   }, [hideBilling]);
 
-  const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleProfileChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const setFormField = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -160,8 +217,12 @@ export function useSettings() {
     setErrorMessage,
     setActiveTab,
     handleProfileChange,
+    setFormField,
     handlePasswordChange,
     handleProfileSubmit,
     handlePasswordSubmit,
+    stateOpen,
+    setStateOpen,
+    stateRef,
   };
 }

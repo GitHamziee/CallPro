@@ -8,6 +8,11 @@ export interface UserDetail {
   name: string | null;
   email: string;
   phone: string | null;
+  licenseNo: string | null;
+  brokerage: string | null;
+  targetAreas: string | null;
+  state: string | null;
+  accountExecutive: string | null;
   role: string;
   createdAt: string;
   updatedAt: string;

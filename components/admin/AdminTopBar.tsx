@@ -10,6 +10,8 @@ const PAGE_TITLES: Record<string, string> = {
   "/admin/users": "User Management",
   "/admin/leads": "Lead Management",
   "/admin/packages": "Package Management",
+  "/admin/subscriptions": "Subscriptions",
+  "/admin/analytics": "Analytics",
 };
 
 export default function AdminTopBar() {

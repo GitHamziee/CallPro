@@ -11,7 +11,13 @@ import {
   CreditCard,
   Clock,
   Lock,
+  MapPin,
+  Building2,
+  FileText,
+  Target,
+  UserCheck,
 } from "lucide-react";
+import { US_STATE_MAP } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
@@ -202,6 +208,84 @@ export default function AdminUserDetailPage({
           </div>
         </div>
       </div>
+
+      {/* Profile Details */}
+      {(user.state || user.targetAreas || user.licenseNo || user.brokerage || user.accountExecutive) && (
+        <div className="bg-white rounded-xl border border-slate-200 overflow-hidden mb-5">
+          <div className="px-4 py-3 sm:px-6 sm:py-4 border-b border-slate-100">
+            <h3 className="text-sm font-semibold text-slate-900">
+              Profile Details
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 divide-slate-50">
+            {user.accountExecutive && (
+              <div className="flex items-start gap-3 px-4 py-3 sm:px-6 sm:py-4 sm:border-b sm:border-slate-50">
+                <UserCheck className="h-4 w-4 text-slate-400 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-[10px] sm:text-[11px] font-medium text-slate-400 uppercase tracking-wider">
+                    Account Executive
+                  </p>
+                  <p className="text-xs sm:text-sm font-medium text-slate-900 mt-0.5">
+                    {user.accountExecutive}
+                  </p>
+                </div>
+              </div>
+            )}
+            {user.state && (
+              <div className="flex items-start gap-3 px-4 py-3 sm:px-6 sm:py-4 sm:border-b sm:border-slate-50">
+                <MapPin className="h-4 w-4 text-slate-400 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-[10px] sm:text-[11px] font-medium text-slate-400 uppercase tracking-wider">
+                    State
+                  </p>
+                  <p className="text-xs sm:text-sm font-medium text-slate-900 mt-0.5">
+                    {US_STATE_MAP.get(user.state!) || user.state}
+                  </p>
+                </div>
+              </div>
+            )}
+            {user.targetAreas && (
+              <div className="flex items-start gap-3 px-4 py-3 sm:px-6 sm:py-4 sm:border-b sm:border-slate-50">
+                <Target className="h-4 w-4 text-slate-400 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-[10px] sm:text-[11px] font-medium text-slate-400 uppercase tracking-wider">
+                    Target Areas
+                  </p>
+                  <p className="text-xs sm:text-sm font-medium text-slate-900 mt-0.5">
+                    {user.targetAreas}
+                  </p>
+                </div>
+              </div>
+            )}
+            {user.licenseNo && (
+              <div className="flex items-start gap-3 px-4 py-3 sm:px-6 sm:py-4 sm:border-b sm:border-slate-50">
+                <FileText className="h-4 w-4 text-slate-400 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-[10px] sm:text-[11px] font-medium text-slate-400 uppercase tracking-wider">
+                    License No
+                  </p>
+                  <p className="text-xs sm:text-sm font-medium text-slate-900 mt-0.5">
+                    {user.licenseNo}
+                  </p>
+                </div>
+              </div>
+            )}
+            {user.brokerage && (
+              <div className="flex items-start gap-3 px-4 py-3 sm:px-6 sm:py-4 sm:border-b sm:border-slate-50">
+                <Building2 className="h-4 w-4 text-slate-400 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-[10px] sm:text-[11px] font-medium text-slate-400 uppercase tracking-wider">
+                    Brokerage
+                  </p>
+                  <p className="text-xs sm:text-sm font-medium text-slate-900 mt-0.5">
+                    {user.brokerage}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Change Password */}
       <div className="bg-white rounded-xl border border-slate-200 overflow-hidden mb-5">

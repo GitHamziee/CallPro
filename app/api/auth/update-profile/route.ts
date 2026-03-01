@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { validateEmail, validateName, sanitizeInput } from "@/lib/validation";
+import { validateEmail, validateName, validatePhone, sanitizeInput } from "@/lib/validation";
+import { US_STATE_MAP } from "@/lib/constants";
 
 export async function PATCH(req: Request) {
   try {
@@ -12,7 +13,7 @@ export async function PATCH(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { name, email } = await req.json();
+    const { name, email, phone, licenseNo, brokerage, targetAreas, state, accountExecutive } = await req.json();
 
     // Validate inputs
     if (name !== undefined) {
@@ -30,6 +31,17 @@ export async function PATCH(req: Request) {
           { status: 400 }
         );
       }
+    }
+
+    if (phone !== undefined && phone !== "") {
+      const phoneResult = validatePhone(phone);
+      if (!phoneResult.valid) {
+        return NextResponse.json({ error: phoneResult.error }, { status: 400 });
+      }
+    }
+
+    if (state !== undefined && state !== "" && !US_STATE_MAP.has(state.trim().toUpperCase())) {
+      return NextResponse.json({ error: "Invalid state" }, { status: 400 });
     }
 
     const normalizedEmail = email
@@ -55,6 +67,12 @@ export async function PATCH(req: Request) {
       data: {
         ...(name !== undefined && { name: sanitizeInput(name) }),
         ...(normalizedEmail && { email: normalizedEmail }),
+        ...(phone !== undefined && { phone: phone ? sanitizeInput(phone) : null }),
+        ...(licenseNo !== undefined && { licenseNo: licenseNo ? sanitizeInput(licenseNo) : null }),
+        ...(brokerage !== undefined && { brokerage: brokerage ? sanitizeInput(brokerage) : null }),
+        ...(targetAreas !== undefined && { targetAreas: targetAreas ? sanitizeInput(targetAreas) : null }),
+        ...(state !== undefined && { state: state ? state.trim().toUpperCase() : null }),
+        ...(accountExecutive !== undefined && { accountExecutive: accountExecutive ? sanitizeInput(accountExecutive) : null }),
       },
       select: { id: true, name: true, email: true, role: true },
     });

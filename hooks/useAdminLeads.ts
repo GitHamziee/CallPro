@@ -11,10 +11,17 @@ export interface LeadInvoice {
 
 export interface LeadRow {
   id: string;
+  leadType: string;
   name: string;
-  email: string;
   phone: string;
-  zipCode: string;
+  email: string | null;
+  address: string;
+  propertyType: string;
+  bedsBaths: string;
+  timeline: string;
+  contractStatus: string;
+  appointmentTime: string;
+  notes: string | null;
   status: "NEW" | "PENDING" | "ACCEPTED" | "INVOICED" | "PAID";
   createdAt: string;
   agent: { id: string; name: string | null; email: string };

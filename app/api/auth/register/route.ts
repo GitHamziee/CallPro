@@ -5,9 +5,11 @@ import {
   validateEmail,
   validatePassword,
   validateName,
+  validatePhone,
   sanitizeInput,
 } from "@/lib/validation";
 import { rateLimit } from "@/lib/rate-limit";
+import { US_STATE_MAP } from "@/lib/constants";
 
 export async function POST(req: Request) {
   try {
@@ -22,7 +24,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { name, email, password } = body;
+    const { name, email, password, phone, licenseNo, brokerage, targetAreas, state, accountExecutive } = body;
 
     // Validate inputs
     const nameResult = validateName(name);
@@ -41,6 +43,19 @@ export async function POST(req: Request) {
         { error: passwordResult.error },
         { status: 400 }
       );
+    }
+
+    const phoneResult = validatePhone(phone);
+    if (!phoneResult.valid) {
+      return NextResponse.json({ error: phoneResult.error }, { status: 400 });
+    }
+
+    if (!targetAreas || typeof targetAreas !== "string" || !targetAreas.trim()) {
+      return NextResponse.json({ error: "Target areas are required" }, { status: 400 });
+    }
+
+    if (!state || typeof state !== "string" || !US_STATE_MAP.has(state.trim().toUpperCase())) {
+      return NextResponse.json({ error: "Please select a valid state" }, { status: 400 });
     }
 
     const normalizedEmail = email.toLowerCase().trim();
@@ -62,6 +77,12 @@ export async function POST(req: Request) {
         name: sanitizedName,
         email: normalizedEmail,
         password: hashed,
+        phone: sanitizeInput(phone),
+        licenseNo: licenseNo ? sanitizeInput(licenseNo) : null,
+        brokerage: brokerage ? sanitizeInput(brokerage) : null,
+        targetAreas: sanitizeInput(targetAreas),
+        state: state.trim().toUpperCase(),
+        accountExecutive: accountExecutive ? sanitizeInput(accountExecutive) : null,
       },
     });
 

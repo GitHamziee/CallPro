@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   Search,
   ChevronLeft,
@@ -7,9 +8,10 @@ import {
   FileText,
   CalendarDays,
   Clock,
+  Pencil,
 } from "lucide-react";
 import { useLeadHistory } from "@/hooks/useLeadHistory";
-import { timeAgo } from "@/lib/format-utils";
+import { timeAgo, LEAD_STATUS_BADGES } from "@/lib/format-utils";
 
 export default function LeadHistoryPage() {
   const {
@@ -133,7 +135,13 @@ export default function LeadHistoryPage() {
                     Phone
                   </th>
                   <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3 hidden md:table-cell">
-                    Zip
+                    Address
+                  </th>
+                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3 hidden lg:table-cell">
+                    Appointment
+                  </th>
+                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3 hidden sm:table-cell">
+                    Status
                   </th>
                   <th className="text-right text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3">
                     Date
@@ -147,19 +155,62 @@ export default function LeadHistoryPage() {
                     className="hover:bg-slate-50/70 transition-colors"
                   >
                     <td className="px-5 py-4">
-                      <p className="text-sm font-medium text-slate-900">
-                        {lead.name}
-                      </p>
-                      <p className="text-xs text-slate-500">{lead.email}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm font-medium text-slate-900">
+                          {lead.name}
+                        </p>
+                        <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${lead.leadType === "Buyer" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}`}>
+                          {lead.leadType}
+                        </span>
+                      </div>
+                      {lead.email && <p className="text-xs text-slate-500">{lead.email}</p>}
                     </td>
                     <td className="px-5 py-4 text-sm text-slate-600 hidden sm:table-cell">
                       {lead.phone}
                     </td>
-                    <td className="px-5 py-4 text-sm text-slate-600 hidden md:table-cell">
-                      {lead.zipCode}
+                    <td className="px-5 py-4 text-sm text-slate-600 hidden md:table-cell truncate max-w-[200px]">
+                      {lead.address}
                     </td>
-                    <td className="px-5 py-4 text-right text-xs text-slate-400">
-                      {timeAgo(lead.createdAt)}
+                    <td className="px-5 py-4 text-sm text-slate-600 hidden lg:table-cell">
+                      {new Date(lead.appointmentTime).toLocaleDateString()} {new Date(lead.appointmentTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                    </td>
+                    <td className="px-5 py-4 hidden sm:table-cell">
+                      <div className="flex items-center gap-2">
+                        <span className={`inline-flex px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider ${LEAD_STATUS_BADGES[lead.status] || "bg-slate-100 text-slate-500"}`}>
+                          {lead.status}
+                        </span>
+                        {lead.status === "NEW" && (
+                          <Link
+                            href={`/leads/submit?edit=${lead.id}`}
+                            className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-medium text-brand-600 hover:bg-brand-50 transition-colors"
+                          >
+                            <Pencil className="h-3 w-3" />
+                            Edit
+                          </Link>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-5 py-4 text-right">
+                      <div className="flex flex-col items-end gap-1">
+                        <span className="text-xs text-slate-400">
+                          {timeAgo(lead.createdAt)}
+                        </span>
+                        {/* Mobile: status + edit */}
+                        <div className="flex items-center gap-1.5 sm:hidden">
+                          <span className={`inline-flex px-1.5 py-0.5 rounded text-[9px] font-bold uppercase ${LEAD_STATUS_BADGES[lead.status] || "bg-slate-100 text-slate-500"}`}>
+                            {lead.status}
+                          </span>
+                          {lead.status === "NEW" && (
+                            <Link
+                              href={`/leads/submit?edit=${lead.id}`}
+                              className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[9px] font-medium text-brand-600 bg-brand-50"
+                            >
+                              <Pencil className="h-2.5 w-2.5" />
+                              Edit
+                            </Link>
+                          )}
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 ))}

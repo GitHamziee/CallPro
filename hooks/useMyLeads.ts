@@ -17,10 +17,17 @@ export interface LeadInvoice {
 
 export interface MyLead {
   id: string;
+  leadType: string;
   name: string;
-  email: string;
   phone: string;
-  zipCode: string;
+  email: string | null;
+  address: string;
+  propertyType: string;
+  bedsBaths: string;
+  timeline: string;
+  contractStatus: string;
+  appointmentTime: string;
+  notes: string | null;
   status: "PENDING" | "ACCEPTED" | "INVOICED" | "PAID";
   createdAt: string;
   agent: LeadAgent;

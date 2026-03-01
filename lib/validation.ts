@@ -90,22 +90,6 @@ export function validatePhone(phone: string): ValidationResult {
   return { valid: true };
 }
 
-export function validateZipCode(zipCode: string): ValidationResult {
-  if (!zipCode || typeof zipCode !== "string") {
-    return { valid: false, error: "Zip code is required" };
-  }
-
-  const trimmed = zipCode.trim();
-
-  if (!/^\d{5}(-\d{4})?$/.test(trimmed)) {
-    return {
-      valid: false,
-      error: "Invalid zip code format (e.g. 12345 or 12345-6789)",
-    };
-  }
-
-  return { valid: true };
-}
 
 export function sanitizeInput(input: string): string {
   if (typeof input !== "string") return "";

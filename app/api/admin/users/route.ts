@@ -11,8 +11,8 @@ export async function GET(req: NextRequest) {
     if (rateLimited) return rateLimited;
 
     const { searchParams } = new URL(req.url);
-    const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
-    const limit = Math.min(50, Math.max(1, parseInt(searchParams.get("limit") || "10")));
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1") || 1);
+    const limit = Math.min(50, Math.max(1, parseInt(searchParams.get("limit") || "10") || 10));
     const search = searchParams.get("search") || "";
     const role = searchParams.get("role") || "";
     const sortBy = searchParams.get("sortBy") || "createdAt";
@@ -36,7 +36,7 @@ export async function GET(req: NextRequest) {
     const allowedSortFields = ["createdAt", "name", "email", "role"];
     const safeSortBy = allowedSortFields.includes(sortBy) ? sortBy : "createdAt";
 
-    const [users, total] = await Promise.all([
+    const [users, total, roleCounts, activeSubs] = await Promise.all([
       prisma.user.findMany({
         where,
         select: {
@@ -68,13 +68,36 @@ export async function GET(req: NextRequest) {
         take: limit,
       }),
       prisma.user.count({ where }),
+      prisma.user.groupBy({
+        by: ["role"],
+        _count: { _all: true },
+      }),
+      prisma.purchase.count({
+        where: {
+          status: "ACTIVE",
+          OR: [{ expiresAt: { gt: new Date() } }, { expiresAt: null }],
+        },
+      }),
     ]);
+
+    const countByRole: Record<string, number> = {};
+    let totalUsers = 0;
+    for (const row of roleCounts) {
+      countByRole[row.role] = row._count._all;
+      totalUsers += row._count._all;
+    }
 
     return NextResponse.json({
       users,
       total,
       page,
       totalPages: Math.ceil(total / limit),
+      stats: {
+        totalUsers,
+        admins: countByRole["ADMIN"] || 0,
+        agents: countByRole["AGENT"] || 0,
+        activeSubs,
+      },
     });
   } catch (error) {
     console.error("Admin users list error:", error);

@@ -17,7 +17,7 @@ import { timeAgo, getInitials, getAvatarColor } from "@/lib/format-utils";
 export default function AdminUsersPage() {
   const {
     users,
-    total,
+    totalUsers,
     page,
     totalPages,
     search,
@@ -40,7 +40,7 @@ export default function AdminUsersPage() {
             <Users className="h-4 w-4 sm:h-5 sm:w-5 text-slate-600" />
           </div>
           <div>
-            <p className="text-xl sm:text-2xl font-semibold text-slate-900">{total}</p>
+            <p className="text-xl sm:text-2xl font-semibold text-slate-900">{totalUsers}</p>
             <p className="text-[10px] sm:text-xs text-slate-500">Total Users</p>
           </div>
         </div>

@@ -39,9 +39,14 @@ model User {
   email         String    @unique
   emailVerified DateTime?
   image         String?
-  password      String?
-  phone         String?
-  role          Role      @default(USER)
+  password         String?
+  phone            String?
+  licenseNo        String?
+  brokerage        String?
+  targetAreas      String?
+  state            String?
+  accountExecutive String?
+  role             Role      @default(USER)
   tokenVersion  Int       @default(0)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -138,15 +143,22 @@ model Purchase {
 }
 
 model Lead {
-  id           String     @id @default(cuid())
-  agentId      String
-  name         String
-  email        String
-  phone        String
-  zipCode      String
-  status       LeadStatus @default(NEW)
-  assignedToId String?
-  createdAt    DateTime   @default(now())
+  id              String     @id @default(cuid())
+  agentId         String
+  leadType        String     @default("Buyer")    // "Buyer" or "Seller"
+  name            String
+  phone           String
+  email           String?
+  address         String     @default("")
+  propertyType    String     @default("")
+  bedsBaths       String     @default("")
+  timeline        String     @default("")
+  contractStatus  String     @default("No")      // "Yes" or "No"
+  appointmentTime DateTime   @default(now())
+  notes           String?
+  status          LeadStatus @default(NEW)
+  assignedToId    String?
+  createdAt       DateTime   @default(now())
 
   agent      User  @relation("AgentLeads", fields: [agentId], references: [id], onDelete: Cascade)
   assignedTo User? @relation("AssignedLeads", fields: [assignedToId], references: [id], onDelete: SetNull)

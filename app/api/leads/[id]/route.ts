@@ -1,67 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { requireAgent, applyRateLimit } from "@/lib/api-utils";
-import {
-  validateEmail,
-  validatePhone,
-  sanitizeInput,
-} from "@/lib/validation";
+import { validateEmail, validatePhone, sanitizeInput } from "@/lib/validation";
 
-export async function GET(req: NextRequest) {
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const [session, authError] = await requireAgent();
     if (authError) return authError;
 
-    const { searchParams } = new URL(req.url);
-    const page = Math.max(1, parseInt(searchParams.get("page") || "1") || 1);
-    const limit = Math.min(50, Math.max(1, parseInt(searchParams.get("limit") || "10") || 10));
+    const { id } = await params;
 
-    const agentId = session.user.id;
-    const search = searchParams.get("search")?.trim() || "";
-    const now = new Date();
-    const todayStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
-    const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
-
-    const where = {
-      agentId,
-      ...(search && {
-        OR: [
-          { name: { contains: search, mode: "insensitive" as const } },
-          { email: { contains: search, mode: "insensitive" as const } },
-        ],
-      }),
-    };
-
-    const [leads, total, totalLeads, leadsThisMonth, leadsToday] = await Promise.all([
-      prisma.lead.findMany({
-        where,
-        orderBy: { createdAt: "desc" },
-        skip: (page - 1) * limit,
-        take: limit,
-      }),
-      prisma.lead.count({ where }),
-      prisma.lead.count({ where: { agentId } }),
-      prisma.lead.count({
-        where: { agentId, createdAt: { gte: monthStart } },
-      }),
-      prisma.lead.count({
-        where: { agentId, createdAt: { gte: todayStart } },
-      }),
-    ]);
-
-    return NextResponse.json({
-      leads,
-      total,
-      page,
-      totalPages: Math.ceil(total / limit),
-      stats: {
-        totalLeads,
-        leadsThisMonth,
-        leadsToday,
-      },
+    const lead = await prisma.lead.findFirst({
+      where: { id, agentId: session.user.id },
     });
+
+    if (!lead) {
+      return NextResponse.json({ error: "Lead not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ lead });
   } catch (error) {
-    console.error("Leads list error:", error);
+    console.error("Lead fetch error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -69,13 +31,34 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function POST(req: NextRequest) {
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const [session, authError] = await requireAgent();
     if (authError) return authError;
 
     const rateLimited = applyRateLimit(`leads:${session.user.id}`, 30, 60 * 1000);
     if (rateLimited) return rateLimited;
+
+    const { id } = await params;
+
+    // Verify ownership and NEW status
+    const existing = await prisma.lead.findFirst({
+      where: { id, agentId: session.user.id },
+    });
+
+    if (!existing) {
+      return NextResponse.json({ error: "Lead not found" }, { status: 404 });
+    }
+
+    if (existing.status !== "NEW") {
+      return NextResponse.json(
+        { error: "Only leads with NEW status can be edited" },
+        { status: 403 }
+      );
+    }
 
     const body = await req.json();
     const { leadType, name, phone, email, address, propertyType, bedsBaths, timeline, contractStatus, appointmentTime, notes } = body;
@@ -85,19 +68,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Lead type must be Buyer or Seller" }, { status: 400 });
     }
 
-    // Sanitize and validate name
     const cleanName = sanitizeInput(name || "");
     if (cleanName.length < 2) {
       return NextResponse.json({ error: "Name must be at least 2 characters" }, { status: 400 });
     }
 
-    // Validate phone
     const phoneResult = validatePhone(phone);
     if (!phoneResult.valid) {
       return NextResponse.json({ error: phoneResult.error }, { status: 400 });
     }
 
-    // Validate email (optional)
     if (email && email.trim()) {
       const emailResult = validateEmail(email);
       if (!emailResult.valid) {
@@ -105,7 +85,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Validate required text fields
     const cleanAddress = sanitizeInput(address || "");
     if (cleanAddress.length < 2) {
       return NextResponse.json({ error: "Address is required" }, { status: 400 });
@@ -126,22 +105,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Timeline is required" }, { status: 400 });
     }
 
-    // Validate contract status
     if (!contractStatus || !["Yes", "No"].includes(contractStatus)) {
       return NextResponse.json({ error: "Contract status must be Yes or No" }, { status: 400 });
     }
 
-    // Validate appointment time
     const parsedAppointment = new Date(appointmentTime);
     if (!appointmentTime || isNaN(parsedAppointment.getTime())) {
       return NextResponse.json({ error: "Valid appointment time is required" }, { status: 400 });
     }
 
-    const cleanNotes = notes ? sanitizeInput(notes) : null;
-
-    const lead = await prisma.lead.create({
+    const lead = await prisma.lead.update({
+      where: { id },
       data: {
-        agentId: session.user.id,
         leadType,
         name: cleanName,
         phone: phone.trim(),
@@ -152,13 +127,13 @@ export async function POST(req: NextRequest) {
         timeline: cleanTimeline,
         contractStatus,
         appointmentTime: parsedAppointment,
-        notes: cleanNotes,
+        notes: notes ? sanitizeInput(notes) : null,
       },
     });
 
-    return NextResponse.json({ lead, message: "Lead submitted successfully" }, { status: 201 });
+    return NextResponse.json({ lead, message: "Lead updated successfully" });
   } catch (error) {
-    console.error("Lead creation error:", error);
+    console.error("Lead update error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

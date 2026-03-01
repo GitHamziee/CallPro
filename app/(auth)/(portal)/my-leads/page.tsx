@@ -17,6 +17,9 @@ import {
   Phone,
   MapPin,
   Lock,
+  Home,
+  Calendar,
+  FileText,
 } from "lucide-react";
 import { useMyLeads, type MyLead } from "@/hooks/useMyLeads";
 import { timeAgo, LEAD_STATUS_BADGES } from "@/lib/format-utils";
@@ -176,17 +179,16 @@ export default function MyLeadsPage() {
                     className="hover:bg-slate-50/70 transition-colors cursor-pointer"
                   >
                     <td className="px-5 py-4">
-                      <p className="text-sm font-medium text-slate-900">
-                        {lead.name}
-                      </p>
-                      <p
-                        className={`text-xs ${
-                          lead.contactHidden
-                            ? "text-slate-300 select-none blur-[3px]"
-                            : "text-slate-500"
-                        }`}
-                      >
-                        {lead.email}
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm font-medium text-slate-900">
+                          {lead.name}
+                        </p>
+                        <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${lead.leadType === "Buyer" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}`}>
+                          {lead.leadType}
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-500 truncate">
+                        {lead.address}
                       </p>
                     </td>
                     <td
@@ -324,32 +326,20 @@ export default function MyLeadsPage() {
             </div>
 
             {/* Body */}
-            <div className="px-6 py-5 space-y-4">
-              {/* Name */}
+            <div className="px-6 py-5 space-y-4 max-h-[60vh] overflow-y-auto">
+              {/* Lead Type + Name */}
               <div className="flex items-start gap-3">
                 <User className="h-4 w-4 text-slate-400 mt-0.5" />
                 <div>
                   <p className="text-xs text-slate-500">Name</p>
-                  <p className="text-sm font-medium text-slate-900">
-                    {selectedLead.name}
-                  </p>
-                </div>
-              </div>
-
-              {/* Email */}
-              <div className="flex items-start gap-3">
-                <Mail className="h-4 w-4 text-slate-400 mt-0.5" />
-                <div>
-                  <p className="text-xs text-slate-500">Email</p>
-                  <p
-                    className={`text-sm font-medium ${
-                      selectedLead.contactHidden
-                        ? "text-slate-300 select-none blur-[3px]"
-                        : "text-slate-900"
-                    }`}
-                  >
-                    {selectedLead.email}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm font-medium text-slate-900">
+                      {selectedLead.name}
+                    </p>
+                    <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${selectedLead.leadType === "Buyer" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}`}>
+                      {selectedLead.leadType}
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -370,22 +360,104 @@ export default function MyLeadsPage() {
                 </div>
               </div>
 
-              {/* Zip Code */}
+              {/* Email */}
+              {selectedLead.email && (
+                <div className="flex items-start gap-3">
+                  <Mail className="h-4 w-4 text-slate-400 mt-0.5" />
+                  <div>
+                    <p className="text-xs text-slate-500">Email</p>
+                    <p
+                      className={`text-sm font-medium ${
+                        selectedLead.contactHidden
+                          ? "text-slate-300 select-none blur-[3px]"
+                          : "text-slate-900"
+                      }`}
+                    >
+                      {selectedLead.email}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Address */}
               <div className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 text-slate-400 mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Zip Code</p>
-                  <p
-                    className={`text-sm font-medium ${
-                      selectedLead.contactHidden
-                        ? "text-slate-300 select-none blur-[3px]"
-                        : "text-slate-900"
-                    }`}
-                  >
-                    {selectedLead.zipCode}
+                  <p className="text-xs text-slate-500">Address</p>
+                  <p className="text-sm font-medium text-slate-900">
+                    {selectedLead.address}
                   </p>
                 </div>
               </div>
+
+              {/* Property Type */}
+              <div className="flex items-start gap-3">
+                <Home className="h-4 w-4 text-slate-400 mt-0.5" />
+                <div>
+                  <p className="text-xs text-slate-500">Property Type</p>
+                  <p className="text-sm font-medium text-slate-900">
+                    {selectedLead.propertyType}
+                  </p>
+                </div>
+              </div>
+
+              {/* Beds & Baths */}
+              <div className="flex items-start gap-3">
+                <Home className="h-4 w-4 text-slate-400 mt-0.5" />
+                <div>
+                  <p className="text-xs text-slate-500">Beds & Baths / Acreage</p>
+                  <p className="text-sm font-medium text-slate-900">
+                    {selectedLead.bedsBaths}
+                  </p>
+                </div>
+              </div>
+
+              {/* Timeline */}
+              <div className="flex items-start gap-3">
+                <Clock className="h-4 w-4 text-slate-400 mt-0.5" />
+                <div>
+                  <p className="text-xs text-slate-500">Timeline</p>
+                  <p className="text-sm font-medium text-slate-900">
+                    {selectedLead.timeline}
+                  </p>
+                </div>
+              </div>
+
+              {/* Contract Status */}
+              <div className="flex items-start gap-3">
+                <FileText className="h-4 w-4 text-slate-400 mt-0.5" />
+                <div>
+                  <p className="text-xs text-slate-500">Contract Active</p>
+                  <span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${selectedLead.contractStatus === "Yes" ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-600"}`}>
+                    {selectedLead.contractStatus}
+                  </span>
+                </div>
+              </div>
+
+              {/* Appointment Time */}
+              <div className="flex items-start gap-3">
+                <Calendar className="h-4 w-4 text-slate-400 mt-0.5" />
+                <div>
+                  <p className="text-xs text-slate-500">Appointment</p>
+                  <p className="text-sm font-medium text-slate-900">
+                    {new Date(selectedLead.appointmentTime).toLocaleDateString()}{" "}
+                    {new Date(selectedLead.appointmentTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                  </p>
+                </div>
+              </div>
+
+              {/* Notes */}
+              {selectedLead.notes && (
+                <div className="flex items-start gap-3">
+                  <FileText className="h-4 w-4 text-slate-400 mt-0.5" />
+                  <div>
+                    <p className="text-xs text-slate-500">Notes</p>
+                    <p className="text-sm font-medium text-slate-900">
+                      {selectedLead.notes}
+                    </p>
+                  </div>
+                </div>
+              )}
 
               {/* Status */}
               <div className="flex items-start gap-3">
