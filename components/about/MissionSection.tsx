@@ -36,17 +36,17 @@ export default function MissionSection() {
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center mb-24">
           <AnimatedSection>
             <Badge className="mb-4">Our Mission</Badge>
-            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl leading-tight">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl leading-tight">
               Delivering the ultimate{" "}
               <span className="gradient-text">real estate experience</span>
             </h2>
-            <p className="mt-5 text-slate-600 leading-relaxed">
+            <p className="mt-5 text-slate-600 dark:text-slate-400 leading-relaxed">
               Too many agents waste time chasing unqualified leads from outdated
               sources. We built R4Referral to change that — a referral network
               powered by AI verification and human validation that delivers
               leads who are genuinely ready to buy or sell.
             </p>
-            <p className="mt-4 text-slate-600 leading-relaxed">
+            <p className="mt-4 text-slate-600 dark:text-slate-400 leading-relaxed">
               Our agents don&apos;t wonder if leads are real. They get verified
               contact info, intent signals, and property details — so they can
               focus on what they do best: closing deals.
@@ -64,12 +64,12 @@ export default function MissionSection() {
                 ].map((item) => (
                   <div
                     key={item.label}
-                    className="flex flex-col items-center justify-center rounded-xl bg-slate-50 p-6 text-center border border-slate-100"
+                    className="flex flex-col items-center justify-center rounded-xl bg-slate-50 dark:bg-slate-900 p-6 text-center border border-slate-100 dark:border-slate-800"
                   >
                     <span className="text-2xl font-bold gradient-text">
                       {item.value}
                     </span>
-                    <span className="mt-1 text-xs text-slate-500">
+                    <span className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                       {item.label}
                     </span>
                   </div>
@@ -81,7 +81,7 @@ export default function MissionSection() {
 
         <AnimatedSection className="text-center mb-12">
           <Badge className="mb-4">Our Values</Badge>
-          <h2 className="text-3xl font-bold text-slate-900">
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
             What We Stand For
           </h2>
         </AnimatedSection>
@@ -92,13 +92,13 @@ export default function MissionSection() {
             return (
               <AnimatedSection key={value.title} delay={i * 0.1}>
                 <div className="glass-card rounded-2xl p-6 h-full transition-all duration-300 hover:-translate-y-1">
-                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 border border-brand-100">
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-900/30 border border-brand-100 dark:border-brand-800">
                     <Icon className="h-5 w-5 text-brand-600" />
                   </div>
-                  <h3 className="text-base font-semibold text-slate-900 mb-2">
+                  <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-2">
                     {value.title}
                   </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
+                  <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                     {value.description}
                   </p>
                 </div>

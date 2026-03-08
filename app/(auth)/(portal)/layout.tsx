@@ -13,7 +13,7 @@ export default function PortalLayout({
   // while useSession() resolves. This prevents loading flashes on tab navigation.
   return (
     <SidebarProvider>
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
         <Sidebar />
 
         {/* Main content area -- offset by sidebar width on desktop */}

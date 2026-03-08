@@ -17,10 +17,10 @@ export default function PrivacyPolicyPage() {
       <section className="py-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="glass-card rounded-2xl p-10">
-            <div className="space-y-8 text-slate-600 leading-relaxed">
+            <div className="space-y-8 text-slate-600 dark:text-slate-400 leading-relaxed">
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Policy Overview</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Policy Overview</h2>
                 <p>
                   This Policy governs the information practices of r4referral.com and its affiliates
                   or subsidiaries (&quot;we,&quot; &quot;us,&quot; and &quot;our&quot;) regarding your use of the
@@ -34,7 +34,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Policy Changes</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Policy Changes</h2>
                 <p>
                   We reserve the right to modify this Privacy Policy at any time and for any reason,
                   with the &quot;Last Updated&quot; date reflecting such changes. Any modifications will be
@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Information We Collect</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Information We Collect</h2>
                 <h3 className="text-base font-semibold text-slate-800 mt-4 mb-2">Direct Information You Provide to Us</h3>
                 <p>
                   There are many ways we may collect information from you, including when you:
@@ -105,7 +105,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">How We Use Your Information</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">How We Use Your Information</h2>
                 <p>The following outlines the purposes for which we may use the information we collect:</p>
                 <ul className="mt-2 space-y-1 list-disc list-inside text-slate-600">
                   <li>To fulfill the purpose for which you provided the information</li>
@@ -130,7 +130,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Disclosing Your Information</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Disclosing Your Information</h2>
                 <p>Under certain circumstances, we may need to disclose or share your information with non-affiliated third parties:</p>
                 <ul className="mt-2 space-y-2 text-slate-600">
                   <li><strong>Your consent:</strong> We may share your information with third parties if you have provided us with consent to do so.</li>
@@ -142,7 +142,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Online Analytics and Advertising</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Online Analytics and Advertising</h2>
                 <p>
                   We may utilize third-party web analytics services, such as Google Analytics, to gather and
                   analyze information. These service providers collect data, including your IP address, through
@@ -161,7 +161,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Managing Your Data</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Managing Your Data</h2>
                 <p>
                   To ensure the accuracy of your information, you have the ability to access and modify certain
                   data in accordance with applicable laws. Should your provided information change or become
@@ -174,7 +174,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Children&apos;s Privacy</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Children&apos;s Privacy</h2>
                 <p>
                   R4Referral&apos;s Services are not designed for children under the age of 13. In the event that
                   we become aware of collecting personal information from children under 13, we will promptly
@@ -184,7 +184,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Security</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Security</h2>
                 <p>
                   R4Referral has implemented administrative, technical, and physical measures to safeguard against
                   unauthorized access, use, or alteration of your information. Nevertheless, we cannot guarantee
@@ -195,7 +195,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Third-Party Links and Services</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Third-Party Links and Services</h2>
                 <p>
                   R4Referral&apos;s Services may include links to third-party websites, applications, and services.
                   However, we do not assume responsibility for the privacy practices of these external sites and
@@ -204,7 +204,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Your California Privacy Rights</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Your California Privacy Rights</h2>
                 <p>
                   If you are a California resident, you have the right, once a year, to request information about
                   our disclosure of your &quot;personal information&quot; to third parties for direct marketing
@@ -216,7 +216,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Changes to this Privacy Policy</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Changes to this Privacy Policy</h2>
                 <p>
                   We reserve the right to modify this Privacy Policy at any time to reflect changes in the law,
                   our data collection and use practices, the features of our Services, or advancements in
@@ -226,7 +226,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Contact Us</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Contact Us</h2>
                 <p>
                   If you have any questions about this Privacy Policy, please contact us at info@r4referral.com.
                 </p>

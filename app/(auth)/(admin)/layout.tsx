@@ -15,10 +15,10 @@ export default function AdminLayout({
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-2 border-slate-200 border-t-slate-800 mx-auto mb-3" />
-          <p className="text-sm text-slate-500">Loading...</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">Loading...</p>
         </div>
       </div>
     );
@@ -31,7 +31,7 @@ export default function AdminLayout({
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
         <AdminSidebar />
         <div className="md:ml-46 flex flex-col min-h-screen">
           <AdminTopBar />

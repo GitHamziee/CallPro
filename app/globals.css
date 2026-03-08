@@ -101,12 +101,41 @@
   --sidebar-ring: oklch(0.55 0.22 255);
 }
 
+.dark {
+  --background: oklch(0.13 0.02 255);
+  --foreground: oklch(0.97 0.01 240);
+  --card: oklch(0.17 0.02 255);
+  --card-foreground: oklch(0.97 0.01 240);
+  --popover: oklch(0.17 0.02 255);
+  --popover-foreground: oklch(0.97 0.01 240);
+  --primary: oklch(0.55 0.22 255);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.22 0.02 255);
+  --secondary-foreground: oklch(0.97 0.01 240);
+  --muted: oklch(0.22 0.02 255);
+  --muted-foreground: oklch(0.65 0.02 240);
+  --accent: oklch(0.22 0.02 255);
+  --accent-foreground: oklch(0.97 0.01 240);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.30 0.02 255);
+  --input: oklch(0.30 0.02 255);
+  --ring: oklch(0.55 0.22 255);
+  --sidebar: oklch(0.17 0.02 255);
+  --sidebar-foreground: oklch(0.97 0.01 240);
+  --sidebar-primary: oklch(0.55 0.22 255);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.22 0.02 255);
+  --sidebar-accent-foreground: oklch(0.97 0.01 240);
+  --sidebar-border: oklch(0.30 0.02 255);
+  --sidebar-ring: oklch(0.55 0.22 255);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-white text-slate-900 antialiased;
+    @apply bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased;
   }
 }
 
@@ -116,6 +145,11 @@
     linear-gradient(to right, rgba(37, 99, 235, 0.04) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
   background-size: 64px 64px;
+}
+:is(.dark *).grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(37, 99, 235, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
 }
 
 /* Gradient text utility */
@@ -132,6 +166,12 @@
 }
 .btn-glow:hover {
   box-shadow: 0 0 30px rgba(37, 99, 235, 0.4);
+}
+:is(.dark *).btn-glow {
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.35);
+}
+:is(.dark *).btn-glow:hover {
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.55);
 }
 
 /* Gradient CTA button with moving shimmer + underglow */
@@ -219,6 +259,15 @@
 .glass-card:hover {
   border-color: #bfdbfe;
   box-shadow: 0 4px 16px 0 rgba(37, 99, 235, 0.08);
+}
+:is(.dark *).glass-card {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+}
+:is(.dark *).glass-card:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 16px 0 rgba(37, 99, 235, 0.15);
 }
 
 /* Floating blob drift — ambient background animation */

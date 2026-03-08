@@ -30,7 +30,7 @@ export default function PageLoader() {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white transition-opacity duration-500 ease-in-out ${
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white dark:bg-slate-950 transition-opacity duration-500 ease-in-out ${
         fading ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
@@ -39,13 +39,13 @@ export default function PageLoader() {
         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-600 shadow-lg shadow-brand-600/30">
           <PhoneCall className="h-6 w-6 text-white" />
         </div>
-        <span className="text-2xl font-bold text-slate-900">
+        <span className="text-2xl font-bold text-slate-900 dark:text-white">
           R4<span className="text-brand-600">Referral</span>
         </span>
       </div>
 
       {/* Progress bar track */}
-      <div className="w-40 h-0.5 bg-slate-100 rounded-full overflow-hidden">
+      <div className="w-40 h-0.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
         <div
           className="h-full w-full bg-brand-600 rounded-full origin-left"
           style={{ animation: "loader-bar 1.5s cubic-bezier(0.4,0,0.2,1) forwards" }}

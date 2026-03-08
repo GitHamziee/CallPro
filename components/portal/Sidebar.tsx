@@ -28,19 +28,19 @@ export default function Sidebar() {
   });
 
   const sidebarContent = (
-    <div className="flex h-full flex-col bg-white border-r border-slate-200">
+    <div className="flex h-full flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700">
       {/* Logo */}
-      <div className="flex h-16 items-center gap-2.5 px-6 border-b border-slate-100">
+      <div className="flex h-16 items-center gap-2.5 px-6 border-b border-slate-100 dark:border-slate-800">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 shadow-sm">
           <PhoneCall className="h-4 w-4 text-white" />
         </div>
-        <span className="text-lg font-bold text-slate-900">
-          R4<span className="text-brand-600">Referral</span>
+        <span className="text-lg font-bold text-slate-900 dark:text-white">
+          R4<span className="text-brand-600 dark:text-brand-400">Referral</span>
         </span>
         {/* Close button -- mobile only */}
         <button
           onClick={close}
-          className="ml-auto md:hidden p-1 rounded-md text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+          className="ml-auto md:hidden p-1 rounded-md text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           aria-label="Close sidebar"
         >
           <X className="h-5 w-5" />
@@ -59,8 +59,8 @@ export default function Sidebar() {
               onClick={close}
               className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                 isActive
-                  ? "bg-brand-50 text-brand-600"
-                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                  ? "bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400"
+                  : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
               <Icon className="h-5 w-5" />
@@ -71,10 +71,10 @@ export default function Sidebar() {
       </nav>
 
       {/* Logout -- pinned to bottom */}
-      <div className="px-3 py-4 border-t border-slate-100">
+      <div className="px-3 py-4 border-t border-slate-100 dark:border-slate-800">
         <button
           onClick={() => signOut({ callbackUrl: "/" })}
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-red-50 hover:text-red-600 transition-colors"
+          className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors"
         >
           <LogOut className="h-5 w-5" />
           Log Out

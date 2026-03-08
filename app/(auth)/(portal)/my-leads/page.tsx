@@ -47,54 +47,54 @@ export default function MyLeadsPage() {
     <div className="mx-auto max-w-5xl">
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-        <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-50">
+        <div className="flex items-center gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-50 dark:bg-amber-900/30">
             <Clock className="h-5 w-5 text-amber-600" />
           </div>
           <div>
-            <p className="text-2xl font-semibold text-slate-900">
+            <p className="text-2xl font-semibold text-slate-900 dark:text-white">
               {stats?.pendingCount ?? 0}
             </p>
-            <p className="text-xs text-slate-500">Pending</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Pending</p>
           </div>
         </div>
-        <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50">
+        <div className="flex items-center gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-900/30">
             <CheckCircle className="h-5 w-5 text-emerald-600" />
           </div>
           <div>
-            <p className="text-2xl font-semibold text-slate-900">
+            <p className="text-2xl font-semibold text-slate-900 dark:text-white">
               {stats?.acceptedCount ?? 0}
             </p>
-            <p className="text-xs text-slate-500">Accepted</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Accepted</p>
           </div>
         </div>
-        <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50">
+        <div className="flex items-center gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-900/30">
             <CreditCard className="h-5 w-5 text-blue-600" />
           </div>
           <div>
-            <p className="text-2xl font-semibold text-slate-900">
+            <p className="text-2xl font-semibold text-slate-900 dark:text-white">
               {stats?.invoicedCount ?? 0}
             </p>
-            <p className="text-xs text-slate-500">Invoiced</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Invoiced</p>
           </div>
         </div>
-        <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-50">
+        <div className="flex items-center gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-50 dark:bg-green-900/30">
             <DollarSign className="h-5 w-5 text-green-600" />
           </div>
           <div>
-            <p className="text-2xl font-semibold text-slate-900">
+            <p className="text-2xl font-semibold text-slate-900 dark:text-white">
               {stats?.paidCount ?? 0}
             </p>
-            <p className="text-xs text-slate-500">Paid</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Paid</p>
           </div>
         </div>
       </div>
 
       {/* Status filter pills */}
-      <div className="flex items-center gap-1 mb-5 rounded-xl border border-slate-200 bg-white p-1 w-fit">
+      <div className="flex items-center gap-1 mb-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-1 w-fit">
         {[
           { label: "All", value: "" },
           { label: "Pending", value: "PENDING" },
@@ -107,8 +107,8 @@ export default function MyLeadsPage() {
             onClick={() => setStatusFilter(opt.value)}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
               statusFilter === opt.value
-                ? "bg-slate-900 text-white shadow-sm"
-                : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
+                ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-700"
             }`}
           >
             {opt.label}
@@ -118,31 +118,31 @@ export default function MyLeadsPage() {
 
       {/* Error */}
       {error && (
-        <div className="mb-4 px-4 py-3 rounded-xl bg-red-50 text-red-700 text-sm font-medium border border-red-200">
+        <div className="mb-4 px-4 py-3 rounded-xl bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-sm font-medium border border-red-200 dark:border-red-800">
           {error}
         </div>
       )}
 
       {/* Leads table */}
-      <div className="rounded-xl border border-slate-200 bg-white overflow-hidden">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden">
         {loading ? (
-          <div className="divide-y divide-slate-100">
+          <div className="divide-y divide-slate-100 dark:divide-slate-800">
             {Array.from({ length: 5 }).map((_, i) => (
               <div
                 key={i}
                 className="flex items-center gap-4 px-5 py-4 animate-pulse"
               >
-                <div className="h-10 w-10 rounded-full bg-slate-100" />
+                <div className="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-700" />
                 <div className="flex-1 space-y-2">
-                  <div className="h-4 w-32 rounded bg-slate-100" />
-                  <div className="h-3 w-48 rounded bg-slate-50" />
+                  <div className="h-4 w-32 rounded bg-slate-100 dark:bg-slate-700" />
+                  <div className="h-3 w-48 rounded bg-slate-50 dark:bg-slate-700" />
                 </div>
-                <div className="h-6 w-20 rounded bg-slate-100" />
+                <div className="h-6 w-20 rounded bg-slate-100 dark:bg-slate-700" />
               </div>
             ))}
           </div>
         ) : leads.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-slate-400">
+          <div className="flex flex-col items-center justify-center py-20 text-slate-400 dark:text-slate-500">
             <Inbox className="h-10 w-10 mb-3" />
             <p className="text-sm font-medium">No leads yet</p>
             <p className="text-xs mt-1">
@@ -153,49 +153,49 @@ export default function MyLeadsPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-slate-200 bg-slate-50/50">
-                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3">
+                <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800">
+                  <th className="text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-5 py-3">
                     Lead
                   </th>
-                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3 hidden sm:table-cell">
+                  <th className="text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-5 py-3 hidden sm:table-cell">
                     Phone
                   </th>
-                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3 hidden lg:table-cell">
+                  <th className="text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-5 py-3 hidden lg:table-cell">
                     Agent
                   </th>
-                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3">
+                  <th className="text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-5 py-3">
                     Status
                   </th>
-                  <th className="text-right text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3">
+                  <th className="text-right text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-5 py-3">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {leads.map((lead) => (
                   <tr
                     key={lead.id}
                     onClick={() => setSelectedLead(lead)}
-                    className="hover:bg-slate-50/70 transition-colors cursor-pointer"
+                    className="hover:bg-slate-50/70 dark:hover:bg-slate-700/50 transition-colors cursor-pointer"
                   >
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-2">
-                        <p className="text-sm font-medium text-slate-900">
+                        <p className="text-sm font-medium text-slate-900 dark:text-white">
                           {lead.name}
                         </p>
-                        <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${lead.leadType === "Buyer" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}`}>
+                        <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${lead.leadType === "Buyer" ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400" : "bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400"}`}>
                           {lead.leadType}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500 truncate">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
                         {lead.address}
                       </p>
                     </td>
-                    <td className="px-5 py-4 text-sm hidden sm:table-cell text-slate-400">
+                    <td className="px-5 py-4 text-sm hidden sm:table-cell text-slate-400 dark:text-slate-500">
                       {lead.status === "PENDING" ? "—" : lead.phone}
                     </td>
                     <td className="px-5 py-4 hidden lg:table-cell">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400">
                         <Headset className="h-3 w-3" />
                         {lead.agent.name || lead.agent.email}
                       </span>
@@ -216,7 +216,7 @@ export default function MyLeadsPage() {
                           <button
                             onClick={(e) => { e.stopPropagation(); handleAction(lead.id, "accept"); }}
                             disabled={acting !== null}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors disabled:opacity-50"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors disabled:opacity-50"
                           >
                             {acting === lead.id ? (
                               <div className="animate-spin rounded-full h-3 w-3 border-2 border-emerald-200 border-t-emerald-600" />
@@ -228,7 +228,7 @@ export default function MyLeadsPage() {
                           <button
                             onClick={(e) => { e.stopPropagation(); handleAction(lead.id, "decline"); }}
                             disabled={acting !== null}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-50 text-red-600 hover:bg-red-100 transition-colors disabled:opacity-50"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors disabled:opacity-50"
                           >
                             <XCircle className="h-3 w-3" />
                             Decline
@@ -236,13 +236,13 @@ export default function MyLeadsPage() {
                         </div>
                       ) : lead.status === "INVOICED" && lead.invoice ? (
                         <div className="flex items-center justify-end gap-2">
-                          <span className="text-sm font-medium text-slate-700">
+                          <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                             ${(lead.invoice.amount / 100).toFixed(2)}
                           </span>
                           <button
                             onClick={(e) => { e.stopPropagation(); handlePayInvoice(lead.invoice!.id); }}
                             disabled={acting !== null}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors disabled:opacity-50"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors disabled:opacity-50"
                           >
                             {acting === lead.invoice.id ? (
                               <div className="animate-spin rounded-full h-3 w-3 border-2 border-blue-200 border-t-blue-600" />
@@ -254,18 +254,18 @@ export default function MyLeadsPage() {
                         </div>
                       ) : lead.status === "PAID" ? (
                         lead.invoice?.description?.startsWith("Paid via Package") ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-violet-50 text-violet-700">
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-violet-50 dark:bg-violet-900/30 text-violet-700 dark:text-violet-400">
                             <CheckCircle className="h-3 w-3" />
                             Package
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 text-xs text-green-600 font-medium">
+                          <span className="inline-flex items-center gap-1 text-xs text-green-600 dark:text-green-400 font-medium">
                             <CheckCircle className="h-3 w-3" />
                             Paid
                           </span>
                         )
                       ) : (
-                        <span className="text-xs text-slate-400">
+                        <span className="text-xs text-slate-400 dark:text-slate-500">
                           {timeAgo(lead.createdAt)}
                         </span>
                       )}
@@ -279,22 +279,22 @@ export default function MyLeadsPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-5 py-3 border-t border-slate-100 bg-slate-50/30">
-            <p className="text-xs text-slate-500">
+          <div className="flex items-center justify-between px-5 py-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-800">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Page {page} of {totalPages} ({total} total)
             </p>
             <div className="flex gap-1.5">
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="flex items-center justify-center h-8 w-8 rounded-lg border border-slate-200 text-slate-500 hover:bg-white hover:text-slate-900 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                className="flex items-center justify-center h-8 w-8 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
-                className="flex items-center justify-center h-8 w-8 rounded-lg border border-slate-200 text-slate-500 hover:bg-white hover:text-slate-900 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                className="flex items-center justify-center h-8 w-8 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -310,17 +310,17 @@ export default function MyLeadsPage() {
           onClick={() => setSelectedLead(null)}
         >
           <div
-            className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+            className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-              <h3 className="text-lg font-bold text-slate-900">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-700">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                 Lead Details
               </h3>
               <button
                 onClick={() => setSelectedLead(null)}
-                className="p-1 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
+                className="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -332,21 +332,21 @@ export default function MyLeadsPage() {
                 /* ── Locked preview for PENDING leads ── */
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <User className="h-4 w-4 text-slate-400 mt-0.5" />
+                    <User className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-500">Lead</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Lead</p>
                       <div className="flex items-center gap-2">
-                        <p className="text-sm font-medium text-slate-900">{selectedLead.name}</p>
-                        <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${selectedLead.leadType === "Buyer" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}`}>
+                        <p className="text-sm font-medium text-slate-900 dark:text-white">{selectedLead.name}</p>
+                        <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${selectedLead.leadType === "Buyer" ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400" : "bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400"}`}>
                           {selectedLead.leadType}
                         </span>
                       </div>
                     </div>
                   </div>
-                  <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-8 text-center">
-                    <Lock className="h-8 w-8 text-slate-300 mx-auto mb-3" />
-                    <p className="text-sm font-semibold text-slate-700 mb-1">Details Locked</p>
-                    <p className="text-xs text-slate-500 max-w-xs mx-auto">
+                  <div className="rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-4 py-8 text-center">
+                    <Lock className="h-8 w-8 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
+                    <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Details Locked</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto">
                       Accept this lead to unlock the full contact info and lead details.
                     </p>
                   </div>
@@ -356,12 +356,12 @@ export default function MyLeadsPage() {
                 <div className="space-y-4">
                   {/* Lead Type + Name */}
                   <div className="flex items-start gap-3">
-                    <User className="h-4 w-4 text-slate-400 mt-0.5" />
+                    <User className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-500">Name</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Name</p>
                       <div className="flex items-center gap-2">
-                        <p className="text-sm font-medium text-slate-900">{selectedLead.name}</p>
-                        <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${selectedLead.leadType === "Buyer" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}`}>
+                        <p className="text-sm font-medium text-slate-900 dark:text-white">{selectedLead.name}</p>
+                        <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${selectedLead.leadType === "Buyer" ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400" : "bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400"}`}>
                           {selectedLead.leadType}
                         </span>
                       </div>
@@ -370,10 +370,10 @@ export default function MyLeadsPage() {
 
                   {/* Phone */}
                   <div className="flex items-start gap-3">
-                    <Phone className="h-4 w-4 text-slate-400 mt-0.5" />
+                    <Phone className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-500">Phone</p>
-                      <p className="text-sm font-medium text-slate-900">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Phone</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">
                         {selectedLead.phone}
                       </p>
                     </div>
@@ -382,10 +382,10 @@ export default function MyLeadsPage() {
                   {/* Email */}
                   {selectedLead.email && (
                     <div className="flex items-start gap-3">
-                      <Mail className="h-4 w-4 text-slate-400 mt-0.5" />
+                      <Mail className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                       <div>
-                        <p className="text-xs text-slate-500">Email</p>
-                        <p className="text-sm font-medium text-slate-900">
+                        <p className="text-xs text-slate-500 dark:text-slate-400">Email</p>
+                        <p className="text-sm font-medium text-slate-900 dark:text-white">
                           {selectedLead.email}
                         </p>
                       </div>
@@ -394,46 +394,46 @@ export default function MyLeadsPage() {
 
                   {/* Address */}
                   <div className="flex items-start gap-3">
-                    <MapPin className="h-4 w-4 text-slate-400 mt-0.5" />
+                    <MapPin className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-500">Address</p>
-                      <p className="text-sm font-medium text-slate-900">{selectedLead.address}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Address</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">{selectedLead.address}</p>
                     </div>
                   </div>
 
                   {/* Property Type */}
                   <div className="flex items-start gap-3">
-                    <Home className="h-4 w-4 text-slate-400 mt-0.5" />
+                    <Home className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-500">Property Type</p>
-                      <p className="text-sm font-medium text-slate-900">{selectedLead.propertyType}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Property Type</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">{selectedLead.propertyType}</p>
                     </div>
                   </div>
 
                   {/* Beds & Baths */}
                   <div className="flex items-start gap-3">
-                    <Home className="h-4 w-4 text-slate-400 mt-0.5" />
+                    <Home className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-500">Beds & Baths / Acreage</p>
-                      <p className="text-sm font-medium text-slate-900">{selectedLead.bedsBaths}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Beds & Baths / Acreage</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">{selectedLead.bedsBaths}</p>
                     </div>
                   </div>
 
                   {/* Timeline */}
                   <div className="flex items-start gap-3">
-                    <Clock className="h-4 w-4 text-slate-400 mt-0.5" />
+                    <Clock className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-500">Timeline</p>
-                      <p className="text-sm font-medium text-slate-900">{selectedLead.timeline}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Timeline</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">{selectedLead.timeline}</p>
                     </div>
                   </div>
 
                   {/* Contract Status */}
                   <div className="flex items-start gap-3">
-                    <FileText className="h-4 w-4 text-slate-400 mt-0.5" />
+                    <FileText className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-500">Contract Active</p>
-                      <span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${selectedLead.contractStatus === "Yes" ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-600"}`}>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Contract Active</p>
+                      <span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${selectedLead.contractStatus === "Yes" ? "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400" : "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400"}`}>
                         {selectedLead.contractStatus}
                       </span>
                     </div>
@@ -441,10 +441,10 @@ export default function MyLeadsPage() {
 
                   {/* Appointment Time */}
                   <div className="flex items-start gap-3">
-                    <Calendar className="h-4 w-4 text-slate-400 mt-0.5" />
+                    <Calendar className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-500">Appointment</p>
-                      <p className="text-sm font-medium text-slate-900">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Appointment</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">
                         {new Date(selectedLead.appointmentTime).toLocaleDateString()}{" "}
                         {new Date(selectedLead.appointmentTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                       </p>
@@ -454,19 +454,19 @@ export default function MyLeadsPage() {
                   {/* Notes */}
                   {selectedLead.notes && (
                     <div className="flex items-start gap-3">
-                      <FileText className="h-4 w-4 text-slate-400 mt-0.5" />
+                      <FileText className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                       <div>
-                        <p className="text-xs text-slate-500">Notes</p>
-                        <p className="text-sm font-medium text-slate-900">{selectedLead.notes}</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">Notes</p>
+                        <p className="text-sm font-medium text-slate-900 dark:text-white">{selectedLead.notes}</p>
                       </div>
                     </div>
                   )}
 
                   {/* Status */}
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-4 w-4 text-slate-400 mt-0.5" />
+                    <CheckCircle className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-500">Status</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Status</p>
                       <span className={`inline-flex px-2.5 py-1 rounded-full text-xs font-semibold ${LEAD_STATUS_BADGES[selectedLead.status] || LEAD_STATUS_BADGES.PENDING}`}>
                         {selectedLead.status}
                       </span>
@@ -475,10 +475,10 @@ export default function MyLeadsPage() {
 
                   {/* Agent */}
                   <div className="flex items-start gap-3">
-                    <Headset className="h-4 w-4 text-slate-400 mt-0.5" />
+                    <Headset className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-500">Agent</p>
-                      <p className="text-sm font-medium text-slate-900">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Agent</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">
                         {selectedLead.agent.name || selectedLead.agent.email}
                       </p>
                     </div>
@@ -486,10 +486,10 @@ export default function MyLeadsPage() {
 
                   {/* Date */}
                   <div className="flex items-start gap-3">
-                    <Clock className="h-4 w-4 text-slate-400 mt-0.5" />
+                    <Clock className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                     <div>
-                      <p className="text-xs text-slate-500">Submitted</p>
-                      <p className="text-sm font-medium text-slate-900">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Submitted</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">
                         {new Date(selectedLead.createdAt).toLocaleDateString()} ({timeAgo(selectedLead.createdAt)})
                       </p>
                     </div>
@@ -498,18 +498,18 @@ export default function MyLeadsPage() {
                   {/* Invoice */}
                   {selectedLead.invoice && (
                     <div className="flex items-start gap-3">
-                      <DollarSign className="h-4 w-4 text-slate-400 mt-0.5" />
+                      <DollarSign className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                       <div>
-                        <p className="text-xs text-slate-500">Invoice</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">Invoice</p>
                         {selectedLead.invoice.description?.startsWith("Paid via Package") ? (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-violet-50 text-violet-700">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-violet-50 dark:bg-violet-900/30 text-violet-700 dark:text-violet-400">
                             <CheckCircle className="h-3 w-3" />
                             {selectedLead.invoice.description}
                           </span>
                         ) : (
-                          <p className="text-sm font-medium text-slate-900">
+                          <p className="text-sm font-medium text-slate-900 dark:text-white">
                             ${(selectedLead.invoice.amount / 100).toFixed(2)}{" "}
-                            <span className={`text-xs font-semibold ${selectedLead.invoice.status === "PAID" ? "text-green-600" : "text-amber-600"}`}>
+                            <span className={`text-xs font-semibold ${selectedLead.invoice.status === "PAID" ? "text-green-600 dark:text-green-400" : "text-amber-600 dark:text-amber-400"}`}>
                               ({selectedLead.invoice.status})
                             </span>
                           </p>
@@ -523,7 +523,7 @@ export default function MyLeadsPage() {
             </div>
 
             {/* Footer actions */}
-            <div className="px-6 py-4 border-t border-slate-100 flex justify-end gap-2">
+            <div className="px-6 py-4 border-t border-slate-100 dark:border-slate-700 flex justify-end gap-2">
               {selectedLead.status === "PENDING" && (
                 <>
                   <button
@@ -531,7 +531,7 @@ export default function MyLeadsPage() {
                       handleAction(selectedLead.id, "decline");
                       setSelectedLead(null);
                     }}
-                    className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+                    className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors"
                   >
                     Decline
                   </button>
@@ -540,7 +540,7 @@ export default function MyLeadsPage() {
                       handleAction(selectedLead.id, "accept");
                       setSelectedLead(null);
                     }}
-                    className="px-4 py-2 rounded-lg text-xs font-semibold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors"
+                    className="px-4 py-2 rounded-lg text-xs font-semibold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors"
                   >
                     Accept
                   </button>
@@ -552,14 +552,14 @@ export default function MyLeadsPage() {
                     handlePayInvoice(selectedLead.invoice!.id);
                     setSelectedLead(null);
                   }}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
                 >
                   Pay ${(selectedLead.invoice.amount / 100).toFixed(2)}
                 </button>
               )}
               <button
                 onClick={() => setSelectedLead(null)}
-                className="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors"
+                className="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
               >
                 Close
               </button>

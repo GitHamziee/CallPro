@@ -17,10 +17,10 @@ export default function TermsOfServicePage() {
       <section className="py-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="glass-card rounded-2xl p-10">
-            <div className="space-y-8 text-slate-600 leading-relaxed">
+            <div className="space-y-8 text-slate-600 dark:text-slate-400 leading-relaxed">
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">About R4Referral</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">About R4Referral</h2>
                 <p>
                   R4Referral provides outbound sales services designed to help B2B companies scale their
                   pipeline. Through our trained agents, proven calling frameworks, and data-driven approach,
@@ -30,7 +30,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Definitions</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Definitions</h2>
                 <p>
                   The terms &quot;we,&quot; &quot;us,&quot; &quot;our,&quot; and &quot;R4Referral&quot; refer to
                   R4Referral and its affiliates. &quot;You,&quot; &quot;your,&quot; and &quot;user&quot; refer to
@@ -41,7 +41,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Changes to Terms</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Changes to Terms</h2>
                 <p>
                   We reserve the right to make changes to R4Referral&apos;s Terms and Conditions at any time
                   and for any reason. We will alert you about any changes by updating the &quot;Last
@@ -52,7 +52,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Acceptance of Terms</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Acceptance of Terms</h2>
                 <p>
                   By utilizing R4Referral services, you consent to our Terms. Your usage of R4Referral services
                   implies that you have accepted and agreed to abide by these Terms. If you are accessing
@@ -65,7 +65,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Communications &amp; SMS Messaging</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Communications &amp; SMS Messaging</h2>
                 <p>
                   By providing your phone number and opting in to SMS communications, you consent to receive
                   text messages from R4Referral including appointment reminders, lead notifications, account
@@ -87,7 +87,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Client Obligations</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Client Obligations</h2>
                 <p>You agree to:</p>
                 <ul className="mt-2 space-y-1 list-disc list-inside text-slate-600">
                   <li>Provide accurate and complete information for campaign setup</li>
@@ -100,7 +100,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Payment Terms</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Payment Terms</h2>
                 <p>
                   Fees are charged monthly in advance. Payment is due within 5 business days of invoice.
                   Late payments may incur a 1.5% monthly late fee. We reserve the right to suspend
@@ -109,7 +109,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Dispute/Chargeback Waiver</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Dispute/Chargeback Waiver</h2>
                 <p>
                   All payments made are final and non-disputable. The Client expressly waives any right to
                   initiate chargebacks or payment reversals through their bank or card provider. Any concerns
@@ -120,7 +120,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Refunds</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Refunds</h2>
                 <p>
                   Any request for reconsideration of payment must be formally submitted in writing within
                   sixty (60) calendar days of the original service agreement execution date. Requests made
@@ -145,7 +145,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Intellectual Property</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Intellectual Property</h2>
                 <p>
                   All scripts, templates, processes, and methodologies developed by R4Referral remain the
                   intellectual property of R4Referral. Client-provided materials remain the property of the
@@ -154,7 +154,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Data Disclosure</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Data Disclosure</h2>
                 <p>We may need to access or reveal your data for the following reasons:</p>
                 <ul className="mt-2 space-y-1 list-disc list-inside text-slate-600">
                   <li>Delivering R4Referral services as required</li>
@@ -166,7 +166,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Confidential Information</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Confidential Information</h2>
                 <p>
                   &quot;Confidential Information&quot; refers to any information or data disclosed by either
                   party that is marked as confidential or proprietary, or which should reasonably be
@@ -182,7 +182,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Warranty Disclaimer</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Warranty Disclaimer</h2>
                 <p>
                   We offer R4Referral services &quot;as is&quot; and provide no warranties or representations
                   regarding these services. We explicitly deny any and all warranties, whether explicitly
@@ -193,7 +193,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Indemnification</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Indemnification</h2>
                 <p>
                   R4Referral will not be responsible for any bills, damages, or costs resulting from any claims
                   arising from your use of our services. You agree to indemnify R4Referral against all claims
@@ -205,7 +205,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Limitation of Liability</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Limitation of Liability</h2>
                 <p>
                   Neither party will be liable to the other party for any indirect, special, incidental,
                   consequential, or punitive damages of any kind, including damages for loss of goodwill,
@@ -217,7 +217,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Termination</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Termination</h2>
                 <p>
                   Either party may terminate services with 30 days written notice. R4Referral may suspend
                   services immediately if we have reason to believe you have violated these Terms, if your
@@ -228,7 +228,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Eligibility</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Eligibility</h2>
                 <p>
                   R4Referral services are intended for use by adults only and are not directed at minors. We do
                   not knowingly collect personally identifiable information from anyone under the age of 13.
@@ -238,7 +238,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">No Waiver</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">No Waiver</h2>
                 <p>
                   Our failure to enforce any provision of these Terms does not waive our right to do so in
                   the future. Even if we waive a provision, it is not waived for all time unless it is in
@@ -247,7 +247,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Force Majeure</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Force Majeure</h2>
                 <p>
                   If a party fails to perform any obligation due to a cause beyond its control and without
                   negligence, such as a natural disaster, civil or military authority&apos;s action, fire,
@@ -258,7 +258,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Governing Law and Venue</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Governing Law and Venue</h2>
                 <p>
                   The Federal Arbitration Act will govern the enforceability and interpretation of the
                   arbitration agreement section below. Apart from the arbitration provision, these terms will
@@ -271,7 +271,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Agreement to Arbitrate</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Agreement to Arbitrate</h2>
                 <p>
                   Before initiating any formal legal case, the parties should first attempt to resolve the
                   dispute through R4Referral&apos;s Customer Support. If the dispute remains unresolved, both
@@ -289,7 +289,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Entire Agreement</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Entire Agreement</h2>
                 <p>
                   These terms and their attachments replace all previous and current proposals, statements,
                   marketing materials, presentations, and agreements, both oral and written. Any information
@@ -299,7 +299,7 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Contact Us</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Contact Us</h2>
                 <p>
                   If you have any questions about these Terms, please contact us at info@r4referral.com.
                 </p>

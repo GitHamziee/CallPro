@@ -17,10 +17,10 @@ export default function ServicesPage() {
   return (
     <>
       {/* Header */}
-      <div className="relative overflow-hidden bg-white pt-24 pb-12 text-center">
+      <div className="relative overflow-hidden bg-white dark:bg-slate-950 pt-24 pb-12 text-center">
         <div className="grid-pattern absolute inset-0" />
-        <div className="absolute left-1/2 top-0 -translate-x-1/2 h-72 w-72 rounded-full bg-brand-100/60 blur-3xl" />
-        <div className="absolute top-1/2 -left-24 h-48 w-48 rounded-full bg-accent-100/40 blur-3xl" />
+        <div className="absolute left-1/2 top-0 -translate-x-1/2 h-72 w-72 rounded-full bg-brand-100/60 dark:bg-brand-900/30 blur-3xl" />
+        <div className="absolute top-1/2 -left-24 h-48 w-48 rounded-full bg-accent-100/40 dark:bg-accent-900/20 blur-3xl" />
 
         <div className="relative mx-auto max-w-4xl px-4">
           <div className="flex justify-center mb-4">
@@ -29,11 +29,11 @@ export default function ServicesPage() {
               Our Services
             </Badge>
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
             Everything You Need to{" "}
             <span className="gradient-text">Grow Your Business</span>
           </h1>
-          <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             End-to-end solutions powered by trained professionals. No
             freelancers, no offshore chaos — just results.
           </p>
@@ -44,17 +44,17 @@ export default function ServicesPage() {
       <ServiceProcess />
 
       {/* Bottom CTA */}
-      <section className="py-24 relative overflow-hidden bg-white">
+      <section className="py-24 relative overflow-hidden bg-white dark:bg-slate-950">
         <div className="grid-pattern absolute inset-0" />
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-brand-100/50 blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-brand-100/50 dark:bg-brand-900/30 blur-3xl" />
 
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <AnimatedSection>
             <Badge className="mb-4">Get Started</Badge>
-            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl leading-tight">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl leading-tight">
               Ready to <span className="gradient-text">Grow Your Business</span>?
             </h2>
-            <p className="mt-5 text-lg text-slate-600 max-w-xl mx-auto">
+            <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
               Get started with verified leads tailored to your market.
               Sign up today and start receiving leads within days.
             </p>
@@ -75,7 +75,7 @@ export default function ServicesPage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-slate-300 text-slate-700 hover:bg-slate-50 text-base px-8"
+                className="border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-base px-8"
               >
                 <Link href="/pricing">View Pricing</Link>
               </Button>

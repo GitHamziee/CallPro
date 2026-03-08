@@ -84,70 +84,70 @@ export default function AdminLeadsPage() {
     <div className="mx-auto max-w-6xl">
       {/* Stats row */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 mb-4 sm:mb-6">
-        <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border border-slate-200 bg-white p-3 sm:p-4">
-          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-blue-50 shrink-0">
+        <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 sm:p-4">
+          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-900/30 shrink-0">
             <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
           </div>
           <div>
-            <p className="text-xl sm:text-2xl font-semibold text-slate-900">
+            <p className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white">
               {stats?.totalLeads ?? 0}
             </p>
-            <p className="text-[10px] sm:text-xs text-slate-500">Total</p>
+            <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">Total</p>
           </div>
         </div>
-        <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border border-slate-200 bg-white p-3 sm:p-4">
-          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-slate-100 shrink-0">
-            <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-slate-500" />
+        <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 sm:p-4">
+          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-700 shrink-0">
+            <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-slate-500 dark:text-slate-400" />
           </div>
           <div>
-            <p className="text-xl sm:text-2xl font-semibold text-slate-900">
+            <p className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white">
               {stats?.newCount ?? 0}
             </p>
-            <p className="text-[10px] sm:text-xs text-slate-500">New</p>
+            <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">New</p>
           </div>
         </div>
-        <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border border-slate-200 bg-white p-3 sm:p-4">
-          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-amber-50 shrink-0">
+        <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 sm:p-4">
+          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-amber-50 dark:bg-amber-900/30 shrink-0">
             <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-amber-600" />
           </div>
           <div>
-            <p className="text-xl sm:text-2xl font-semibold text-slate-900">
+            <p className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white">
               {stats?.pendingCount ?? 0}
             </p>
-            <p className="text-[10px] sm:text-xs text-slate-500">Pending</p>
+            <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">Pending</p>
           </div>
         </div>
-        <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border border-slate-200 bg-white p-3 sm:p-4">
-          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-emerald-50 shrink-0">
+        <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 sm:p-4">
+          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-900/30 shrink-0">
             <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-600" />
           </div>
           <div>
-            <p className="text-xl sm:text-2xl font-semibold text-slate-900">
+            <p className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white">
               {stats?.acceptedCount ?? 0}
             </p>
-            <p className="text-[10px] sm:text-xs text-slate-500">Accepted</p>
+            <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">Accepted</p>
           </div>
         </div>
-        <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border border-slate-200 bg-white p-3 sm:p-4">
-          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-blue-50 shrink-0">
+        <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 sm:p-4">
+          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-900/30 shrink-0">
             <CreditCard className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
           </div>
           <div>
-            <p className="text-xl sm:text-2xl font-semibold text-slate-900">
+            <p className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white">
               {stats?.invoicedCount ?? 0}
             </p>
-            <p className="text-[10px] sm:text-xs text-slate-500">Invoiced</p>
+            <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">Invoiced</p>
           </div>
         </div>
-        <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border border-slate-200 bg-white p-3 sm:p-4">
-          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-green-50 shrink-0">
+        <div className="flex items-center gap-2.5 sm:gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 sm:p-4">
+          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-green-50 dark:bg-green-900/30 shrink-0">
             <DollarSign className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
           </div>
           <div>
-            <p className="text-xl sm:text-2xl font-semibold text-slate-900">
+            <p className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white">
               {stats?.paidCount ?? 0}
             </p>
-            <p className="text-[10px] sm:text-xs text-slate-500">Paid</p>
+            <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">Paid</p>
           </div>
         </div>
       </div>
@@ -155,13 +155,13 @@ export default function AdminLeadsPage() {
       {/* Search & Filters */}
       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mb-4 sm:mb-5">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
           <input
             type="text"
             placeholder="Search leads..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 border border-slate-200 dark:border-slate-600 rounded-xl text-sm bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
           />
         </div>
         {/* Agent dropdown */}
@@ -171,8 +171,8 @@ export default function AdminLeadsPage() {
               onClick={() => setAgentOpen((o) => !o)}
               className={`flex items-center gap-1.5 px-3 py-2.5 rounded-xl border text-xs font-medium transition-all ${
                 agentFilter
-                  ? "border-slate-900 bg-slate-900 text-white"
-                  : "border-slate-200 bg-white text-slate-600"
+                  ? "border-slate-900 bg-slate-900 text-white dark:border-white dark:bg-white dark:text-slate-900"
+                  : "border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400"
               }`}
             >
               <Headset className="h-3.5 w-3.5" />
@@ -184,11 +184,11 @@ export default function AdminLeadsPage() {
               <ChevronDown className={`h-3 w-3 transition-transform ${agentOpen ? "rotate-180" : ""}`} />
             </button>
             {agentOpen && (
-              <div className="absolute top-full left-0 mt-1 w-48 rounded-xl border border-slate-200 bg-white shadow-lg py-1 z-30 max-h-60 overflow-y-auto">
+              <div className="absolute top-full left-0 mt-1 w-48 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-lg py-1 z-30 max-h-60 overflow-y-auto">
                 <button
                   onClick={() => { setAgentFilter(""); setAgentOpen(false); }}
                   className={`w-full text-left px-3 py-2 text-xs font-medium transition-colors ${
-                    !agentFilter ? "bg-slate-50 text-slate-900" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                    !agentFilter ? "bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white" : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white"
                   }`}
                 >
                   All QA
@@ -199,7 +199,7 @@ export default function AdminLeadsPage() {
                     key={agent.id}
                     onClick={() => { setAgentFilter(agent.id); setAgentOpen(false); }}
                     className={`w-full text-left px-3 py-2 text-xs font-medium transition-colors truncate ${
-                      agentFilter === agent.id ? "bg-slate-50 text-slate-900" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                      agentFilter === agent.id ? "bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white" : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white"
                     }`}
                   >
                     {agent.name || agent.email}
@@ -212,15 +212,15 @@ export default function AdminLeadsPage() {
         )}
 
         {/* Desktop: inline status pills */}
-        <div className="hidden sm:flex items-center gap-1 rounded-xl border border-slate-200 bg-white p-1 self-start">
+        <div className="hidden sm:flex items-center gap-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-1 self-start">
           {STATUS_OPTIONS.map((opt) => (
             <button
               key={opt.label}
               onClick={() => setStatusFilter(opt.value)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 statusFilter === opt.value
-                  ? "bg-slate-900 text-white shadow-sm"
-                  : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
+                  ? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
+                  : "text-slate-500 hover:text-slate-900 hover:bg-slate-50 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700"
               }`}
             >
               {opt.label}
@@ -234,8 +234,8 @@ export default function AdminLeadsPage() {
             onClick={() => setFilterOpen((o) => !o)}
             className={`flex items-center gap-1.5 px-3 py-2.5 rounded-xl border text-xs font-medium transition-all ${
               statusFilter
-                ? "border-slate-900 bg-slate-900 text-white"
-                : "border-slate-200 bg-white text-slate-600"
+                ? "border-slate-900 bg-slate-900 text-white dark:border-white dark:bg-white dark:text-slate-900"
+                : "border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400"
             }`}
           >
             <SlidersHorizontal className="h-3.5 w-3.5" />
@@ -244,13 +244,13 @@ export default function AdminLeadsPage() {
               : "Filter"}
           </button>
           {filterOpen && (
-            <div className="absolute top-full left-0 mt-1 w-40 rounded-xl border border-slate-200 bg-white shadow-lg py-1 z-30">
+            <div className="absolute top-full left-0 mt-1 w-40 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-lg py-1 z-30">
               {STATUS_OPTIONS.map((opt) => (
                 <button
                   key={opt.label}
                   onClick={() => { setStatusFilter(opt.value); setFilterOpen(false); }}
                   className={`w-full text-left px-3 py-2 text-xs font-medium transition-colors ${
-                    statusFilter === opt.value ? "bg-slate-50 text-slate-900" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                    statusFilter === opt.value ? "bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white" : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white"
                   }`}
                 >
                   {opt.label}
@@ -263,25 +263,25 @@ export default function AdminLeadsPage() {
       </div>
 
       {/* Leads table */}
-      <div className="rounded-xl border border-slate-200 bg-white overflow-hidden">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden">
         {loading ? (
-          <div className="divide-y divide-slate-100">
+          <div className="divide-y divide-slate-100 dark:divide-slate-800">
             {Array.from({ length: 5 }).map((_, i) => (
               <div
                 key={i}
                 className="flex items-center gap-3 sm:gap-4 px-3 py-3 sm:px-5 sm:py-4 animate-pulse"
               >
-                <div className="h-10 w-10 rounded-full bg-slate-100" />
+                <div className="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-700" />
                 <div className="flex-1 space-y-2">
-                  <div className="h-4 w-32 rounded bg-slate-100" />
-                  <div className="h-3 w-48 rounded bg-slate-50" />
+                  <div className="h-4 w-32 rounded bg-slate-100 dark:bg-slate-700" />
+                  <div className="h-3 w-48 rounded bg-slate-50 dark:bg-slate-700" />
                 </div>
-                <div className="h-6 w-20 rounded bg-slate-100" />
+                <div className="h-6 w-20 rounded bg-slate-100 dark:bg-slate-700" />
               </div>
             ))}
           </div>
         ) : leads.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-slate-400">
+          <div className="flex flex-col items-center justify-center py-20 text-slate-400 dark:text-slate-500">
             <FileText className="h-10 w-10 mb-3" />
             <p className="text-sm font-medium">No leads found</p>
             <p className="text-xs mt-1">
@@ -292,50 +292,50 @@ export default function AdminLeadsPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-slate-200 bg-slate-50/50">
-                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3">
+                <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800">
+                  <th className="text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3">
                     Lead
                   </th>
-                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3 hidden sm:table-cell">
+                  <th className="text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3 hidden sm:table-cell">
                     Phone
                   </th>
-                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3 hidden lg:table-cell">
+                  <th className="text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3 hidden lg:table-cell">
                     QA
                   </th>
-                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3">
+                  <th className="text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3">
                     Status
                   </th>
-                  <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3">
+                  <th className="text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3">
                     Action
                   </th>
-                  <th className="text-right text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3">
+                  <th className="text-right text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3">
                     Date
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {leads.map((lead) => (
                   <tr
                     key={lead.id}
                     onClick={() => setSelectedLead(lead)}
-                    className="hover:bg-slate-50/70 transition-colors cursor-pointer"
+                    className="hover:bg-slate-50/70 dark:hover:bg-slate-700/50 transition-colors cursor-pointer"
                   >
                     <td className="px-3 py-3 sm:px-5 sm:py-4">
                       <div className="flex items-center gap-1.5">
-                        <p className="text-xs sm:text-sm font-medium text-slate-900 truncate">
+                        <p className="text-xs sm:text-sm font-medium text-slate-900 dark:text-white truncate">
                           {lead.name}
                         </p>
-                        <span className={`hidden sm:inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase shrink-0 ${lead.leadType === "Buyer" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}`}>
+                        <span className={`hidden sm:inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase shrink-0 ${lead.leadType === "Buyer" ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400" : "bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400"}`}>
                           {lead.leadType}
                         </span>
                       </div>
-                      <p className="text-[10px] sm:text-xs text-slate-500 truncate">{lead.address}</p>
+                      <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 truncate">{lead.address}</p>
                     </td>
-                    <td className="px-3 py-3 sm:px-5 sm:py-4 text-sm text-slate-600 hidden sm:table-cell">
+                    <td className="px-3 py-3 sm:px-5 sm:py-4 text-sm text-slate-600 dark:text-slate-400 hidden sm:table-cell">
                       {lead.phone}
                     </td>
                     <td className="px-3 py-3 sm:px-5 sm:py-4 hidden lg:table-cell">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400">
                         <Headset className="h-3 w-3" />
                         {lead.agent.name || lead.agent.email}
                       </span>
@@ -354,7 +354,7 @@ export default function AdminLeadsPage() {
                       {lead.status === "NEW" && !lead.assignedTo ? (
                         <button
                           onClick={(e) => { e.stopPropagation(); setAssignLeadId(lead.id); }}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-brand-50 text-brand-700 hover:bg-brand-100 transition-colors"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-brand-50 dark:bg-brand-900/30 text-brand-700 hover:bg-brand-100 dark:hover:bg-brand-900/50 transition-colors"
                         >
                           <UserPlus className="h-3 w-3" />
                           Assign
@@ -362,7 +362,7 @@ export default function AdminLeadsPage() {
                       ) : lead.status === "ACCEPTED" ? (
                         <button
                           onClick={(e) => { e.stopPropagation(); setInvoiceLeadId(lead.id); }}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
                         >
                           <DollarSign className="h-3 w-3" />
                           Send Invoice
@@ -370,18 +370,18 @@ export default function AdminLeadsPage() {
                       ) : (lead.status === "INVOICED" ||
                           lead.status === "PAID") &&
                         lead.invoice ? (
-                        <span className="text-sm font-medium text-slate-700">
+                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                           ${(lead.invoice.amount / 100).toFixed(2)}
                         </span>
                       ) : lead.assignedTo ? (
-                        <span className="text-sm text-slate-700">
+                        <span className="text-sm text-slate-700 dark:text-slate-300">
                           {lead.assignedTo.name || lead.assignedTo.email}
                         </span>
                       ) : (
-                        <span className="text-xs text-slate-400">&mdash;</span>
+                        <span className="text-xs text-slate-400 dark:text-slate-500">&mdash;</span>
                       )}
                     </td>
-                    <td className="px-3 py-3 sm:px-5 sm:py-4 text-right text-xs text-slate-400">
+                    <td className="px-3 py-3 sm:px-5 sm:py-4 text-right text-xs text-slate-400 dark:text-slate-500">
                       {timeAgo(lead.createdAt)}
                     </td>
                   </tr>
@@ -393,22 +393,22 @@ export default function AdminLeadsPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-3 py-2.5 sm:px-5 sm:py-3 border-t border-slate-100 bg-slate-50/30">
-            <p className="text-xs text-slate-500">
+          <div className="flex items-center justify-between px-3 py-2.5 sm:px-5 sm:py-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/30">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Page {page} of {totalPages} ({total} total)
             </p>
             <div className="flex gap-1.5">
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="flex items-center justify-center h-8 w-8 rounded-lg border border-slate-200 text-slate-500 hover:bg-white hover:text-slate-900 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                className="flex items-center justify-center h-8 w-8 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
-                className="flex items-center justify-center h-8 w-8 rounded-lg border border-slate-200 text-slate-500 hover:bg-white hover:text-slate-900 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                className="flex items-center justify-center h-8 w-8 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -444,17 +444,17 @@ export default function AdminLeadsPage() {
           onClick={() => setSelectedLead(null)}
         >
           <div
-            className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+            className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-              <h3 className="text-lg font-bold text-slate-900">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                 Lead Details
               </h3>
               <button
                 onClick={() => setSelectedLead(null)}
-                className="p-1 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
+                className="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -464,14 +464,14 @@ export default function AdminLeadsPage() {
             <div className="px-6 py-5 space-y-4 max-h-[60vh] overflow-y-auto">
               {/* Lead Type + Name */}
               <div className="flex items-start gap-3">
-                <User className="h-4 w-4 text-slate-400 mt-0.5" />
+                <User className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Name</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Name</p>
                   <div className="flex items-center gap-2">
-                    <p className="text-sm font-medium text-slate-900">
+                    <p className="text-sm font-medium text-slate-900 dark:text-white">
                       {selectedLead.name}
                     </p>
-                    <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${selectedLead.leadType === "Buyer" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}`}>
+                    <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${selectedLead.leadType === "Buyer" ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400" : "bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400"}`}>
                       {selectedLead.leadType}
                     </span>
                   </div>
@@ -480,10 +480,10 @@ export default function AdminLeadsPage() {
 
               {/* Phone */}
               <div className="flex items-start gap-3">
-                <Phone className="h-4 w-4 text-slate-400 mt-0.5" />
+                <Phone className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Phone</p>
-                  <p className="text-sm font-medium text-slate-900">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Phone</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">
                     {selectedLead.phone}
                   </p>
                 </div>
@@ -492,10 +492,10 @@ export default function AdminLeadsPage() {
               {/* Email */}
               {selectedLead.email && (
                 <div className="flex items-start gap-3">
-                  <Mail className="h-4 w-4 text-slate-400 mt-0.5" />
+                  <Mail className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                   <div>
-                    <p className="text-xs text-slate-500">Email</p>
-                    <p className="text-sm font-medium text-slate-900">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Email</p>
+                    <p className="text-sm font-medium text-slate-900 dark:text-white">
                       {selectedLead.email}
                     </p>
                   </div>
@@ -504,10 +504,10 @@ export default function AdminLeadsPage() {
 
               {/* Address */}
               <div className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 text-slate-400 mt-0.5" />
+                <MapPin className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Address</p>
-                  <p className="text-sm font-medium text-slate-900">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Address</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">
                     {selectedLead.address}
                   </p>
                 </div>
@@ -515,10 +515,10 @@ export default function AdminLeadsPage() {
 
               {/* Property Type */}
               <div className="flex items-start gap-3">
-                <Home className="h-4 w-4 text-slate-400 mt-0.5" />
+                <Home className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Property Type</p>
-                  <p className="text-sm font-medium text-slate-900">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Property Type</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">
                     {selectedLead.propertyType}
                   </p>
                 </div>
@@ -526,10 +526,10 @@ export default function AdminLeadsPage() {
 
               {/* Beds & Baths */}
               <div className="flex items-start gap-3">
-                <Home className="h-4 w-4 text-slate-400 mt-0.5" />
+                <Home className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Beds & Baths / Acreage</p>
-                  <p className="text-sm font-medium text-slate-900">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Beds & Baths / Acreage</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">
                     {selectedLead.bedsBaths}
                   </p>
                 </div>
@@ -537,10 +537,10 @@ export default function AdminLeadsPage() {
 
               {/* Timeline */}
               <div className="flex items-start gap-3">
-                <Clock className="h-4 w-4 text-slate-400 mt-0.5" />
+                <Clock className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Timeline</p>
-                  <p className="text-sm font-medium text-slate-900">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Timeline</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">
                     {selectedLead.timeline}
                   </p>
                 </div>
@@ -548,10 +548,10 @@ export default function AdminLeadsPage() {
 
               {/* Contract Status */}
               <div className="flex items-start gap-3">
-                <FileText className="h-4 w-4 text-slate-400 mt-0.5" />
+                <FileText className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Contract Active</p>
-                  <span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${selectedLead.contractStatus === "Yes" ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-600"}`}>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Contract Active</p>
+                  <span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${selectedLead.contractStatus === "Yes" ? "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400" : "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400"}`}>
                     {selectedLead.contractStatus}
                   </span>
                 </div>
@@ -559,10 +559,10 @@ export default function AdminLeadsPage() {
 
               {/* Appointment Time */}
               <div className="flex items-start gap-3">
-                <Calendar className="h-4 w-4 text-slate-400 mt-0.5" />
+                <Calendar className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Appointment</p>
-                  <p className="text-sm font-medium text-slate-900">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Appointment</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">
                     {new Date(selectedLead.appointmentTime).toLocaleDateString()}{" "}
                     {new Date(selectedLead.appointmentTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                   </p>
@@ -572,10 +572,10 @@ export default function AdminLeadsPage() {
               {/* Notes */}
               {selectedLead.notes && (
                 <div className="flex items-start gap-3">
-                  <FileText className="h-4 w-4 text-slate-400 mt-0.5" />
+                  <FileText className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                   <div>
-                    <p className="text-xs text-slate-500">Notes</p>
-                    <p className="text-sm font-medium text-slate-900">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Notes</p>
+                    <p className="text-sm font-medium text-slate-900 dark:text-white">
                       {selectedLead.notes}
                     </p>
                   </div>
@@ -584,9 +584,9 @@ export default function AdminLeadsPage() {
 
               {/* Status */}
               <div className="flex items-start gap-3">
-                <CheckCircle className="h-4 w-4 text-slate-400 mt-0.5" />
+                <CheckCircle className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Status</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Status</p>
                   <span
                     className={`inline-flex px-2.5 py-1 rounded-full text-xs font-semibold ${
                       LEAD_STATUS_BADGES[selectedLead.status] ||
@@ -600,10 +600,10 @@ export default function AdminLeadsPage() {
 
               {/* Agent */}
               <div className="flex items-start gap-3">
-                <Headset className="h-4 w-4 text-slate-400 mt-0.5" />
+                <Headset className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">QA</p>
-                  <p className="text-sm font-medium text-slate-900">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">QA</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">
                     {selectedLead.agent.name || selectedLead.agent.email}
                   </p>
                 </div>
@@ -612,10 +612,10 @@ export default function AdminLeadsPage() {
               {/* Assigned To */}
               {selectedLead.assignedTo && (
                 <div className="flex items-start gap-3">
-                  <UserPlus className="h-4 w-4 text-slate-400 mt-0.5" />
+                  <UserPlus className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                   <div>
-                    <p className="text-xs text-slate-500">Assigned To</p>
-                    <p className="text-sm font-medium text-slate-900">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Assigned To</p>
+                    <p className="text-sm font-medium text-slate-900 dark:text-white">
                       {selectedLead.assignedTo.name || selectedLead.assignedTo.email}
                     </p>
                   </div>
@@ -624,10 +624,10 @@ export default function AdminLeadsPage() {
 
               {/* Date */}
               <div className="flex items-start gap-3">
-                <Clock className="h-4 w-4 text-slate-400 mt-0.5" />
+                <Clock className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Submitted</p>
-                  <p className="text-sm font-medium text-slate-900">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Submitted</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">
                     {new Date(selectedLead.createdAt).toLocaleDateString()} ({timeAgo(selectedLead.createdAt)})
                   </p>
                 </div>
@@ -636,16 +636,16 @@ export default function AdminLeadsPage() {
               {/* Invoice */}
               {selectedLead.invoice && (
                 <div className="flex items-start gap-3">
-                  <DollarSign className="h-4 w-4 text-slate-400 mt-0.5" />
+                  <DollarSign className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
                   <div>
-                    <p className="text-xs text-slate-500">Invoice</p>
-                    <p className="text-sm font-medium text-slate-900">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Invoice</p>
+                    <p className="text-sm font-medium text-slate-900 dark:text-white">
                       ${(selectedLead.invoice.amount / 100).toFixed(2)}{" "}
                       <span
                         className={`text-xs font-semibold ${
                           selectedLead.invoice.status === "PAID"
-                            ? "text-green-600"
-                            : "text-amber-600"
+                            ? "text-green-600 dark:text-green-400"
+                            : "text-amber-600 dark:text-amber-400"
                         }`}
                       >
                         ({selectedLead.invoice.status})
@@ -657,14 +657,14 @@ export default function AdminLeadsPage() {
             </div>
 
             {/* Footer actions */}
-            <div className="px-6 py-4 border-t border-slate-100 flex justify-end gap-2">
+            <div className="px-6 py-4 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-2">
               {selectedLead.status === "NEW" && !selectedLead.assignedTo && (
                 <button
                   onClick={() => {
                     setAssignLeadId(selectedLead.id);
                     setSelectedLead(null);
                   }}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold bg-brand-50 text-brand-700 hover:bg-brand-100 transition-colors"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold bg-brand-50 dark:bg-brand-900/30 text-brand-700 hover:bg-brand-100 dark:hover:bg-brand-900/50 transition-colors"
                 >
                   Assign
                 </button>
@@ -675,14 +675,14 @@ export default function AdminLeadsPage() {
                     setInvoiceLeadId(selectedLead.id);
                     setSelectedLead(null);
                   }}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
                 >
                   Send Invoice
                 </button>
               )}
               <button
                 onClick={() => setSelectedLead(null)}
-                className="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors"
+                className="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
               >
                 Close
               </button>

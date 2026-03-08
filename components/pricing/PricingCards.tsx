@@ -44,8 +44,8 @@ export default function PricingCards() {
       {/* Background decorations */}
       <div className="grid-pattern absolute inset-0" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-300 to-transparent" />
-      <div className="absolute top-1/3 -left-32 h-[28rem] w-[28rem] rounded-full bg-brand-100/60 blur-3xl" />
-      <div className="absolute bottom-1/4 -right-32 h-[24rem] w-[24rem] rounded-full bg-accent-100/40 blur-3xl" />
+      <div className="absolute top-1/3 -left-32 h-[28rem] w-[28rem] rounded-full bg-brand-100/60 dark:bg-brand-900/30 blur-3xl" />
+      <div className="absolute bottom-1/4 -right-32 h-[24rem] w-[24rem] rounded-full bg-accent-100/40 dark:bg-accent-900/20 blur-3xl" />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Plan cards */}
@@ -130,17 +130,17 @@ export default function PricingCards() {
                         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-600 shadow-lg shadow-brand-600/25 group-hover:scale-105 transition-transform duration-300">
                           <CardIcon className="h-5 w-5 text-white" />
                         </div>
-                        <h3 className="text-lg font-bold text-slate-900">{plan.name}</h3>
+                        <h3 className="text-lg font-bold text-slate-900 dark:text-white">{plan.name}</h3>
                       </div>
-                      <p className="text-sm text-slate-500">{plan.description}</p>
+                      <p className="text-sm text-slate-500 dark:text-slate-400">{plan.description}</p>
                     </div>
 
                     {/* Price */}
                     <div className="mb-8">
                       <div className="flex items-end gap-1.5">
-                        <span className="text-5xl font-bold tabular-nums text-slate-900">{displayPrice}</span>
+                        <span className="text-5xl font-bold tabular-nums text-slate-900 dark:text-white">{displayPrice}</span>
                         {plan.period && (
-                          <span className="mb-1.5 text-base text-slate-400">{plan.period}</span>
+                          <span className="mb-1.5 text-base text-slate-400 dark:text-slate-500">{plan.period}</span>
                         )}
                       </div>
                     </div>
@@ -152,10 +152,10 @@ export default function PricingCards() {
                     <ul className="space-y-3 flex-1 mb-8">
                       {plan.features.map((feature) => (
                         <li key={feature} className="flex items-start gap-2.5">
-                          <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-50 border border-brand-200">
+                          <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-50 dark:bg-brand-900/30 border border-brand-200 dark:border-brand-700">
                             <Check className="h-3 w-3 text-brand-600" />
                           </div>
-                          <span className="text-sm text-slate-700">{feature}</span>
+                          <span className="text-sm text-slate-700 dark:text-slate-300">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -180,15 +180,15 @@ export default function PricingCards() {
 
         {/* Trust signals — pill style */}
         <AnimatedSection delay={0.35} className="mt-16">
-          <div className="rounded-2xl bg-slate-50 border border-slate-200 px-8 py-6">
+          <div className="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-8 py-6">
             <div className="flex flex-wrap justify-center gap-3">
               {TRUST_SIGNALS.map(({ icon: Icon, label }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-2 rounded-full bg-white border border-slate-200 px-4 py-2 shadow-sm"
+                  className="flex items-center gap-2 rounded-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 px-4 py-2 shadow-sm"
                 >
                   <Icon className="h-4 w-4 text-brand-600 flex-shrink-0" />
-                  <span className="text-sm font-medium text-slate-700">{label}</span>
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{label}</span>
                 </div>
               ))}
             </div>

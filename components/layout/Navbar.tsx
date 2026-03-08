@@ -7,6 +7,7 @@ import { useSession, signOut } from "next-auth/react";
 import { Menu, X, PhoneCall, User } from "lucide-react";
 import { NAV_LINKS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/shared/ThemeToggle";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,8 +29,8 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-b border-slate-200 bg-white/95 backdrop-blur-md shadow-sm"
-          : "bg-white/80 backdrop-blur-sm border-b border-slate-100"
+          ? "border-b border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-sm"
+          : "bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-slate-100 dark:border-slate-800"
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
@@ -38,8 +39,8 @@ export default function Navbar() {
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 shadow-md shadow-brand-600/25">
             <PhoneCall className="h-4 w-4 text-white" />
           </div>
-          <span className="text-lg font-bold text-slate-900">
-            R4<span className="text-brand-600">Referral</span>
+          <span className="text-lg font-bold text-slate-900 dark:text-white">
+            R4<span className="text-brand-600 dark:text-brand-400">Referral</span>
           </span>
         </Link>
 
@@ -51,8 +52,8 @@ export default function Navbar() {
                 href={link.href}
                 className={`text-sm font-medium transition-colors ${
                   pathname === link.href
-                    ? "text-brand-600"
-                    : "text-slate-600 hover:text-slate-900"
+                    ? "text-brand-600 dark:text-brand-400"
+                    : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
                 {link.label}
@@ -63,11 +64,12 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           {session?.user ? (
             <>
               <Link
                 href="/settings"
-                className={`p-2 rounded-lg transition-colors text-slate-600 hover:bg-slate-100 hover:text-slate-900`}
+                className={`p-2 rounded-lg transition-colors text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white`}
                 title="Settings"
               >
                 <User className="h-5 w-5" />
@@ -85,8 +87,8 @@ export default function Navbar() {
                 href="/login"
                 className={`text-sm font-medium transition-colors ${
                   pathname === "/login"
-                    ? "text-brand-600"
-                    : "text-slate-600 hover:text-slate-900"
+                    ? "text-brand-600 dark:text-brand-400"
+                    : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
                 Log In
@@ -104,8 +106,9 @@ export default function Navbar() {
         </div>
 
         {/* Mobile hamburger */}
+        <ThemeToggle className="md:hidden" />
         <button
-          className="md:hidden text-slate-600 hover:text-slate-900 transition-colors"
+          className="md:hidden text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -115,7 +118,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white">
+        <div className="md:hidden border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
           <ul className="flex flex-col px-4 py-4 gap-1">
             {!session?.user && NAV_LINKS.map((link) => (
               <li key={link.href}>
@@ -123,21 +126,21 @@ export default function Navbar() {
                   href={link.href}
                   className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors text-center ${
                     pathname === link.href
-                      ? "bg-brand-50 text-brand-600"
-                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                      ? "bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400"
+                      : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
                   }`}
                 >
                   {link.label}
                 </Link>
               </li>
             ))}
-            <li className="pt-2 border-t border-slate-100 mt-1 flex gap-2">
+            <li className="pt-2 border-t border-slate-100 dark:border-slate-800 mt-1 flex gap-2">
               {session?.user ? (
                 <>
                   <Button
                     asChild
                     variant="outline"
-                    className="flex-1 border-slate-300 text-slate-700 hover:bg-slate-50"
+                    className="flex-1 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
                   >
                     <Link href="/settings">Settings</Link>
                   </Button>
@@ -153,7 +156,7 @@ export default function Navbar() {
                   <Button
                     asChild
                     variant="outline"
-                    className="flex-1 border-slate-300 text-slate-700 hover:bg-slate-50"
+                    className="flex-1 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
                   >
                     <Link href="/login">Log In</Link>
                   </Button>

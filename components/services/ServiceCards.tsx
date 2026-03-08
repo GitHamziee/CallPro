@@ -81,25 +81,25 @@ function LightCard({
         <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-600 group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-brand-600/25">
           <Icon className="h-7 w-7 text-white" />
         </div>
-        <span className="text-4xl font-bold text-slate-100 select-none tabular-nums">
+        <span className="text-4xl font-bold text-slate-100 dark:text-slate-800 select-none tabular-nums">
           {String(index + 1).padStart(2, "0")}
         </span>
       </div>
-      <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
-      <p className="text-slate-600 leading-relaxed mb-6">{service.description}</p>
+      <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{service.title}</h3>
+      <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">{service.description}</p>
       <ul className="space-y-3 flex-1 mb-7">
         {service.bullets.map((b) => (
           <li key={b} className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-50 border border-brand-200">
+            <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-50 dark:bg-brand-900/30 border border-brand-200 dark:border-brand-700">
               <Check className="h-3 w-3 text-brand-600" />
             </div>
-            <span className="text-sm text-slate-600 leading-relaxed">{b}</span>
+            <span className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{b}</span>
           </li>
         ))}
       </ul>
-      <div className="flex items-center gap-2.5 rounded-xl bg-brand-50 border border-brand-100 px-4 py-2.5">
+      <div className="flex items-center gap-2.5 rounded-xl bg-brand-50 dark:bg-brand-900/30 border border-brand-100 dark:border-brand-800 px-4 py-2.5">
         <TrendingUp className="h-4 w-4 text-brand-600 flex-shrink-0" />
-        <span className="text-xs font-semibold text-brand-700">{service.metric}</span>
+        <span className="text-xs font-semibold text-brand-700 dark:text-brand-400">{service.metric}</span>
       </div>
     </div>
   );
@@ -181,8 +181,8 @@ export default function ServiceCards() {
       {/* Connected staggered service cards */}
       <section className="relative pt-12 pb-24 overflow-hidden">
         <div className="grid-pattern absolute inset-0" />
-        <div className="absolute top-1/4 -left-32 h-[28rem] w-[28rem] rounded-full bg-brand-100/50 blur-3xl" />
-        <div className="absolute bottom-1/3 -right-32 h-[24rem] w-[24rem] rounded-full bg-accent-100/30 blur-3xl" />
+        <div className="absolute top-1/4 -left-32 h-[28rem] w-[28rem] rounded-full bg-brand-100/50 dark:bg-brand-900/30 blur-3xl" />
+        <div className="absolute bottom-1/3 -right-32 h-[24rem] w-[24rem] rounded-full bg-accent-100/30 dark:bg-accent-900/20 blur-3xl" />
 
         <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div>
@@ -245,18 +245,18 @@ export default function ServiceCards() {
       <section className="pb-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
-            <div className="rounded-2xl bg-slate-50 border border-slate-200 px-8 py-8">
-              <p className="text-center text-xs font-semibold text-slate-400 uppercase tracking-widest mb-6">
+            <div className="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-8 py-8">
+              <p className="text-center text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6">
                 Every service includes
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 {ALL_INCLUDE.map((item) => (
                   <div
                     key={item}
-                    className="flex items-center gap-2 rounded-full bg-white border border-slate-200 px-4 py-2 shadow-sm"
+                    className="flex items-center gap-2 rounded-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 px-4 py-2 shadow-sm"
                   >
                     <div className="h-2 w-2 rounded-full bg-brand-600" />
-                    <span className="text-sm font-medium text-slate-700">{item}</span>
+                    <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{item}</span>
                   </div>
                 ))}
               </div>

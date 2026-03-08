@@ -82,12 +82,12 @@ const PARTNERS = ["eXp Realty", "Keller Williams", "Coldwell Banker", "Berkshire
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-white">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-white dark:bg-slate-950">
       {/* Background elements */}
       <div className="grid-pattern absolute inset-0" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-600 to-transparent" />
-      <div className="absolute top-1/4 -left-48 h-[32rem] w-[32rem] rounded-full bg-brand-100/80 blur-3xl blob-drift-1" />
-      <div className="absolute bottom-1/4 -right-48 h-[28rem] w-[28rem] rounded-full bg-cyan-100/70 blur-3xl blob-drift-2" />
+      <div className="absolute top-1/4 -left-48 h-[32rem] w-[32rem] rounded-full bg-brand-100/80 dark:bg-brand-900/30 blur-3xl blob-drift-1" />
+      <div className="absolute bottom-1/4 -right-48 h-[28rem] w-[28rem] rounded-full bg-cyan-100/70 dark:bg-cyan-900/20 blur-3xl blob-drift-2" />
 
       <div className="relative mx-auto max-w-6xl w-full px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
@@ -104,13 +104,13 @@ export default function HeroSection() {
                 <span className="h-1.5 w-1.5 rounded-full bg-brand-600 animate-pulse" />
                 Verified Real Estate Leads
               </Badge>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 dark:border-amber-700 bg-amber-50 dark:bg-amber-900/30 px-3 py-1 text-xs font-medium text-amber-700 dark:text-amber-400">
                 ★★★★★&nbsp; Trusted by 2,500+ agents
               </span>
             </motion.div>
 
-            <h1 className="text-4xl font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-              <CharReveal text="Turn " className="text-slate-900" delay={0.1} />
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl">
+              <CharReveal text="Turn " className="text-slate-900 dark:text-white" delay={0.1} />
               <motion.span
                 className="gradient-text inline-block"
                 initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
@@ -120,7 +120,7 @@ export default function HeroSection() {
                 Leads
               </motion.span>
               {" "}
-              <span className="whitespace-nowrap"><CharReveal text="Into " className="text-slate-900" delay={0.7} /></span>
+              <span className="whitespace-nowrap"><CharReveal text="Into " className="text-slate-900 dark:text-white" delay={0.7} /></span>
               <motion.span
                 className="gradient-text inline-block"
                 initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
@@ -135,7 +135,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-6 max-w-xl text-lg text-slate-600 leading-relaxed"
+              className="mt-6 max-w-xl text-lg text-slate-600 dark:text-slate-400 leading-relaxed"
             >
               R4Referral is a digital real estate referral network that delivers
               verified, high-intent buyer and seller leads directly to agents
@@ -167,7 +167,7 @@ export default function HeroSection() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="border-slate-300 bg-transparent text-slate-700 hover:bg-slate-50 text-base px-8"
+                  className="border-slate-300 dark:border-slate-600 bg-transparent text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-base px-8"
                 >
                   <Link href="/services">View Services</Link>
                 </Button>
@@ -181,14 +181,14 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="mt-12"
             >
-              <p className="mb-4 text-xs font-medium uppercase tracking-widest text-slate-400">
+              <p className="mb-4 text-xs font-medium uppercase tracking-widest text-slate-400 dark:text-slate-500">
                 Agents from top brokerages trust us
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 {PARTNERS.map((company) => (
                   <span
                     key={company}
-                    className="rounded-full border border-slate-200 bg-slate-50 px-4 py-1.5 text-xs font-semibold text-slate-500"
+                    className="rounded-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 px-4 py-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400"
                   >
                     {company}
                   </span>

@@ -30,11 +30,11 @@ function LoginContent() {
   } = useLogin();
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center px-4 py-12">
       {/* Back to home */}
       <Link
         href="/"
-        className="absolute top-5 left-5 flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-900 transition-colors"
+        className="absolute top-5 left-5 flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
       >
         <ArrowLeft className="h-3.5 w-3.5" />
         Back to home
@@ -45,19 +45,19 @@ function LoginContent() {
         <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-600 shadow-md shadow-brand-600/30">
           <PhoneCall className="h-4.5 w-4.5 text-white" />
         </div>
-        <span className="text-xl font-bold text-slate-900">
+        <span className="text-xl font-bold text-slate-900 dark:text-white">
           R4<span className="text-brand-600">Referral</span>
         </span>
       </Link>
 
       {/* Card */}
-      <div className="w-full max-w-[400px] rounded-2xl border border-slate-200 bg-white px-8 py-8 shadow-sm">
+      <div className="w-full max-w-[400px] rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-8 py-8 shadow-sm">
 
         <div className="mb-7">
-          <h1 className="text-xl font-semibold text-slate-900 tracking-tight">
+          <h1 className="text-xl font-semibold text-slate-900 dark:text-white tracking-tight">
             Sign in to R4Referral
           </h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             Enter your credentials to access your portal.
           </p>
         </div>
@@ -68,7 +68,7 @@ function LoginContent() {
           )}
           {error && <p className="text-sm text-red-500">{error}</p>}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1.5">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
               Email address
             </label>
             <input
@@ -78,18 +78,18 @@ function LoginContent() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="you@company.com"
-              className="w-full rounded-lg border border-slate-200 bg-slate-50/50 px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/15 transition-all"
+              className="w-full rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800 px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/15 transition-all"
             />
           </div>
 
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-sm font-medium text-slate-700">
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                 Password
               </label>
               <Link
                 href="/forgot-password"
-                className="text-xs text-slate-500 hover:text-brand-600 transition-colors"
+                className="text-xs text-slate-500 dark:text-slate-400 hover:text-brand-600 transition-colors"
               >
                 Forgot password?
               </Link>
@@ -102,12 +102,12 @@ function LoginContent() {
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 placeholder="••••••••"
-                className="w-full rounded-lg border border-slate-200 bg-slate-50/50 px-3.5 py-2.5 pr-10 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/15 transition-all"
+                className="w-full rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-800 px-3.5 py-2.5 pr-10 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/15 transition-all"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
@@ -119,9 +119,9 @@ function LoginContent() {
               type="checkbox"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
-              className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500/20"
+              className="h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-brand-600 focus:ring-brand-500/20"
             />
-            <span className="text-sm text-slate-600">Remember me</span>
+            <span className="text-sm text-slate-600 dark:text-slate-400">Remember me</span>
           </label>
 
           <Button
@@ -142,8 +142,8 @@ function LoginContent() {
           </Button>
         </form>
 
-        <div className="mt-6 pt-6 border-t border-slate-100 text-center">
-          <p className="text-sm text-slate-500">
+        <div className="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 text-center">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             Don&apos;t have an account?{" "}
             <Link href={registerHref} className="font-medium text-brand-600 hover:text-brand-700 transition-colors">
               Create one
@@ -153,11 +153,11 @@ function LoginContent() {
       </div>
 
       {/* Footer */}
-      <p className="mt-8 text-xs text-slate-400">
+      <p className="mt-8 text-xs text-slate-400 dark:text-slate-500">
         © {new Date().getFullYear()} R4Referral ·{" "}
-        <Link href="/privacy-policy" className="hover:text-slate-600 transition-colors">Privacy</Link>
+        <Link href="/privacy-policy" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Privacy</Link>
         {" "}·{" "}
-        <Link href="/terms-of-service" className="hover:text-slate-600 transition-colors">Terms</Link>
+        <Link href="/terms-of-service" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Terms</Link>
       </p>
     </div>
   );

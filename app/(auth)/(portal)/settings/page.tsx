@@ -58,13 +58,13 @@ export default function SettingsPage() {
 
   return (
     <div className="mx-auto max-w-5xl">
-      <p className="text-xs md:text-sm text-slate-500 mb-4 md:mb-6">
+      <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 mb-4 md:mb-6">
         Manage your account, security, and billing preferences.
       </p>
 
       {/* Notifications */}
       {successMessage && (
-        <div className="mb-4 md:mb-6 p-3 md:p-4 pl-4 md:pl-5 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-lg text-emerald-800 text-sm flex items-start gap-2 md:gap-3">
+        <div className="mb-4 md:mb-6 p-3 md:p-4 pl-4 md:pl-5 bg-emerald-50 dark:bg-emerald-900/30 border-l-4 border-emerald-500 rounded-r-lg text-emerald-800 dark:text-emerald-300 text-sm flex items-start gap-2 md:gap-3">
           <svg
             className="w-4 h-4 md:w-5 md:h-5 mt-0.5 flex-shrink-0"
             fill="currentColor"
@@ -79,7 +79,7 @@ export default function SettingsPage() {
           <span className="flex-1">{successMessage}</span>
           <button
             onClick={() => setSuccessMessage("")}
-            className="text-emerald-600 hover:text-emerald-700"
+            className="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300"
           >
             ✕
           </button>
@@ -87,7 +87,7 @@ export default function SettingsPage() {
       )}
 
       {errorMessage && (
-        <div className="mb-4 md:mb-6 p-3 md:p-4 pl-4 md:pl-5 bg-red-50 border-l-4 border-red-500 rounded-r-lg text-red-800 text-sm flex items-start gap-2 md:gap-3">
+        <div className="mb-4 md:mb-6 p-3 md:p-4 pl-4 md:pl-5 bg-red-50 dark:bg-red-900/30 border-l-4 border-red-500 rounded-r-lg text-red-800 dark:text-red-300 text-sm flex items-start gap-2 md:gap-3">
           <svg
             className="w-4 h-4 md:w-5 md:h-5 mt-0.5 flex-shrink-0"
             fill="currentColor"
@@ -102,7 +102,7 @@ export default function SettingsPage() {
           <span className="flex-1">{errorMessage}</span>
           <button
             onClick={() => setErrorMessage("")}
-            className="text-red-600 hover:text-red-700"
+            className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
           >
             ✕
           </button>
@@ -113,7 +113,7 @@ export default function SettingsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-6">
         {/* Tab Navigation */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-1 flex lg:block overflow-x-auto">
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-1 flex lg:block overflow-x-auto">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
@@ -122,8 +122,8 @@ export default function SettingsPage() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 lg:flex-none w-auto lg:w-full flex items-center justify-center lg:justify-start gap-2 lg:gap-3 px-3 lg:px-4 py-2.5 lg:py-3 rounded-md transition-colors text-center lg:text-left whitespace-nowrap text-sm ${
                     activeTab === tab.id
-                      ? "bg-brand-50 text-brand-600 font-medium"
-                      : "text-slate-600 hover:bg-slate-50"
+                      ? "bg-brand-50 dark:bg-brand-900/30 text-brand-600 font-medium"
+                      : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
                   }`}
                 >
                   <Icon className="w-4 h-4 lg:w-5 lg:h-5" />
@@ -139,13 +139,13 @@ export default function SettingsPage() {
           {/* Account Settings */}
           {activeTab === "account" && (
             <div className="space-y-4 md:space-y-6">
-              <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 md:p-6">
+              <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-4 md:p-6">
                 <div className="flex items-start justify-between mb-4 md:mb-6">
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">
                       Account
                     </h2>
-                    <p className="text-slate-600 text-xs md:text-sm mt-1">
+                    <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm mt-1">
                       Update your profile information
                     </p>
                   </div>
@@ -158,7 +158,7 @@ export default function SettingsPage() {
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2"
+                      className="block text-sm font-semibold text-slate-900 dark:text-white mb-1.5 md:mb-2"
                     >
                       Full Name
                     </label>
@@ -168,10 +168,10 @@ export default function SettingsPage() {
                       name="name"
                       value={formData.name}
                       onChange={handleProfileChange}
-                      className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                      className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all dark:bg-slate-800 dark:text-white"
                       placeholder="John Doe"
                     />
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                       This is the name displayed on your profile
                     </p>
                   </div>
@@ -179,7 +179,7 @@ export default function SettingsPage() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2"
+                      className="block text-sm font-semibold text-slate-900 dark:text-white mb-1.5 md:mb-2"
                     >
                       Email Address
                     </label>
@@ -189,10 +189,10 @@ export default function SettingsPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleProfileChange}
-                      className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                      className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all dark:bg-slate-800 dark:text-white"
                       placeholder="john@example.com"
                     />
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                       Used for login and account notifications
                     </p>
                   </div>
@@ -203,7 +203,7 @@ export default function SettingsPage() {
                       <div>
                         <label
                           htmlFor="phone"
-                          className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2"
+                          className="block text-sm font-semibold text-slate-900 dark:text-white mb-1.5 md:mb-2"
                         >
                           Phone
                         </label>
@@ -213,7 +213,7 @@ export default function SettingsPage() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleProfileChange}
-                          className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                          className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all dark:bg-slate-800 dark:text-white"
                           placeholder="+1 (555) 000-0000"
                         />
                       </div>
@@ -223,9 +223,9 @@ export default function SettingsPage() {
                         <div>
                           <label
                             htmlFor="licenseNo"
-                            className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2"
+                            className="block text-sm font-semibold text-slate-900 dark:text-white mb-1.5 md:mb-2"
                           >
-                            License No <span className="text-slate-400 text-xs font-normal">(Optional)</span>
+                            License No <span className="text-slate-400 dark:text-slate-500 text-xs font-normal">(Optional)</span>
                           </label>
                           <input
                             id="licenseNo"
@@ -233,16 +233,16 @@ export default function SettingsPage() {
                             name="licenseNo"
                             value={formData.licenseNo}
                             onChange={handleProfileChange}
-                            className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                            className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all dark:bg-slate-800 dark:text-white"
                             placeholder="e.g. SL12345678"
                           />
                         </div>
                         <div>
                           <label
                             htmlFor="brokerage"
-                            className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2"
+                            className="block text-sm font-semibold text-slate-900 dark:text-white mb-1.5 md:mb-2"
                           >
-                            Brokerage <span className="text-slate-400 text-xs font-normal">(Optional)</span>
+                            Brokerage <span className="text-slate-400 dark:text-slate-500 text-xs font-normal">(Optional)</span>
                           </label>
                           <input
                             id="brokerage"
@@ -250,7 +250,7 @@ export default function SettingsPage() {
                             name="brokerage"
                             value={formData.brokerage}
                             onChange={handleProfileChange}
-                            className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                            className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all dark:bg-slate-800 dark:text-white"
                             placeholder="e.g. Keller Williams"
                           />
                         </div>
@@ -260,7 +260,7 @@ export default function SettingsPage() {
                       <div>
                         <label
                           htmlFor="targetAreas"
-                          className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2"
+                          className="block text-sm font-semibold text-slate-900 dark:text-white mb-1.5 md:mb-2"
                         >
                           Target Areas
                         </label>
@@ -270,7 +270,7 @@ export default function SettingsPage() {
                           value={formData.targetAreas}
                           onChange={handleProfileChange}
                           rows={2}
-                          className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all resize-none"
+                          className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all resize-none dark:bg-slate-800 dark:text-white"
                           placeholder="Miami, Fort Lauderdale, Palm Beach"
                         />
                       </div>
@@ -278,38 +278,38 @@ export default function SettingsPage() {
                       {/* State + Account Executive */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                         <div>
-                          <label className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2">
+                          <label className="block text-sm font-semibold text-slate-900 dark:text-white mb-1.5 md:mb-2">
                             State
                           </label>
                           <div className="relative" ref={stateRef}>
                             <button
                               type="button"
                               onClick={() => { setStateOpen((o) => !o); setStateSearch(""); }}
-                              className={`flex items-center justify-between w-full px-3 py-2.5 md:px-4 md:py-3 rounded-lg border border-slate-300 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent ${
-                                formData.state ? "text-slate-900" : "text-slate-400"
+                              className={`flex items-center justify-between w-full px-3 py-2.5 md:px-4 md:py-3 rounded-lg border border-slate-300 dark:border-slate-600 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent dark:bg-slate-800 ${
+                                formData.state ? "text-slate-900 dark:text-white" : "text-slate-400 dark:text-slate-500"
                               }`}
                             >
                               {selectedStateLabel || "Select state..."}
-                              <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform ${stateOpen ? "rotate-180" : ""}`} />
+                              <ChevronDown className={`h-4 w-4 text-slate-400 dark:text-slate-500 transition-transform ${stateOpen ? "rotate-180" : ""}`} />
                             </button>
                             {stateOpen && (
-                              <div className="absolute top-full left-0 mt-1 w-full rounded-xl border border-slate-200 bg-white shadow-lg z-30 overflow-hidden">
-                                <div className="p-2 border-b border-slate-100">
+                              <div className="absolute top-full left-0 mt-1 w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-lg z-30 overflow-hidden">
+                                <div className="p-2 border-b border-slate-100 dark:border-slate-700">
                                   <div className="relative">
-                                    <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400" />
+                                    <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />
                                     <input
                                       type="text"
                                       value={stateSearch}
                                       onChange={(e) => setStateSearch(e.target.value)}
                                       placeholder="Search states..."
-                                      className="w-full pl-8 pr-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-brand-500"
+                                      className="w-full pl-8 pr-3 py-1.5 text-xs border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:border-brand-500 dark:bg-slate-800 dark:text-white"
                                       autoFocus
                                     />
                                   </div>
                                 </div>
                                 <div className="max-h-48 overflow-y-auto py-1">
                                   {filteredStates.length === 0 ? (
-                                    <p className="px-3 py-2 text-xs text-slate-400">No states found</p>
+                                    <p className="px-3 py-2 text-xs text-slate-400 dark:text-slate-500">No states found</p>
                                   ) : (
                                     filteredStates.map((opt) => (
                                       <button
@@ -317,7 +317,7 @@ export default function SettingsPage() {
                                         key={opt.value}
                                         onClick={() => { setFormField("state", opt.value); setStateOpen(false); }}
                                         className={`w-full text-left px-3 py-2 text-sm font-medium transition-colors ${
-                                          formData.state === opt.value ? "bg-slate-50 text-slate-900" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                                          formData.state === opt.value ? "bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white" : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white"
                                         }`}
                                       >
                                         {opt.label}
@@ -333,9 +333,9 @@ export default function SettingsPage() {
                         <div>
                           <label
                             htmlFor="accountExecutive"
-                            className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2"
+                            className="block text-sm font-semibold text-slate-900 dark:text-white mb-1.5 md:mb-2"
                           >
-                            Account Executive <span className="text-slate-400 text-xs font-normal">(Optional)</span>
+                            Account Executive <span className="text-slate-400 dark:text-slate-500 text-xs font-normal">(Optional)</span>
                           </label>
                           <input
                             id="accountExecutive"
@@ -343,7 +343,7 @@ export default function SettingsPage() {
                             name="accountExecutive"
                             value={formData.accountExecutive}
                             onChange={handleProfileChange}
-                            className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                            className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all dark:bg-slate-800 dark:text-white"
                             placeholder="Name of your AE"
                           />
                         </div>
@@ -366,13 +366,13 @@ export default function SettingsPage() {
           {/* Security Settings */}
           {activeTab === "security" && (
             <div className="space-y-4 md:space-y-6">
-              <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 md:p-6">
+              <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-4 md:p-6">
                 <div className="flex items-start justify-between mb-4 md:mb-6">
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">
                       Security
                     </h2>
-                    <p className="text-slate-600 text-xs md:text-sm mt-1">
+                    <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm mt-1">
                       Manage your password and security settings
                     </p>
                   </div>
@@ -385,7 +385,7 @@ export default function SettingsPage() {
                   <div>
                     <label
                       htmlFor="currentPassword"
-                      className="block text-sm font-semibold text-slate-900 mb-1.5 md:mb-2"
+                      className="block text-sm font-semibold text-slate-900 dark:text-white mb-1.5 md:mb-2"
                     >
                       Current Password
                     </label>
@@ -395,14 +395,14 @@ export default function SettingsPage() {
                       name="currentPassword"
                       value={passwordData.currentPassword}
                       onChange={handlePasswordChange}
-                      className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                      className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all dark:bg-slate-800 dark:text-white"
                       placeholder="••••••••"
                     />
                   </div>
 
-                  <div className="border-t border-slate-200 pt-4 md:pt-6">
+                  <div className="border-t border-slate-200 dark:border-slate-700 pt-4 md:pt-6">
                     <div className="mb-3 md:mb-4">
-                      <h3 className="text-sm font-semibold text-slate-900 mb-3 md:mb-4">
+                      <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3 md:mb-4">
                         New Password
                       </h3>
                     </div>
@@ -411,7 +411,7 @@ export default function SettingsPage() {
                       <div>
                         <label
                           htmlFor="newPassword"
-                          className="block text-sm font-medium text-slate-700 mb-1.5 md:mb-2"
+                          className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5 md:mb-2"
                         >
                           New Password
                         </label>
@@ -421,10 +421,10 @@ export default function SettingsPage() {
                           name="newPassword"
                           value={passwordData.newPassword}
                           onChange={handlePasswordChange}
-                          className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                          className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all dark:bg-slate-800 dark:text-white"
                           placeholder="••••••••"
                         />
-                        <p className="text-xs text-slate-500 mt-1">
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                           Min 8 characters with uppercase, lowercase, and a
                           number
                         </p>
@@ -433,7 +433,7 @@ export default function SettingsPage() {
                       <div>
                         <label
                           htmlFor="confirmPassword"
-                          className="block text-sm font-medium text-slate-700 mb-1.5 md:mb-2"
+                          className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5 md:mb-2"
                         >
                           Confirm Password
                         </label>
@@ -443,7 +443,7 @@ export default function SettingsPage() {
                           name="confirmPassword"
                           value={passwordData.confirmPassword}
                           onChange={handlePasswordChange}
-                          className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
+                          className="w-full px-3 py-2.5 md:px-4 md:py-3 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all dark:bg-slate-800 dark:text-white"
                           placeholder="••••••••"
                         />
                       </div>
@@ -465,13 +465,13 @@ export default function SettingsPage() {
           {/* Billing & Plans — users only */}
           {activeTab === "billing" && !hideBilling && (
             <div className="space-y-4 md:space-y-6">
-              <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 md:p-6">
+              <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-4 md:p-6">
                 <div className="flex items-start justify-between mb-4 md:mb-6">
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">
                       Billing & Plans
                     </h2>
-                    <p className="text-slate-600 text-xs md:text-sm mt-1">
+                    <p className="text-slate-600 dark:text-slate-400 text-xs md:text-sm mt-1">
                       Manage your subscription and billing
                     </p>
                   </div>
@@ -479,26 +479,26 @@ export default function SettingsPage() {
 
                 {purchase ? (
                   <div className="space-y-4">
-                    <div className="p-4 rounded-lg border border-brand-200 bg-brand-50/30">
+                    <div className="p-4 rounded-lg border border-brand-200 dark:border-brand-800 bg-brand-50/30 dark:bg-brand-900/30">
                       <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-base font-semibold text-slate-900">
+                        <h3 className="text-base font-semibold text-slate-900 dark:text-white">
                           {purchase.package.name} Plan
                         </h3>
-                        <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">
+                        <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400">
                           Active
                         </span>
                       </div>
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                          <p className="text-slate-500">Monthly Cost</p>
-                          <p className="font-semibold text-slate-900">
+                          <p className="text-slate-500 dark:text-slate-400">Monthly Cost</p>
+                          <p className="font-semibold text-slate-900 dark:text-white">
                             $
                             {(purchase.package.price / 100).toLocaleString()}
                           </p>
                         </div>
                         <div>
-                          <p className="text-slate-500">Started</p>
-                          <p className="font-semibold text-slate-900">
+                          <p className="text-slate-500 dark:text-slate-400">Started</p>
+                          <p className="font-semibold text-slate-900 dark:text-white">
                             {new Date(
                               purchase.createdAt
                             ).toLocaleDateString()}
@@ -506,8 +506,8 @@ export default function SettingsPage() {
                         </div>
                         {purchase.expiresAt && (
                           <div>
-                            <p className="text-slate-500">Expires</p>
-                            <p className="font-semibold text-slate-900">
+                            <p className="text-slate-500 dark:text-slate-400">Expires</p>
+                            <p className="font-semibold text-slate-900 dark:text-white">
                               {new Date(
                                 purchase.expiresAt
                               ).toLocaleDateString()}
@@ -518,18 +518,18 @@ export default function SettingsPage() {
                     </div>
                     <a
                       href="/packages"
-                      className="inline-flex items-center px-4 py-2.5 md:px-6 md:py-3 border border-slate-200 text-slate-700 hover:bg-slate-50 text-sm md:text-base font-semibold rounded-lg transition-colors"
+                      className="inline-flex items-center px-4 py-2.5 md:px-6 md:py-3 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 text-sm md:text-base font-semibold rounded-lg transition-colors"
                     >
                       View All Packages
                     </a>
                   </div>
                 ) : (
                   <div className="text-center py-8 md:py-12">
-                    <CreditCard className="w-10 h-10 md:w-12 md:h-12 text-slate-300 mx-auto mb-3 md:mb-4" />
-                    <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-2">
+                    <CreditCard className="w-10 h-10 md:w-12 md:h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3 md:mb-4" />
+                    <h3 className="text-base md:text-lg font-semibold text-slate-900 dark:text-white mb-2">
                       No Active Subscription
                     </h3>
-                    <p className="text-xs md:text-sm text-slate-500 mb-4 md:mb-6 max-w-sm mx-auto">
+                    <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 mb-4 md:mb-6 max-w-sm mx-auto">
                       Browse our available packages to find the right plan for
                       your business.
                     </p>

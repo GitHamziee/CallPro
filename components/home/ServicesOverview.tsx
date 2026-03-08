@@ -12,11 +12,11 @@ export default function ServicesOverview() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <Badge className="mb-4">What We Do</Badge>
-          <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">
             Everything You Need to{" "}
             <span className="gradient-text">Grow Your Business</span>
           </h2>
-          <p className="mt-4 text-slate-600 max-w-xl mx-auto">
+          <p className="mt-4 text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
             Verified leads, virtual assistants, CRM tools, and more — built
             specifically for real estate professionals.
           </p>
@@ -32,15 +32,15 @@ export default function ServicesOverview() {
                   <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-600 shadow-lg shadow-brand-600/25 group-hover:scale-105 transition-transform duration-300">
                     <Icon className="h-6 w-6 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-3">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed flex-1">
+                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed flex-1">
                     {service.description}
                   </p>
                   {/* Result metric */}
-                  <div className="mt-4 mb-4 rounded-lg bg-brand-50 border border-brand-100 px-3 py-2">
-                    <span className="text-xs font-semibold text-brand-700">
+                  <div className="mt-4 mb-4 rounded-lg bg-brand-50 dark:bg-brand-900/30 border border-brand-100 dark:border-brand-800 px-3 py-2">
+                    <span className="text-xs font-semibold text-brand-700 dark:text-brand-400">
                       {service.metric}
                     </span>
                   </div>
@@ -59,7 +59,7 @@ export default function ServicesOverview() {
         <AnimatedSection className="mt-12 text-center" delay={0.3}>
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-6 py-2.5 text-sm font-medium text-slate-600 hover:border-brand-400 hover:text-brand-600 transition-all duration-200"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-300 dark:border-slate-600 px-6 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:border-brand-400 hover:text-brand-600 transition-all duration-200"
           >
             View all 5 services <ArrowRight className="h-4 w-4" />
           </Link>

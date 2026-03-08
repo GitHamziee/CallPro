@@ -11,15 +11,15 @@ const AVATAR_COLORS = [
 
 export default function TeamSection() {
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24 bg-slate-50 dark:bg-slate-900">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <Badge className="mb-4">The Team</Badge>
-          <h2 className="text-3xl font-bold text-slate-900">
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
             The People Behind{" "}
             <span className="gradient-text">Your Results</span>
           </h2>
-          <p className="mt-4 text-slate-600 max-w-xl mx-auto">
+          <p className="mt-4 text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
             Real estate professionals and tech experts building the future
             of agent lead generation.
           </p>
@@ -37,7 +37,7 @@ export default function TeamSection() {
                     .map((n) => n[0])
                     .join("")}
                 </div>
-                <h3 className="text-base font-semibold text-slate-900">
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white">
                   {member.name}
                 </h3>
                 <p className="mt-1 text-sm text-brand-600">{member.title}</p>
