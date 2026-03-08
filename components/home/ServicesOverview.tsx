@@ -9,7 +9,7 @@ export default function ServicesOverview() {
 
   return (
     <section className="py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <Badge className="mb-4">What We Do</Badge>
           <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
@@ -61,7 +61,7 @@ export default function ServicesOverview() {
             href="/services"
             className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-6 py-2.5 text-sm font-medium text-slate-600 hover:border-brand-400 hover:text-brand-600 transition-all duration-200"
           >
-            View all 6 services <ArrowRight className="h-4 w-4" />
+            View all 5 services <ArrowRight className="h-4 w-4" />
           </Link>
         </AnimatedSection>
       </div>

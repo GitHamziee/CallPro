@@ -19,6 +19,7 @@ export function useRegister() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const [smsConsent, setSmsConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -99,6 +100,8 @@ export function useRegister() {
     setShowConfirm,
     agreed,
     setAgreed,
+    smsConsent,
+    setSmsConsent,
     loading,
     error,
     passwordError,

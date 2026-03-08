@@ -10,7 +10,7 @@ export default function StatsBar() {
 
   return (
     <section className="bg-brand-600">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8" ref={ref}>
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8" ref={ref}>
         <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
           {STATS.map((stat, i) => (
             <motion.div

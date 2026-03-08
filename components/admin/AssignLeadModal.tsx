@@ -7,6 +7,7 @@ interface SubscribedUser {
   id: string;
   name: string | null;
   email: string;
+  purchases: { package: { name: string } }[];
 }
 
 interface AssignLeadModalProps {
@@ -183,6 +184,11 @@ export default function AssignLeadModal({
                         {user.email}
                       </p>
                     </div>
+                    {user.purchases[0]?.package?.name && (
+                      <span className="shrink-0 px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 text-[10px] font-semibold">
+                        {user.purchases[0].package.name}
+                      </span>
+                    )}
                     {assigning === user.id && (
                       <div className="animate-spin rounded-full h-4 w-4 border-2 border-slate-200 border-t-slate-600" />
                     )}

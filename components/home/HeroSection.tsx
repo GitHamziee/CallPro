@@ -89,7 +89,7 @@ export default function HeroSection() {
       <div className="absolute top-1/4 -left-48 h-[32rem] w-[32rem] rounded-full bg-brand-100/80 blur-3xl blob-drift-1" />
       <div className="absolute bottom-1/4 -right-48 h-[28rem] w-[28rem] rounded-full bg-cyan-100/70 blur-3xl blob-drift-2" />
 
-      <div className="relative mx-auto max-w-7xl w-full px-4 py-32 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-5xl w-full px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
 
           {/* Left: text content */}
@@ -109,7 +109,7 @@ export default function HeroSection() {
               </span>
             </motion.div>
 
-            <h1 className="text-5xl font-bold leading-tight tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
               <CharReveal text="Turn " className="text-slate-900" delay={0.1} />
               <motion.span
                 className="gradient-text inline-block"
@@ -119,8 +119,8 @@ export default function HeroSection() {
               >
                 Conversations
               </motion.span>
-              <br />
-              <CharReveal text="Into " className="text-slate-900" delay={0.7} />
+              {" "}
+              <span className="whitespace-nowrap"><CharReveal text="Into " className="text-slate-900" delay={0.7} /></span>
               <motion.span
                 className="gradient-text inline-block"
                 initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}

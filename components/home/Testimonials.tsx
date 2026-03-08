@@ -11,7 +11,7 @@ export default function Testimonials() {
       <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-accent-500/20 blur-3xl translate-y-1/3 -translate-x-1/3" />
       <div className="grid-pattern absolute inset-0 opacity-10" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <Badge className="mb-4 border-white/30 bg-white/10 text-white">
             Client Results

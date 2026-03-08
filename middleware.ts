@@ -17,7 +17,9 @@ export async function middleware(req: NextRequest) {
   const isProtected = protectedPaths.some((p) => pathname.startsWith(p));
 
   if (isProtected && !token) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    const loginUrl = new URL("/login", req.url);
+    loginUrl.searchParams.set("callbackUrl", pathname);
+    return NextResponse.redirect(loginUrl);
   }
 
   // Admin users hitting /dashboard → send to /admin (unless explicitly navigating to portal)

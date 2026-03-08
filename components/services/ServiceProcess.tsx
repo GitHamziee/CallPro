@@ -39,8 +39,12 @@ const STEPS = [
 
 export default function ServiceProcess() {
   return (
-    <section className="py-24 bg-section-dark overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-section-dark overflow-hidden relative">
+      <div className="grid-pattern absolute inset-0 opacity-20" />
+      <div className="absolute top-1/3 -left-24 h-[20rem] w-[20rem] rounded-full bg-brand-600/10 blur-3xl" />
+      <div className="absolute bottom-1/4 -right-24 h-[16rem] w-[16rem] rounded-full bg-accent-600/10 blur-3xl" />
+
+      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <AnimatedSection className="text-center mb-16">
           <Badge className="mb-4 border-white/20 bg-white/10 text-white/70">

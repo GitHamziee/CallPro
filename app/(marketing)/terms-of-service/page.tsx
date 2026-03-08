@@ -65,15 +65,24 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 mb-3">Communications</h2>
+                <h2 className="text-xl font-semibold text-slate-900 mb-3">Communications &amp; SMS Messaging</h2>
                 <p>
-                  Using R4Referral services indicates your acceptance of receiving phone calls and messages
-                  from us and our associates. By using R4Referral services, you grant R4Referral, its subsidiaries,
-                  and its partners express permission to communicate with you via phone or text message at
-                  the number provided. Please note that your wireless service provider contract may incur
-                  message and data rates. Your consent to text messages and phone calls is not a prerequisite
-                  to utilizing any of our services. If you do not wish to receive these communications,
-                  please refrain from using R4Referral services or submitting your information to us.
+                  By providing your phone number and opting in to SMS communications, you consent to receive
+                  text messages from R4Referral including appointment reminders, lead notifications, account
+                  updates, and service-related alerts. Message frequency varies based on your account activity.
+                  Message and data rates may apply depending on your wireless carrier and plan.
+                </p>
+                <p className="mt-3">
+                  Your consent to receive SMS/text messages is not a condition of purchasing any goods or
+                  services from R4Referral. You may opt out of text messages at any time by replying
+                  <strong> STOP</strong> to any message. After opting out, you will receive a final confirmation
+                  message and will no longer receive SMS from R4Referral unless you re-subscribe. For help or
+                  support, reply <strong>HELP</strong> to any message or contact us at hello@r4referral.com.
+                </p>
+                <p className="mt-3">
+                  R4Referral and mobile carriers are not liable for delayed or undelivered messages. Message
+                  delivery is subject to effective transmission by your wireless service provider. By opting in,
+                  you confirm that you are the owner or authorized user of the mobile device and phone number provided.
                 </p>
               </div>
 

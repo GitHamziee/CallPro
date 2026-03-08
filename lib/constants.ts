@@ -1,4 +1,4 @@
-import { Phone, Calendar, Users, BarChart3, MessageSquare, Target } from "lucide-react";
+import { Home, Headphones, Target, Globe, MessageSquare } from "lucide-react";
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -17,54 +17,28 @@ export const STATS = [
 
 export const SERVICES = [
   {
-    icon: Phone,
-    title: "Outbound Calling",
+    icon: Home,
+    title: "Real Estate Services",
     description:
-      "Our trained agents deliver high-impact outbound calling campaigns that open doors and generate qualified pipeline fast.",
-    metric: "500+ calls/day per agent",
+      "Dedicated lead generation and appointment setting built specifically for real estate professionals looking to scale.",
+    metric: "47 avg. booked appointments/month",
     bullets: [
-      "Agents trained on your ICP, value prop & objections",
+      "Buyer & seller lead generation tailored to your market",
+      "Pre-qualified prospects matched to your target areas",
+      "Appointment setting with instant calendar confirmations",
+    ],
+    href: "/services",
+  },
+  {
+    icon: Headphones,
+    title: "VA Services",
+    description:
+      "Trained virtual assistants who handle outbound calling, follow-ups, and admin tasks so your team can focus on closing.",
+    metric: "500+ calls/day per VA",
+    bullets: [
+      "Dedicated VAs trained on your brand and scripts",
       "Real-time call monitoring with live coaching",
       "Daily outcome tracking with conversion metrics",
-    ],
-    href: "/services",
-  },
-  {
-    icon: Calendar,
-    title: "Appointment Setting",
-    description:
-      "We fill your calendar with verified, high-intent appointments so your closers can focus on closing.",
-    metric: "47 avg. booked meetings/month",
-    bullets: [
-      "Pre-qualified prospects matched to your ideal buyer",
-      "Calendar integration with instant booking confirmations",
-      "No-show follow-up and rescheduling included",
-    ],
-    href: "/services",
-  },
-  {
-    icon: Users,
-    title: "Lead Qualification",
-    description:
-      "Every lead is pre-screened and scored against your ideal customer profile before it ever reaches your team.",
-    metric: "3× higher close rate on qualified leads",
-    bullets: [
-      "Custom qualification criteria based on your ICP",
-      "BANT-style scoring on every prospect",
-      "Detailed handoff notes delivered to your sales team",
-    ],
-    href: "/services",
-  },
-  {
-    icon: MessageSquare,
-    title: "Follow-Up Campaigns",
-    description:
-      "Multi-touch follow-up sequences that nurture cold and warm prospects until they're ready to buy.",
-    metric: "5-touch avg. follow-up sequence",
-    bullets: [
-      "Multi-channel follow-up coordinated across phone & email",
-      "Automated scheduling with human touch points",
-      "Warm lead reactivation from your existing database",
     ],
     href: "/services",
   },
@@ -82,15 +56,28 @@ export const SERVICES = [
     href: "/services",
   },
   {
-    icon: BarChart3,
-    title: "Reporting & Analytics",
+    icon: Globe,
+    title: "Website Development",
     description:
-      "Transparent, real-time dashboards with call recordings, conversion metrics, and actionable insights.",
-    metric: "Live dashboard access 24/7",
+      "Custom-built, conversion-optimized websites designed to capture leads and showcase your brand online.",
+    metric: "3× higher lead capture rate",
     bullets: [
-      "Full call recordings accessible anytime in your portal",
-      "Weekly executive summary reports emailed to your team",
-      "KPI tracking: calls, contacts, appointments, conversions",
+      "Mobile-responsive designs optimized for conversions",
+      "SEO-ready pages with integrated lead capture forms",
+      "Ongoing maintenance, hosting, and performance updates",
+    ],
+    href: "/services",
+  },
+  {
+    icon: MessageSquare,
+    title: "Follow-Up Campaigns",
+    description:
+      "Multi-touch follow-up sequences that nurture cold and warm prospects until they're ready to buy.",
+    metric: "5-touch avg. follow-up sequence",
+    bullets: [
+      "Multi-channel follow-up coordinated across phone & email",
+      "Automated scheduling with human touch points",
+      "Warm lead reactivation from your existing database",
     ],
     href: "/services",
   },
@@ -261,10 +248,11 @@ export const TEAM_MEMBERS = [
 
 export const FOOTER_LINKS = {
   services: [
-    { label: "Outbound Calling", href: "/services" },
-    { label: "Appointment Setting", href: "/services" },
-    { label: "Lead Qualification", href: "/services" },
+    { label: "Real Estate Services", href: "/services" },
+    { label: "VA Services", href: "/services" },
     { label: "CRM Management", href: "/services" },
+    { label: "Website Development", href: "/services" },
+    { label: "Follow-Up Campaigns", href: "/services" },
   ],
   company: [
     { label: "About Us", href: "/about" },

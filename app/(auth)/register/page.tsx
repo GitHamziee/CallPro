@@ -29,6 +29,8 @@ function RegisterContent() {
     setShowConfirm,
     agreed,
     setAgreed,
+    smsConsent,
+    setSmsConsent,
     loading,
     error,
     passwordError,
@@ -322,6 +324,20 @@ function RegisterContent() {
               <Link href="/privacy-policy" className="text-slate-700 font-medium hover:text-brand-600 transition-colors underline underline-offset-2 decoration-slate-300">
                 Privacy Policy
               </Link>
+            </span>
+          </label>
+
+          <label className="flex items-start gap-2.5 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={smsConsent}
+              onChange={(e) => setSmsConsent(e.target.checked)}
+              className="mt-0.5 h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500/20 flex-shrink-0"
+            />
+            <span className="text-xs text-slate-400 leading-relaxed">
+              I agree to receive SMS/text messages from R4Referral including appointment
+              reminders and account notifications. Message frequency varies. Msg &amp; data
+              rates may apply. Reply STOP to opt out, HELP for help.
             </span>
           </label>
 

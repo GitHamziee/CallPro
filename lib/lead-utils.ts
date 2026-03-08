@@ -92,7 +92,19 @@ export async function getSubscribedUsers() {
         },
       },
     },
-    select: { id: true, name: true, email: true },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      purchases: {
+        where: {
+          status: "ACTIVE",
+          OR: [{ expiresAt: { gt: new Date() } }, { expiresAt: null }],
+        },
+        select: { package: { select: { name: true } } },
+        take: 1,
+      },
+    },
     orderBy: { name: "asc" },
     take: 200,
   });

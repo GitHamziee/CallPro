@@ -5,7 +5,7 @@ import Badge from "@/components/shared/Badge";
 export default function HowItWorks() {
   return (
     <section className="py-24 bg-slate-50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <Badge className="mb-4">The Process</Badge>
           <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">

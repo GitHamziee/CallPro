@@ -12,7 +12,7 @@ const AVATAR_COLORS = [
 export default function TeamSection() {
   return (
     <section className="py-24 bg-slate-50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <Badge className="mb-4">The Team</Badge>
           <h2 className="text-3xl font-bold text-slate-900">
