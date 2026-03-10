@@ -16,13 +16,12 @@ import {
   Mail,
   Phone,
   MapPin,
-  Lock,
   Home,
   Calendar,
   FileText,
 } from "lucide-react";
 import { useMyLeads, type MyLead } from "@/hooks/useMyLeads";
-import { timeAgo, LEAD_STATUS_BADGES } from "@/lib/format-utils";
+import { timeAgo, formatDateMST, formatTimeMST, LEAD_STATUS_BADGES } from "@/lib/format-utils";
 
 export default function MyLeadsPage() {
   const {
@@ -192,7 +191,7 @@ export default function MyLeadsPage() {
                       </p>
                     </td>
                     <td className="px-5 py-4 text-sm hidden sm:table-cell text-slate-400 dark:text-slate-500">
-                      {lead.status === "PENDING" ? "—" : lead.phone}
+                      {lead.phone}
                     </td>
                     <td className="px-5 py-4 hidden lg:table-cell">
                       <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400">
@@ -328,31 +327,6 @@ export default function MyLeadsPage() {
 
             {/* Body */}
             <div className="px-6 py-5 max-h-[60vh] overflow-y-auto">
-              {selectedLead.status === "PENDING" ? (
-                /* ── Locked preview for PENDING leads ── */
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <User className="h-4 w-4 text-slate-400 dark:text-slate-500 mt-0.5" />
-                    <div>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">Lead</p>
-                      <div className="flex items-center gap-2">
-                        <p className="text-sm font-medium text-slate-900 dark:text-white">{selectedLead.name}</p>
-                        <span className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${selectedLead.leadType === "Buyer" ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400" : "bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400"}`}>
-                          {selectedLead.leadType}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-4 py-8 text-center">
-                    <Lock className="h-8 w-8 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
-                    <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Details Locked</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto">
-                      Accept this lead to unlock the full contact info and lead details.
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                /* ── Full details for accepted / invoiced / paid leads ── */
                 <div className="space-y-4">
                   {/* Lead Type + Name */}
                   <div className="flex items-start gap-3">
@@ -445,8 +419,8 @@ export default function MyLeadsPage() {
                     <div>
                       <p className="text-xs text-slate-500 dark:text-slate-400">Appointment</p>
                       <p className="text-sm font-medium text-slate-900 dark:text-white">
-                        {new Date(selectedLead.appointmentTime).toLocaleDateString()}{" "}
-                        {new Date(selectedLead.appointmentTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                        {formatDateMST(selectedLead.appointmentTime)}{" "}
+                        {formatTimeMST(selectedLead.appointmentTime)}
                       </p>
                     </div>
                   </div>
@@ -490,7 +464,7 @@ export default function MyLeadsPage() {
                     <div>
                       <p className="text-xs text-slate-500 dark:text-slate-400">Submitted</p>
                       <p className="text-sm font-medium text-slate-900 dark:text-white">
-                        {new Date(selectedLead.createdAt).toLocaleDateString()} ({timeAgo(selectedLead.createdAt)})
+                        {formatDateMST(selectedLead.createdAt)} ({timeAgo(selectedLead.createdAt)})
                       </p>
                     </div>
                   </div>
@@ -519,7 +493,6 @@ export default function MyLeadsPage() {
                   )}
 
                 </div>
-              )}
             </div>
 
             {/* Footer actions */}

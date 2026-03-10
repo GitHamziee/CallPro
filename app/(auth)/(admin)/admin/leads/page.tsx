@@ -23,7 +23,7 @@ import {
   Calendar,
 } from "lucide-react";
 import { useAdminLeads, type LeadRow } from "@/hooks/useAdminLeads";
-import { timeAgo, LEAD_STATUS_BADGES } from "@/lib/format-utils";
+import { timeAgo, formatDateMST, formatTimeMST, LEAD_STATUS_BADGES } from "@/lib/format-utils";
 import AssignLeadModal from "@/components/admin/AssignLeadModal";
 import SendInvoiceModal from "@/components/admin/SendInvoiceModal";
 
@@ -563,8 +563,8 @@ export default function AdminLeadsPage() {
                 <div>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Appointment</p>
                   <p className="text-sm font-medium text-slate-900 dark:text-white">
-                    {new Date(selectedLead.appointmentTime).toLocaleDateString()}{" "}
-                    {new Date(selectedLead.appointmentTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                    {formatDateMST(selectedLead.appointmentTime)}{" "}
+                    {formatTimeMST(selectedLead.appointmentTime)}
                   </p>
                 </div>
               </div>
@@ -628,7 +628,7 @@ export default function AdminLeadsPage() {
                 <div>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Submitted</p>
                   <p className="text-sm font-medium text-slate-900 dark:text-white">
-                    {new Date(selectedLead.createdAt).toLocaleDateString()} ({timeAgo(selectedLead.createdAt)})
+                    {formatDateMST(selectedLead.createdAt)} ({timeAgo(selectedLead.createdAt)})
                   </p>
                 </div>
               </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { toDatetimeLocalMST } from "@/lib/format-utils";
 
 const EMPTY_FORM = {
   leadType: "",
@@ -39,10 +40,7 @@ export function useSubmitLead() {
       const data = await res.json();
       if (res.ok && data.lead) {
         const l = data.lead;
-        const apt = new Date(l.appointmentTime);
-        const aptLocal = isNaN(apt.getTime())
-          ? ""
-          : `${apt.getFullYear()}-${String(apt.getMonth() + 1).padStart(2, "0")}-${String(apt.getDate()).padStart(2, "0")}T${String(apt.getHours()).padStart(2, "0")}:${String(apt.getMinutes()).padStart(2, "0")}`;
+        const aptLocal = toDatetimeLocalMST(l.appointmentTime);
 
         setForm({
           leadType: l.leadType || "",

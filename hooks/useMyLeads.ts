@@ -32,7 +32,6 @@ export interface MyLead {
   createdAt: string;
   agent: LeadAgent;
   invoice: LeadInvoice | null;
-  contactHidden?: boolean;
 }
 
 export interface MyLeadStats {

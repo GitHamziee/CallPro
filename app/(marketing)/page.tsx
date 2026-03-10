@@ -1,4 +1,5 @@
 import HeroSection from "@/components/home/HeroSection";
+import TrustBar from "@/components/home/TrustBar";
 import StatsBar from "@/components/home/StatsBar";
 import ServicesOverview from "@/components/home/ServicesOverview";
 import HowItWorks from "@/components/home/HowItWorks";
@@ -8,9 +9,10 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <TrustBar />
       <StatsBar />
-      <ServicesOverview />
       <HowItWorks />
+      <ServicesOverview />
       <Testimonials />
     </>
   );

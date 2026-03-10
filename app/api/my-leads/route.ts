@@ -4,23 +4,6 @@ import { requireUser, applyRateLimit } from "@/lib/api-utils";
 import { acceptLead, declineLead } from "@/lib/lead-utils";
 import { createInvoice, markLeadPaidByPackage } from "@/lib/invoice-utils";
 
-function maskString(str: string): string {
-  if (str.length <= 2) return "••••";
-  return str[0] + "•".repeat(Math.max(4, str.length - 2)) + str[str.length - 1];
-}
-
-function maskEmail(email: string): string {
-  const [local, domain] = email.split("@");
-  if (!domain) return "••••@••••";
-  return maskString(local) + "@" + domain;
-}
-
-function maskPhone(phone: string): string {
-  const digits = phone.replace(/\D/g, "");
-  if (digits.length <= 4) return "••••••••";
-  return "•".repeat(digits.length - 4) + digits.slice(-4);
-}
-
 export async function GET(req: NextRequest) {
   try {
     const [session, authError] = await requireUser();
@@ -68,20 +51,8 @@ export async function GET(req: NextRequest) {
     const invoicedCount = countByStatus["INVOICED"] || 0;
     const paidCount = countByStatus["PAID"] || 0;
 
-    // Mask contact details for PENDING leads — user hasn't accepted yet
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const sanitizedLeads = leads.map((lead: any) => {
-      const shouldMask = lead.status === "PENDING";
-      return {
-        ...lead,
-        email: shouldMask && lead.email ? maskEmail(lead.email) : lead.email,
-        phone: shouldMask ? maskPhone(lead.phone) : lead.phone,
-        contactHidden: shouldMask,
-      };
-    });
-
     return NextResponse.json({
-      leads: sanitizedLeads,
+      leads,
       total,
       page,
       totalPages: Math.ceil(total / limit),

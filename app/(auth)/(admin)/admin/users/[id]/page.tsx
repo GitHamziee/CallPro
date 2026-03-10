@@ -31,6 +31,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useAdminUserDetail } from "@/hooks/useAdminUserDetail";
+import { formatShortDateMST, formatShortDateNoYearMST } from "@/lib/format-utils";
 
 function getInitials(name: string | null) {
   if (name) {
@@ -160,11 +161,7 @@ export default function AdminUserDetailPage({
               Joined
             </p>
             <p className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">
-              {new Date(user.createdAt).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })}
+              {formatShortDateMST(user.createdAt)}
             </p>
           </div>
           <div className="px-3 py-3 sm:px-5 sm:py-4">
@@ -468,19 +465,13 @@ export default function AdminUserDetailPage({
                     <div className="flex items-center gap-2 sm:gap-3 mt-0.5">
                       <span className="flex items-center gap-1 text-[10px] sm:text-xs text-slate-400 dark:text-slate-500">
                         <Calendar className="h-3 w-3 hidden sm:block" />
-                        {new Date(purchase.createdAt).toLocaleDateString(
-                          "en-US",
-                          { month: "short", day: "numeric", year: "numeric" }
-                        )}
+                        {formatShortDateMST(purchase.createdAt)}
                       </span>
                       {purchase.expiresAt && (
                         <span className="flex items-center gap-1 text-[10px] sm:text-xs text-slate-400 dark:text-slate-500">
                           <Clock className="h-3 w-3 hidden sm:block" />
                           Exp{" "}
-                          {new Date(purchase.expiresAt).toLocaleDateString(
-                            "en-US",
-                            { month: "short", day: "numeric" }
-                          )}
+                          {formatShortDateNoYearMST(purchase.expiresAt)}
                         </span>
                       )}
                     </div>

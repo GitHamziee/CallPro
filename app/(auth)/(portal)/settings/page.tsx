@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { User, Lock, CreditCard, ChevronDown, Search } from "lucide-react";
 import { useSettings } from "@/hooks/useSettings";
+import { formatDateMST } from "@/lib/format-utils";
 import { US_STATES, US_STATE_MAP } from "@/lib/constants";
 
 export default function SettingsPage() {
@@ -499,18 +500,14 @@ export default function SettingsPage() {
                         <div>
                           <p className="text-slate-500 dark:text-slate-400">Started</p>
                           <p className="font-semibold text-slate-900 dark:text-white">
-                            {new Date(
-                              purchase.createdAt
-                            ).toLocaleDateString()}
+                            {formatDateMST(purchase.createdAt)}
                           </p>
                         </div>
                         {purchase.expiresAt && (
                           <div>
                             <p className="text-slate-500 dark:text-slate-400">Expires</p>
                             <p className="font-semibold text-slate-900 dark:text-white">
-                              {new Date(
-                                purchase.expiresAt
-                              ).toLocaleDateString()}
+                              {formatDateMST(purchase.expiresAt)}
                             </p>
                           </div>
                         )}

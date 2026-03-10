@@ -18,13 +18,13 @@ function formatCents(cents: number) {
 function formatMonthLabel(monthStr: string) {
   const [y, m] = monthStr.split("-").map(Number);
   const date = new Date(y, m - 1);
-  return date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+  return date.toLocaleDateString("en-US", { timeZone: "America/Denver", month: "long", year: "numeric" });
 }
 
 function formatShortMonth(monthStr: string) {
   const [, m] = monthStr.split("-").map(Number);
   const date = new Date(2000, m - 1);
-  return date.toLocaleDateString("en-US", { month: "short" });
+  return date.toLocaleDateString("en-US", { timeZone: "America/Denver", month: "short" });
 }
 
 export default function AdminAnalyticsPage() {

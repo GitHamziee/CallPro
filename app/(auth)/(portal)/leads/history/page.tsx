@@ -20,7 +20,7 @@ import {
   Calendar,
 } from "lucide-react";
 import { useLeadHistory, type HistoryLead } from "@/hooks/useLeadHistory";
-import { timeAgo, LEAD_STATUS_BADGES } from "@/lib/format-utils";
+import { timeAgo, formatDateMST, formatTimeMST, formatDateTimeMST, LEAD_STATUS_BADGES } from "@/lib/format-utils";
 
 export default function LeadHistoryPage() {
   const {
@@ -184,7 +184,7 @@ export default function LeadHistoryPage() {
                       {lead.address}
                     </td>
                     <td className="px-5 py-4 text-sm text-slate-600 dark:text-slate-400 hidden lg:table-cell">
-                      {new Date(lead.appointmentTime).toLocaleDateString()} {new Date(lead.appointmentTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                      {formatDateTimeMST(lead.appointmentTime)}
                     </td>
                     <td className="px-5 py-4 hidden sm:table-cell">
                       <div className="flex items-center gap-2">
@@ -360,8 +360,8 @@ export default function LeadHistoryPage() {
                 <div>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Appointment</p>
                   <p className="text-sm font-medium text-slate-900 dark:text-white">
-                    {new Date(selectedLead.appointmentTime).toLocaleDateString()}{" "}
-                    {new Date(selectedLead.appointmentTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                    {formatDateMST(selectedLead.appointmentTime)}{" "}
+                    {formatTimeMST(selectedLead.appointmentTime)}
                   </p>
                 </div>
               </div>
@@ -391,7 +391,7 @@ export default function LeadHistoryPage() {
                 <div>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Submitted</p>
                   <p className="text-sm font-medium text-slate-900 dark:text-white">
-                    {new Date(selectedLead.createdAt).toLocaleDateString()} ({timeAgo(selectedLead.createdAt)})
+                    {formatDateMST(selectedLead.createdAt)} ({timeAgo(selectedLead.createdAt)})
                   </p>
                 </div>
               </div>

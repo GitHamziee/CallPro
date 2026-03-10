@@ -1,5 +1,8 @@
 /** Shared formatting utilities used across pages. */
 
+/** All user-facing dates/times are displayed in Mountain Standard Time. */
+const TZ = "America/Denver";
+
 export function timeAgo(dateStr: string) {
   const diff = Date.now() - new Date(dateStr).getTime();
   const days = Math.floor(diff / 86400000);
@@ -9,6 +12,74 @@ export function timeAgo(dateStr: string) {
   const months = Math.floor(days / 30);
   if (months < 12) return `${months}mo ago`;
   return `${Math.floor(months / 12)}y ago`;
+}
+
+/** e.g. "3/9/2026" */
+export function formatDateMST(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-US", { timeZone: TZ });
+}
+
+/** e.g. "02:30 PM" */
+export function formatTimeMST(dateStr: string) {
+  return new Date(dateStr).toLocaleTimeString("en-US", {
+    timeZone: TZ,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+/** e.g. "3/9/2026 02:30 PM" */
+export function formatDateTimeMST(dateStr: string) {
+  return `${formatDateMST(dateStr)} ${formatTimeMST(dateStr)}`;
+}
+
+/** e.g. "Mar 9, 2026" */
+export function formatShortDateMST(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-US", {
+    timeZone: TZ,
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+/** e.g. "Mar 9" (no year) */
+export function formatShortDateNoYearMST(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-US", {
+    timeZone: TZ,
+    month: "short",
+    day: "numeric",
+  });
+}
+
+/** e.g. "March 2026" */
+export function formatMonthYearMST(dateStr?: string) {
+  const d = dateStr ? new Date(dateStr) : new Date();
+  return d.toLocaleDateString("en-US", {
+    timeZone: TZ,
+    month: "long",
+    year: "numeric",
+  });
+}
+
+/**
+ * Converts a UTC/ISO date string to a `datetime-local` input value in MST.
+ * e.g. "2026-03-09T21:30:00Z" → "2026-03-09T14:30"
+ */
+export function toDatetimeLocalMST(dateStr: string) {
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return "";
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: TZ,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "";
+  return `${get("year")}-${get("month")}-${get("day")}T${get("hour")}:${get("minute")}`;
 }
 
 export function getInitials(name: string | null, email: string) {

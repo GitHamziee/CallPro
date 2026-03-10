@@ -24,6 +24,7 @@ import {
   type PurchaseInfo,
   type AdminStats,
 } from "@/hooks/useDashboard";
+import { formatDateMST, formatMonthYearMST } from "@/lib/format-utils";
 import type { Session } from "next-auth";
 
 // ─── User Dashboard ────────────────────────────────────────────────
@@ -80,7 +81,7 @@ function UserDashboard({
           </p>
           <p className="text-[10px] md:text-xs text-slate-400 dark:text-slate-500 mt-1 hidden sm:block">
             {purchase
-              ? `Since ${new Date(purchase.createdAt).toLocaleDateString()}${purchase.expiresAt ? ` · Expires ${new Date(purchase.expiresAt).toLocaleDateString()}` : ""}`
+              ? `Since ${formatDateMST(purchase.createdAt)}${purchase.expiresAt ? ` · Expires ${formatDateMST(purchase.expiresAt)}` : ""}`
               : "No active subscription"}
           </p>
         </div>
@@ -151,10 +152,7 @@ function AdminDashboard({
         </h2>
         <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400">
           Here&apos;s your platform overview for{" "}
-          {new Date().toLocaleDateString("en-US", {
-            month: "long",
-            year: "numeric",
-          })}
+          {formatMonthYearMST()}
           .
         </p>
       </div>
@@ -334,7 +332,7 @@ function AdminDashboard({
                     {user.role}
                   </span>
                   <span className="text-[10px] md:text-xs text-slate-400 dark:text-slate-500">
-                    {new Date(user.createdAt).toLocaleDateString()}
+                    {formatDateMST(user.createdAt)}
                   </span>
                 </div>
               </div>

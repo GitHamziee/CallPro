@@ -78,8 +78,6 @@ function AnimatedCounter({
   );
 }
 
-const PARTNERS = ["eXp Realty", "Keller Williams", "Coldwell Banker", "Berkshire Hathaway"];
-
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-white dark:bg-slate-950">
@@ -174,27 +172,6 @@ export default function HeroSection() {
               </MagneticButton>
             </motion.div>
 
-            {/* Trust strip — partner pills */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-12"
-            >
-              <p className="mb-4 text-xs font-medium uppercase tracking-widest text-slate-400 dark:text-slate-500">
-                Agents from top brokerages trust us
-              </p>
-              <div className="flex flex-wrap items-center gap-3">
-                {PARTNERS.map((company) => (
-                  <span
-                    key={company}
-                    className="rounded-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 px-4 py-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400"
-                  >
-                    {company}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
           </div>
 
           {/* Right: Live lead dashboard card */}

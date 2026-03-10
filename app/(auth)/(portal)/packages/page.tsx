@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { Check, Loader2 } from "lucide-react";
 import { usePackages } from "@/hooks/usePackages";
+import { formatDateMST } from "@/lib/format-utils";
 
 export default function PackagesPage() {
   const { data: session } = useSession();
@@ -29,7 +30,7 @@ export default function PackagesPage() {
             {activePurchase.expiresAt && (
               <span className="ml-2 text-slate-400 dark:text-slate-500">
                 · Expires{" "}
-                {new Date(activePurchase.expiresAt).toLocaleDateString()}
+                {formatDateMST(activePurchase.expiresAt)}
               </span>
             )}
           </p>

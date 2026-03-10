@@ -5,43 +5,38 @@ import { Button } from "@/components/ui/button";
 import Badge from "@/components/shared/Badge";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 import ServiceCards from "@/components/services/ServiceCards";
-import ServiceProcess from "@/components/services/ServiceProcess";
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Explore our full suite of services: real estate lead generation, virtual assistant, CRM platform, virtual staging, and website development.",
+    "Explore our full suite of services: real estate lead generation, virtual assistants, and custom website development for real estate professionals.",
 };
 
 export default function ServicesPage() {
   return (
     <>
-      {/* Header */}
-      <div className="relative overflow-hidden bg-white dark:bg-slate-950 pt-24 pb-12 text-center">
+      {/* Hero Header */}
+      <section className="relative overflow-hidden bg-white dark:bg-slate-950 pt-28 pb-16">
         <div className="grid-pattern absolute inset-0" />
-        <div className="absolute left-1/2 top-0 -translate-x-1/2 h-72 w-72 rounded-full bg-brand-100/60 dark:bg-brand-900/30 blur-3xl" />
-        <div className="absolute top-1/2 -left-24 h-48 w-48 rounded-full bg-accent-100/40 dark:bg-accent-900/20 blur-3xl" />
+        <div className="absolute left-1/2 top-0 -translate-x-1/2 h-80 w-80 rounded-full bg-brand-100/60 dark:bg-brand-900/30 blur-3xl" />
+        <div className="absolute top-1/2 -left-24 h-56 w-56 rounded-full bg-accent-200/40 dark:bg-accent-900/20 blur-3xl" />
+        <div className="absolute bottom-0 -right-24 h-56 w-56 rounded-full bg-brand-200/40 dark:bg-brand-900/20 blur-3xl" />
 
-        <div className="relative mx-auto max-w-4xl px-4">
+        <div className="relative mx-auto max-w-4xl px-4 text-center">
           <div className="flex justify-center mb-4">
             <Badge>
               <span className="h-1.5 w-1.5 rounded-full bg-brand-600 animate-pulse" />
               Our Services
             </Badge>
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl">
             Everything You Need to{" "}
             <span className="gradient-text">Grow Your Business</span>
           </h1>
-          <p className="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            End-to-end solutions powered by trained professionals. No
-            freelancers, no offshore chaos — just results.
-          </p>
         </div>
-      </div>
+      </section>
 
       <ServiceCards />
-      <ServiceProcess />
 
       {/* Bottom CTA */}
       <section className="py-24 relative overflow-hidden bg-white dark:bg-slate-950">
