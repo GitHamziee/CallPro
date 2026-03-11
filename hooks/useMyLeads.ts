@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 interface LeadAgent {
   id: string;
@@ -52,8 +52,13 @@ export function useMyLeads() {
   const [acting, setActing] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [selectedLead, setSelectedLead] = useState<MyLead | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
 
   const fetchLeads = useCallback(async (silent = false) => {
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
     if (!silent) setLoading(true);
     setError("");
     try {
@@ -64,7 +69,9 @@ export function useMyLeads() {
         ...(silent && { skipStats: "1" }),
       });
 
-      const res = await fetch(`/api/my-leads?${params}`);
+      const res = await fetch(`/api/my-leads?${params}`, {
+        signal: controller.signal,
+      });
       const data = await res.json();
 
       if (res.ok) {
@@ -75,10 +82,11 @@ export function useMyLeads() {
       } else if (!silent) {
         setError(data.error || "Failed to load leads");
       }
-    } catch {
+    } catch (err) {
+      if ((err as Error).name === "AbortError") return;
       if (!silent) setError("Network error");
     } finally {
-      if (!silent) setLoading(false);
+      if (!controller.signal.aborted && !silent) setLoading(false);
     }
   }, [page, statusFilter]);
 

@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { requireUser, applyRateLimit } from "@/lib/api-utils";
 import { acceptLead, declineLead } from "@/lib/lead-utils";
-import { createInvoice, markLeadPaidByPackage } from "@/lib/invoice-utils";
 
 export async function GET(req: NextRequest) {
   try {
@@ -133,36 +132,53 @@ export async function PATCH(req: NextRequest) {
         );
       }
 
-      // Determine billing mode from active package type
-      const userData = await prisma.user.findUnique({
-        where: { id: session.user.id },
-        select: {
-          leadCost: true,
-          purchases: {
-            where: {
-              status: "ACTIVE",
-              OR: [{ expiresAt: { gt: new Date() } }, { expiresAt: null }],
+      // Auto-billing in a transaction so accept + invoice are atomic
+      try {
+        await prisma.$transaction(async (tx) => {
+          const userData = await tx.user.findUnique({
+            where: { id: session.user.id },
+            select: {
+              leadCost: true,
+              purchases: {
+                where: {
+                  status: "ACTIVE",
+                  OR: [{ expiresAt: { gt: new Date() } }, { expiresAt: null }],
+                },
+                take: 1,
+                select: { package: { select: { name: true, type: true } } },
+              },
             },
-            take: 1,
-            select: { package: { select: { name: true, type: true } } },
-          },
-        },
-      });
+          });
 
-      const activePkg = userData?.purchases?.[0]?.package;
-      if (activePkg?.type === "PAY_PER_LEAD") {
-        // Only auto-invoice if admin has set a per-lead cost for this user
-        if (userData?.leadCost && userData.leadCost > 0) {
-          const invoiceResult = await createInvoice(leadId, userData.leadCost);
-          if ("error" in invoiceResult) {
-            console.error("Auto-invoice failed:", invoiceResult.error);
+          const activePkg = userData?.purchases?.[0]?.package;
+          if (activePkg?.type === "PAY_PER_LEAD") {
+            if (userData?.leadCost && userData.leadCost > 0) {
+              await tx.invoice.create({
+                data: { leadId, amount: userData.leadCost },
+              });
+              await tx.lead.update({
+                where: { id: leadId },
+                data: { status: "INVOICED" },
+              });
+            }
+          } else if (activePkg?.type === "SUBSCRIPTION") {
+            await tx.invoice.create({
+              data: {
+                leadId,
+                amount: 0,
+                description: `Paid via Package: ${activePkg.name}`,
+                status: "PAID",
+                paidAt: new Date(),
+              },
+            });
+            await tx.lead.update({
+              where: { id: leadId },
+              data: { status: "PAID" },
+            });
           }
-        }
-      } else if (activePkg?.type === "SUBSCRIPTION") {
-        const payResult = await markLeadPaidByPackage(leadId, activePkg.name);
-        if ("error" in payResult) {
-          console.error("Auto-pay by package failed:", payResult.error);
-        }
+        });
+      } catch (billingError) {
+        console.error("Auto-billing transaction failed:", billingError);
       }
 
       return NextResponse.json({ lead: result.lead, message: "Lead accepted" });

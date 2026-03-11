@@ -1,9 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
 export async function GET(req: NextRequest) {
   try {
     const userId = req.nextUrl.searchParams.get("userId");
+
+    // Custom package requires auth — prevent info leak via guessed userId
+    if (userId) {
+      const session = await getServerSession(authOptions);
+      if (!session?.user?.id || (session.user.id !== userId && session.user.role !== "ADMIN")) {
+        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+      }
+    }
 
     // Standard packages (exclude custom)
     const packages = await prisma.package.findMany({

@@ -60,6 +60,7 @@ export function useAdminLeads() {
   const [stats, setStats] = useState<LeadStats | null>(null);
   const [assignLeadId, setAssignLeadId] = useState<string | null>(null);
   const [invoiceLeadId, setInvoiceLeadId] = useState<string | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
 
   // Fetch agents for filter dropdown
   useEffect(() => {
@@ -84,6 +85,10 @@ export function useAdminLeads() {
   }, []);
 
   const fetchLeads = useCallback(async (silent = false) => {
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
     if (!silent) setLoading(true);
     try {
       const params = new URLSearchParams({
@@ -94,7 +99,9 @@ export function useAdminLeads() {
         ...(statusFilter && { status: statusFilter }),
       });
 
-      const res = await fetch(`/api/admin/leads?${params}`);
+      const res = await fetch(`/api/admin/leads?${params}`, {
+        signal: controller.signal,
+      });
       const data = await res.json();
 
       if (res.ok) {
@@ -103,10 +110,10 @@ export function useAdminLeads() {
         setTotalPages(data.totalPages);
         setStats(data.stats);
       }
-    } catch {
-      // silently fail
+    } catch (err) {
+      if ((err as Error).name === "AbortError") return;
     } finally {
-      if (!silent) setLoading(false);
+      if (!controller.signal.aborted && !silent) setLoading(false);
     }
   }, [page, debouncedSearch, agentFilter, statusFilter]);
 
