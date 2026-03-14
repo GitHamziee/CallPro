@@ -16,7 +16,7 @@ export default function Footer() {
                 alt="R4Referral"
                 width={75}
                 height={60}
-                className="h-[60px] w-[75px] object-contain"
+                className="h-[60px] w-[75px] object-contain brightness-0 invert"
               />
             </Link>
             <p className="max-w-xs text-sm text-white/60 leading-relaxed text-center md:text-left mx-auto md:mx-0">
