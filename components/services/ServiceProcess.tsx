@@ -8,7 +8,7 @@ const STEPS = [
     step: "01",
     title: "Set Your Preferences",
     description:
-      "Tell us your target areas, property types, and lead preferences. We customize everything to match your farm area.",
+      "Tell us your target areas, property types, and referral preferences. We customize everything to match your farm area.",
     duration: "Day 1",
   },
   {
@@ -16,15 +16,15 @@ const STEPS = [
     step: "02",
     title: "We Source & Verify",
     description:
-      "Our AI filters and ISA team validate every lead for genuine buyer or seller intent. No fakes, no duplicates, no tire-kickers.",
+      "Our AI filters and ISA team validate every referral for genuine buyer or seller intent. No fakes, no duplicates, no tire-kickers.",
     duration: "Days 2–3",
   },
   {
     icon: Rocket,
     step: "03",
-    title: "Leads Delivered",
+    title: "Referrals Delivered",
     description:
-      "Verified leads are sent to your dashboard in real-time with full contact info, intent signals, and property details.",
+      "Verified referrals are sent to your dashboard in real-time with full contact info, intent signals, and property details.",
     duration: "Day 3+",
   },
   {
@@ -32,7 +32,7 @@ const STEPS = [
     step: "04",
     title: "Close & Scale",
     description:
-      "Focus on closing deals while we keep the leads flowing. Track your ROI and scale your volume when you're ready.",
+      "Focus on closing deals while we keep the referrals flowing. Track your ROI and scale your volume when you're ready.",
     duration: "Ongoing",
   },
 ];
@@ -51,11 +51,11 @@ export default function ServiceProcess() {
             Our Process
           </Badge>
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            From sign-up to verified leads{" "}
+            From sign-up to verified referrals{" "}
             <span className="gradient-text">in 3 days</span>
           </h2>
           <p className="mt-4 text-white/60 max-w-xl mx-auto leading-relaxed">
-            A streamlined process that gets verified leads into your hands
+            A streamlined process that gets verified referrals into your hands
             fast — with full transparency at every step.
           </p>
         </AnimatedSection>

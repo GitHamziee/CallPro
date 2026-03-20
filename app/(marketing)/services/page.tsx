@@ -9,7 +9,7 @@ import ServiceCards from "@/components/services/ServiceCards";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Explore our full suite of services: real estate lead generation, virtual assistants, and custom website development for real estate professionals.",
+    "Explore our full suite of services: real estate referral generation, virtual assistants, and custom website development for real estate professionals.",
 };
 
 export default function ServicesPage() {
@@ -50,8 +50,8 @@ export default function ServicesPage() {
               Ready to <span className="gradient-text">Grow Your Business</span>?
             </h2>
             <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
-              Get started with verified leads tailored to your market.
-              Sign up today and start receiving leads within days.
+              Get started with verified referrals tailored to your market.
+              Sign up today and start receiving referrals within days.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
               <div className="btn-gradient-wrap rounded-md">

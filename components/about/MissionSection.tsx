@@ -5,9 +5,9 @@ import Badge from "@/components/shared/Badge";
 const VALUES = [
   {
     icon: Target,
-    title: "Verified Leads Only",
+    title: "Verified Referrals Only",
     description:
-      "Every lead goes through AI filtering and ISA validation before it reaches you. No fakes, no duplicates.",
+      "Every referral goes through AI filtering and ISA validation before it reaches you. No fakes, no duplicates.",
   },
   {
     icon: Users,
@@ -19,13 +19,13 @@ const VALUES = [
     icon: TrendingUp,
     title: "Data-Driven",
     description:
-      "We track every metric, optimize lead sources, and continuously improve conversion rates for our network.",
+      "We track every metric, optimize referral sources, and continuously improve conversion rates for our network.",
   },
   {
     icon: Shield,
     title: "Full Transparency",
     description:
-      "Real-time dashboards, lead tracking, and clear reporting. You always know exactly where your leads stand.",
+      "Real-time dashboards, referral tracking, and clear reporting. You always know exactly where your referrals stand.",
   },
 ];
 
@@ -41,13 +41,13 @@ export default function MissionSection() {
               <span className="gradient-text">real estate experience</span>
             </h2>
             <p className="mt-5 text-slate-600 dark:text-slate-400 leading-relaxed">
-              Too many agents waste time chasing unqualified leads from outdated
+              Too many agents waste time chasing unqualified referrals from outdated
               sources. We built R4Referral to change that — a referral network
               powered by AI verification and human validation that delivers
-              leads who are genuinely ready to buy or sell.
+              referrals from people who are genuinely ready to buy or sell.
             </p>
             <p className="mt-4 text-slate-600 dark:text-slate-400 leading-relaxed">
-              Our agents don&apos;t wonder if leads are real. They get verified
+              Our agents don&apos;t wonder if referrals are real. They get verified
               contact info, intent signals, and property details — so they can
               focus on what they do best: closing deals.
             </p>
@@ -60,9 +60,9 @@ export default function MissionSection() {
               </h3>
               <div className="space-y-6">
                 {[
-                  { step: "01", title: "AI Lead Sourcing", description: "We identify high-intent buyers and sellers using proprietary data and AI filtering." },
-                  { step: "02", title: "ISA Verification", description: "Every lead is contacted and validated by trained inside sales agents before delivery." },
-                  { step: "03", title: "Agent Matching", description: "Leads are matched to agents based on location, specialty, and availability." },
+                  { step: "01", title: "AI Referral Sourcing", description: "We identify high-intent buyers and sellers using proprietary data and AI filtering." },
+                  { step: "02", title: "ISA Verification", description: "Every referral is contacted and validated by trained inside sales agents before delivery." },
+                  { step: "03", title: "Agent Matching", description: "Referrals are matched to agents based on location, specialty, and availability." },
                   { step: "04", title: "Deal Support", description: "We stay involved with follow-ups and scheduling to help you close faster." },
                 ].map((item) => (
                   <div key={item.step} className="group flex gap-4 rounded-xl p-2 -m-2 transition-all duration-300 hover:bg-brand-50/50 dark:hover:bg-brand-900/20">

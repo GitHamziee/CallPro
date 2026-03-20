@@ -5,7 +5,7 @@ import MissionSection from "@/components/about/MissionSection";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about R4Referral — a digital real estate referral network delivering verified leads to agents nationwide.",
+    "Learn about R4Referral — a digital real estate referral network delivering verified referrals to agents nationwide.",
 };
 
 export default function AboutPage() {

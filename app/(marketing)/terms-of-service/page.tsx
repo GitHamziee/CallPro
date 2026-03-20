@@ -24,7 +24,7 @@ export default function TermsOfServicePage() {
                 <p>
                   R4Referral provides outbound sales services designed to help B2B companies scale their
                   pipeline. Through our trained agents, proven calling frameworks, and data-driven approach,
-                  we deliver appointment setting, lead qualification, and outbound calling campaigns that
+                  we deliver appointment setting, referral qualification, and outbound calling campaigns that
                   drive measurable results.
                 </p>
               </div>
@@ -68,7 +68,7 @@ export default function TermsOfServicePage() {
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Communications &amp; SMS Messaging</h2>
                 <p>
                   By providing your phone number and opting in to SMS communications, you consent to receive
-                  text messages from R4Referral including appointment reminders, lead notifications, account
+                  text messages from R4Referral including appointment reminders, referral notifications, account
                   updates, and service-related alerts. Message frequency varies based on your account activity.
                   Message and data rates may apply depending on your wireless carrier and plan.
                 </p>
@@ -127,7 +127,7 @@ export default function TermsOfServicePage() {
                   beyond this period shall be deemed irrevocably waived.
                 </p>
                 <p className="mt-3">
-                  In cases where no material service execution, operational labor, or lead delivery has taken
+                  In cases where no material service execution, operational labor, or referral delivery has taken
                   place, the Company shall deduct a non-refundable 15% to cover merchant processing,
                   administrative, and handling expenses.
                 </p>

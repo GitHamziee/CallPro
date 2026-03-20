@@ -159,7 +159,7 @@ export default function HeroSection() {
             >
               <Badge>
                 <span className="h-1.5 w-1.5 rounded-full bg-brand-600 animate-pulse" />
-                Verified Real Estate Leads
+                Verified Real Estate Referrals
               </Badge>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 dark:border-amber-700 bg-amber-50 dark:bg-amber-900/30 px-3 py-1 text-xs font-medium text-amber-700 dark:text-amber-400">
                 ★★★★★&nbsp; Trusted by 2,500+ agents
@@ -174,7 +174,7 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.6, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
-                Leads
+                Referrals
               </motion.span>
               {" "}
               <span className="whitespace-nowrap"><CharReveal text="Into " className="text-slate-900 dark:text-white" delay={0.7} /></span>
@@ -195,7 +195,7 @@ export default function HeroSection() {
               className="mt-6 max-w-xl text-lg text-slate-600 dark:text-slate-400 leading-relaxed"
             >
               R4Referral is a digital real estate referral network that delivers
-              verified, high-intent buyer and seller leads directly to agents
+              verified, high-intent buyer and seller referrals directly to agents
               across all 50 states.
             </motion.p>
 
@@ -247,7 +247,7 @@ export default function HeroSection() {
                   <Home className="h-5 w-5 text-brand-400" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Lead Dashboard</p>
+                  <p className="text-sm font-semibold text-white">Referral Dashboard</p>
                   <p className="text-xs text-white/50">R4Referral Network</p>
                 </div>
                 <div className="ml-auto flex items-center gap-1.5">
@@ -262,7 +262,7 @@ export default function HeroSection() {
               {/* Stats */}
               <div className="space-y-3">
                 {[
-                  { label: "Leads delivered today", target: stats.today, decimals: 0, suffix: "", color: "text-white", delay: 1.1 },
+                  { label: "Referrals delivered today", target: stats.today, decimals: 0, suffix: "", color: "text-white", delay: 1.1 },
                   { label: "Verified this week", target: stats.week, decimals: 0, suffix: "", color: "text-green-400", delay: 1.2 },
                   { label: "Avg. contact rate", target: stats.rate, decimals: 1, suffix: "%", color: "text-brand-400", delay: 1.3 },
                 ].map((row) => (
@@ -304,9 +304,9 @@ export default function HeroSection() {
                 }}
               >
                 {[
-                  { name: "New Buyer Lead", detail: "Miami, FL", dot: "bg-green-500" },
-                  { name: "New Seller Lead", detail: "Austin, TX", dot: "bg-brand-500" },
-                  { name: "New Buyer Lead", detail: "Denver, CO", dot: "bg-amber-500" },
+                  { name: "New Buyer Referral", detail: "Miami, FL", dot: "bg-green-500" },
+                  { name: "New Seller Referral", detail: "Austin, TX", dot: "bg-brand-500" },
+                  { name: "New Buyer Referral", detail: "Denver, CO", dot: "bg-amber-500" },
                 ].map((a) => (
                   <motion.div
                     key={a.detail}
@@ -336,7 +336,7 @@ export default function HeroSection() {
                 <span className="text-xs text-white/50">Monthly trend</span>
                 <span className="flex items-center gap-1.5 text-xs font-semibold text-green-400">
                   <TrendingUp className="h-3.5 w-3.5" />
-                  +24% more leads
+                  +24% more referrals
                 </span>
               </motion.div>
             </div>

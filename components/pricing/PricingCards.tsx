@@ -11,7 +11,7 @@ const TRUST_SIGNALS = [
   { icon: Shield, label: "No hidden fees" },
   { icon: DollarSign, label: "Transparent pricing" },
   { icon: Zap, label: "Live in 5–7 business days" },
-  { icon: BarChart3, label: "Track every lead" },
+  { icon: BarChart3, label: "Track every referral" },
   { icon: Headphones, label: "Dedicated support" },
 ];
 

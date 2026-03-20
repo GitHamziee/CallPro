@@ -10,7 +10,6 @@ import {
   ClipboardList,
   Users,
   Code,
-  BarChart3,
   Database,
   Cloud,
   Smartphone,
@@ -29,7 +28,7 @@ export const NAV_LINKS: NavLink[] = [
     label: "Services",
     href: "/services",
     children: [
-      { label: "Lead Generation", href: "/services/lead-generation", icon: Home, description: "AI-verified buyer & seller leads" },
+      { label: "Referral Generation", href: "/services/lead-generation", icon: Home, description: "AI-verified buyer & seller referrals" },
       { label: "Virtual Assistant", href: "/services/virtual-assistant", icon: Headphones, description: "Dedicated VAs for real estate" },
       { label: "Web Development", href: "/services/web-development", icon: Globe, description: "Full-stack development by a 15+ engineer team" },
     ],
@@ -41,7 +40,7 @@ export const NAV_LINKS: NavLink[] = [
 
 export const STATS = [
   { target: 1250, suffix: "+", decimals: 0, label: "Agents Onboard" },
-  { target: 36, suffix: "K+", decimals: 0, label: "Leads Delivered" },
+  { target: 36, suffix: "K+", decimals: 0, label: "Referrals Delivered" },
   { target: 98, suffix: "%", decimals: 0, label: "Satisfaction Rate" },
   { target: 50, suffix: "", decimals: 0, label: "States Covered" },
 ];
@@ -50,14 +49,14 @@ export const SERVICES = [
   {
     icon: Home,
     slug: "lead-generation",
-    title: "Real Estate Lead Generation",
+    title: "Real Estate Referral Generation",
     description:
-      "AI-powered, verified buyer and seller leads delivered directly to your inbox — pre-screened for genuine intent.",
+      "AI-powered, verified buyer and seller referrals delivered directly to your inbox — pre-screened for genuine intent.",
     metric: "Multi-stage verification process",
     bullets: [
       "Hyper-local targeting by zip code, city, or county",
-      "AI filtering eliminates fake and duplicate leads",
-      "ISA-validated leads with confirmed contact info",
+      "AI filtering eliminates fake and duplicate referrals",
+      "ISA-validated referrals with confirmed contact info",
     ],
     href: "/services/lead-generation",
   },
@@ -66,11 +65,11 @@ export const SERVICES = [
     slug: "virtual-assistant",
     title: "Virtual Assistant",
     description:
-      "Dedicated virtual assistants who handle admin, follow-ups, and lead nurturing so you can focus on closing deals.",
+      "Dedicated virtual assistants who handle admin, follow-ups, and referral nurturing so you can focus on closing deals.",
     metric: "Save 20+ hrs/week on admin tasks",
     bullets: [
       "Trained VAs familiar with real estate workflows",
-      "Lead follow-up and appointment scheduling",
+      "Referral follow-up and appointment scheduling",
       "CRM updates, transaction coordination, and more",
     ],
     href: "/services/virtual-assistant",
@@ -102,33 +101,33 @@ export const SERVICE_PAGE_CONTENT: Record<string, {
   faq: { question: string; answer: string }[];
 }> = {
   "lead-generation": {
-    badge: "Lead Generation",
-    headline: "Verified Leads That ",
+    badge: "Referral Generation",
+    headline: "Verified Referrals That ",
     highlightedText: "Actually Convert",
     subtitle:
-      "Stop wasting time on dead-end leads. Our AI-powered verification and ISA team deliver pre-screened, high-intent buyer and seller leads directly to your dashboard.",
+      "Stop wasting time on dead-end referrals. Our AI-powered verification and ISA team deliver pre-screened, high-intent buyer and seller referrals directly to your dashboard.",
     stats: [
-      { value: "36K+", label: "Leads Delivered" },
+      { value: "36K+", label: "Referrals Delivered" },
       { value: "98%", label: "Verification Rate" },
       { value: "50", label: "States Covered" },
     ],
     features: [
-      { icon: Target, title: "Hyper-Local Targeting", description: "Target leads by zip code, city, county, or entire state. You define your farm area, we deliver leads in it." },
-      { icon: ShieldCheck, title: "Multi-Stage Verification", description: "Every lead passes through AI filtering and human ISA validation before reaching your dashboard." },
-      { icon: MapPin, title: "Nationwide Coverage", description: "We generate and verify leads across all 50 US states with deep market penetration in every region." },
+      { icon: Target, title: "Hyper-Local Targeting", description: "Target referrals by zip code, city, county, or entire state. You define your farm area, we deliver referrals in it." },
+      { icon: ShieldCheck, title: "Multi-Stage Verification", description: "Every referral passes through AI filtering and human ISA validation before reaching your dashboard." },
+      { icon: MapPin, title: "Nationwide Coverage", description: "We generate and verify referrals across all 50 US states with deep market penetration in every region." },
       { icon: Bot, title: "AI-Powered Filtering", description: "Our AI eliminates fake entries, duplicates, and low-intent inquiries so you only see real opportunities." },
     ],
     process: [
-      { step: "01", title: "Set Your Preferences", description: "Tell us your target areas, property types, and budget range. We tailor every lead to your market." },
-      { step: "02", title: "We Source & Verify", description: "Our AI filters and ISA team validate every lead for genuine intent — no fakes, no duplicates." },
-      { step: "03", title: "Leads Delivered", description: "Verified leads appear in your dashboard in real-time with full contact info and property details." },
+      { step: "01", title: "Set Your Preferences", description: "Tell us your target areas, property types, and budget range. We tailor every referral to your market." },
+      { step: "02", title: "We Source & Verify", description: "Our AI filters and ISA team validate every referral for genuine intent — no fakes, no duplicates." },
+      { step: "03", title: "Referrals Delivered", description: "Verified referrals appear in your dashboard in real-time with full contact info and property details." },
       { step: "04", title: "Close & Grow", description: "Focus on closing deals. Track your ROI with transparent reporting and scale when you're ready." },
     ],
     faq: [
-      { question: "How are leads verified?", answer: "Every lead goes through a multi-stage process: AI filtering removes fakes and duplicates, then our trained ISA team validates intent via phone and email confirmation." },
-      { question: "How quickly will I receive leads?", answer: "Most agents start receiving verified leads within 3–5 business days of signing up and setting their targeting preferences." },
+      { question: "How are referrals verified?", answer: "Every referral goes through a multi-stage process: AI filtering removes fakes and duplicates, then our trained ISA team validates intent via phone and email confirmation." },
+      { question: "How quickly will I receive referrals?", answer: "Most agents start receiving verified referrals within 3–5 business days of signing up and setting their targeting preferences." },
       { question: "Can I target specific areas?", answer: "Yes. You can target by zip code, city, county, or entire state. Set as many target areas as you need — there's no limit." },
-      { question: "What information comes with each lead?", answer: "Each lead includes full name, verified phone number, email, property address, property type, timeline, and intent signals." },
+      { question: "What information comes with each referral?", answer: "Each referral includes full name, verified phone number, email, property address, property type, timeline, and intent signals." },
     ],
   },
   "virtual-assistant": {
@@ -136,7 +135,7 @@ export const SERVICE_PAGE_CONTENT: Record<string, {
     headline: "Your Dedicated ",
     highlightedText: "Real Estate VA",
     subtitle:
-      "Free up 20+ hours per week with a trained virtual assistant who handles admin, follow-ups, and lead nurturing so you can focus on showings and closings.",
+      "Free up 20+ hours per week with a trained virtual assistant who handles admin, follow-ups, and referral nurturing so you can focus on showings and closings.",
     stats: [
       { value: "20+", label: "Hours Saved Weekly" },
       { value: "100%", label: "US-Trained VAs" },
@@ -145,17 +144,17 @@ export const SERVICE_PAGE_CONTENT: Record<string, {
     features: [
       { icon: CalendarCheck, title: "Appointment Scheduling", description: "Your VA books showings, follow-up calls, and meetings directly on your calendar — no more phone tag." },
       { icon: ClipboardList, title: "Transaction Coordination", description: "From contract to close, your VA manages paperwork, deadlines, and vendor communication." },
-      { icon: Users, title: "Lead Follow-Up", description: "Systematic follow-up sequences ensure no lead falls through the cracks. Your VA nurtures until they're ready." },
+      { icon: Users, title: "Referral Follow-Up", description: "Systematic follow-up sequences ensure no referral falls through the cracks. Your VA nurtures until they're ready." },
       { icon: Bot, title: "CRM Management", description: "Your VA keeps your CRM updated with notes, status changes, and activity logs after every interaction." },
     ],
     process: [
       { step: "01", title: "Onboarding Call", description: "We learn your workflows, tools, and preferences to match you with the perfect VA for your business." },
       { step: "02", title: "VA Assignment", description: "Your dedicated VA is trained on your specific systems, scripts, and processes before day one." },
-      { step: "03", title: "Daily Operations", description: "Your VA handles admin tasks, lead follow-ups, and scheduling while you focus on revenue-generating activities." },
+      { step: "03", title: "Daily Operations", description: "Your VA handles admin tasks, referral follow-ups, and scheduling while you focus on revenue-generating activities." },
       { step: "04", title: "Weekly Reviews", description: "Regular check-ins ensure your VA stays aligned with your goals and continuously improves." },
     ],
     faq: [
-      { question: "What tasks can a VA handle?", answer: "Lead follow-up, appointment scheduling, CRM updates, transaction coordination, email management, social media posting, and general admin work." },
+      { question: "What tasks can a VA handle?", answer: "Referral follow-up, appointment scheduling, CRM updates, transaction coordination, email management, social media posting, and general admin work." },
       { question: "Are VAs trained in real estate?", answer: "Yes. All our VAs are specifically trained in real estate workflows, terminology, and common tools like KvCORE, Follow Up Boss, and more." },
       { question: "How many hours per week?", answer: "We offer flexible plans from 20 to 40 hours per week depending on your needs. Most agents start with 20 hours and scale up." },
       { question: "Can I communicate directly with my VA?", answer: "Absolutely. You'll have direct access via phone, email, and your preferred messaging platform for real-time communication." },
@@ -188,7 +187,7 @@ export const SERVICE_PAGE_CONTENT: Record<string, {
       { question: "What technologies do you work with?", answer: "Frontend: React, Next.js, Angular, Vue.js, TypeScript, Tailwind CSS. Backend: Node.js, Express, Python, Django, Flask, .NET, PHP, Laravel, Java, Spring Boot. Mobile: Flutter, React Native, Swift, Kotlin. Databases: PostgreSQL, MySQL, MongoDB, Redis, Firebase, Supabase. Cloud: AWS, Azure, GCP, Docker, Kubernetes, Terraform." },
       { question: "How large is your team?", answer: "We have 15+ full-time engineers across frontend, backend, mobile, DevOps, and QA — plus dedicated project managers and UI/UX designers. Every project gets a cross-functional team assigned from day one." },
       { question: "How long does a project take?", answer: "Landing pages and marketing sites take 1–2 weeks. Full-stack web apps with dashboards and auth take 4–8 weeks. Enterprise platforms and mobile apps typically run 8–16 weeks depending on scope." },
-      { question: "Do you build custom dashboards, portals, and SaaS products?", answer: "Yes. We've built admin panels, client portals, CRM systems, lead management dashboards, analytics platforms, and multi-tenant SaaS products — all custom-coded from scratch." },
+      { question: "Do you build custom dashboards, portals, and SaaS products?", answer: "Yes. We've built admin panels, client portals, CRM systems, referral management dashboards, analytics platforms, and multi-tenant SaaS products — all custom-coded from scratch." },
       { question: "What about hosting, deployment, and ongoing support?", answer: "We deploy to AWS, Azure, Vercel, GCP, or your own infrastructure. All projects include SSL, CDN, CI/CD pipelines, automated backups, and optional monthly maintenance plans with SLA-backed support." },
       { question: "Can you integrate with third-party services?", answer: "Absolutely. We've integrated Stripe, PayPal, Twilio, SendGrid, Resend, Google Maps, Mapbox, Salesforce, HubSpot, MLS/IDX feeds, OpenAI, and custom REST/GraphQL APIs." },
     ],
@@ -200,19 +199,19 @@ export const HOW_IT_WORKS = [
     step: "01",
     title: "Sign Up & Set Preferences",
     description:
-      "Tell us your target areas, property types, and lead preferences. We'll tailor everything to your market.",
+      "Tell us your target areas, property types, and referral preferences. We'll tailor everything to your market.",
   },
   {
     step: "02",
-    title: "We Source & Verify Leads",
+    title: "We Source & Verify Referrals",
     description:
-      "Our AI filters and ISA team validate every lead for genuine intent — no fakes, no duplicates, no tire-kickers.",
+      "Our AI filters and ISA team validate every referral for genuine intent — no fakes, no duplicates, no tire-kickers.",
   },
   {
     step: "03",
-    title: "Leads Delivered to You",
+    title: "Referrals Delivered to You",
     description:
-      "Verified leads are sent directly to your dashboard in real-time. Contact info, intent signals, and property details included.",
+      "Verified referrals are sent directly to your dashboard in real-time. Contact info, intent signals, and property details included.",
   },
   {
     step: "04",
@@ -225,7 +224,7 @@ export const HOW_IT_WORKS = [
 export const TESTIMONIALS = [
   {
     quote:
-      "Honestly didn't expect much at first, but the leads were actually legit. Closed my first deal within three weeks and I've been getting consistent ones since. Way better than what I was getting from Zillow.",
+      "Honestly didn't expect much at first, but the referrals were actually legit. Closed my first deal within three weeks and I've been getting consistent ones since. Way better than what I was getting from Zillow.",
     name: "Marcus T.",
     title: "Licensed Realtor",
     company: "eXp Realty",
@@ -234,11 +233,11 @@ export const TESTIMONIALS = [
   },
   {
     quote:
-      "I was spending like 2 hours a day just following up with dead leads. Switched to R4Referral and the difference is night and day — these people actually want to talk to you. Saved me so much time.",
+      "I was spending like 2 hours a day just following up with dead referrals. Switched to R4Referral and the difference is night and day — these people actually want to talk to you. Saved me so much time.",
     name: "Sarah K.",
     title: "Broker Associate",
     company: "Keller Williams",
-    result: "12 verified leads in 60 days",
+    result: "12 verified referrals in 60 days",
     videoUrl: "https://www.youtube.com/embed/jNQXAC9IVRw",
   },
   {
@@ -258,12 +257,12 @@ export const PRICING_PLANS = [
     price: "$375",
     period: "lifetime",
     description:
-      "Start with zero risk. Pay only for leads you accept — cancel anytime.",
+      "Start with zero risk. Pay only for referrals you accept — cancel anytime.",
     features: [
       "$375 one-time setup (lifetime access)",
-      "$100 per accepted lead",
-      "Minimum 2 leads",
-      "Human verified leads",
+      "$100 per accepted referral",
+      "Minimum 2 referrals",
+      "Human verified referrals",
       "Live transfers",
       "Scheduled appointments (with recording)",
       "Premium portal access",
@@ -280,10 +279,10 @@ export const PRICING_PLANS = [
     originalPrice: "$1,375",
     period: "one-time",
     description:
-      "Best value — 10 guaranteed leads at a steep discount. Everything included.",
+      "Best value — 10 guaranteed referrals at a steep discount. Everything included.",
     features: [
-      "10 guaranteed leads",
-      "Human verified leads",
+      "10 guaranteed referrals",
+      "Human verified referrals",
       "Live transfers",
       "Scheduled appointments (with recording)",
       "Premium portal access",
@@ -298,14 +297,14 @@ export const PRICING_PLANS = [
     price: "$699",
     period: "/4 months",
     description:
-      "High volume leads with low upfront cost and a small referral fee on closings.",
+      "High volume referrals with low upfront cost and a small referral fee on closings.",
     features: [
       "$699 for 4-month term",
-      "8–12 leads included",
+      "8–12 referrals included",
       "15% referral fee per closing",
-      "Human verified leads",
+      "Human verified referrals",
       "Scheduled appointments (with recording)",
-      "Exclusive leads",
+      "Exclusive referrals",
       "Premium portal access",
       "Free follow-up",
       "Reimbursement offer",
@@ -320,27 +319,27 @@ export const PRICING_FAQ = [
   {
     question: "How does Pay Per Lead work?",
     answer:
-      "You pay a one-time $375 setup fee for lifetime access, then $100 for each lead you accept. All leads are human verified with live transfers and scheduled appointments. You can cancel anytime.",
+      "You pay a one-time $375 setup fee for lifetime access, then $100 for each referral you accept. All referrals are human verified with live transfers and scheduled appointments. You can cancel anytime.",
   },
   {
     question: "What's included in the Bundle Offer?",
     answer:
-      "The Bundle Offer gives you 10 guaranteed, human-verified leads for a one-time payment of $949 (originally $1,375). Every lead comes with live transfers, scheduled appointments with recordings, premium portal access, free follow-up, and 24/7 support.",
+      "The Bundle Offer gives you 10 guaranteed, human-verified referrals for a one-time payment of $949 (originally $1,375). Every referral comes with live transfers, scheduled appointments with recordings, premium portal access, free follow-up, and 24/7 support.",
   },
   {
     question: "How does the Referral Plan work?",
     answer:
-      "For $699 you get 8–12 exclusive leads over a 4-month term. There's a 15% referral fee on closings. If leads don't meet our quality standards, we offer reimbursement. Includes scheduled appointments, premium portal, and 24/7 support.",
+      "For $699 you get 8–12 exclusive referrals over a 4-month term. There's a 15% referral fee on closings. If referrals don't meet our quality standards, we offer reimbursement. Includes scheduled appointments, premium portal, and 24/7 support.",
   },
   {
     question: "What does 'human verified' mean?",
     answer:
-      "Every lead is verified by a real person on our team — not just a form submission. We confirm intent, contact details, and readiness before a lead is delivered to you.",
+      "Every referral is verified by a real person on our team — not just a form submission. We confirm intent, contact details, and readiness before a referral is delivered to you.",
   },
   {
     question: "What are live transfers?",
     answer:
-      "When we connect with a qualified lead, we transfer the call directly to you in real time. You speak with the lead while their interest is at its highest.",
+      "When we connect with a qualified referral, we transfer the call directly to you in real time. You speak with them while their interest is at its highest.",
   },
   {
     question: "Can I switch between plans?",
@@ -348,9 +347,9 @@ export const PRICING_FAQ = [
       "Yes. You can upgrade or switch plans at any time. Contact our team and we'll help you transition to the plan that fits your needs.",
   },
   {
-    question: "How quickly will I start receiving leads?",
+    question: "How quickly will I start receiving referrals?",
     answer:
-      "Most agents start receiving verified leads within 3–5 business days of signing up and setting their targeting preferences.",
+      "Most agents start receiving verified referrals within 3–5 business days of signing up and setting their targeting preferences.",
   },
   {
     question: "What's the reimbursement offer on the Referral Plan?",
@@ -384,7 +383,7 @@ export const TEAM_MEMBERS = [
 
 export const FOOTER_LINKS = {
   services: [
-    { label: "Lead Generation", href: "/services/lead-generation" },
+    { label: "Referral Generation", href: "/services/lead-generation" },
     { label: "Virtual Assistant", href: "/services/virtual-assistant" },
     { label: "Web Development", href: "/services/web-development" },
   ],

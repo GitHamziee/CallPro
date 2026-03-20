@@ -51,7 +51,7 @@ export default function PricingPage() {
             </h2>
             <p className="mt-5 text-lg text-white/70 max-w-xl mx-auto">
               Book a free 30-minute strategy call. We&apos;ll help you pick the
-              perfect plan and get your first leads rolling in days.
+              perfect plan and get your first referrals rolling in days.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
               <div className="btn-gradient-wrap rounded-md">

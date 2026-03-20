@@ -58,7 +58,7 @@ export default function ServicesOverview() {
             <span className="gradient-text">Grow Your Business</span>
           </h2>
           <p className="mt-4 text-slate-600 dark:text-slate-400 max-w-xl mx-auto text-lg">
-            Verified leads, virtual assistants, and custom websites — built
+            Verified referrals, virtual assistants, and custom websites — built
             specifically for real estate professionals.
           </p>
         </AnimatedSection>

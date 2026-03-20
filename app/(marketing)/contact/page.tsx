@@ -5,7 +5,7 @@ import ContactForm from "@/components/contact/ContactForm";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with R4Referral. Start receiving verified real estate leads tailored to your market.",
+    "Get in touch with R4Referral. Start receiving verified real estate referrals tailored to your market.",
 };
 
 export default function ContactPage() {

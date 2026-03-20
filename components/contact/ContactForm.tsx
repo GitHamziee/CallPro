@@ -64,7 +64,7 @@ export default function ContactForm() {
                   Get in Touch
                 </h2>
                 <p className="text-sm text-white/70 leading-relaxed mb-8">
-                  Ready to start receiving verified real estate leads?
+                  Ready to start receiving verified real estate referrals?
                   Reach out — we&apos;ll get back within 1 business day.
                 </p>
 

@@ -21,7 +21,7 @@ export default function TeamSection() {
           </h2>
           <p className="mt-4 text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
             Real estate professionals and tech experts building the future
-            of agent lead generation.
+            of agent referral generation.
           </p>
         </AnimatedSection>
 

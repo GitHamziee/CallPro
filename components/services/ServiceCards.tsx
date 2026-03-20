@@ -109,7 +109,7 @@ function AccountManagerIcon({ className }: { className?: string }) {
 }
 
 const WHY_DIFFERENT = [
-  { icon: ExclusiveLeadsIcon, title: "Exclusive", subtitle: "(High-Intent Leads)", filled: true },
+  { icon: ExclusiveLeadsIcon, title: "Exclusive", subtitle: "(High-Intent Referrals)", filled: true },
   { icon: VerifiedAppointmentsIcon, title: "Verified Appointments", subtitle: "That Convert", filled: false },
   { icon: ISAVerificationIcon, title: "ISAs", subtitle: "Live Verification by Our ISAs", filled: false },
   { icon: LowFeesIcon, title: "Low Referral Fees", subtitle: "High ROI", filled: false },
