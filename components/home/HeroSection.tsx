@@ -120,7 +120,7 @@ export default function HeroSection() {
     setStats({
       today: getTodayLeadCount(),
       week: seededRand(dateSeed + 1, 120, 310),
-      rate: seededRand(dateSeed + 2, 880, 970, 1) / 10,
+      rate: seededRand(dateSeed + 2, 88, 97, 1),
     });
 
     // Tick every 4–8 minutes — only update if the new value is higher
@@ -288,7 +288,7 @@ export default function HeroSection() {
                     transition={{ duration: 0.4, delay: 2.4 }}
                     className="mt-1.5 text-xs text-white/40 text-right"
                   >
-                    {stats.rate}% verification rate
+                    {stats.rate.toFixed(1)}% verification rate
                   </motion.p>
                 </div>
               </div>
