@@ -13,12 +13,12 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "R4Referral — Outbound Sales & Lead Generation",
+    default: "R4Referral — Premium Real Estate Referrals",
     template: "%s | R4Referral",
   },
   description:
-    "R4Referral is a results-driven call center specializing in outbound sales, appointment setting, and lead generation for B2B businesses.",
-  keywords: ["call center", "outbound sales", "lead generation", "appointment setting", "B2B sales"],
+    "R4Referral is a digital real estate referral network delivering verified, high-intent buyer and seller referrals directly to agents across all 50 states.",
+  keywords: ["real estate referrals", "buyer referrals", "seller referrals", "real estate leads", "verified referrals"],
 };
 
 export default function RootLayout({
