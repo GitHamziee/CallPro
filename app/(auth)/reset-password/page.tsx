@@ -218,7 +218,7 @@ function ResetPasswordContent() {
 
       {/* Footer */}
       <p className="mt-8 text-xs text-slate-400 dark:text-slate-500">
-        © {new Date().getFullYear()} R4Referral ·{" "}
+        © {new Date().getFullYear()} R4Referral LLC ·{" "}
         <Link
           href="/privacy-policy"
           className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors"

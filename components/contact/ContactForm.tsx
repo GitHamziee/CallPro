@@ -40,6 +40,7 @@ export default function ContactForm() {
     company: "",
     message: "",
   });
+  const [smsConsent, setSmsConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -203,6 +204,18 @@ export default function ContactForm() {
                       className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-colors resize-none"
                     />
                   </div>
+
+                  <label className="flex items-start gap-2.5 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={smsConsent}
+                      onChange={(e) => setSmsConsent(e.target.checked)}
+                      className="mt-0.5 h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-brand-600 focus:ring-brand-500/20 flex-shrink-0"
+                    />
+                    <span className="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
+                      I agree to receive marketing, promotional, and account-related text messages from R4Referral LLC at the phone number provided. Consent is not a condition of purchase. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out or HELP for help.
+                    </span>
+                  </label>
 
                   <div className="flex justify-center">
                     <div className="btn-gradient-wrap rounded-md">

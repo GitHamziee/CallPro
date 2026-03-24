@@ -122,7 +122,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40">
-            © {new Date().getFullYear()} R4Referral. All rights reserved.
+            © {new Date().getFullYear()} R4Referral LLC. All rights reserved.
           </p>
           <p className="text-xs text-white/30 flex items-center gap-1">
             Made with <Heart className="h-3 w-3 text-red-500 fill-red-500" /> by{" "}
