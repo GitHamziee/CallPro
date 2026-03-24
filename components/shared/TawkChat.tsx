@@ -2,8 +2,8 @@
 
 import Script from "next/script";
 
-const TAWK_PROPERTY_ID = "69a13c924afa321c34c793e9";
-const TAWK_WIDGET_ID = "1jiet97hl";
+const TAWK_PROPERTY_ID = "69c2fb89fb40191c3834a2aa";
+const TAWK_WIDGET_ID = "1jkgqd4qc";
 
 export default function TawkChat() {
   return (
