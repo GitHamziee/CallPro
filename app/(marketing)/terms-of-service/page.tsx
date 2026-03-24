@@ -3,7 +3,7 @@ import PageHeader from "@/components/shared/PageHeader";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "R4Referral's Terms of Service — the rules governing your use of our platform and services.",
+  description: "R4Referral's Terms and Conditions — the rules governing your use of our platform and services.",
 };
 
 export default function TermsOfServicePage() {
@@ -12,7 +12,7 @@ export default function TermsOfServicePage() {
       <PageHeader
         badge="Legal"
         title="Terms &amp; Conditions"
-        subtitle="Last updated: February 28, 2026"
+        subtitle="Last updated: March 24, 2026"
       />
       <section className="py-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -20,7 +20,7 @@ export default function TermsOfServicePage() {
             <div className="space-y-8 text-slate-600 dark:text-slate-400 leading-relaxed">
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">About R4Referral</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">1. About R4Referral</h2>
                 <p>
                   R4Referral LLC is a digital real estate referral network that connects verified, high-intent
                   buyers and sellers with licensed agents across all 50 states. Our platform delivers
@@ -30,278 +30,221 @@ export default function TermsOfServicePage() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Definitions</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">2. Definitions</h2>
+                <ul className="mt-2 space-y-1 list-disc list-inside">
+                  <li>&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot; refers to R4Referral and its affiliates.</li>
+                  <li>&quot;Client,&quot; &quot;you,&quot; &quot;your,&quot; or &quot;user&quot; refers to any individual or entity using R4Referral services.</li>
+                  <li>&quot;Services&quot; refers to all offerings provided by R4Referral.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">3. Acceptance of Terms</h2>
                 <p>
-                  The terms &quot;we,&quot; &quot;us,&quot; &quot;our,&quot; and &quot;R4Referral&quot; refer to
-                  R4Referral and its affiliates. &quot;You,&quot; &quot;your,&quot; and &quot;user&quot; refer to
-                  the user. The term &quot;R4Referral services&quot; encompasses our phone-based and digital
-                  services, our website and web application, along with various communications, email
-                  notifications, and other media offered by R4Referral.
+                  By accessing or using R4Referral services, you agree to be bound by these Terms and Conditions.
+                  If you do not agree, you may not use our services.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Changes to Terms</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">4. Changes to Terms</h2>
                 <p>
-                  We reserve the right to make changes to R4Referral&apos;s Terms and Conditions at any time
-                  and for any reason. We will alert you about any changes by updating the &quot;Last
-                  Updated&quot; date. Any changes or modifications will be effective immediately upon posting
-                  the updated Terms and Conditions on the Site, and you waive the right to receive specific
-                  notice of each such change.
+                  R4Referral may update these Terms at any time. We will notify you of material changes by
+                  updating the &quot;Last Updated&quot; date. Continued use of our services after any update
+                  constitutes your acceptance of the revised Terms.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Acceptance of Terms</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">5. Communications &amp; SMS Messaging</h2>
                 <p>
-                  By utilizing R4Referral services, you consent to our Terms. Your usage of R4Referral services
-                  implies that you have accepted and agreed to abide by these Terms. If you are accessing
-                  R4Referral services on behalf of an entity, you agree to these Terms on behalf of that
-                  organization and assure R4Referral that you possess the authority to bind that entity to
-                  these Terms. However, if that organization has an independent written agreement with
-                  R4Referral, that agreement shall govern such usage if any provisions in these Terms conflict
-                  with it.
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Communications &amp; SMS Messaging</h2>
-                <p>
-                  By providing your phone number and opting in to SMS communications, you consent to receive
-                  text messages from R4Referral including appointment reminders, referral notifications, account
-                  updates, and service-related alerts. Message frequency varies based on your account activity.
-                  Message and data rates may apply depending on your wireless carrier and plan.
+                  By providing your contact information and opting in, you consent to receive SMS messages,
+                  phone calls, and emails from R4Referral including referral notifications, appointment
+                  reminders, and account-related updates. Message frequency varies. Message and data rates
+                  may apply.
                 </p>
                 <p className="mt-3">
-                  Your consent to receive SMS/text messages is not a condition of purchasing any goods or
-                  services from R4Referral. You may opt out of text messages at any time by replying
-                  <strong> STOP</strong> to any message. After opting out, you will receive a final confirmation
-                  message and will no longer receive SMS from R4Referral unless you re-subscribe. For help or
-                  support, reply <strong>HELP</strong> to any message or contact us at hello@r4referral.com.
-                </p>
-                <p className="mt-3">
-                  R4Referral and mobile carriers are not liable for delayed or undelivered messages. Message
-                  delivery is subject to effective transmission by your wireless service provider. By opting in,
-                  you confirm that you are the owner or authorized user of the mobile device and phone number provided.
+                  Consent to receive communications is not a condition of purchase. You may opt out of SMS
+                  at any time by replying <strong>STOP</strong> to any message. For help, reply <strong>HELP</strong> or
+                  contact us at hello@r4referral.com.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Client Obligations</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">6. Client Obligations</h2>
                 <p>You agree to:</p>
-                <ul className="mt-2 space-y-1 list-disc list-inside text-slate-600">
-                  <li>Provide accurate and complete information for campaign setup</li>
-                  <li>Ensure all contact lists comply with applicable laws (TCPA, CAN-SPAM, etc.)</li>
+                <ul className="mt-2 space-y-1 list-disc list-inside">
+                  <li>Provide accurate and complete information</li>
+                  <li>Comply with all applicable laws including TCPA and CAN-SPAM</li>
                   <li>Promptly respond to R4Referral communications</li>
-                  <li>Pay all fees as specified in your service agreement</li>
+                  <li>Pay all fees as agreed in your service arrangement</li>
                   <li>Not use our services for any unlawful purpose</li>
-                  <li>Promptly notify us of any changes in your contact information</li>
                 </ul>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Payment Terms</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">7. Compliance with Laws</h2>
                 <p>
-                  Fees are charged monthly in advance. Payment is due within 5 business days of invoice.
-                  Late payments may incur a 1.5% monthly late fee. We reserve the right to suspend
-                  services for accounts more than 15 days past due.
+                  Both parties agree to comply with all applicable federal, state, and local laws and
+                  regulations in connection with the use of R4Referral services.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Dispute/Chargeback Waiver</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">8. Payment Terms</h2>
                 <p>
-                  All payments made are final and non-disputable. The Client expressly waives any right to
-                  initiate chargebacks or payment reversals through their bank or card provider. Any concerns
-                  or disputes must be addressed solely through R4Referral&apos;s internal resolution process.
-                  Any chargeback attempt will be treated as a breach of contract, with R4Referral reserving full
-                  rights to dispute, recover losses, and pursue legal remedies.
+                  Fees are billed as agreed upon in your service arrangement. Payment is due within 5 business
+                  days of invoice. Late payments may incur a 1.5% monthly late fee. R4Referral reserves the
+                  right to suspend services for accounts more than 15 days past due.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Refunds</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">9. Chargeback and Payment Disputes</h2>
                 <p>
-                  Any request for reconsideration of payment must be formally submitted in writing within
-                  sixty (60) calendar days of the original service agreement execution date. Requests made
-                  beyond this period shall be deemed irrevocably waived.
-                </p>
-                <p className="mt-3">
-                  In cases where no material service execution, operational labor, or referral delivery has taken
-                  place, the Company shall deduct a non-refundable 15% to cover merchant processing,
-                  administrative, and handling expenses.
-                </p>
-                <p className="mt-3">
-                  Once services have commenced — including resource deployment, campaign initiation, or
-                  marketing expenditure — the Company reserves the right to withhold up to 50% of the total
-                  payment to cover labor, infrastructure, and operational costs.
-                </p>
-                <p className="mt-3">
-                  Refunds shall not be issued for voluntary cancellations, withdrawal from services, or a
-                  change of mind by the Client. All refund assessments and determinations are made at the
-                  sole discretion of the Company. Such decisions are final, binding, and not subject to
-                  dispute, chargeback, or third-party intervention unless otherwise required by law.
+                  All payments made are final. The Client expressly waives any right to initiate chargebacks
+                  or payment reversals through their bank or card provider. Any disputes must be addressed
+                  through R4Referral&apos;s internal resolution process. Any chargeback attempt will be treated
+                  as a breach of contract, with R4Referral reserving full rights to dispute and recover losses.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Intellectual Property</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">10. Refund Policy</h2>
                 <p>
-                  All scripts, templates, processes, and methodologies developed by R4Referral remain the
-                  intellectual property of R4Referral. Client-provided materials remain the property of the
-                  client. Call recordings from campaigns are available to clients for review purposes.
+                  Refund requests must be submitted in writing within 60 calendar days of the original service
+                  agreement date. A non-refundable 15% administrative fee applies to all refunds where no
+                  material service has been rendered. Once services have commenced, up to 50% of total payment
+                  may be withheld to cover operational costs. Refunds are not issued for voluntary cancellations
+                  or change of mind. All refund determinations are made at the sole discretion of R4Referral
+                  and are final.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Data Disclosure</h2>
-                <p>We may need to access or reveal your data for the following reasons:</p>
-                <ul className="mt-2 space-y-1 list-disc list-inside text-slate-600">
-                  <li>Delivering R4Referral services as required</li>
-                  <li>Resolving technical concerns, extending assistance, or maintaining our services</li>
-                  <li>Safeguarding R4Referral, our users, or the broader community</li>
-                  <li>Responding to emergency situations</li>
-                  <li>Adhering to legal obligations</li>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">11. Lead Ownership &amp; Attribution</h2>
+                <p>
+                  Any referral or lead introduced through R4Referral&apos;s platform or network remains
+                  attributable to R4Referral for a period of 12 months from the date of introduction.
+                  Clients may not bypass R4Referral to independently engage with referred contacts during
+                  this period without written consent.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">12. Non-Circumvention</h2>
+                <p>
+                  Clients may not directly solicit, hire, or engage any R4Referral employee, agent, or
+                  contractor for a period of 12 months following the end of their service agreement without
+                  prior written consent from R4Referral.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">13. Intellectual Property</h2>
+                <p>
+                  All scripts, processes, methodologies, software, and materials developed by R4Referral
+                  remain the exclusive intellectual property of R4Referral. Client-provided materials remain
+                  the property of the client.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">14. Confidential Information</h2>
+                <p>
+                  Both parties agree to keep confidential any proprietary or sensitive information received
+                  from the other party and not to disclose it to third parties without prior written consent,
+                  except as required by law.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">15. Data Disclosure</h2>
+                <p>R4Referral may access or disclose your data in order to:</p>
+                <ul className="mt-2 space-y-1 list-disc list-inside">
+                  <li>Deliver R4Referral services</li>
+                  <li>Resolve technical issues or provide support</li>
+                  <li>Protect R4Referral, its users, or the public</li>
+                  <li>Comply with legal obligations</li>
                 </ul>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Confidential Information</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">16. Service Disclaimer</h2>
                 <p>
-                  &quot;Confidential Information&quot; refers to any information or data disclosed by either
-                  party that is marked as confidential or proprietary, or which should reasonably be
-                  understood to be confidential. Both parties agree to use Confidential Information only in
-                  accordance with these Terms and not to disclose it to any third party without prior written
-                  consent, except as allowed under these Terms.
-                </p>
-                <p className="mt-3">
-                  The parties acknowledge that a breach of this provision may cause irreparable harm, and
-                  therefore, the non-breaching party may seek injunctive relief without waiving any other
-                  rights or remedies available to them.
+                  R4Referral services are provided &quot;as is&quot; without warranties of any kind, express or implied.
+                  We do not guarantee specific outcomes, conversion rates, or results, as these depend on
+                  factors outside our control.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Warranty Disclaimer</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">17. Indemnification</h2>
                 <p>
-                  We offer R4Referral services &quot;as is&quot; and provide no warranties or representations
-                  regarding these services. We explicitly deny any and all warranties, whether explicitly
-                  stated or implied, including, but not limited to, warranties of merchantability,
-                  non-infringement, and fitness for a particular purpose. We do not guarantee specific
-                  results from campaigns as outcomes depend on multiple market factors.
+                  You agree to defend, indemnify, and hold harmless R4Referral and its officers, directors,
+                  employees, and affiliates from any claims, damages, or costs arising from your use of our
+                  services or breach of these Terms.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Indemnification</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">18. Limitation of Liability</h2>
                 <p>
-                  R4Referral will not be responsible for any bills, damages, or costs resulting from any claims
-                  arising from your use of our services. You agree to indemnify R4Referral against all claims
-                  related to your use of our services. You will defend, indemnify, and hold harmless R4Referral,
-                  its officers, directors, employees, members, stockholders, and affiliates against all claims
-                  brought or threatened by a third party and any losses related thereto arising out of your
-                  breach of these Terms or your use of R4Referral services.
+                  R4Referral&apos;s total liability to you for any claim arising out of or relating to these Terms
+                  or our services shall not exceed the total fees paid by you in the 12 months preceding the
+                  claim. In no event shall R4Referral be liable for indirect, incidental, or consequential damages.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Limitation of Liability</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">19. Termination</h2>
                 <p>
-                  Neither party will be liable to the other party for any indirect, special, incidental,
-                  consequential, or punitive damages of any kind, including damages for loss of goodwill,
-                  lost profits, lost sales or business, work stoppage, computer failure or malfunction, or
-                  lost data, whether in tort, contract, or otherwise. Under no circumstances will either
-                  party be liable for direct damages exceeding the amounts paid or payable by you during the
-                  twelve (12) months preceding the incident or claim.
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Termination</h2>
-                <p>
-                  Either party may terminate services with 30 days written notice. R4Referral may suspend
-                  services immediately if we have reason to believe you have violated these Terms, if your
-                  use of the services is fraudulent or negatively impacting the services, or if it has become
-                  illegal or impractical to provide the services. Upon termination, all outstanding fees
+                  Either party may terminate services with 30 days written notice. R4Referral may suspend or
+                  terminate services immediately for breach of these Terms, non-payment, or conduct that
+                  negatively impacts our platform or other clients. Upon termination, all outstanding fees
                   become immediately due.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Eligibility</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">20. Force Majeure</h2>
                 <p>
-                  R4Referral services are intended for use by adults only and are not directed at minors. We do
-                  not knowingly collect personally identifiable information from anyone under the age of 13.
-                  R4Referral services are only intended for use by citizens and residents of the United States
-                  and Canada.
+                  Neither party will be liable for failure to perform obligations due to causes beyond their
+                  reasonable control, including natural disasters, acts of government, or other unforeseeable events.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">No Waiver</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">21. Governing Law</h2>
                 <p>
-                  Our failure to enforce any provision of these Terms does not waive our right to do so in
-                  the future. Even if we waive a provision, it is not waived for all time unless it is in
-                  writing and signed by both parties.
+                  These Terms are governed by the laws of the State of New York, without regard to conflict
+                  of law principles. Any legal action shall be brought in state or federal courts in New York.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Force Majeure</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">22. Arbitration</h2>
                 <p>
-                  If a party fails to perform any obligation due to a cause beyond its control and without
-                  negligence, such as a natural disaster, civil or military authority&apos;s action, fire,
-                  strike, lockout, terrorist acts, war, riot, or earthquake, it will not be considered an
-                  event of default or a breach of these terms. The affected party must take all reasonable
-                  actions to minimize the consequences.
+                  Any dispute arising from these Terms or R4Referral services shall be resolved through
+                  binding arbitration in New York, or such other location as agreed upon by both parties.
+                  The parties waive the right to a jury trial and agree not to bring class action claims.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Governing Law and Venue</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">23. Entire Agreement</h2>
                 <p>
-                  The Federal Arbitration Act will govern the enforceability and interpretation of the
-                  arbitration agreement section below. Apart from the arbitration provision, these terms will
-                  be interpreted according to the laws of the State of New York without regard to any
-                  conflicts of laws. The United Nations Convention on Contracts for the International Sale
-                  of Goods will not govern these terms. Any legal action arising out of or related to these
-                  terms or R4Referral services will be brought in state or federal courts in New York, and both
-                  parties agree to the personal jurisdiction of these courts.
+                  These Terms constitute the entire agreement between you and R4Referral and supersede all
+                  prior agreements, representations, or understandings, whether written or oral.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Agreement to Arbitrate</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">24. Contact Information</h2>
                 <p>
-                  Before initiating any formal legal case, the parties should first attempt to resolve the
-                  dispute through R4Referral&apos;s Customer Support. If the dispute remains unresolved, both
-                  parties agree to resolve any dispute relating to these terms or R4Referral services through
-                  binding arbitration in New York, or any other location agreed upon by both parties. The
-                  agreement to arbitrate remains effective even after the parties stop using R4Referral services.
-                </p>
-                <p className="mt-3">
-                  The parties agree that disputes related to intellectual property will be resolved in court
-                  instead of through arbitration. The parties agree not to bring claims on behalf of others
-                  in any class, consolidated, or representative action. If the class action waiver provision
-                  is deemed unenforceable, the entire arbitration agreement will be null and void, but the
-                  rest of the terms will remain in effect.
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Entire Agreement</h2>
-                <p>
-                  These terms and their attachments replace all previous and current proposals, statements,
-                  marketing materials, presentations, and agreements, both oral and written. Any information
-                  or advice given by R4Referral&apos;s employees or members, whether written or oral, does not
-                  create any additional warranty or expand the scope of the warranties mentioned in these terms.
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Contact Us</h2>
-                <p>
-                  If you have any questions about these Terms, please contact us at info@r4referral.com.
+                  R4Referral LLC<br />
+                  5900 Balcones Dr, Ste 100, Austin, TX 78731<br />
+                  Email: <a href="mailto:info@r4referral.com" className="text-brand-600 hover:underline">info@r4referral.com</a>
                 </p>
               </div>
 
