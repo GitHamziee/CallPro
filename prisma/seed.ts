@@ -39,10 +39,24 @@ async function main() {
     console.log("Admin user already exists");
   }
 
+  // Rename existing packages (order matters to avoid unique constraint conflicts)
+  const renames = [
+    { from: "Standard", to: "Gold" },     // free up "Standard" name first
+    { from: "Basic", to: "Standard" },     // now safe to use "Standard"
+    { from: "Premium", to: "Platinum" },
+  ];
+  for (const { from, to } of renames) {
+    const existing = await prisma.package.findUnique({ where: { name: from } });
+    if (existing) {
+      await prisma.package.update({ where: { name: from }, data: { name: to } });
+      console.log(`Renamed package: ${from} → ${to}`);
+    }
+  }
+
   // Seed packages
   const packages = [
     {
-      name: "Pay Per Lead",
+      name: "Standard",
       description:
         "Start with zero risk. $375 one-time setup for lifetime access, then $100 per accepted lead. Cancel anytime.",
       price: 37500, // $375.00 setup fee
@@ -63,7 +77,7 @@ async function main() {
       sortOrder: 1,
     },
     {
-      name: "Bundle Offer",
+      name: "Gold",
       description:
         "Best value — 10 guaranteed leads at a steep discount. Everything included.",
       price: 94900, // $949.00
@@ -80,7 +94,7 @@ async function main() {
       sortOrder: 2,
     },
     {
-      name: "Referral Plan",
+      name: "Platinum",
       description:
         "High volume leads with low upfront cost and a 15% referral fee on closings.",
       price: 69900, // $699.00

@@ -253,7 +253,7 @@ export const TESTIMONIALS = [
 
 export const PRICING_PLANS = [
   {
-    name: "Pay Per Lead",
+    name: "Standard",
     price: "$375",
     period: "lifetime",
     description:
@@ -274,7 +274,7 @@ export const PRICING_PLANS = [
     highlighted: false,
   },
   {
-    name: "Bundle Offer",
+    name: "Gold",
     price: "$949",
     originalPrice: "$1,375",
     period: "one-time",
@@ -293,7 +293,7 @@ export const PRICING_PLANS = [
     highlighted: true,
   },
   {
-    name: "Referral Plan",
+    name: "Platinum",
     price: "$699",
     period: "/4 months",
     description:
@@ -317,17 +317,17 @@ export const PRICING_PLANS = [
 
 export const PRICING_FAQ = [
   {
-    question: "How does Pay Per Lead work?",
+    question: "How does the Standard plan work?",
     answer:
       "You pay a one-time $375 setup fee for lifetime access, then $100 for each referral you accept. All referrals are human verified with live transfers and scheduled appointments. You can cancel anytime.",
   },
   {
-    question: "What's included in the Bundle Offer?",
+    question: "What's included in the Gold plan?",
     answer:
-      "The Bundle Offer gives you 10 guaranteed, human-verified referrals for a one-time payment of $949 (originally $1,375). Every referral comes with live transfers, scheduled appointments with recordings, premium portal access, free follow-up, and 24/7 support.",
+      "The Gold plan gives you 10 guaranteed, human-verified referrals for a one-time payment of $949 (originally $1,375). Every referral comes with live transfers, scheduled appointments with recordings, premium portal access, free follow-up, and 24/7 support.",
   },
   {
-    question: "How does the Referral Plan work?",
+    question: "How does the Platinum plan work?",
     answer:
       "For $699 you get 8–12 exclusive referrals over a 4-month term. There's a 15% referral fee on closings. If referrals don't meet our quality standards, we offer reimbursement. Includes scheduled appointments, premium portal, and 24/7 support.",
   },
@@ -352,9 +352,9 @@ export const PRICING_FAQ = [
       "Most agents start receiving verified referrals within 3–5 business days of signing up and setting their targeting preferences.",
   },
   {
-    question: "What's the reimbursement offer on the Referral Plan?",
+    question: "What's the reimbursement offer on the Platinum plan?",
     answer:
-      "You get full upfront payment reimbursed on the first close through the Referral Plan. Not valid for PPL or Bundle offer.",
+      "You get full upfront payment reimbursed on the first close through the Platinum plan. Not valid for the Standard or Gold plans.",
   },
 ];
 

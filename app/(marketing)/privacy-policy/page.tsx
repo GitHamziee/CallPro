@@ -12,7 +12,7 @@ export default function PrivacyPolicyPage() {
       <PageHeader
         badge="Legal"
         title="Privacy Policy"
-        subtitle="Last updated: March 24, 2026"
+        subtitle="How we collect, use, share, and protect your information."
       />
       <section className="py-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -20,246 +20,219 @@ export default function PrivacyPolicyPage() {
             <div className="space-y-8 text-slate-600 dark:text-slate-400 leading-relaxed">
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Overview</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Policy Overview</h2>
                 <p>
-                  This Privacy Policy explains how R4Referral (&quot;R4Referral,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;)
-                  collects, uses, and protects your information when you use our websites, platforms, lead services,
-                  tools, and related offerings (collectively, the &quot;Services&quot;).
+                  This Privacy Policy explains how R4Referral LLC (&quot;R4Referral,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;)
+                  collects, uses, shares, and protects information in connection with your use of our websites, products,
+                  services, promotions, and tools, including www.r4referral.com (collectively referred to as the &quot;Services&quot;).
                 </p>
                 <p className="mt-3">
-                  By accessing or using the Services, you consent to the collection, use, and disclosure of
-                  information as described in this Privacy Policy.
-                </p>
-                <p className="mt-3">
-                  If you do not agree with this Privacy Policy, please discontinue use of the Services.
+                  By using our Services, you authorize R4Referral LLC, its affiliates, partners, and service providers
+                  to contact you via phone calls, text messages, and emails (including automated or prerecorded messages)
+                  about services or offers that may interest you. Your consent to receive these communications is not a
+                  condition for purchasing any property, product, or service.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Consent to Communications</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Policy Changes</h2>
                 <p>
-                  By submitting your contact information through the Services, you expressly consent to receive
-                  communications from R4Referral and licensed real estate professionals in our referral network.
-                </p>
-                <p className="mt-3">These communications may include:</p>
-                <ul className="mt-2 space-y-1 list-disc list-inside">
-                  <li>Phone calls</li>
-                  <li>SMS / text messages</li>
-                  <li>Automated telephone dialing systems</li>
-                  <li>Artificial or prerecorded voice messages</li>
-                  <li>Email communications</li>
-                </ul>
-                <p className="mt-3">These communications may relate to:</p>
-                <ul className="mt-2 space-y-1 list-disc list-inside">
-                  <li>Real estate inquiries</li>
-                  <li>Real estate services</li>
-                  <li>Referral services</li>
-                  <li>Marketing offers related to your inquiry</li>
-                </ul>
-                <p className="mt-3">
-                  Consent to receive communications is not required to purchase property, goods, or services.
+                  We may update this Privacy Policy at any time to reflect changes in our practices or legal requirements.
+                  Any updates will be posted on this page with a &quot;Last Updated&quot; date. You waive the right to receive
+                  specific notice of each modification.
                 </p>
                 <p className="mt-3">
-                  You may opt out of SMS messages at any time by replying <strong>STOP</strong>.
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Types of Messaging</h2>
-                <p>Our messaging may include three categories:</p>
-
-                <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-1">Conversational Messages</h3>
-                <p>
-                  Messages sent during one-to-one conversations with users who have contacted us or requested information.
-                </p>
-
-                <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-1">Informational Messages</h3>
-                <p>
-                  Messages providing updates regarding inquiries, services, or transactions.
-                </p>
-
-                <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-1">Promotional Messages</h3>
-                <p>
-                  Marketing messages about services that may be relevant to your interests. Promotional messages
-                  are sent only to users who have provided consent.
+                  Please review this Policy periodically. By continuing to use our Services after any changes are posted,
+                  you agree to the revised terms. If you do not agree, please discontinue using the Services.
                 </p>
               </div>
 
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Information We Collect</h2>
+                <p>
+                  We collect information both directly (when you provide it to us) and automatically (through your device or browser).
+                </p>
 
-                <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2">Information You Provide</h3>
-                <p>We collect information when you:</p>
+                <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2">1. Information You Provide</h3>
+                <p>We may collect information when you:</p>
                 <ul className="mt-2 space-y-1 list-disc list-inside">
+                  <li>Respond to our messages or promotions</li>
                   <li>Create an account</li>
-                  <li>Submit a contact form</li>
-                  <li>Request real estate information</li>
-                  <li>Communicate with us</li>
-                  <li>Participate in surveys or feedback</li>
-                  <li>Subscribe to updates</li>
+                  <li>Request information, newsletters, or services</li>
+                  <li>Participate in surveys or provide feedback</li>
+                  <li>Share user-generated content such as comments or media</li>
                 </ul>
-                <p className="mt-3">This information may include:</p>
+                <p className="mt-3">The information you provide may include:</p>
                 <ul className="mt-2 space-y-1 list-disc list-inside">
-                  <li>Name</li>
+                  <li>Full name</li>
                   <li>Email address</li>
                   <li>Phone number</li>
-                  <li>Physical address</li>
-                  <li>Business or brokerage information</li>
-                  <li>Real estate preferences</li>
-                  <li>Campaign details</li>
-                  <li>Billing information</li>
+                  <li>Physical address or workplace</li>
+                  <li>Date of birth</li>
+                  <li>Property preferences or interests</li>
+                  <li>Financial or payment details (if applicable)</li>
+                  <li>Photos, audio, or video content</li>
                 </ul>
 
-                <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2">Automatically Collected Information</h3>
-                <p>When you access our Services, we may automatically collect certain technical information including:</p>
+                <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2">2. Information Collected Automatically</h3>
+                <p>We automatically collect certain data about how you access and use our Services, including:</p>
                 <ul className="mt-2 space-y-1 list-disc list-inside">
-                  <li>IP address</li>
-                  <li>Device identifiers</li>
-                  <li>Browser type and language</li>
-                  <li>Operating system</li>
-                  <li>Geolocation data</li>
-                  <li>Pages visited and interactions</li>
-                  <li>Referral sources</li>
+                  <li>IP address, browser type, and operating system</li>
+                  <li>Device identifiers (e.g., IMEI, MAC address)</li>
+                  <li>Geographic location (general or GPS-based)</li>
+                  <li>Usage data (pages viewed, time spent, actions taken)</li>
                 </ul>
-              </div>
-
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Cookies and Tracking Technologies</h2>
-                <p>We may use cookies, server logs, tracking pixels, and other technologies to:</p>
-                <ul className="mt-2 space-y-1 list-disc list-inside">
-                  <li>Recognize returning users</li>
-                  <li>Remember preferences</li>
-                  <li>Analyze traffic patterns</li>
-                  <li>Improve user experience</li>
-                  <li>Measure advertising effectiveness</li>
-                </ul>
-              </div>
-
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Cross-Device Usage</h2>
-                <p>
-                  We may use certain information (such as login credentials, IP addresses, or device identifiers)
-                  to recognize users across multiple devices or browsers.
+                <p className="mt-3">
+                  We may use cookies, tracking pixels, and similar technologies to improve your experience and tailor
+                  content or advertising. You can manage cookie preferences through your browser settings.
                 </p>
-              </div>
 
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Location Information</h2>
-                <p>We may collect location information such as:</p>
-                <ul className="mt-2 space-y-1 list-disc list-inside">
-                  <li>IP-based geographic location</li>
-                  <li>Mobile device GPS data (if enabled)</li>
-                </ul>
-              </div>
+                <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2">3. Information from Third Parties</h3>
+                <p>
+                  We may receive additional information about you from third parties, affiliates, or marketing partners.
+                  This may include verification data, demographic insights, or fraud prevention data. We may combine
+                  this with information we collect directly from you.
+                </p>
 
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Information From Third Parties</h2>
-                <p>We may obtain information from:</p>
-                <ul className="mt-2 space-y-1 list-disc list-inside">
-                  <li>Marketing partners</li>
-                  <li>Analytics providers</li>
-                  <li>Identity verification services</li>
-                  <li>Fraud prevention systems</li>
-                  <li>Affiliated businesses</li>
-                </ul>
+                <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2">4. Cross-Device Tracking</h3>
+                <p>
+                  To provide a seamless experience across devices, we may use technologies to identify and link your
+                  activities across multiple browsers or devices.
+                </p>
               </div>
 
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">How We Use Your Information</h2>
-                <p>We use collected information to:</p>
+                <p>We use the information we collect to:</p>
                 <ul className="mt-2 space-y-1 list-disc list-inside">
-                  <li>Provide and operate the Services</li>
-                  <li>Match real estate inquiries with licensed professionals</li>
-                  <li>Verify user identity</li>
-                  <li>Process transactions</li>
-                  <li>Communicate regarding inquiries and services</li>
-                  <li>Send marketing communications (with consent)</li>
-                  <li>Analyze user behavior and improve the platform</li>
-                  <li>Detect and prevent fraud or abuse</li>
-                  <li>Comply with legal obligations</li>
+                  <li>Provide, improve, and personalize our Services</li>
+                  <li>Verify your identity and manage your account</li>
+                  <li>Process transactions and deliver requested features</li>
+                  <li>Send updates, offers, or service-related notifications</li>
+                  <li>Conduct analytics, research, and performance tracking</li>
+                  <li>Prevent fraud, ensure security, and comply with legal obligations</li>
+                </ul>
+                <p className="mt-3">
+                  We may contact you via phone, SMS, WhatsApp, LinkedIn, Facebook, or email. You may opt out of
+                  promotional communications at any time by following the instructions in the message or by contacting
+                  us directly.
+                </p>
+                <p className="mt-3">
+                  <strong className="text-slate-800 dark:text-slate-200">Note:</strong> We do not share text messaging
+                  originator opt-in data or consent with third parties for marketing or promotional purposes.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Disclosure of Information</h2>
+                <p>We may share your information in the following cases:</p>
+                <ul className="mt-2 space-y-2 list-disc list-inside">
+                  <li><strong className="text-slate-800 dark:text-slate-200">With your consent:</strong> When you allow us to share your information with partners or affiliates.</li>
+                  <li><strong className="text-slate-800 dark:text-slate-200">With service providers:</strong> Who perform functions such as marketing, analytics, or legal support on our behalf.</li>
+                  <li><strong className="text-slate-800 dark:text-slate-200">With business partners:</strong> When offering joint products or promotions.</li>
+                  <li><strong className="text-slate-800 dark:text-slate-200">For legal reasons:</strong> To comply with laws, protect our rights, or prevent fraud.</li>
+                  <li><strong className="text-slate-800 dark:text-slate-200">In business transfers:</strong> If R4Referral LLC merges, acquires, or sells assets, user data may be included in the transaction.</li>
                 </ul>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Lead Distribution</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Online Analytics and Advertising</h2>
                 <p>
-                  When you submit a real estate inquiry through R4Referral, your information may be shared with
-                  licensed real estate professionals participating in our referral network.
+                  We use third-party tools such as Google Analytics, Facebook, and DoubleClick to track performance
+                  and deliver targeted ads. These tools may use cookies and other technologies to collect data about
+                  your browsing behavior.
+                </p>
+                <p className="mt-3">
+                  You can opt out of Google Analytics by installing the Google Analytics Opt-out Browser Add-on.
+                </p>
+                <p className="mt-3">
+                  Even if you opt out, you may still see ads — they just won&apos;t be personalized based on your data.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">How We Share Information</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Do Not Track (DNT)</h2>
                 <p>
-                  We may share your information with service providers, business partners, and for legal
-                  requirements or business transfers. We do not sell or share SMS opt-in data or consent
-                  information with third parties for marketing purposes.
+                  Currently, we do not respond to DNT signals due to the lack of a standard definition across the industry.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Data Retention</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Managing Your Data</h2>
                 <p>
-                  We retain personal information for as long as necessary to provide our Services and comply
-                  with legal obligations, typically up to 24 months.
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Managing Your Information</h2>
-                <p>
-                  You may access, update, or request deletion of your information by contacting us at{" "}
+                  You may review, update, or request deletion of your personal information by contacting us at{" "}
                   <a href="mailto:info@r4referral.com" className="text-brand-600 hover:underline">info@r4referral.com</a>.
+                </p>
+                <p className="mt-3">
+                  We will close your account and remove your information as soon as possible, subject to any legal or
+                  business obligations that require us to retain certain data (such as fraud prevention, legal compliance,
+                  or dispute resolution).
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Consent to Data Transfer</h2>
+                <p>
+                  By using our Services, you consent to the transfer and processing of your data in the United States
+                  and other countries where our systems operate. Data protection laws in these jurisdictions may differ
+                  from those in your country.
                 </p>
               </div>
 
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Children&apos;s Privacy</h2>
                 <p>
-                  Our Services are not intended for individuals under the age of 13. We do not knowingly
-                  collect personal information from children under 13.
+                  Our Services are not intended for children under 13. We do not knowingly collect data from minors.
+                  If we discover such data, it will be deleted promptly.
                 </p>
               </div>
 
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Security</h2>
                 <p>
-                  We implement administrative, technical, and physical safeguards to protect personal
-                  information. However, no system is completely secure and we cannot guarantee absolute security.
+                  We use administrative, technical, and physical safeguards to protect your information. However, no
+                  system is entirely secure. You are responsible for protecting your account credentials and notifying
+                  us immediately if you suspect unauthorized access.
                 </p>
               </div>
 
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Third-Party Links</h2>
                 <p>
-                  Our Services may contain links to external websites. We are not responsible for the privacy
-                  practices of those sites and encourage you to review their policies.
+                  Our Services may link to third-party websites or apps. We are not responsible for their content or
+                  privacy practices. We encourage you to review their privacy policies before sharing any information.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">California Privacy Rights</h2>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">California Privacy Rights (CCPA)</h2>
                 <p>
-                  California residents may request information about their personal data or request deletion
-                  under applicable California law, including the CCPA. To submit a request, contact us at{" "}
-                  <a href="mailto:info@r4referral.com" className="text-brand-600 hover:underline">info@r4referral.com</a>.
+                  California residents have the right to request details about how we share personal information for
+                  marketing purposes and to opt out of having their information &quot;sold&quot; under the California Consumer
+                  Privacy Act (CCPA).
+                </p>
+                <p className="mt-3">
+                  To submit a request, contact us at{" "}
+                  <a href="mailto:info@r4referral.com" className="text-brand-600 hover:underline">info@r4referral.com</a>{" "}
+                  with &quot;CCPA Request&quot; in the subject line.
                 </p>
               </div>
 
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Changes to This Policy</h2>
                 <p>
-                  We may update this Privacy Policy periodically. The &quot;Last Updated&quot; date at the top of
-                  this page reflects any changes. Continued use of the Services after updates constitutes
-                  your acceptance of the revised policy.
+                  We may revise this Privacy Policy periodically. Updates take effect when posted on our website.
+                  Your continued use of our Services means you accept the updated terms.
                 </p>
               </div>
 
               <div>
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Contact Us</h2>
                 <p>
+                  For questions or concerns about this Privacy Policy or our data practices, please contact us at:
+                </p>
+                <p className="mt-3">
                   R4Referral LLC<br />
-                  5900 Balcones Dr, Ste 100, Austin, TX 78731<br />
                   Email:{" "}
                   <a href="mailto:info@r4referral.com" className="text-brand-600 hover:underline">info@r4referral.com</a>
                 </p>
