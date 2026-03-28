@@ -41,9 +41,9 @@ async function main() {
 
   // Rename existing packages (order matters to avoid unique constraint conflicts)
   const renames = [
-    { from: "Standard", to: "Gold" },     // free up "Standard" name first
-    { from: "Basic", to: "Standard" },     // now safe to use "Standard"
-    { from: "Premium", to: "Platinum" },
+    { from: "Gold", to: "_temp_gold" },   // temp name to free up "Gold"
+    { from: "Platinum", to: "Gold" },      // $699 → Gold
+    { from: "_temp_gold", to: "Platinum" }, // $949 → Platinum
   ];
   for (const { from, to } of renames) {
     const existing = await prisma.package.findUnique({ where: { name: from } });
@@ -77,7 +77,7 @@ async function main() {
       sortOrder: 1,
     },
     {
-      name: "Gold",
+      name: "Platinum",
       description:
         "Best value — 10 guaranteed leads at a steep discount. Everything included.",
       price: 94900, // $949.00
@@ -94,7 +94,7 @@ async function main() {
       sortOrder: 2,
     },
     {
-      name: "Platinum",
+      name: "Gold",
       description:
         "High volume leads with low upfront cost and a 15% referral fee on closings.",
       price: 69900, // $699.00

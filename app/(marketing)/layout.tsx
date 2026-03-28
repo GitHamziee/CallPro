@@ -1,6 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import TawkChat from "@/components/shared/TawkChat";
+// import TawkChat from "@/components/shared/TawkChat";
 
 export default function MarketingLayout({
   children,
@@ -12,7 +12,7 @@ export default function MarketingLayout({
       <Navbar />
       <main>{children}</main>
       <Footer />
-      <TawkChat />
+      {/* <TawkChat /> */}
     </>
   );
 }
