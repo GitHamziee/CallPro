@@ -14,9 +14,15 @@ const CONTACT_INFO = [
   },
   {
     icon: Mail,
-    label: "Email",
-    value: "hello@r4referral.com",
-    href: "mailto:hello@r4referral.com",
+    label: "General",
+    value: "info@r4referral.com",
+    href: "mailto:info@r4referral.com",
+  },
+  {
+    icon: Mail,
+    label: "Support",
+    value: "support@r4referral.com",
+    href: "mailto:support@r4referral.com",
   },
   {
     icon: MapPin,

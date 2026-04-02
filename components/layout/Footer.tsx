@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Linkedin, Twitter, Facebook, Mail, Phone, MapPin, Heart } from "lucide-react";
+import { Linkedin, Instagram, Facebook, Mail, Phone, MapPin, Heart } from "lucide-react";
 import { FOOTER_LINKS } from "@/lib/constants";
 
 export default function Footer() {
@@ -27,9 +27,9 @@ export default function Footer() {
             </p>
             <div className="mt-6 flex gap-3 justify-center md:justify-start">
               {[
-                { icon: Linkedin, label: "LinkedIn", href: "#" },
-                { icon: Twitter, label: "Twitter", href: "#" },
-                { icon: Facebook, label: "Facebook", href: "#" },
+                { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/company/r4referral" },
+                { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/r4referral?igsh=YjZqdHA1MTlrNHQ5" },
+                { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/share/1Cdvstj3Bb/?mibextid=wwXIfr" },
               ].map(({ icon: Icon, label, href }) => (
                 <a
                   key={label}
@@ -50,11 +50,18 @@ export default function Footer() {
                 +1 (512) 678-0096
               </a>
               <a
-                href="mailto:hello@r4referral.com"
+                href="mailto:info@r4referral.com"
                 className="flex items-center gap-2 hover:text-white transition-colors"
               >
                 <Mail className="h-3.5 w-3.5 shrink-0" />
-                hello@r4referral.com
+                info@r4referral.com
+              </a>
+              <a
+                href="mailto:support@r4referral.com"
+                className="flex items-center gap-2 hover:text-white transition-colors"
+              >
+                <Mail className="h-3.5 w-3.5 shrink-0" />
+                support@r4referral.com
               </a>
               <div className="flex items-start gap-2">
                 <MapPin className="h-3.5 w-3.5 shrink-0 mt-0.5" />

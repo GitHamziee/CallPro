@@ -124,6 +124,22 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div>
+                <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">SMS Consent &amp; Opt-In</h2>
+                <p>
+                  R4Referral LLC collects phone numbers only when users voluntarily provide them through our website,
+                  application forms, or other communication channels. By submitting your phone number, you consent to
+                  receive SMS messages from R4Referral LLC related to your inquiries, account updates, referrals, and
+                  promotional offers.
+                </p>
+                <p className="mt-3">
+                  Message frequency may vary depending on user interaction. Message and data rates may apply. You may
+                  opt out at any time by replying <strong className="text-slate-800 dark:text-slate-200">STOP</strong> to
+                  any message or by contacting us at{" "}
+                  <a href="mailto:support@r4referral.com" className="text-brand-600 hover:underline">support@r4referral.com</a>.
+                </p>
+              </div>
+
+              <div>
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Disclosure of Information</h2>
                 <p>We may share your information in the following cases:</p>
                 <ul className="mt-2 space-y-2 list-disc list-inside">
