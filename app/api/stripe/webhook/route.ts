@@ -3,6 +3,7 @@ import { getStripe } from "@/lib/stripe";
 import prisma from "@/lib/prisma";
 import { markInvoicePaid } from "@/lib/invoice-utils";
 import { logStripeEvent } from "@/lib/stripe-logger";
+import { sendPlanPurchasedEmail, sendInvoicePaidEmail } from "@/lib/email";
 import Stripe from "stripe";
 
 export async function POST(req: Request) {
@@ -114,6 +115,28 @@ export async function POST(req: Request) {
                 `Invoice paid: invoice=${invoiceId}, user=${userId}, session=${session.id}`
               );
 
+              // Send confirmation email — fetch lead + user for context
+              prisma.invoice.findUnique({
+                where: { id: invoiceId },
+                include: {
+                  lead: {
+                    select: {
+                      name: true,
+                      assignedTo: { select: { name: true, email: true } },
+                    },
+                  },
+                },
+              }).then((inv) => {
+                if (inv?.lead?.assignedTo) {
+                  sendInvoicePaidEmail(
+                    inv.lead.assignedTo.email,
+                    inv.lead.assignedTo.name,
+                    inv.amount,
+                    inv.lead.name
+                  ).catch((err) => console.error("Invoice paid email failed:", err));
+                }
+              }).catch((err) => console.error("Invoice email fetch failed:", err));
+
               await logStripeEvent({
                 event: "webhook.invoice_payment",
                 sessionId: session.id,
@@ -174,7 +197,7 @@ export async function POST(req: Request) {
 
           const user = await prisma.user.findUnique({
             where: { id: userId },
-            select: { id: true },
+            select: { id: true, name: true, email: true },
           });
 
           if (!user) {
@@ -197,7 +220,7 @@ export async function POST(req: Request) {
 
           const pkg = await prisma.package.findUnique({
             where: { id: packageId },
-            select: { id: true, isActive: true, durationDays: true },
+            select: { id: true, name: true, isActive: true, durationDays: true },
           });
 
           if (!pkg || !pkg.isActive) {
@@ -238,6 +261,9 @@ export async function POST(req: Request) {
             console.log(
               `Purchase created: user=${userId}, package=${packageId}, session=${session.id}`
             );
+
+            sendPlanPurchasedEmail(user.email, user.name, pkg.name, expiresAt)
+              .catch((err) => console.error("Plan purchased email failed:", err));
 
             await logStripeEvent({
               event: "webhook.purchase",

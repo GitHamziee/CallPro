@@ -1,13 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { Send, Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/shared/AnimatedSection";
-
-const PHONE_NUMBER = "+1 (512) 678-0096";
-const EMAIL = "info@r4referral.com";
 
 const CONTACT_INFO = [
   {
@@ -215,24 +211,16 @@ export default function ContactForm() {
                     <label className="flex items-start gap-3 cursor-pointer">
                       <input
                         type="checkbox"
-                        required
                         checked={marketingConsent}
                         onChange={(e) => setMarketingConsent(e.target.checked)}
                         className="mt-0.5 h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-brand-600 focus:ring-brand-500/20 flex-shrink-0"
                       />
                       <div>
                         <span className="block text-sm font-semibold text-slate-900 dark:text-white mb-1">
-                          Marketing Consent
+                          Marketing Consent <span className="text-xs font-normal text-slate-400">(Optional)</span>
                         </span>
                         <span className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                          I consent to receive SMS Marketing communications from R4Referral LLC. You will receive 3 messages per month. Text HELP to {PHONE_NUMBER} for assistance. Reply STOP to unsubscribe anytime. I agree to receive communications and can opt out at any time. By submitting this form, I agree to the{" "}
-                          <Link href="/terms-of-service" className="text-brand-600 dark:text-brand-400 font-medium hover:underline">
-                            Terms and Conditions
-                          </Link>{" "}
-                          and{" "}
-                          <Link href="/privacy-policy" className="text-brand-600 dark:text-brand-400 font-medium hover:underline">
-                            Privacy Policy
-                          </Link>.
+                          By checking this box, you agree to receive recurring automated marketing and promotional text messages from R4Referral LLC at the phone number provided. Message frequency varies (2–4 messages per month). Message and data rates may apply. Reply STOP to opt out. Reply HELP for help. Consent is not a condition of purchase.
                         </span>
                       </div>
                     </label>
@@ -243,20 +231,16 @@ export default function ContactForm() {
                     <label className="flex items-start gap-3 cursor-pointer">
                       <input
                         type="checkbox"
-                        required
                         checked={messagingTerms}
                         onChange={(e) => setMessagingTerms(e.target.checked)}
                         className="mt-0.5 h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-brand-600 focus:ring-brand-500/20 flex-shrink-0"
                       />
                       <div>
                         <span className="block text-sm font-semibold text-slate-900 dark:text-white mb-1">
-                          Messaging Terms
+                          Messaging Terms <span className="text-xs font-normal text-slate-400">(Optional)</span>
                         </span>
                         <span className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                          You agree to receive informational messages (appointment reminders, account notifications, etc.) from R4Referral LLC. Message frequency varies. Message and data rates may apply. For help, reply HELP or email{" "}
-                          <a href={`mailto:${EMAIL}`} className="text-brand-600 dark:text-brand-400 font-medium hover:underline">
-                            {EMAIL}
-                          </a>. You can opt out anytime by replying STOP.
+                          By checking this box, you agree to receive non-marketing text messages from R4Referral LLC related to account notifications, service updates, and appointment reminders. Message frequency varies (up to 2 messages per month). Message and data rates may apply. Reply STOP to opt out. Reply HELP for help.
                         </span>
                       </div>
                     </label>

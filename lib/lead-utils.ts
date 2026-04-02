@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { sendLeadAssignedEmail } from "@/lib/email";
 
 /** Assign a lead to a subscribed user. Validates lead is NEW and user has active subscription. */
 export async function assignLeadToUser(leadId: string, userId: string) {
@@ -42,6 +43,13 @@ export async function assignLeadToUser(leadId: string, userId: string) {
 
   if (!updated)
     return { error: "Lead was already assigned", status: 409 };
+
+  // Fire-and-forget — email failure must not block the assignment
+  sendLeadAssignedEmail(
+    updated.assignedTo!.email,
+    updated.assignedTo!.name,
+    { name: updated.name, leadType: updated.leadType }
+  ).catch((err) => console.error("Lead assigned email failed:", err));
 
   return { lead: updated };
 }
