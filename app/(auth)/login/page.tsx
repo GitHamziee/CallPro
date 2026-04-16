@@ -133,10 +133,7 @@ function LoginContent() {
               />
               <span className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                 <span className="font-semibold text-slate-700 dark:text-slate-300">SMS Updates </span>
-                <span className="text-slate-400">(Optional)</span> — By checking this box, I agree to receive SMS messages from R4Referral LLC, including lead notifications, account updates, and occasional promotional offers. Message frequency may vary. Message and data rates may apply. Reply STOP to opt out or HELP for assistance. Consent is not a condition of use. See our{" "}
-                <Link href="/privacy-policy" className="underline hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Privacy Policy</Link>
-                {" "}and{" "}
-                <Link href="/terms-of-service" className="underline hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Terms &amp; Conditions</Link>.
+                <span className="text-slate-400">(Optional)</span> — By checking this box, you agree to receive SMS from R4Referral LLC regarding your appointment request, including confirmations and follow-ups. Message frequency varies. Message &amp; data rates may apply. Reply STOP to opt out or HELP for assistance.
               </span>
             </label>
           </div>

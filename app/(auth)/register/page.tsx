@@ -311,10 +311,7 @@ function RegisterContent() {
                 className="mt-0.5 h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-brand-600 focus:ring-brand-500/20 flex-shrink-0"
               />
               <span className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                By checking this box, I agree to receive SMS messages from R4Referral LLC at the phone number provided, including lead notifications, appointment reminders, account updates, and occasional promotional offers. Message frequency may vary. Message and data rates may apply. Reply STOP to opt out at any time or HELP for assistance. Consent is not a condition of purchase. See our{" "}
-                <Link href="/privacy-policy" className="underline hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Privacy Policy</Link>
-                {" "}and{" "}
-                <Link href="/terms-of-service" className="underline hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Terms &amp; Conditions</Link>.
+                By checking this box, you agree to receive SMS from R4Referral LLC regarding your appointment request, including confirmations and follow-ups. Message frequency varies. Message &amp; data rates may apply. Reply STOP to opt out or HELP for assistance.
               </span>
             </label>
           </div>
