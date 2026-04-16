@@ -113,6 +113,7 @@ export default function PricingCards() {
                         ))}
                       </ul>
 
+                      {/* COMMENTED OUT - Register CTA temporarily disabled
                       <Button
                         asChild
                         size="lg"
@@ -122,6 +123,7 @@ export default function PricingCards() {
                           Get Started <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                       </Button>
+                      */}
                     </div>
                   </div>
                 ) : (
@@ -166,6 +168,7 @@ export default function PricingCards() {
                       ))}
                     </ul>
 
+                    {/* COMMENTED OUT - Register CTA temporarily disabled
                     <div className="btn-gradient-wrap rounded-md">
                       <Button
                         asChild
@@ -177,6 +180,7 @@ export default function PricingCards() {
                         </Link>
                       </Button>
                     </div>
+                    */}
                   </div>
                 )}
               </AnimatedSection>

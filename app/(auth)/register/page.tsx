@@ -13,11 +13,13 @@ const inputClass =
 const labelClass = "block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5";
 
 export default function RegisterPage() {
-  return (
-    <Suspense>
-      <RegisterContent />
-    </Suspense>
-  );
+  return null;
+  // COMMENTED OUT - Register page temporarily disabled
+  // return (
+  //   <Suspense>
+  //     <RegisterContent />
+  //   </Suspense>
+  // );
 }
 
 function RegisterContent() {

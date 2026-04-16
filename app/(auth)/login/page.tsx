@@ -8,11 +8,13 @@ import { Button } from "@/components/ui/button";
 import { useLogin } from "@/hooks/useLogin";
 
 export default function LoginPage() {
-  return (
-    <Suspense>
-      <LoginContent />
-    </Suspense>
-  );
+  return null;
+  // COMMENTED OUT - Login page temporarily disabled
+  // return (
+  //   <Suspense>
+  //     <LoginContent />
+  //   </Suspense>
+  // );
 }
 
 function LoginContent() {

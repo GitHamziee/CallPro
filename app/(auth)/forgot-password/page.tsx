@@ -7,6 +7,9 @@ import { ArrowLeft, ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function ForgotPasswordPage() {
+  return null;
+  // COMMENTED OUT - Forgot password page temporarily disabled (login/register disabled)
+  /*
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -69,12 +72,14 @@ export default function ForgotPasswordPage() {
               If an account exists for <strong>{email}</strong>, we&apos;ve sent
               a password reset link. It expires in 1 hour.
             </p>
+            {/* COMMENTED OUT - Login link temporarily disabled
             <Link
               href="/login"
               className="text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors"
             >
               Back to sign in
             </Link>
+            */}
           </div>
         ) : (
           /* Form state */
@@ -158,4 +163,5 @@ export default function ForgotPasswordPage() {
       </p>
     </div>
   );
+  */
 }

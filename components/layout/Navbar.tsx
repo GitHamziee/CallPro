@@ -168,6 +168,8 @@ export default function Navbar() {
               </Button>
             </>
           ) : (
+            <></>
+            /* COMMENTED OUT - Login/Register buttons temporarily disabled
             <>
               <Link
                 href="/login"
@@ -188,6 +190,7 @@ export default function Navbar() {
                 </Button>
               </div>
             </>
+            */
           )}
         </div>
 
@@ -307,6 +310,8 @@ export default function Navbar() {
                   </Button>
                 </>
               ) : (
+                <></>
+                /* COMMENTED OUT - Login/Register buttons temporarily disabled
                 <>
                   <Button
                     asChild
@@ -324,6 +329,7 @@ export default function Navbar() {
                     </Button>
                   </div>
                 </>
+                */
               )}
             </li>
           </ul>

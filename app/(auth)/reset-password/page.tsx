@@ -8,11 +8,13 @@ import { ArrowLeft, ArrowRight, Eye, EyeOff, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function ResetPasswordPage() {
-  return (
-    <Suspense>
-      <ResetPasswordContent />
-    </Suspense>
-  );
+  return null;
+  // COMMENTED OUT - Reset password page temporarily disabled (login/register disabled)
+  // return (
+  //   <Suspense>
+  //     <ResetPasswordContent />
+  //   </Suspense>
+  // );
 }
 
 function ResetPasswordContent() {
