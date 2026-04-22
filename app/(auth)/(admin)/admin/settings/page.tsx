@@ -44,7 +44,7 @@ export default function AdminSettingsPage() {
                     When enabled, the Login, Register, Forgot Password, and Reset Password pages
                     are hidden from visitors, and the public contact email switches to
                     <span className="font-medium text-slate-700 dark:text-slate-300">
-                      {" info@r4referral.com"}
+                      {" R4referral@gmail.com"}
                     </span>.
                   </p>
                 </div>

@@ -1,7 +1,7 @@
 import prisma from "./prisma";
 
-export const EMAIL_WHEN_VISIBLE = "R4referral@gmail.com";
-export const EMAIL_WHEN_HIDDEN = "info@r4referral.com";
+export const EMAIL_WHEN_VISIBLE = "info@r4referral.com";
+export const EMAIL_WHEN_HIDDEN = "R4referral@gmail.com";
 
 export type SiteSettings = {
   hidePages: boolean;
