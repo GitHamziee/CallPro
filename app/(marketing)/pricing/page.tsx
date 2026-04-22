@@ -6,6 +6,7 @@ import Badge from "@/components/shared/Badge";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 import PricingCards from "@/components/pricing/PricingCards";
 import PricingFAQ from "@/components/pricing/PricingFAQ";
+import { getSiteSettings } from "@/lib/site-settings";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -13,7 +14,10 @@ export const metadata: Metadata = {
     "Simple, transparent pricing for outbound sales teams of every size. No hidden fees, no long-term contracts.",
 };
 
-export default function PricingPage() {
+export const dynamic = "force-dynamic";
+
+export default async function PricingPage() {
+  const { hidePages } = await getSiteSettings();
   return (
     <>
       {/* Header */}
@@ -36,7 +40,7 @@ export default function PricingPage() {
         </div>
       </div>
 
-      <PricingCards />
+      <PricingCards showCTA={!hidePages} />
       <PricingFAQ />
 
       {/* Bottom CTA */}

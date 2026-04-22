@@ -17,7 +17,7 @@ const TRUST_SIGNALS = [
 
 const CARD_ICONS = [Zap, Star, Sparkles];
 
-export default function PricingCards() {
+export default function PricingCards({ showCTA = false }: { showCTA?: boolean }) {
   const [priceMap, setPriceMap] = useState<Map<string, number>>(new Map());
 
   useEffect(() => {
@@ -113,17 +113,17 @@ export default function PricingCards() {
                         ))}
                       </ul>
 
-                      {/* COMMENTED OUT - Register CTA temporarily disabled
-                      <Button
-                        asChild
-                        size="lg"
-                        className="bg-white text-brand-700 hover:bg-brand-50 font-semibold shadow-lg shadow-white/10"
-                      >
-                        <Link href="/register?callbackUrl=/packages">
-                          Get Started <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                      </Button>
-                      */}
+                      {showCTA && (
+                        <Button
+                          asChild
+                          size="lg"
+                          className="bg-white text-brand-700 hover:bg-brand-50 font-semibold shadow-lg shadow-white/10"
+                        >
+                          <Link href="/register?callbackUrl=/packages">
+                            Get Started <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      )}
                     </div>
                   </div>
                 ) : (
@@ -168,19 +168,19 @@ export default function PricingCards() {
                       ))}
                     </ul>
 
-                    {/* COMMENTED OUT - Register CTA temporarily disabled
-                    <div className="btn-gradient-wrap rounded-md">
-                      <Button
-                        asChild
-                        size="lg"
-                        className="btn-gradient text-white border-0 w-full"
-                      >
-                        <Link href="/register?callbackUrl=/packages">
-                          {plan.cta} <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                      </Button>
-                    </div>
-                    */}
+                    {showCTA && (
+                      <div className="btn-gradient-wrap rounded-md">
+                        <Button
+                          asChild
+                          size="lg"
+                          className="btn-gradient text-white border-0 w-full"
+                        >
+                          <Link href="/register?callbackUrl=/packages">
+                            {plan.cta} <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
               </AnimatedSection>
