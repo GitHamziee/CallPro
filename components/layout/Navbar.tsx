@@ -10,7 +10,7 @@ import { NAV_LINKS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/shared/ThemeToggle";
 
-export default function Navbar() {
+export default function Navbar({ showAuthLinks = false }: { showAuthLinks?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -167,9 +167,7 @@ export default function Navbar() {
                 Log Out
               </Button>
             </>
-          ) : (
-            <></>
-            /* COMMENTED OUT - Login/Register buttons temporarily disabled
+          ) : showAuthLinks ? (
             <>
               <Link
                 href="/login"
@@ -190,8 +188,7 @@ export default function Navbar() {
                 </Button>
               </div>
             </>
-            */
-          )}
+          ) : null}
         </div>
 
         {/* Mobile: theme toggle + hamburger grouped on the right */}
@@ -309,9 +306,7 @@ export default function Navbar() {
                     Log Out
                   </Button>
                 </>
-              ) : (
-                <></>
-                /* COMMENTED OUT - Login/Register buttons temporarily disabled
+              ) : showAuthLinks ? (
                 <>
                   <Button
                     asChild
@@ -329,8 +324,7 @@ export default function Navbar() {
                     </Button>
                   </div>
                 </>
-                */
-              )}
+              ) : null}
             </li>
           </ul>
         </div>
