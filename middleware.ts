@@ -7,7 +7,7 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Logged-in users visiting homepage, login, or register → redirect based on role
-  if ((pathname === "/" || pathname === "/login" || pathname === "/register") && token) {
+  if ((pathname === "/" || pathname === "/login" || pathname === "/admin-login" || pathname === "/register") && token) {
     const dest = token.role === "ADMIN" ? "/admin" : "/dashboard";
     return NextResponse.redirect(new URL(dest, req.url));
   }
@@ -51,5 +51,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/login", "/register", "/dashboard/:path*", "/settings/:path*", "/packages/:path*", "/admin/:path*", "/leads/:path*", "/my-leads/:path*"],
+  matcher: ["/", "/login", "/admin-login", "/register", "/dashboard/:path*", "/settings/:path*", "/packages/:path*", "/admin/:path*", "/leads/:path*", "/my-leads/:path*"],
 };
