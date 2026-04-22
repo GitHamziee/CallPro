@@ -7,7 +7,6 @@ import { signIn } from "next-auth/react";
 export function useLogin() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -45,8 +44,6 @@ export function useLogin() {
     setFormData,
     showPassword,
     setShowPassword,
-    rememberMe,
-    setRememberMe,
     loading,
     error,
     registered,

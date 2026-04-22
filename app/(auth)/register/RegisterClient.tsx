@@ -20,8 +20,6 @@ export default function RegisterClient() {
     setShowPassword,
     showConfirm,
     setShowConfirm,
-    smsConsent,
-    setSmsConsent,
     loading,
     error,
     passwordError,
@@ -291,21 +289,6 @@ export default function RegisterClient() {
                 className={inputClass}
               />
             </div>
-          </div>
-
-          {/* SMS Consent */}
-          <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 p-4">
-            <label className="flex items-start gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={smsConsent}
-                onChange={(e) => setSmsConsent(e.target.checked)}
-                className="mt-0.5 h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-brand-600 focus:ring-brand-500/20 flex-shrink-0"
-              />
-              <span className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                By checking this box, you agree to receive SMS from R4Referral LLC regarding your appointment request, including confirmations and follow-ups. Message frequency varies. Message &amp; data rates may apply. Reply STOP to opt out or HELP for assistance.
-              </span>
-            </label>
           </div>
 
           <Button

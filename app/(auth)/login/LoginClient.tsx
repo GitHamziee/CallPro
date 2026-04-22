@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Eye, EyeOff, ArrowRight, ArrowLeft } from "lucide-react";
@@ -13,16 +12,12 @@ export default function LoginClient() {
     setFormData,
     showPassword,
     setShowPassword,
-    rememberMe,
-    setRememberMe,
     loading,
     error,
     registered,
     registerHref,
     handleSubmit,
   } = useLogin();
-
-  const [smsConsent, setSmsConsent] = useState(false);
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center px-4 py-12">
@@ -102,32 +97,6 @@ export default function LoginClient() {
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
-          </div>
-
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-              className="h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-brand-600 focus:ring-brand-500/20"
-            />
-            <span className="text-sm text-slate-600 dark:text-slate-400">Remember me</span>
-          </label>
-
-          {/* SMS Consent (Optional) */}
-          <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 p-4">
-            <label className="flex items-start gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={smsConsent}
-                onChange={(e) => setSmsConsent(e.target.checked)}
-                className="mt-0.5 h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-brand-600 focus:ring-brand-500/20 flex-shrink-0"
-              />
-              <span className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                <span className="font-semibold text-slate-700 dark:text-slate-300">SMS Updates </span>
-                <span className="text-slate-400">(Optional)</span> — By checking this box, you agree to receive SMS from R4Referral LLC regarding your appointment request, including confirmations and follow-ups. Message frequency varies. Message &amp; data rates may apply. Reply STOP to opt out or HELP for assistance.
-              </span>
-            </label>
           </div>
 
           <Button
