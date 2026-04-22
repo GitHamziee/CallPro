@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: "R4Referral LLC's Terms and Conditions — the rules governing your use of our platform and services.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function TermsOfServicePage() {
   const { contactEmail } = await getSiteSettings();
   return (

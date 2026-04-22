@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     "Get in touch with R4Referral LLC. Start receiving verified real estate referrals tailored to your market.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function ContactPage() {
   const { contactEmail } = await getSiteSettings();
 

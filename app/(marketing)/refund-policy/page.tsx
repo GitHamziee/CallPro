@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: "R4Referral LLC's Refund Policy — effective for 60 days from the date of your Referral Agreement execution.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function RefundPolicyPage() {
   const { contactEmail } = await getSiteSettings();
   return (

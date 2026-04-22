@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: "R4Referral LLC's Privacy Policy — how we collect, use, and protect your data.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function PrivacyPolicyPage() {
   const { contactEmail } = await getSiteSettings();
   return (

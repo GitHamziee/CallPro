@@ -204,7 +204,7 @@ model Invoice {
 
 model SiteSettings {
   id        String   @id @default("singleton")
-  hidePages Boolean  @default(true)
+  hidePages Boolean  @default(false)
   updatedAt DateTime @updatedAt
 }
 
