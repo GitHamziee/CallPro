@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import prisma from "@/lib/prisma";
 import { requireAdmin, applyRateLimit } from "@/lib/api-utils";
-import { resolveContactEmail } from "@/lib/site-settings";
+import { resolveContactEmail, SITE_SETTINGS_TAG } from "@/lib/site-settings";
 
 export async function GET() {
   try {
@@ -51,6 +52,8 @@ export async function PATCH(req: NextRequest) {
       create: { id: "singleton", hidePages },
       select: { hidePages: true, updatedAt: true },
     });
+
+    revalidateTag(SITE_SETTINGS_TAG);
 
     return NextResponse.json({
       settings: {
