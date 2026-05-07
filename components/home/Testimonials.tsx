@@ -1,4 +1,3 @@
-import { Quote } from "lucide-react";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 import Badge from "@/components/shared/Badge";
 import { TESTIMONIALS } from "@/lib/constants";
@@ -16,53 +15,22 @@ export default function Testimonials() {
             Client Reviews
           </Badge>
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            Hear It From <span className="text-accent-300">Our Clients</span>
+            Reviews From{" "}
+            <span className="text-accent-300">Our Customers</span>
           </h2>
-          <p className="mt-4 text-brand-100 max-w-xl mx-auto">
-            Real stories from agents who&apos;ve grown their business with R4Referral LLC.
-          </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {TESTIMONIALS.map((t, i) => (
-            <AnimatedSection key={t.name} delay={i * 0.12}>
-              <div className="flex flex-col h-full">
-                <div className="relative rounded-t-2xl overflow-hidden bg-black/20 border border-b-0 border-white/20 flex justify-center">
-                  <div className="aspect-[9/16] max-h-[400px] w-full max-w-[225px] md:max-w-none">
-                    <iframe
-                      src={`${t.videoUrl}?rel=0&modestbranding=1`}
-                      title={`${t.name} video review`}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="h-full w-full"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col flex-1 rounded-b-2xl bg-white/10 border border-t-0 border-white/20 p-6 backdrop-blur-sm">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="inline-flex rounded-full bg-white/20 border border-white/25 px-3 py-1 text-xs font-semibold text-accent-200">
-                      {t.result}
-                    </span>
-                    <div className="flex gap-0.5">
-                      {[1, 2, 3, 4, 5].map((s) => (
-                        <span key={s} className="text-amber-300 text-sm">★</span>
-                      ))}
-                    </div>
-                  </div>
-                  <Quote className="h-6 w-6 text-white/30 mb-2" />
-                  <p className="text-brand-50 leading-relaxed text-sm flex-1">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                  <div className="mt-4 flex items-center gap-3 pt-4 border-t border-white/15">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-accent-400 to-brand-400 text-white text-sm font-bold flex-shrink-0">
-                      {t.name.charAt(0)}
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white">{t.name}</p>
-                      <p className="text-xs text-brand-200">{t.title} · {t.company}</p>
-                    </div>
-                  </div>
-                </div>
+            <AnimatedSection key={t.id} delay={i * 0.1}>
+              <div className="mx-auto w-full max-w-[280px] aspect-[9/16] overflow-hidden rounded-2xl border border-white/20 bg-black/20 shadow-lg">
+                <iframe
+                  src={`${t.videoUrl}?rel=0&modestbranding=1`}
+                  title={`Customer review ${i + 1}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="h-full w-full"
+                />
               </div>
             </AnimatedSection>
           ))}
