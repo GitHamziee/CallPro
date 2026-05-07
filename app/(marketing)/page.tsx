@@ -6,6 +6,7 @@ import TrustBar from "@/components/home/TrustBar";
 const StatsBar = dynamic(() => import("@/components/home/StatsBar"));
 const HowItWorks = dynamic(() => import("@/components/home/HowItWorks"));
 const ServicesOverview = dynamic(() => import("@/components/home/ServicesOverview"));
+const Testimonials = dynamic(() => import("@/components/home/Testimonials"));
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <StatsBar />
       <HowItWorks />
       <ServicesOverview />
+      <Testimonials />
       <TrustBar />
     </>
   );

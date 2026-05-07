@@ -225,29 +225,29 @@ export const TESTIMONIALS = [
   {
     quote:
       "Honestly didn't expect much at first, but the referrals were actually legit. Closed my first deal within three weeks and I've been getting consistent ones since. Way better than what I was getting from Zillow.",
-    name: "Marcus T.",
-    title: "Licensed Realtor",
+    name: "Marcus Reyes",
+    title: "Realtor",
     company: "eXp Realty",
     result: "3 closings in first 30 days",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    videoUrl: "https://www.youtube.com/embed/o66XX8omEdw",
   },
   {
     quote:
-      "I was spending like 2 hours a day just following up with dead referrals. Switched to R4Referral LLC and the difference is night and day — these people actually want to talk to you. Saved me so much time.",
-    name: "Sarah K.",
+      "I was spending like 2 hours a day just following up with dead referrals. Switched to R4Referral and the difference is night and day. These people actually want to talk to you. Saved me so much time.",
+    name: "Sarah Bennett",
     title: "Broker Associate",
     company: "Keller Williams",
-    result: "12 verified referrals in 60 days",
-    videoUrl: "https://www.youtube.com/embed/jNQXAC9IVRw",
+    result: "12 referrals in 60 days",
+    videoUrl: "https://www.youtube.com/embed/jQZxFvNi6NA",
   },
   {
     quote:
       "The VA handles all my scheduling and follow-ups now. I used to miss callbacks all the time, but now everything's organized. Honestly can't imagine going back to doing it all myself.",
-    name: "David R.",
+    name: "David Morales",
     title: "Real Estate Agent",
     company: "Coldwell Banker",
     result: "20+ hours saved weekly",
-    videoUrl: "https://www.youtube.com/embed/9bZkp7q19f0",
+    videoUrl: "https://www.youtube.com/embed/5caAUmNQaJ8",
   },
 ];
 
