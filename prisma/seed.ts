@@ -55,7 +55,6 @@ async function main() {
         "Human verified leads",
         "Live transfers",
         "Scheduled appointments",
-        "Call/lead Recording Where Permitted and With Notice",
         "Upto 3 Counties/Cities",
         "Premium portal access",
         "Free follow-up",
@@ -72,11 +71,10 @@ async function main() {
       durationDays: 120, // 4 months
       features: [
         "$699 for 4-month term",
-        "8–12 leads included",
+        "12-15 leads included",
         "15% referral fee per closing",
         "Human verified leads",
         "Scheduled appointments",
-        "Call/lead Recording Where Permitted and With Notice",
         "Upto 3 Counties/Cities",
         "Exclusive leads",
         "Premium portal access",
@@ -89,15 +87,15 @@ async function main() {
     {
       name: "Platinum",
       description:
-        "Best value — 10 guaranteed leads at a steep discount. Everything included.",
-      price: 94900, // $949.00
-      durationDays: null, // no time expiry — expires after 10 leads
+        "Best value — 3-4 listings or buyer contracts with a dedicated Account Manager.",
+      price: 99900, // $999.00
+      durationDays: null, // no time expiry — expires after contract goals are met
       features: [
-        "10 guaranteed leads",
+        "3-4 Listings or Buyer contracts",
+        "Account Manager",
         "Human verified leads",
         "Live transfers",
         "Scheduled appointments",
-        "Call/lead Recording Where Permitted and With Notice",
         "Upto 3 Counties/Cities",
         "Premium portal access",
         "Free follow-up",
