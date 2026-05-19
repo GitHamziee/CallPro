@@ -89,10 +89,12 @@ async function main() {
       description:
         "Best value — 3-4 listings or buyer contracts with a dedicated Account Manager.",
       price: 99900, // $999.00
-      durationDays: null, // no time expiry — expires after contract goals are met
+      durationDays: 180, // 6 months
       features: [
         "3-4 Listings or Buyer contracts",
         "Account Manager",
+        "15% Referral fee per closing",
+        "Upload listing",
         "Human verified leads",
         "Live transfers",
         "Scheduled appointments",

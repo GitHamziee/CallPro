@@ -277,12 +277,14 @@ export const PRICING_PLANS = [
     name: "Platinum",
     price: "$999",
     originalPrice: "$1,375",
-    period: "one-time",
+    period: "/6 months",
     description:
       "Best value — 3-4 listings or buyer contracts with a dedicated Account Manager.",
     features: [
       "3-4 Listings or Buyer contracts",
       "Account Manager",
+      "15% Referral fee per closing",
+      "Upload listing",
       "Human verified referrals",
       "Live transfers",
       "Scheduled appointments",
@@ -310,7 +312,7 @@ export const PRICING_FAQ = [
   {
     question: "What's included in the Platinum plan?",
     answer:
-      "The Platinum plan gives you 3-4 listings or buyer contracts with a dedicated Account Manager for a one-time payment of $999 (originally $1,375). Every referral is human-verified and comes with live transfers, scheduled appointments, premium portal access, free follow-up, and 24/7 support.",
+      "The Platinum plan gives you 3-4 listings or buyer contracts with a dedicated Account Manager over a 6-month term for $999 (originally $1,375). Includes a 15% referral fee per closing, the ability to upload your own listings, human-verified referrals with live transfers, scheduled appointments, premium portal access, free follow-up, and 24/7 support.",
   },
   {
     question: "What does 'human verified' mean?",

@@ -57,6 +57,10 @@ export default function PricingCards({ showCTA = false }: { showCTA?: boolean })
                 ? `$${(dbPrice / 100).toLocaleString("en-US", { minimumFractionDigits: 0 })}`
                 : plan.price;
             const CardIcon = CARD_ICONS[i];
+            const parsePrice = (s: string) => parseInt(s.replace(/[^0-9]/g, ""), 10) || 0;
+            const savings = plan.originalPrice
+              ? parsePrice(plan.originalPrice) - parsePrice(displayPrice)
+              : 0;
 
             return (
               <AnimatedSection key={plan.name} delay={i * 0.12} className="h-full">
@@ -102,7 +106,16 @@ export default function PricingCards({ showCTA = false }: { showCTA?: boolean })
                       {/* Price */}
                       <div className="mb-8">
                         {plan.originalPrice && (
-                          <span className="text-lg text-white/40 line-through mr-2">{plan.originalPrice}</span>
+                          <div className="mb-2 flex items-center gap-2">
+                            <span className="text-xl font-semibold text-white/60 line-through decoration-2 decoration-red-400/70">
+                              {plan.originalPrice}
+                            </span>
+                            {savings > 0 && (
+                              <span className="rounded-full bg-emerald-500/20 border border-emerald-400/40 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide text-emerald-300">
+                                Save ${savings.toLocaleString("en-US")}
+                              </span>
+                            )}
+                          </div>
                         )}
                         <div className="flex items-end gap-1.5">
                           <span className="text-5xl font-bold tabular-nums text-white">{displayPrice}</span>
@@ -171,7 +184,16 @@ export default function PricingCards({ showCTA = false }: { showCTA?: boolean })
                     {/* Price */}
                     <div className="mb-8">
                       {plan.originalPrice && (
-                        <span className="text-lg text-slate-400 line-through mr-2">{plan.originalPrice}</span>
+                        <div className="mb-2 flex items-center gap-2">
+                          <span className="text-xl font-semibold text-slate-500 line-through decoration-2 decoration-red-400/80">
+                            {plan.originalPrice}
+                          </span>
+                          {savings > 0 && (
+                            <span className="rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide text-emerald-700 dark:bg-emerald-500/15 dark:border-emerald-400/30 dark:text-emerald-300">
+                              Save ${savings.toLocaleString("en-US")}
+                            </span>
+                          )}
+                        </div>
                       )}
                       <div className="flex items-end gap-1.5">
                         <span className="text-5xl font-bold tabular-nums text-slate-900 dark:text-white">{displayPrice}</span>
